@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,19 +26,19 @@ public class BookEntity {
     @Column(name = "name", updatable = false, nullable = false)
     private String name;
 
-    private List<AuthorEntity> authors;
-    // TODO: Mapping this member
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AuthorEntity> authors;
 
-    @Column(name = "genre", updatable = false, nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private GenreEntity genre;
 
-    @Column(name = "publishingHouse", updatable = false, nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private PublishingHouseEntity publishingHouse;
 
     @Column(name = "publicationDate", updatable = false, nullable = false)
     private LocalDate publicationDate;
 
-    @Column(name = "content", nullable = false)
-    private String content;
+    @Column(name = "pathFile", nullable = false)
+    private String pathFile;
 
 }

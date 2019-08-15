@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +17,10 @@ public class BookDTO {
 
     private Long id;
     private String name;
-    private List<AuthorDTO> authors;
-    private GenreDto genre;
+    private Set<AuthorDTO> authors;
+    private GenreDTO genre;
     private PublishingHouseDTO publishingHouse;
     private LocalDate publicationDate;
-    private String content;
+    private String pathFile;
 
 }

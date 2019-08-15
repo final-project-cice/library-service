@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class PublishingHouseEntity {
     @Column(name = "name", updatable = false, nullable = false)
     private String name;
 
-    private List<AddressEntity> address;
-    // TODO: Mapping this member
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private PublishingHouseEntity address;
 
 }

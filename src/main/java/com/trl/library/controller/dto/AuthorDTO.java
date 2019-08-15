@@ -5,7 +5,6 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -26,6 +25,6 @@ public class AuthorDTO {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate birthday;
 
-    private List<GenreDto> genres;
+    private Set<GenreDTO> genres;
 
 }

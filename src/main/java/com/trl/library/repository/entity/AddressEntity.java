@@ -34,6 +34,6 @@ public class AddressEntity {
     private String houseNumber;
 
     @Column(name = "postcode", updatable = false, nullable = false)
-    private Long postcode;
+    private Integer postcode;
 
 }

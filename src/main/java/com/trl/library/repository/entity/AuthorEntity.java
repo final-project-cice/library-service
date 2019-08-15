@@ -5,7 +5,6 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -33,12 +32,13 @@ public class AuthorEntity {
     @Column(name = "email", updatable = false, nullable = false, unique = true)
     private String email;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AddressEntity> address;
-    // TODO: Mapping this member
 
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
-    private List<GenreEntity> genres;
-    // TODO: Mapping this member
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<GenreEntity> genres;
+
 }

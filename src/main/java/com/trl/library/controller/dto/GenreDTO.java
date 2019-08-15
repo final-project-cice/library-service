@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(of = "id")
 @ToString
 @Accessors(chain = true)
-public class GenreDto {
+public class GenreDTO {
 
     private Long id;
     private String name;
