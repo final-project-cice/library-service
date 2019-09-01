@@ -1,17 +1,8 @@
 package com.trl.library.repository.entity;
 
-import lombok.*;
-import lombok.experimental.Accessors;
-
 import javax.persistence.*;
+import java.util.Objects;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
-@ToString
-@Accessors(chain = true)
 @Entity
 @Table(name = "publishing_house")
 public class PublishingHouseEntity {
@@ -26,5 +17,50 @@ public class PublishingHouseEntity {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private PublishingHouseEntity address;
+
+    public PublishingHouseEntity() {
+    }
+
+    public PublishingHouseEntity(Long id, String name, PublishingHouseEntity address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public PublishingHouseEntity getAddress() {
+        return address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PublishingHouseEntity that = (PublishingHouseEntity) o;
+        return id.equals(that.id) &&
+                name.equals(that.name) &&
+                address.equals(that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, address);
+    }
+
+    @Override
+    public String toString() {
+        return "PublishingHouseEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                '}';
+    }
 
 }

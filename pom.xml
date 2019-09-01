@@ -14,9 +14,11 @@
     <groupId>com.trl</groupId>
     <artifactId>library</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>library</name>
-    <description>Demo project for Spring Boot</description>
+    <description>This micro service is one part of one project library. This micro service performs Library
+    </description>
 
     <!--================================================ Properties =================================================-->
     <properties>
@@ -59,15 +61,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.8.0-beta2</version>
+            <scope>test</scope>
         </dependency>
 
         <!--        <dependency>-->

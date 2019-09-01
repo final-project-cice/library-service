@@ -4,52 +4,52 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "genre")
-public class GenreEntity {
+@Table(name = "email")
+public class EmailEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "name", updatable = false, nullable = false)
-    private String name;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
-    public GenreEntity() {
+    public EmailEntity() {
     }
 
-    public GenreEntity(Long id, String name) {
+    public EmailEntity(Long id, String email) {
         this.id = id;
-        this.name = name;
+        this.email = email;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GenreEntity that = (GenreEntity) o;
+        EmailEntity that = (EmailEntity) o;
         return id.equals(that.id) &&
-                name.equals(that.name);
+                email.equals(that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, email);
     }
 
     @Override
     public String toString() {
-        return "GenreEntity{" +
+        return "EmailEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
