@@ -3,7 +3,7 @@ server:
   port: 8082
 #============================== Configuration Logging
 logging:
-  file: /tmp/log/library_test.log
+  file: /tmp/log/library-service_test.log
   level:
     root: INFO
     org.springframework: INFO
@@ -14,7 +14,7 @@ logging:
 spring:
   profiles.active: test
   application:
-    name: library
+    name: library-service
 
   #============================== Configuration Eureka Client
   eureka:
