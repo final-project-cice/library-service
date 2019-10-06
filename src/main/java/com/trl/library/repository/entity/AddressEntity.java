@@ -30,7 +30,7 @@ public class AddressEntity {
     public AddressEntity() {
     }
 
-    public AddressEntity(String country, String city, String street, String houseNumber, Integer postcode) {
+    public AddressEntity(Long id, String country, String city, String street, String houseNumber, Integer postcode) {
         this.country = country;
         this.city = city;
         this.street = street;

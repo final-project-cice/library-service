@@ -1,6 +1,7 @@
 package com.trl.library.controller.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,20 +14,13 @@ public class BookDTO {
     private PublishingHouseDTO publishingHouse;
     private LocalDate publicationDate;
     private String pathFile;
+    private Integer rating;
+    private List<CommentDTO> comments;
 
     public BookDTO() {
     }
 
-    public BookDTO(Long id, String name, GenreDTO genre, PublishingHouseDTO publishingHouse, LocalDate publicationDate, String pathFile) {
-        this.id = id;
-        this.name = name;
-        this.genre = genre;
-        this.publishingHouse = publishingHouse;
-        this.publicationDate = publicationDate;
-        this.pathFile = pathFile;
-    }
-
-    public BookDTO(Long id, String name, Set<AuthorDTO> authors, GenreDTO genre, PublishingHouseDTO publishingHouse, LocalDate publicationDate, String pathFile) {
+    public BookDTO(Long id, String name, Set<AuthorDTO> authors, GenreDTO genre, PublishingHouseDTO publishingHouse, LocalDate publicationDate, String pathFile, Integer rating, List<CommentDTO> comments) {
         this.id = id;
         this.name = name;
         this.authors = authors;
@@ -34,6 +28,8 @@ public class BookDTO {
         this.publishingHouse = publishingHouse;
         this.publicationDate = publicationDate;
         this.pathFile = pathFile;
+        this.rating = rating;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -62,6 +58,14 @@ public class BookDTO {
 
     public String getPathFile() {
         return pathFile;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
     }
 
     @Override
@@ -93,6 +97,8 @@ public class BookDTO {
                 ", publishingHouse=" + publishingHouse +
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
+                ", rating=" + rating +
+                ", comments=" + comments +
                 '}';
     }
 

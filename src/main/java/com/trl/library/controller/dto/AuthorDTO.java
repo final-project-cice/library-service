@@ -18,19 +18,12 @@ public class AuthorDTO {
     private LocalDate birthday;
 
     private Set<GenreDTO> genres;
+    private Integer rating;
 
     public AuthorDTO() {
     }
 
-    public AuthorDTO(Long id, String firstName, String lastName, String email, LocalDate birthday) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.birthday = birthday;
-    }
-
-    public AuthorDTO(Long id, String firstName, String lastName, String email, Set<AddressDTO> address, LocalDate birthday, Set<GenreDTO> genres) {
+    public AuthorDTO(Long id, String firstName, String lastName, String email, Set<AddressDTO> address, LocalDate birthday, Set<GenreDTO> genres, Integer rating) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,6 +31,7 @@ public class AuthorDTO {
         this.address = address;
         this.birthday = birthday;
         this.genres = genres;
+        this.rating = rating;
     }
 
     public Long getId() {
@@ -68,6 +62,10 @@ public class AuthorDTO {
         return genres;
     }
 
+    public Integer getRating() {
+        return rating;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,14 +75,12 @@ public class AuthorDTO {
                 firstName.equals(authorDTO.firstName) &&
                 lastName.equals(authorDTO.lastName) &&
                 email.equals(authorDTO.email) &&
-                address.equals(authorDTO.address) &&
-                birthday.equals(authorDTO.birthday) &&
-                genres.equals(authorDTO.genres);
+                birthday.equals(authorDTO.birthday);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, address, birthday, genres);
+        return Objects.hash(id, firstName, lastName, email, birthday);
     }
 
     @Override
@@ -97,6 +93,7 @@ public class AuthorDTO {
                 ", address=" + address +
                 ", birthday=" + birthday +
                 ", genres=" + genres +
+                ", rating=" + rating +
                 '}';
     }
 
