@@ -23,15 +23,6 @@ public class AddressDTO {
         this.postcode = postcode;
     }
 
-    public AddressDTO(AddressDTO addressDTO) {
-        this.id = addressDTO.id;
-        this.country = addressDTO.country;
-        this.city = addressDTO.city;
-        this.street = addressDTO.street;
-        this.houseNumber = addressDTO.houseNumber;
-        this.postcode = addressDTO.postcode;
-    }
-
     public Long getId() {
         return id;
     }

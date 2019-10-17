@@ -2,10 +2,10 @@ package com.trl.libraryservice.repository.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-@Entity
+@Entity(name = "AuthorEntity")
 @Table(name = "author")
 public class AuthorEntity {
 
@@ -14,84 +14,102 @@ public class AuthorEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<EmailEntity> emails;
+    @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EmailAuthorEntity> emailAuthorEntities;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PhoneNumberEntity> phoneNumbers;
+    @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PhoneNumberAuthorEntity> phoneNumberAuthorEntities;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AddressEntity> address;
+    @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AddressAuthorEntity> addressAuthorEntities;
 
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<GenreEntity> genres;
+    @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GenreAuthorEntity> genreAuthorEntities;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<BookEntity> books;
+    private List<BookEntity> books;
 
-    public AuthorEntity() {
-    }
-
-    public AuthorEntity(String firstName, String lastName, LocalDate birthday) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-    }
-
-    public AuthorEntity(String firstName, String lastName, Set<EmailEntity> emails, Set<PhoneNumberEntity> phoneNumbers, Set<AddressEntity> address, LocalDate birthday, Set<GenreEntity> genres, Set<BookEntity> books) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emails = emails;
-        this.phoneNumbers = phoneNumbers;
-        this.address = address;
-        this.birthday = birthday;
-        this.genres = genres;
-        this.books = books;
-    }
+    public AuthorEntity() { }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
-    public Set<EmailEntity> getEmails() {
-        return emails;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Set<PhoneNumberEntity> getPhoneNumbers() {
-        return phoneNumbers;
+    public List<EmailAuthorEntity> getEmailAuthorEntities() {
+        return emailAuthorEntities;
     }
 
-    public Set<AddressEntity> getAddress() {
-        return address;
+    public void setEmailAuthorEntities(List<EmailAuthorEntity> emailAuthorEntities) {
+        this.emailAuthorEntities = emailAuthorEntities;
+    }
+
+    public List<PhoneNumberAuthorEntity> getPhoneNumberAuthorEntities() {
+        return phoneNumberAuthorEntities;
+    }
+
+    public void setPhoneNumberAuthorEntities(List<PhoneNumberAuthorEntity> phoneNumberAuthorEntities) {
+        this.phoneNumberAuthorEntities = phoneNumberAuthorEntities;
+    }
+
+    public List<AddressAuthorEntity> getAddressAuthorEntities() {
+        return addressAuthorEntities;
+    }
+
+    public void setAddressAuthorEntities(List<AddressAuthorEntity> addressAuthorEntities) {
+        this.addressAuthorEntities = addressAuthorEntities;
     }
 
     public LocalDate getBirthday() {
         return birthday;
     }
 
-    public Set<GenreEntity> getGenres() {
-        return genres;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
-    public Set<BookEntity> getBooks() {
+    public List<GenreAuthorEntity> getGenreAuthorEntities() {
+        return genreAuthorEntities;
+    }
+
+    public void setGenreAuthorEntities(List<GenreAuthorEntity> genreAuthorEntities) {
+        this.genreAuthorEntities = genreAuthorEntities;
+    }
+
+    public List<BookEntity> getBooks() {
         return books;
+    }
+
+    public void setBooks(List<BookEntity> books) {
+        this.books = books;
     }
 
     @Override
@@ -99,20 +117,20 @@ public class AuthorEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AuthorEntity that = (AuthorEntity) o;
-        return id.equals(that.id) &&
-                firstName.equals(that.firstName) &&
-                lastName.equals(that.lastName) &&
-                emails.equals(that.emails) &&
-                phoneNumbers.equals(that.phoneNumbers) &&
-                address.equals(that.address) &&
-                birthday.equals(that.birthday) &&
-                genres.equals(that.genres) &&
-                books.equals(that.books);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(emailAuthorEntities, that.emailAuthorEntities) &&
+                Objects.equals(phoneNumberAuthorEntities, that.phoneNumberAuthorEntities) &&
+                Objects.equals(addressAuthorEntities, that.addressAuthorEntities) &&
+                Objects.equals(birthday, that.birthday) &&
+                Objects.equals(genreAuthorEntities, that.genreAuthorEntities) &&
+                Objects.equals(books, that.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, emails, phoneNumbers, address, birthday, genres, books);
+        return Objects.hash(id, firstName, lastName, emailAuthorEntities, phoneNumberAuthorEntities, addressAuthorEntities, birthday, genreAuthorEntities, books);
     }
 
     @Override
@@ -121,12 +139,12 @@ public class AuthorEntity {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", emails=" + emails +
-                ", phoneNumbers=" + phoneNumbers +
-                ", address=" + address +
+                ", emailEntities=" + emailAuthorEntities +
+                ", phoneNumberEntities=" + phoneNumberAuthorEntities +
+                ", addressEntities=" + addressAuthorEntities +
                 ", birthday=" + birthday +
-                ", genres=" + genres +
-                ", books=" + books +
+                ", genreEntities=" + genreAuthorEntities +
+                ", bookEntities=" + books +
                 '}';
     }
 

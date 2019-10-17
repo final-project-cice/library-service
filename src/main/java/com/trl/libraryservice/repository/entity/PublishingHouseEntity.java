@@ -1,9 +1,10 @@
 package com.trl.libraryservice.repository.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "PublishingHouseEntity")
 @Table(name = "publishing_house")
 public class PublishingHouseEntity {
 
@@ -12,31 +13,59 @@ public class PublishingHouseEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "name", updatable = false, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private PublishingHouseEntity address;
+    @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AddressPublishingHouseEntity> addressPublishingHouseEntities;
+
+    @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PhoneNumberPublishingHouseEntity> phoneNumberPublishingHouseEntities;
+
+    @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EmailPublishingHouseEntity> emailPublishingHouseEntities;
 
     public PublishingHouseEntity() {
-    }
-
-    public PublishingHouseEntity(Long id, String name, PublishingHouseEntity address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
-    public PublishingHouseEntity getAddress() {
-        return address;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<AddressPublishingHouseEntity> getAddressPublishingHouseEntities() {
+        return addressPublishingHouseEntities;
+    }
+
+    public void setAddressPublishingHouseEntities(List<AddressPublishingHouseEntity> addressPublishingHouseEntities) {
+        this.addressPublishingHouseEntities = addressPublishingHouseEntities;
+    }
+
+    public List<PhoneNumberPublishingHouseEntity> getPhoneNumberPublishingHouseEntities() {
+        return phoneNumberPublishingHouseEntities;
+    }
+
+    public void setPhoneNumberPublishingHouseEntities(List<PhoneNumberPublishingHouseEntity> phoneNumberPublishingHouseEntities) {
+        this.phoneNumberPublishingHouseEntities = phoneNumberPublishingHouseEntities;
+    }
+
+    public List<EmailPublishingHouseEntity> getEmailPublishingHouseEntities() {
+        return emailPublishingHouseEntities;
+    }
+
+    public void setEmailPublishingHouseEntities(List<EmailPublishingHouseEntity> emailPublishingHouseEntities) {
+        this.emailPublishingHouseEntities = emailPublishingHouseEntities;
     }
 
     @Override
@@ -44,14 +73,16 @@ public class PublishingHouseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PublishingHouseEntity that = (PublishingHouseEntity) o;
-        return id.equals(that.id) &&
-                name.equals(that.name) &&
-                address.equals(that.address);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(addressPublishingHouseEntities, that.addressPublishingHouseEntities) &&
+                Objects.equals(phoneNumberPublishingHouseEntities, that.phoneNumberPublishingHouseEntities) &&
+                Objects.equals(emailPublishingHouseEntities, that.emailPublishingHouseEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, address);
+        return Objects.hash(id, name, addressPublishingHouseEntities, phoneNumberPublishingHouseEntities, emailPublishingHouseEntities);
     }
 
     @Override
@@ -59,7 +90,9 @@ public class PublishingHouseEntity {
         return "PublishingHouseEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", address=" + address +
+                ", addressEntities=" + addressPublishingHouseEntities +
+                ", phoneNumberEntities=" + phoneNumberPublishingHouseEntities +
+                ", emailEntities=" + emailPublishingHouseEntities +
                 '}';
     }
 

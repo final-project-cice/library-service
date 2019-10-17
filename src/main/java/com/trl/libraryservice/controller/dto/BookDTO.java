@@ -15,12 +15,12 @@ public class BookDTO {
     private LocalDate publicationDate;
     private String pathFile;
     private Integer rating;
-    private List<CommentDTO> comments;
+    private Set<CommentDTO> comments;
 
     public BookDTO() {
     }
 
-    public BookDTO(Long id, String name, Set<AuthorDTO> authors, GenreDTO genre, PublishingHouseDTO publishingHouse, LocalDate publicationDate, String pathFile, Integer rating, List<CommentDTO> comments) {
+    public BookDTO(Long id, String name, Set<AuthorDTO> authors, GenreDTO genre, PublishingHouseDTO publishingHouse, LocalDate publicationDate, String pathFile, Integer rating, Set<CommentDTO> comments) {
         this.id = id;
         this.name = name;
         this.authors = authors;
@@ -64,7 +64,7 @@ public class BookDTO {
         return rating;
     }
 
-    public List<CommentDTO> getComments() {
+    public Set<CommentDTO> getComments() {
         return comments;
     }
 
