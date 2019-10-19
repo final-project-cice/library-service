@@ -23,7 +23,7 @@ public class CommentBookEntity {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @OneToMany(mappedBy = "commentEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "commentBookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubCommentCommentEntity> subComments;
 
     @ManyToOne(fetch = FetchType.LAZY)

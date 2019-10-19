@@ -9,7 +9,7 @@ public class EmailPublishingHouseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false, table = "")
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "email", unique = true)
