@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "BookEntity")
 @Table(name = "book")
@@ -16,9 +17,6 @@ public class BookEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AuthorEntity> authors;
 
     @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GenreBookEntity> genreBookEntities;
@@ -34,6 +32,19 @@ public class BookEntity {
 
     @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentBookEntity> commentBookEntities;
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private Set<AuthorEntity> authors;
 
     public BookEntity() {
     }
@@ -52,14 +63,6 @@ public class BookEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<AuthorEntity> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<AuthorEntity> authors) {
-        this.authors = authors;
     }
 
     public List<GenreBookEntity> getGenreBookEntities() {
@@ -102,6 +105,24 @@ public class BookEntity {
         this.commentBookEntities = commentBookEntities;
     }
 
+    public Set<AuthorEntity> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(Set<AuthorEntity> authors) {
+        this.authors = authors;
+    }
+
+    public void addAuthor(AuthorEntity authorEntity) {
+        this.authors.add(authorEntity);
+        authorEntity.getBooks().add(this);
+    }
+
+    public void removeAuthor(AuthorEntity authorEntity) {
+        this.authors.remove(authorEntity);
+        authorEntity.getBooks().remove(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,17 +130,17 @@ public class BookEntity {
         BookEntity that = (BookEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(authors, that.authors) &&
                 Objects.equals(genreBookEntities, that.genreBookEntities) &&
                 Objects.equals(publishingHouse, that.publishingHouse) &&
                 Objects.equals(publicationDate, that.publicationDate) &&
                 Objects.equals(pathFile, that.pathFile) &&
-                Objects.equals(commentBookEntities, that.commentBookEntities);
+                Objects.equals(commentBookEntities, that.commentBookEntities) &&
+                Objects.equals(authors, that.authors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, authors, genreBookEntities, publishingHouse, publicationDate, pathFile, commentBookEntities);
+        return Objects.hash(id, name, genreBookEntities, publishingHouse, publicationDate, pathFile, commentBookEntities, authors);
     }
 
     @Override
@@ -127,12 +148,12 @@ public class BookEntity {
         return "BookEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", authors=" + authors +
                 ", genreBookEntities=" + genreBookEntities +
                 ", publishingHouse=" + publishingHouse +
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
-                ", commentEntities=" + commentBookEntities +
+                ", commentBookEntities=" + commentBookEntities +
+                ", authors=" + authors +
                 '}';
     }
 }

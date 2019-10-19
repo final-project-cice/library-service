@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "AuthorEntity")
 @Table(name = "author")
@@ -35,10 +36,21 @@ public class AuthorEntity {
     @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GenreAuthorEntity> genreAuthorEntities;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BookEntity> books;
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(
+            name = "author_book",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private Set<BookEntity> books;
 
-    public AuthorEntity() { }
+    public AuthorEntity() {
+    }
 
     public Long getId() {
         return id;
@@ -104,12 +116,22 @@ public class AuthorEntity {
         this.genreAuthorEntities = genreAuthorEntities;
     }
 
-    public List<BookEntity> getBooks() {
+    public Set<BookEntity> getBooks() {
         return books;
     }
 
-    public void setBooks(List<BookEntity> books) {
+    public void setBooks(Set<BookEntity> books) {
         this.books = books;
+    }
+
+    public void addBook(BookEntity bookEntity) {
+        this.books.add(bookEntity);
+        bookEntity.getAuthors().add(this);
+    }
+
+    public void removeBook(BookEntity bookEntity) {
+        this.books.remove(bookEntity);
+        bookEntity.getAuthors().remove(this);
     }
 
     @Override
