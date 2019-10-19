@@ -1,23 +1,17 @@
 package com.trl.libraryservice.temporary;
 
-import com.trl.libraryservice.repository.AuthorRepository;
-import com.trl.libraryservice.repository.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.Set;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-    private final AuthorRepository authorRepository;
+//    private final AuthorRepository authorRepository;
 
-    @Autowired
-    public DatabaseLoader(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
+//    @Autowired
+//    public DatabaseLoader(AuthorRepository authorRepository) {
+//        this.authorRepository = authorRepository;
+//    }
 
     /*Set<EmailEntity> emailEntitySet = Set.of(
             new EmailEntity(1L, "email_1"),
