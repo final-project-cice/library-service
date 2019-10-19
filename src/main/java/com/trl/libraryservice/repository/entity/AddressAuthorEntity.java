@@ -119,5 +119,4 @@ public class AddressAuthorEntity {
                 ", postcode=" + postcode +
                 '}';
     }
-
 }

@@ -67,5 +67,4 @@ public class GenreBookEntity {
                 ", name='" + name + '\'' +
                 '}';
     }
-
 }

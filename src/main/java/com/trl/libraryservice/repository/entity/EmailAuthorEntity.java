@@ -9,7 +9,7 @@ public class EmailAuthorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false, table = "")
+    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "email", unique = true)
@@ -80,5 +80,4 @@ public class EmailAuthorEntity {
                 ", emailType='" + emailType + '\'' +
                 '}';
     }
-
 }

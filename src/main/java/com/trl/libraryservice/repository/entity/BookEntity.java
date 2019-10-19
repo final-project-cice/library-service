@@ -18,7 +18,6 @@ public class BookEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "author")
     private List<AuthorEntity> authors;
 
     @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,6 +31,9 @@ public class BookEntity {
 
     @Column(name = "path_file", nullable = false)
     private String pathFile;
+
+    @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommentBookEntity> commentEntities;
 
     public BookEntity() {
     }
@@ -92,6 +94,14 @@ public class BookEntity {
         this.pathFile = pathFile;
     }
 
+    public List<CommentBookEntity> getCommentEntities() {
+        return commentEntities;
+    }
+
+    public void setCommentEntities(List<CommentBookEntity> commentEntities) {
+        this.commentEntities = commentEntities;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,12 +113,13 @@ public class BookEntity {
                 Objects.equals(genreBookEntities, that.genreBookEntities) &&
                 Objects.equals(publishingHouse, that.publishingHouse) &&
                 Objects.equals(publicationDate, that.publicationDate) &&
-                Objects.equals(pathFile, that.pathFile);
+                Objects.equals(pathFile, that.pathFile) &&
+                Objects.equals(commentEntities, that.commentEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, authors, genreBookEntities, publishingHouse, publicationDate, pathFile);
+        return Objects.hash(id, name, authors, genreBookEntities, publishingHouse, publicationDate, pathFile, commentEntities);
     }
 
     @Override
@@ -116,12 +127,12 @@ public class BookEntity {
         return "BookEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", authorEntities=" + authors +
-                ", genreEntities=" + genreBookEntities +
+                ", authors=" + authors +
+                ", genreBookEntities=" + genreBookEntities +
                 ", publishingHouse=" + publishingHouse +
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
+                ", commentEntities=" + commentEntities +
                 '}';
     }
-
 }

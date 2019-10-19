@@ -95,5 +95,4 @@ public class PublishingHouseEntity {
                 ", emailEntities=" + emailPublishingHouseEntities +
                 '}';
     }
-
 }

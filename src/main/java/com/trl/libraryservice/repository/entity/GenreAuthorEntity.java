@@ -66,5 +66,4 @@ public class GenreAuthorEntity {
                 ", name='" + name + '\'' +
                 '}';
     }
-
 }
