@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/genre")
-public class GenreResource {
+@RequestMapping(path = "/publishingHouse/phoneNumber")
+public class PhoneNumberPublishingHouseResource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GenreResource.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PhoneNumberPublishingHouseResource.class);
 
 }
+

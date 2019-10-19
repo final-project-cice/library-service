@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/address")
-public class AddressResource {
+@RequestMapping(path = "/publishingHouse/email")
+public class EmailPublishingHouseResource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AddressResource.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EmailPublishingHouseResource.class);
 
 }
