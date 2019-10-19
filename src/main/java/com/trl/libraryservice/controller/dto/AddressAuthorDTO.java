@@ -2,7 +2,7 @@ package com.trl.libraryservice.controller.dto;
 
 import java.util.Objects;
 
-public class AddressDTO {
+public class AddressAuthorDTO {
 
     private Long id;
     private String country;
@@ -10,54 +10,77 @@ public class AddressDTO {
     private String street;
     private String houseNumber;
     private Integer postcode;
+    private AuthorDTO authorDTO;
 
-    public AddressDTO() {
-    }
-
-    public AddressDTO(Long id, String country, String city, String street, String houseNumber, Integer postcode) {
-        this.id = id;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.postcode = postcode;
-    }
+    public AddressAuthorDTO() { }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCountry() {
         return country;
     }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStreet() {
         return street;
     }
 
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
     public String getHouseNumber() {
         return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
     }
 
     public Integer getPostcode() {
         return postcode;
     }
 
+    public void setPostcode(Integer postcode) {
+        this.postcode = postcode;
+    }
+
+    public AuthorDTO getAuthorDTO() {
+        return authorDTO;
+    }
+
+    public void setAuthorDTO(AuthorDTO authorDTO) {
+        this.authorDTO = authorDTO;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AddressDTO that = (AddressDTO) o;
-        return id.equals(that.id) &&
-                country.equals(that.country) &&
-                city.equals(that.city) &&
-                street.equals(that.street) &&
-                houseNumber.equals(that.houseNumber) &&
-                postcode.equals(that.postcode);
+        AddressAuthorDTO that = (AddressAuthorDTO) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(street, that.street) &&
+                Objects.equals(houseNumber, that.houseNumber) &&
+                Objects.equals(postcode, that.postcode);
     }
 
     @Override
@@ -67,7 +90,7 @@ public class AddressDTO {
 
     @Override
     public String toString() {
-        return "AddressDTO{" +
+        return "AddressAuthorDTO{" +
                 "id=" + id +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
@@ -76,5 +99,4 @@ public class AddressDTO {
                 ", postcode=" + postcode +
                 '}';
     }
-
 }

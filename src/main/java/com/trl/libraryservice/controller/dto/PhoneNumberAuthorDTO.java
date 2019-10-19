@@ -1,31 +1,16 @@
-package com.trl.libraryservice.repository.entity;
+package com.trl.libraryservice.controller.dto;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name = "PhoneNumberPublishingHouseEntity")
-@Table(name = "phone_number_publishing_house")
-public class PhoneNumberPublishingHouseEntity {
+public class PhoneNumberAuthorDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-
-    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-
-    @Column(name = "country_code")
     private String countryCode;
-
-    @Column(name = "type")
     private String type;
+    private AuthorDTO authorDTO;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publishing_house_id")
-    private PublishingHouseEntity publishingHouseEntity;
-
-    public PhoneNumberPublishingHouseEntity() { }
+    public PhoneNumberAuthorDTO() { }
 
     public Long getId() {
         return id;
@@ -59,19 +44,19 @@ public class PhoneNumberPublishingHouseEntity {
         this.type = type;
     }
 
-    public PublishingHouseEntity getPublishingHouseEntity() {
-        return publishingHouseEntity;
+    public AuthorDTO getAuthorDTO() {
+        return authorDTO;
     }
 
-    public void setPublishingHouseEntity(PublishingHouseEntity publishingHouseEntity) {
-        this.publishingHouseEntity = publishingHouseEntity;
+    public void setAuthorDTO(AuthorDTO authorDTO) {
+        this.authorDTO = authorDTO;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PhoneNumberPublishingHouseEntity that = (PhoneNumberPublishingHouseEntity) o;
+        PhoneNumberAuthorDTO that = (PhoneNumberAuthorDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(phoneNumber, that.phoneNumber) &&
                 Objects.equals(countryCode, that.countryCode) &&
@@ -85,7 +70,7 @@ public class PhoneNumberPublishingHouseEntity {
 
     @Override
     public String toString() {
-        return "PhoneNumberPublishingHouseEntity{" +
+        return "PhoneNumberAuthorDTO{" +
                 "id=" + id +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", countryCode='" + countryCode + '\'' +
@@ -93,4 +78,3 @@ public class PhoneNumberPublishingHouseEntity {
                 '}';
     }
 }
-

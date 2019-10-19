@@ -1,0 +1,2 @@
+Buscar informacion con que manera se puede hacer para no repetir definicion de los classes entities y dto.
+Porejemplo EmailPublishingHouseEntity y EmailAuthorEntity.

@@ -1,37 +1,18 @@
-package com.trl.libraryservice.repository.entity;
+package com.trl.libraryservice.controller.dto;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name = "AddressPublishingHouseEntity")
-@Table(name = "address_publishing_house")
-public class AddressPublishingHouseEntity {
+public class AddressPublishingHouseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-
-    @Column(name = "country", nullable = false)
     private String country;
-
-    @Column(name = "city", nullable = false)
     private String city;
-
-    @Column(name = "street", nullable = false)
     private String street;
-
-    @Column(name = "house_number", nullable = false)
     private String houseNumber;
-
-    @Column(name = "postcode", nullable = false)
     private Integer postcode;
+    private PublishingHouseDTO publishingHouseDTO;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publishing_house_id")
-    private PublishingHouseEntity publishingHouseEntity;
-
-    public AddressPublishingHouseEntity() { }
+    public AddressPublishingHouseDTO() { }
 
     public Long getId() {
         return id;
@@ -81,19 +62,19 @@ public class AddressPublishingHouseEntity {
         this.postcode = postcode;
     }
 
-    public PublishingHouseEntity getPublishingHouseEntity() {
-        return publishingHouseEntity;
+    public PublishingHouseDTO getPublishingHouseDTO() {
+        return publishingHouseDTO;
     }
 
-    public void setPublishingHouseEntity(PublishingHouseEntity publishingHouseEntity) {
-        this.publishingHouseEntity = publishingHouseEntity;
+    public void setPublishingHouseDTO(PublishingHouseDTO publishingHouseDTO) {
+        this.publishingHouseDTO = publishingHouseDTO;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AddressPublishingHouseEntity that = (AddressPublishingHouseEntity) o;
+        AddressPublishingHouseDTO that = (AddressPublishingHouseDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(country, that.country) &&
                 Objects.equals(city, that.city) &&
@@ -109,7 +90,7 @@ public class AddressPublishingHouseEntity {
 
     @Override
     public String toString() {
-        return "AddressPublishingHouseEntity{" +
+        return "AddressPublishingHouseDTO{" +
                 "id=" + id +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +

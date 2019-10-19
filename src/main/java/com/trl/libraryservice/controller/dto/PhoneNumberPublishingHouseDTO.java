@@ -1,31 +1,16 @@
-package com.trl.libraryservice.repository.entity;
+package com.trl.libraryservice.controller.dto;
 
-import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name = "PhoneNumberPublishingHouseEntity")
-@Table(name = "phone_number_publishing_house")
-public class PhoneNumberPublishingHouseEntity {
+public class PhoneNumberPublishingHouseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-
-    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-
-    @Column(name = "country_code")
     private String countryCode;
-
-    @Column(name = "type")
     private String type;
+    private PublishingHouseDTO publishingHouseDTO;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publishing_house_id")
-    private PublishingHouseEntity publishingHouseEntity;
-
-    public PhoneNumberPublishingHouseEntity() { }
+    public PhoneNumberPublishingHouseDTO() { }
 
     public Long getId() {
         return id;
@@ -59,19 +44,19 @@ public class PhoneNumberPublishingHouseEntity {
         this.type = type;
     }
 
-    public PublishingHouseEntity getPublishingHouseEntity() {
-        return publishingHouseEntity;
+    public PublishingHouseDTO getPublishingHouseDTO() {
+        return publishingHouseDTO;
     }
 
-    public void setPublishingHouseEntity(PublishingHouseEntity publishingHouseEntity) {
-        this.publishingHouseEntity = publishingHouseEntity;
+    public void setPublishingHouseDTO(PublishingHouseDTO publishingHouseDTO) {
+        this.publishingHouseDTO = publishingHouseDTO;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PhoneNumberPublishingHouseEntity that = (PhoneNumberPublishingHouseEntity) o;
+        PhoneNumberPublishingHouseDTO that = (PhoneNumberPublishingHouseDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(phoneNumber, that.phoneNumber) &&
                 Objects.equals(countryCode, that.countryCode) &&
@@ -85,7 +70,7 @@ public class PhoneNumberPublishingHouseEntity {
 
     @Override
     public String toString() {
-        return "PhoneNumberPublishingHouseEntity{" +
+        return "PhoneNumberPublishingHouseDTO{" +
                 "id=" + id +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", countryCode='" + countryCode + '\'' +

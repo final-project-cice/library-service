@@ -3,67 +3,96 @@ package com.trl.libraryservice.controller.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class AuthorDTO {
 
     private Long id;
     private String firstName;
     private String lastName;
-    private String email;
-    private Set<AddressDTO> address;
+    private List<EmailAuthorDTO> emailAuthorDTOS;
+    private List<PhoneNumberAuthorDTO> phoneNumberAuthorDTOS;
+    private List<AddressAuthorDTO> addressAuthorDTOS;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate birthday;
 
-    private Set<GenreDTO> genres;
-    private Integer rating;
+    private List<GenreAuthorDTO> genreAuthorDTOS;
+    private List<BookDTO> bookDTOS;
 
-    public AuthorDTO() {
-    }
-
-    public AuthorDTO(Long id, String firstName, String lastName, String email, Set<AddressDTO> address, LocalDate birthday, Set<GenreDTO> genres, Integer rating) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
-        this.birthday = birthday;
-        this.genres = genres;
-        this.rating = rating;
-    }
+    public AuthorDTO() { }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Set<AddressDTO> getAddress() {
-        return address;
+    public List<EmailAuthorDTO> getEmailAuthorDTOS() {
+        return emailAuthorDTOS;
+    }
+
+    public void setEmailAuthorDTOS(List<EmailAuthorDTO> emailAuthorDTOS) {
+        this.emailAuthorDTOS = emailAuthorDTOS;
+    }
+
+    public List<PhoneNumberAuthorDTO> getPhoneNumberAuthorDTOS() {
+        return phoneNumberAuthorDTOS;
+    }
+
+    public void setPhoneNumberAuthorDTOS(List<PhoneNumberAuthorDTO> phoneNumberAuthorDTOS) {
+        this.phoneNumberAuthorDTOS = phoneNumberAuthorDTOS;
+    }
+
+    public List<AddressAuthorDTO> getAddressAuthorDTOS() {
+        return addressAuthorDTOS;
+    }
+
+    public void setAddressAuthorDTOS(List<AddressAuthorDTO> addressAuthorDTOS) {
+        this.addressAuthorDTOS = addressAuthorDTOS;
     }
 
     public LocalDate getBirthday() {
         return birthday;
     }
 
-    public Set<GenreDTO> getGenres() {
-        return genres;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
-    public Integer getRating() {
-        return rating;
+    public List<GenreAuthorDTO> getGenreAuthorDTOS() {
+        return genreAuthorDTOS;
+    }
+
+    public void setGenreAuthorDTOS(List<GenreAuthorDTO> genreAuthorDTOS) {
+        this.genreAuthorDTOS = genreAuthorDTOS;
+    }
+
+    public List<BookDTO> getBookDTOS() {
+        return bookDTOS;
+    }
+
+    public void setBookDTOS(List<BookDTO> bookDTOS) {
+        this.bookDTOS = bookDTOS;
     }
 
     @Override
@@ -71,16 +100,20 @@ public class AuthorDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AuthorDTO authorDTO = (AuthorDTO) o;
-        return id.equals(authorDTO.id) &&
-                firstName.equals(authorDTO.firstName) &&
-                lastName.equals(authorDTO.lastName) &&
-                email.equals(authorDTO.email) &&
-                birthday.equals(authorDTO.birthday);
+        return Objects.equals(id, authorDTO.id) &&
+                Objects.equals(firstName, authorDTO.firstName) &&
+                Objects.equals(lastName, authorDTO.lastName) &&
+                Objects.equals(emailAuthorDTOS, authorDTO.emailAuthorDTOS) &&
+                Objects.equals(phoneNumberAuthorDTOS, authorDTO.phoneNumberAuthorDTOS) &&
+                Objects.equals(addressAuthorDTOS, authorDTO.addressAuthorDTOS) &&
+                Objects.equals(birthday, authorDTO.birthday) &&
+                Objects.equals(genreAuthorDTOS, authorDTO.genreAuthorDTOS) &&
+                Objects.equals(bookDTOS, authorDTO.bookDTOS);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, birthday);
+        return Objects.hash(id, firstName, lastName, emailAuthorDTOS, phoneNumberAuthorDTOS, addressAuthorDTOS, birthday, genreAuthorDTOS, bookDTOS);
     }
 
     @Override
@@ -89,12 +122,12 @@ public class AuthorDTO {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", address=" + address +
+                ", emailAuthorDTOS=" + emailAuthorDTOS +
+                ", phoneNumberAuthorDTOS=" + phoneNumberAuthorDTOS +
+                ", addressAuthorDTOS=" + addressAuthorDTOS +
                 ", birthday=" + birthday +
-                ", genres=" + genres +
-                ", rating=" + rating +
+                ", genreAuthorDTOS=" + genreAuthorDTOS +
+                ", bookDTOS=" + bookDTOS +
                 '}';
     }
-
 }
