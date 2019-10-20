@@ -44,7 +44,7 @@ public class BookEntity {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )
-    private Set<AuthorEntity> authors;
+    private Set<AuthorEntity> authorEntities;
 
     public BookEntity() {
     }
@@ -105,22 +105,22 @@ public class BookEntity {
         this.commentBookEntities = commentBookEntities;
     }
 
-    public Set<AuthorEntity> getAuthors() {
-        return authors;
+    public Set<AuthorEntity> getAuthorEntities() {
+        return authorEntities;
     }
 
-    public void setAuthors(Set<AuthorEntity> authors) {
-        this.authors = authors;
+    public void setAuthorEntities(Set<AuthorEntity> authorEntities) {
+        this.authorEntities = authorEntities;
     }
 
     public void addAuthor(AuthorEntity authorEntity) {
-        this.authors.add(authorEntity);
-        authorEntity.getBooks().add(this);
+        this.authorEntities.add(authorEntity);
+        authorEntity.getBookEntities().add(this);
     }
 
     public void removeAuthor(AuthorEntity authorEntity) {
-        this.authors.remove(authorEntity);
-        authorEntity.getBooks().remove(this);
+        this.authorEntities.remove(authorEntity);
+        authorEntity.getBookEntities().remove(this);
     }
 
     @Override
@@ -135,12 +135,12 @@ public class BookEntity {
                 Objects.equals(publicationDate, that.publicationDate) &&
                 Objects.equals(pathFile, that.pathFile) &&
                 Objects.equals(commentBookEntities, that.commentBookEntities) &&
-                Objects.equals(authors, that.authors);
+                Objects.equals(authorEntities, that.authorEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genreBookEntities, publishingHouse, publicationDate, pathFile, commentBookEntities, authors);
+        return Objects.hash(id, name, genreBookEntities, publishingHouse, publicationDate, pathFile, commentBookEntities, authorEntities);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class BookEntity {
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
                 ", commentBookEntities=" + commentBookEntities +
-                ", authors=" + authors +
+                ", authors=" + authorEntities +
                 '}';
     }
 }

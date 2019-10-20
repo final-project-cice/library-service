@@ -47,7 +47,7 @@ public class AuthorEntity {
             joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-    private Set<BookEntity> books;
+    private Set<BookEntity> bookEntities;
 
     public AuthorEntity() {
     }
@@ -116,22 +116,22 @@ public class AuthorEntity {
         this.genreAuthorEntities = genreAuthorEntities;
     }
 
-    public Set<BookEntity> getBooks() {
-        return books;
+    public Set<BookEntity> getBookEntities() {
+        return bookEntities;
     }
 
-    public void setBooks(Set<BookEntity> books) {
-        this.books = books;
+    public void setBookEntities(Set<BookEntity> bookEntities) {
+        this.bookEntities = bookEntities;
     }
 
     public void addBook(BookEntity bookEntity) {
-        this.books.add(bookEntity);
-        bookEntity.getAuthors().add(this);
+        this.bookEntities.add(bookEntity);
+        bookEntity.getAuthorEntities().add(this);
     }
 
     public void removeBook(BookEntity bookEntity) {
-        this.books.remove(bookEntity);
-        bookEntity.getAuthors().remove(this);
+        this.bookEntities.remove(bookEntity);
+        bookEntity.getAuthorEntities().remove(this);
     }
 
     @Override
@@ -147,12 +147,12 @@ public class AuthorEntity {
                 Objects.equals(addressAuthorEntities, that.addressAuthorEntities) &&
                 Objects.equals(birthday, that.birthday) &&
                 Objects.equals(genreAuthorEntities, that.genreAuthorEntities) &&
-                Objects.equals(books, that.books);
+                Objects.equals(bookEntities, that.bookEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, emailAuthorEntities, phoneNumberAuthorEntities, addressAuthorEntities, birthday, genreAuthorEntities, books);
+        return Objects.hash(id, firstName, lastName, emailAuthorEntities, phoneNumberAuthorEntities, addressAuthorEntities, birthday, genreAuthorEntities, bookEntities);
     }
 
     @Override
@@ -166,7 +166,7 @@ public class AuthorEntity {
                 ", addressEntities=" + addressAuthorEntities +
                 ", birthday=" + birthday +
                 ", genreEntities=" + genreAuthorEntities +
-                ", bookEntities=" + books +
+                ", bookEntities=" + bookEntities +
                 '}';
     }
 }
