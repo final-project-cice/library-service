@@ -22,7 +22,7 @@ public class BookEntity {
     private List<GenreBookEntity> genreBookEntities;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private PublishingHouseEntity publishingHouse;
+    private PublishingHouseEntity publishingHouseEntity;
 
     @Column(name = "publication_date", nullable = false)
     private LocalDate publicationDate;
@@ -73,12 +73,12 @@ public class BookEntity {
         this.genreBookEntities = genreBookEntities;
     }
 
-    public PublishingHouseEntity getPublishingHouse() {
-        return publishingHouse;
+    public PublishingHouseEntity getPublishingHouseEntity() {
+        return publishingHouseEntity;
     }
 
-    public void setPublishingHouse(PublishingHouseEntity publishingHouse) {
-        this.publishingHouse = publishingHouse;
+    public void setPublishingHouseEntity(PublishingHouseEntity publishingHouseEntity) {
+        this.publishingHouseEntity = publishingHouseEntity;
     }
 
     public LocalDate getPublicationDate() {
@@ -131,16 +131,19 @@ public class BookEntity {
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(genreBookEntities, that.genreBookEntities) &&
-                Objects.equals(publishingHouse, that.publishingHouse) &&
+                Objects.equals(publishingHouseEntity, that.publishingHouseEntity) &&
                 Objects.equals(publicationDate, that.publicationDate) &&
                 Objects.equals(pathFile, that.pathFile) &&
                 Objects.equals(commentBookEntities, that.commentBookEntities) &&
+                // TODO: Check it, a cyclic call will be triggered here.
                 Objects.equals(authorEntities, that.authorEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genreBookEntities, publishingHouse, publicationDate, pathFile, commentBookEntities, authorEntities);
+        return Objects.hash(id, name, genreBookEntities, publishingHouseEntity, publicationDate, pathFile, commentBookEntities,
+                // TODO: Check it, a cyclic call will be triggered here.
+                authorEntities);
     }
 
     @Override
@@ -149,10 +152,11 @@ public class BookEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", genreBookEntities=" + genreBookEntities +
-                ", publishingHouse=" + publishingHouse +
+                ", publishingHouse=" + publishingHouseEntity +
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
                 ", commentBookEntities=" + commentBookEntities +
+                // TODO: Check it, a cyclic call will be triggered here.
                 ", authors=" + authorEntities +
                 '}';
     }

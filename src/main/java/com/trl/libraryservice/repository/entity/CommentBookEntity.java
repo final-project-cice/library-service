@@ -24,7 +24,7 @@ public class CommentBookEntity {
     private LocalDate date;
 
     @OneToMany(mappedBy = "commentBookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubCommentCommentEntity> subComments;
+    private List<SubCommentCommentEntity> subCommentCommentEntities;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
@@ -64,12 +64,12 @@ public class CommentBookEntity {
         this.date = date;
     }
 
-    public List<SubCommentCommentEntity> getSubComments() {
-        return subComments;
+    public List<SubCommentCommentEntity> getSubCommentCommentEntities() {
+        return subCommentCommentEntities;
     }
 
-    public void setSubComments(List<SubCommentCommentEntity> subComments) {
-        this.subComments = subComments;
+    public void setSubCommentCommentEntities(List<SubCommentCommentEntity> subCommentCommentEntities) {
+        this.subCommentCommentEntities = subCommentCommentEntities;
     }
 
     public BookEntity getBookEntity() {
@@ -89,12 +89,12 @@ public class CommentBookEntity {
                 Objects.equals(user, that.user) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(date, that.date) &&
-                Objects.equals(subComments, that.subComments);
+                Objects.equals(subCommentCommentEntities, that.subCommentCommentEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, text, date, subComments);
+        return Objects.hash(id, user, text, date, subCommentCommentEntities);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class CommentBookEntity {
                 ", user=" + user +
                 ", text='" + text + '\'' +
                 ", date=" + date +
-                ", subComments=" + subComments +
+                ", subComments=" + subCommentCommentEntities +
                 '}';
     }
 }

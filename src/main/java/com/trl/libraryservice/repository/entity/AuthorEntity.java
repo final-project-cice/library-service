@@ -147,12 +147,16 @@ public class AuthorEntity {
                 Objects.equals(addressAuthorEntities, that.addressAuthorEntities) &&
                 Objects.equals(birthday, that.birthday) &&
                 Objects.equals(genreAuthorEntities, that.genreAuthorEntities) &&
+                // TODO: Check it, a cyclic call will be triggered here.
                 Objects.equals(bookEntities, that.bookEntities);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, emailAuthorEntities, phoneNumberAuthorEntities, addressAuthorEntities, birthday, genreAuthorEntities, bookEntities);
+        return Objects.hash(id, firstName, lastName, emailAuthorEntities, phoneNumberAuthorEntities,
+                addressAuthorEntities, birthday, genreAuthorEntities,
+                // TODO: Check it, a cyclic call will be triggered here.
+                bookEntities);
     }
 
     @Override
@@ -166,6 +170,7 @@ public class AuthorEntity {
                 ", addressEntities=" + addressAuthorEntities +
                 ", birthday=" + birthday +
                 ", genreEntities=" + genreAuthorEntities +
+                // TODO: Check it, a cyclic call will be triggered here.
                 ", bookEntities=" + bookEntities +
                 '}';
     }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class AuthorDTO {
 
@@ -19,7 +20,7 @@ public class AuthorDTO {
     private LocalDate birthday;
 
     private List<GenreAuthorDTO> genreAuthorDTOS;
-    private List<BookDTO> bookDTOS;
+    private Set<BookDTO> bookDTOS;
 
     public AuthorDTO() { }
 
@@ -87,12 +88,22 @@ public class AuthorDTO {
         this.genreAuthorDTOS = genreAuthorDTOS;
     }
 
-    public List<BookDTO> getBookDTOS() {
+    public Set<BookDTO> getBookDTOS() {
         return bookDTOS;
     }
 
-    public void setBookDTOS(List<BookDTO> bookDTOS) {
+    public void setBookDTOS(Set<BookDTO> bookDTOS) {
         this.bookDTOS = bookDTOS;
+    }
+
+    public void addBook(BookDTO bookDTO) {
+        this.bookDTOS.add(bookDTO);
+        bookDTO.getAuthorDTOS().add(this);
+    }
+
+    public void removeBook(BookDTO bookDTO) {
+        this.bookDTOS.remove(bookDTO);
+        bookDTO.getAuthorDTOS().remove(this);
     }
 
     @Override
@@ -108,12 +119,16 @@ public class AuthorDTO {
                 Objects.equals(addressAuthorDTOS, authorDTO.addressAuthorDTOS) &&
                 Objects.equals(birthday, authorDTO.birthday) &&
                 Objects.equals(genreAuthorDTOS, authorDTO.genreAuthorDTOS) &&
+                // TODO: Check it, a cyclic call will be triggered here.
                 Objects.equals(bookDTOS, authorDTO.bookDTOS);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, emailAuthorDTOS, phoneNumberAuthorDTOS, addressAuthorDTOS, birthday, genreAuthorDTOS, bookDTOS);
+        return Objects.hash(id, firstName, lastName, emailAuthorDTOS, phoneNumberAuthorDTOS, addressAuthorDTOS,
+                birthday, genreAuthorDTOS,
+                // TODO: Check it, a cyclic call will be triggered here.
+                bookDTOS);
     }
 
     @Override
@@ -127,6 +142,7 @@ public class AuthorDTO {
                 ", addressAuthorDTOS=" + addressAuthorDTOS +
                 ", birthday=" + birthday +
                 ", genreAuthorDTOS=" + genreAuthorDTOS +
+                // TODO: Check it, a cyclic call will be triggered here.
                 ", bookDTOS=" + bookDTOS +
                 '}';
     }
