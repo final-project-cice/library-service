@@ -1,2 +1,12 @@
+
+                                        Esta problema se repite ne todos modulos
 Buscar informacion con que manera se puede hacer para no repetir definicion de los classes entities y dto.
 Porejemplo EmailPublishingHouseEntity y EmailAuthorEntity.
+O esto tiene que se asi de esta forma?
+
+                                         Problema en la clase UserService
+Pensar buscar la solucion como hacer la relacion entre "userservice.User" y "libraryservice.User".
+La base de datos de "libraryservice" tiene que tener la tabla user?
+O hacer RestAPI, y cada vez cuando se llama "libraryservice.user" llama "userservice.user" con RestAPI.
+Pensar...
+De momento dejo que service "libraryservice" guarda y busca "Users" en su base de datos.
