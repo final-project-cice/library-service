@@ -14,7 +14,7 @@ public class SubCommentCommentDTO {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
 
-    private CommentBookDTO commentBookDTO;
+    private CommentBookDTO comment;
 
     public SubCommentCommentDTO() { }
 
@@ -50,12 +50,12 @@ public class SubCommentCommentDTO {
         this.date = date;
     }
 
-    public CommentBookDTO getCommentBookDTO() {
-        return commentBookDTO;
+    public CommentBookDTO getComment() {
+        return comment;
     }
 
-    public void setCommentBookDTO(CommentBookDTO commentBookDTO) {
-        this.commentBookDTO = commentBookDTO;
+    public void setComment(CommentBookDTO comment) {
+        this.comment = comment;
     }
 
     @Override

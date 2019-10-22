@@ -11,16 +11,16 @@ public class BookDTO {
 
     private Long id;
     private String name;
-    private List<GenreBookDTO> genreBookDTOS;
-    private PublishingHouseDTO publishingHouseDTO;
+    private List<GenreBookDTO> genres;
+    private PublishingHouseDTO publishingHouse;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate publicationDate;
 
     private String pathFile;
-    private List<CommentBookDTO> commentBookDTOS;
+    private List<CommentBookDTO> comments;
 
-    private Set<AuthorDTO> authorDTOS;
+    private Set<AuthorDTO> authors;
 
     public BookDTO() { }
 
@@ -40,20 +40,20 @@ public class BookDTO {
         this.name = name;
     }
 
-    public List<GenreBookDTO> getGenreBookDTOS() {
-        return genreBookDTOS;
+    public List<GenreBookDTO> getGenres() {
+        return genres;
     }
 
-    public void setGenreBookDTOS(List<GenreBookDTO> genreBookDTOS) {
-        this.genreBookDTOS = genreBookDTOS;
+    public void setGenres(List<GenreBookDTO> genres) {
+        this.genres = genres;
     }
 
-    public PublishingHouseDTO getPublishingHouseDTO() {
-        return publishingHouseDTO;
+    public PublishingHouseDTO getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setPublishingHouseDTO(PublishingHouseDTO publishingHouseDTO) {
-        this.publishingHouseDTO = publishingHouseDTO;
+    public void setPublishingHouse(PublishingHouseDTO publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     public LocalDate getPublicationDate() {
@@ -72,30 +72,30 @@ public class BookDTO {
         this.pathFile = pathFile;
     }
 
-    public List<CommentBookDTO> getCommentBookDTOS() {
-        return commentBookDTOS;
+    public List<CommentBookDTO> getComments() {
+        return comments;
     }
 
-    public void setCommentBookDTOS(List<CommentBookDTO> commentBookDTOS) {
-        this.commentBookDTOS = commentBookDTOS;
+    public void setComments(List<CommentBookDTO> comments) {
+        this.comments = comments;
     }
 
-    public Set<AuthorDTO> getAuthorDTOS() {
-        return authorDTOS;
+    public Set<AuthorDTO> getAuthors() {
+        return authors;
     }
 
-    public void setAuthorDTOS(Set<AuthorDTO> authorDTOS) {
-        this.authorDTOS = authorDTOS;
+    public void setAuthors(Set<AuthorDTO> authors) {
+        this.authors = authors;
     }
 
     public void addAuthor(AuthorDTO authorDTO) {
-        this.authorDTOS.add(authorDTO);
-        authorDTO.getBookDTOS().add(this);
+        this.authors.add(authorDTO);
+        authorDTO.getBooks().add(this);
     }
 
     public void removeAuthor(AuthorDTO authorDTO) {
-        this.authorDTOS.remove(authorDTO);
-        authorDTO.getBookDTOS().remove(this);
+        this.authors.remove(authorDTO);
+        authorDTO.getBooks().remove(this);
     }
 
     @Override
@@ -105,20 +105,20 @@ public class BookDTO {
         BookDTO bookDTO = (BookDTO) o;
         return Objects.equals(id, bookDTO.id) &&
                 Objects.equals(name, bookDTO.name) &&
-                Objects.equals(genreBookDTOS, bookDTO.genreBookDTOS) &&
-                Objects.equals(publishingHouseDTO, bookDTO.publishingHouseDTO) &&
+                Objects.equals(genres, bookDTO.genres) &&
+                Objects.equals(publishingHouse, bookDTO.publishingHouse) &&
                 Objects.equals(publicationDate, bookDTO.publicationDate) &&
                 Objects.equals(pathFile, bookDTO.pathFile) &&
-                Objects.equals(commentBookDTOS, bookDTO.commentBookDTOS) &&
+                Objects.equals(comments, bookDTO.comments) &&
                 // TODO: Check it, a cyclic call will be triggered here.
-                Objects.equals(authorDTOS, bookDTO.authorDTOS);
+                Objects.equals(authors, bookDTO.authors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genreBookDTOS, publishingHouseDTO, publicationDate, pathFile, commentBookDTOS,
+        return Objects.hash(id, name, genres, publishingHouse, publicationDate, pathFile, comments,
                 // TODO: Check it, a cyclic call will be triggered here.
-                authorDTOS);
+                authors);
     }
 
     @Override
@@ -126,13 +126,13 @@ public class BookDTO {
         return "BookDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", genreBookDTOS=" + genreBookDTOS +
-                ", publishingHouse=" + publishingHouseDTO +
+                ", genreBookDTOS=" + genres +
+                ", publishingHouse=" + publishingHouse +
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
-                ", commentBookDTOS=" + commentBookDTOS +
+                ", commentBookDTOS=" + comments +
                 // TODO: Check it, a cyclic call will be triggered here.
-                ", authorDTOS=" + authorDTOS +
+                ", authorDTOS=" + authors +
                 '}';
     }
 }

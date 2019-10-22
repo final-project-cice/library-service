@@ -2,7 +2,6 @@ package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
 import com.trl.libraryservice.repository.entity.BookEntity;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,11 +25,11 @@ public final class BookConverter {
             result = new BookDTO();
             result.setId(entity.getId());
             result.setName(entity.getName());
-            result.setGenreBookDTOS(GenreBookConverter.mapListEntityToListDTO(entity.getGenreBookEntities()));
-            result.setPublishingHouseDTO(PublishingHouseConverter.mapEntityToDTO(entity.getPublishingHouseEntity()));
+            result.setGenres(GenreBookConverter.mapListEntityToListDTO(entity.getGenres()));
+            result.setPublishingHouse(PublishingHouseConverter.mapEntityToDTO(entity.getPublishingHouse()));
             result.setPublicationDate(entity.getPublicationDate());
             result.setPathFile(entity.getPathFile());
-            result.setCommentBookDTOS(CommentBookConverter.mapListEntityToListDTO(entity.getCommentBookEntities()));
+            result.setComments(CommentBookConverter.mapListEntityToListDTO(entity.getComments()));
             // TODO: Check it, a cyclic call will be triggered here.
 //            result.setAuthorDTOS(AuthorConverter.mapSetEntityToSetDTO(entity.getAuthorEntities()));
         }
@@ -76,11 +75,11 @@ public final class BookConverter {
             result = new BookEntity();
             result.setId(dto.getId());
             result.setName(dto.getName());
-            result.setGenreBookEntities(GenreBookConverter.mapListDTOToListEntity(dto.getGenreBookDTOS()));
-            result.setPublishingHouseEntity(PublishingHouseConverter.mapDTOToEntity(dto.getPublishingHouseDTO()));
+            result.setGenres(GenreBookConverter.mapListDTOToListEntity(dto.getGenres()));
+            result.setPublishingHouse(PublishingHouseConverter.mapDTOToEntity(dto.getPublishingHouse()));
             result.setPublicationDate(dto.getPublicationDate());
             result.setPathFile(dto.getPathFile());
-            result.setCommentBookEntities(CommentBookConverter.mapListDTOToListEntity(dto.getCommentBookDTOS()));
+            result.setComments(CommentBookConverter.mapListDTOToListEntity(dto.getComments()));
             // TODO: Check it, a cyclic call will be triggered here.
 //            result.setAuthorEntities(AuthorConverter.mapSetDTOToSetEntity(dto.getAuthorDTOS()));
         }

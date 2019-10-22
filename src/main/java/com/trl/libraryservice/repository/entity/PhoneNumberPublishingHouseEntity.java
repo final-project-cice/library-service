@@ -23,7 +23,7 @@ public class PhoneNumberPublishingHouseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publishing_house_id")
-    private PublishingHouseEntity publishingHouseEntity;
+    private PublishingHouseEntity publishingHouse;
 
     public PhoneNumberPublishingHouseEntity() { }
 
@@ -59,12 +59,12 @@ public class PhoneNumberPublishingHouseEntity {
         this.type = type;
     }
 
-    public PublishingHouseEntity getPublishingHouseEntity() {
-        return publishingHouseEntity;
+    public PublishingHouseEntity getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setPublishingHouseEntity(PublishingHouseEntity publishingHouseEntity) {
-        this.publishingHouseEntity = publishingHouseEntity;
+    public void setPublishingHouse(PublishingHouseEntity publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     @Override

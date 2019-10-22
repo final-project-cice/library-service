@@ -24,11 +24,11 @@ public class CommentBookEntity {
     private LocalDate date;
 
     @OneToMany(mappedBy = "commentBookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubCommentCommentEntity> subCommentCommentEntities;
+    private List<SubCommentCommentEntity> subComments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
-    private BookEntity bookEntity;
+    private BookEntity book;
 
     public CommentBookEntity() { }
 
@@ -64,20 +64,20 @@ public class CommentBookEntity {
         this.date = date;
     }
 
-    public List<SubCommentCommentEntity> getSubCommentCommentEntities() {
-        return subCommentCommentEntities;
+    public List<SubCommentCommentEntity> getSubComments() {
+        return subComments;
     }
 
-    public void setSubCommentCommentEntities(List<SubCommentCommentEntity> subCommentCommentEntities) {
-        this.subCommentCommentEntities = subCommentCommentEntities;
+    public void setSubComments(List<SubCommentCommentEntity> subComments) {
+        this.subComments = subComments;
     }
 
-    public BookEntity getBookEntity() {
-        return bookEntity;
+    public BookEntity getBook() {
+        return book;
     }
 
-    public void setBookEntity(BookEntity bookEntity) {
-        this.bookEntity = bookEntity;
+    public void setBook(BookEntity book) {
+        this.book = book;
     }
 
     @Override
@@ -89,12 +89,12 @@ public class CommentBookEntity {
                 Objects.equals(user, that.user) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(date, that.date) &&
-                Objects.equals(subCommentCommentEntities, that.subCommentCommentEntities);
+                Objects.equals(subComments, that.subComments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, text, date, subCommentCommentEntities);
+        return Objects.hash(id, user, text, date, subComments);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class CommentBookEntity {
                 ", user=" + user +
                 ", text='" + text + '\'' +
                 ", date=" + date +
-                ", subComments=" + subCommentCommentEntities +
+                ", subComments=" + subComments +
                 '}';
     }
 }

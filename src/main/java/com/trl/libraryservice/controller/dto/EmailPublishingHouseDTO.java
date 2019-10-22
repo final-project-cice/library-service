@@ -7,7 +7,7 @@ public class EmailPublishingHouseDTO {
     private Long id;
     private String email;
     private String emailType;
-    private PublishingHouseDTO publishingHouseDTO;
+    private PublishingHouseDTO publishingHouse;
 
     public EmailPublishingHouseDTO() { }
 
@@ -35,12 +35,12 @@ public class EmailPublishingHouseDTO {
         this.emailType = emailType;
     }
 
-    public PublishingHouseDTO getPublishingHouseDTO() {
-        return publishingHouseDTO;
+    public PublishingHouseDTO getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setPublishingHouseDTO(PublishingHouseDTO publishingHouseDTO) {
-        this.publishingHouseDTO = publishingHouseDTO;
+    public void setPublishingHouse(PublishingHouseDTO publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     @Override

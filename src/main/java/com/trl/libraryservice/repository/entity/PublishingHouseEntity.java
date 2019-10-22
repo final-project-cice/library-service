@@ -17,13 +17,13 @@ public class PublishingHouseEntity {
     private String name;
 
     @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AddressPublishingHouseEntity> addressPublishingHouseEntities;
+    private List<AddressPublishingHouseEntity> addresses;
 
     @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PhoneNumberPublishingHouseEntity> phoneNumberPublishingHouseEntities;
+    private List<PhoneNumberPublishingHouseEntity> phoneNumbers;
 
     @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EmailPublishingHouseEntity> emailPublishingHouseEntities;
+    private List<EmailPublishingHouseEntity> emails;
 
     public PublishingHouseEntity() {
     }
@@ -44,28 +44,28 @@ public class PublishingHouseEntity {
         this.name = name;
     }
 
-    public List<AddressPublishingHouseEntity> getAddressPublishingHouseEntities() {
-        return addressPublishingHouseEntities;
+    public List<AddressPublishingHouseEntity> getAddresses() {
+        return addresses;
     }
 
-    public void setAddressPublishingHouseEntities(List<AddressPublishingHouseEntity> addressPublishingHouseEntities) {
-        this.addressPublishingHouseEntities = addressPublishingHouseEntities;
+    public void setAddresses(List<AddressPublishingHouseEntity> addresses) {
+        this.addresses = addresses;
     }
 
-    public List<PhoneNumberPublishingHouseEntity> getPhoneNumberPublishingHouseEntities() {
-        return phoneNumberPublishingHouseEntities;
+    public List<PhoneNumberPublishingHouseEntity> getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setPhoneNumberPublishingHouseEntities(List<PhoneNumberPublishingHouseEntity> phoneNumberPublishingHouseEntities) {
-        this.phoneNumberPublishingHouseEntities = phoneNumberPublishingHouseEntities;
+    public void setPhoneNumbers(List<PhoneNumberPublishingHouseEntity> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 
-    public List<EmailPublishingHouseEntity> getEmailPublishingHouseEntities() {
-        return emailPublishingHouseEntities;
+    public List<EmailPublishingHouseEntity> getEmails() {
+        return emails;
     }
 
-    public void setEmailPublishingHouseEntities(List<EmailPublishingHouseEntity> emailPublishingHouseEntities) {
-        this.emailPublishingHouseEntities = emailPublishingHouseEntities;
+    public void setEmails(List<EmailPublishingHouseEntity> emails) {
+        this.emails = emails;
     }
 
     @Override
@@ -75,14 +75,14 @@ public class PublishingHouseEntity {
         PublishingHouseEntity that = (PublishingHouseEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(addressPublishingHouseEntities, that.addressPublishingHouseEntities) &&
-                Objects.equals(phoneNumberPublishingHouseEntities, that.phoneNumberPublishingHouseEntities) &&
-                Objects.equals(emailPublishingHouseEntities, that.emailPublishingHouseEntities);
+                Objects.equals(addresses, that.addresses) &&
+                Objects.equals(phoneNumbers, that.phoneNumbers) &&
+                Objects.equals(emails, that.emails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, addressPublishingHouseEntities, phoneNumberPublishingHouseEntities, emailPublishingHouseEntities);
+        return Objects.hash(id, name, addresses, phoneNumbers, emails);
     }
 
     @Override
@@ -90,9 +90,9 @@ public class PublishingHouseEntity {
         return "PublishingHouseEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", addressEntities=" + addressPublishingHouseEntities +
-                ", phoneNumberEntities=" + phoneNumberPublishingHouseEntities +
-                ", emailEntities=" + emailPublishingHouseEntities +
+                ", addressEntities=" + addresses +
+                ", phoneNumberEntities=" + phoneNumbers +
+                ", emailEntities=" + emails +
                 '}';
     }
 }

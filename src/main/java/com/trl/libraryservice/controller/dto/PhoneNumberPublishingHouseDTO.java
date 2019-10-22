@@ -8,7 +8,7 @@ public class PhoneNumberPublishingHouseDTO {
     private String phoneNumber;
     private String countryCode;
     private String type;
-    private PublishingHouseDTO publishingHouseDTO;
+    private PublishingHouseDTO publishingHouse;
 
     public PhoneNumberPublishingHouseDTO() { }
 
@@ -44,12 +44,12 @@ public class PhoneNumberPublishingHouseDTO {
         this.type = type;
     }
 
-    public PublishingHouseDTO getPublishingHouseDTO() {
-        return publishingHouseDTO;
+    public PublishingHouseDTO getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setPublishingHouseDTO(PublishingHouseDTO publishingHouseDTO) {
-        this.publishingHouseDTO = publishingHouseDTO;
+    public void setPublishingHouse(PublishingHouseDTO publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     @Override

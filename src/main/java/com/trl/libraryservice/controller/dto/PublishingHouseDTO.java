@@ -7,9 +7,9 @@ public class PublishingHouseDTO {
 
     private Long id;
     private String name;
-    private List<AddressPublishingHouseDTO> addressPublishingHouseDTOS;
-    private List<PhoneNumberPublishingHouseDTO> phoneNumberPublishingHouseDTOS;
-    private List<EmailPublishingHouseDTO> emailPublishingHouseDTOS;
+    private List<AddressPublishingHouseDTO> addresses;
+    private List<PhoneNumberPublishingHouseDTO> phoneNumbers;
+    private List<EmailPublishingHouseDTO> emails;
 
     public PublishingHouseDTO() { }
 
@@ -29,28 +29,28 @@ public class PublishingHouseDTO {
         this.name = name;
     }
 
-    public List<AddressPublishingHouseDTO> getAddressPublishingHouseDTOS() {
-        return addressPublishingHouseDTOS;
+    public List<AddressPublishingHouseDTO> getAddresses() {
+        return addresses;
     }
 
-    public void setAddressPublishingHouseDTOS(List<AddressPublishingHouseDTO> addressPublishingHouseDTOS) {
-        this.addressPublishingHouseDTOS = addressPublishingHouseDTOS;
+    public void setAddresses(List<AddressPublishingHouseDTO> addresses) {
+        this.addresses = addresses;
     }
 
-    public List<PhoneNumberPublishingHouseDTO> getPhoneNumberPublishingHouseDTOS() {
-        return phoneNumberPublishingHouseDTOS;
+    public List<PhoneNumberPublishingHouseDTO> getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setPhoneNumberPublishingHouseDTOS(List<PhoneNumberPublishingHouseDTO> phoneNumberPublishingHouseDTOS) {
-        this.phoneNumberPublishingHouseDTOS = phoneNumberPublishingHouseDTOS;
+    public void setPhoneNumbers(List<PhoneNumberPublishingHouseDTO> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 
-    public List<EmailPublishingHouseDTO> getEmailPublishingHouseDTOS() {
-        return emailPublishingHouseDTOS;
+    public List<EmailPublishingHouseDTO> getEmails() {
+        return emails;
     }
 
-    public void setEmailPublishingHouseDTOS(List<EmailPublishingHouseDTO> emailPublishingHouseDTOS) {
-        this.emailPublishingHouseDTOS = emailPublishingHouseDTOS;
+    public void setEmails(List<EmailPublishingHouseDTO> emails) {
+        this.emails = emails;
     }
 
     @Override
@@ -60,14 +60,14 @@ public class PublishingHouseDTO {
         PublishingHouseDTO that = (PublishingHouseDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(addressPublishingHouseDTOS, that.addressPublishingHouseDTOS) &&
-                Objects.equals(phoneNumberPublishingHouseDTOS, that.phoneNumberPublishingHouseDTOS) &&
-                Objects.equals(emailPublishingHouseDTOS, that.emailPublishingHouseDTOS);
+                Objects.equals(addresses, that.addresses) &&
+                Objects.equals(phoneNumbers, that.phoneNumbers) &&
+                Objects.equals(emails, that.emails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, addressPublishingHouseDTOS, phoneNumberPublishingHouseDTOS, emailPublishingHouseDTOS);
+        return Objects.hash(id, name, addresses, phoneNumbers, emails);
     }
 
     @Override
@@ -75,9 +75,9 @@ public class PublishingHouseDTO {
         return "PublishingHouseDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", addressPublishingHouseDTOS=" + addressPublishingHouseDTOS +
-                ", phoneNumberPublishingHouseDTOS=" + phoneNumberPublishingHouseDTOS +
-                ", emailPublishingHouseDTOS=" + emailPublishingHouseDTOS +
+                ", addressPublishingHouseDTOS=" + addresses +
+                ", phoneNumberPublishingHouseDTOS=" + phoneNumbers +
+                ", emailPublishingHouseDTOS=" + emails +
                 '}';
     }
 }

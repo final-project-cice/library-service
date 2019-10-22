@@ -2,7 +2,6 @@ package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.AuthorDTO;
 import com.trl.libraryservice.repository.entity.AuthorEntity;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,18 +30,18 @@ public final class AuthorConverter {
             result.setId(entity.getId());
             result.setFirstName(entity.getFirstName());
             result.setLastName(entity.getLastName());
-            result.setEmailAuthorDTOS(
-                    EmailAuthorConverter.mapListEntityToListDTO(entity.getEmailAuthorEntities())
+            result.setEmails(
+                    EmailAuthorConverter.mapListEntityToListDTO(entity.getEmails())
             );
-            result.setPhoneNumberAuthorDTOS(
-                    PhoneNumberAuthorConverter.mapListEntityToListDTO(entity.getPhoneNumberAuthorEntities())
+            result.setPhoneNumbers(
+                    PhoneNumberAuthorConverter.mapListEntityToListDTO(entity.getPhoneNumbers())
             );
-            result.setAddressAuthorDTOS(
-                    AddressAuthorConverter.mapListEntityToListDTO(entity.getAddressAuthorEntities())
+            result.setAddresses(
+                    AddressAuthorConverter.mapListEntityToListDTO(entity.getAddresses())
             );
             result.setBirthday(entity.getBirthday());
-            result.setGenreAuthorDTOS(
-                    GenreAuthorConverter.mapListEntityToListDTO(entity.getGenreAuthorEntities())
+            result.setGenres(
+                    GenreAuthorConverter.mapListEntityToListDTO(entity.getGenres())
             );
             // TODO: Check it, a cyclic call will be triggered here.
 //            result.setBookDTOS(BookConverter.mapSetEntityToSetDTO(entity.getBookEntities()));
@@ -90,18 +89,18 @@ public final class AuthorConverter {
             result.setId(dto.getId());
             result.setFirstName(dto.getFirstName());
             result.setLastName(dto.getLastName());
-            result.setEmailAuthorEntities(
-                    EmailAuthorConverter.mapListDTOToListEntity(dto.getEmailAuthorDTOS())
+            result.setEmails(
+                    EmailAuthorConverter.mapListDTOToListEntity(dto.getEmails())
             );
-            result.setPhoneNumberAuthorEntities(
-                    PhoneNumberAuthorConverter.mapListDTOToListEntity(dto.getPhoneNumberAuthorDTOS())
+            result.setPhoneNumbers(
+                    PhoneNumberAuthorConverter.mapListDTOToListEntity(dto.getPhoneNumbers())
             );
-            result.setAddressAuthorEntities(
-                    AddressAuthorConverter.mapListDTOToListEntity(dto.getAddressAuthorDTOS())
+            result.setAddresses(
+                    AddressAuthorConverter.mapListDTOToListEntity(dto.getAddresses())
             );
             result.setBirthday(dto.getBirthday());
-            result.setGenreAuthorEntities(
-                    GenreAuthorConverter.mapListDTOToListEntity(dto.getGenreAuthorDTOS())
+            result.setGenres(
+                    GenreAuthorConverter.mapListDTOToListEntity(dto.getGenres())
             );
             // TODO: Check it, a cyclic call will be triggered here.
 //            result.setBookEntities(BookConverter.mapSetDTOToSetEntity(dto.getBookDTOS()));

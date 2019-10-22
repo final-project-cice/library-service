@@ -19,10 +19,10 @@ public class BookEntity {
     private String name;
 
     @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<GenreBookEntity> genreBookEntities;
+    private List<GenreBookEntity> genres;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private PublishingHouseEntity publishingHouseEntity;
+    private PublishingHouseEntity publishingHouse;
 
     @Column(name = "publication_date", nullable = false)
     private LocalDate publicationDate;
@@ -31,7 +31,7 @@ public class BookEntity {
     private String pathFile;
 
     @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CommentBookEntity> commentBookEntities;
+    private List<CommentBookEntity> comments;
 
     @ManyToMany(
             fetch = FetchType.LAZY,
@@ -44,7 +44,7 @@ public class BookEntity {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )
-    private Set<AuthorEntity> authorEntities;
+    private Set<AuthorEntity> authors;
 
     public BookEntity() {
     }
@@ -65,20 +65,20 @@ public class BookEntity {
         this.name = name;
     }
 
-    public List<GenreBookEntity> getGenreBookEntities() {
-        return genreBookEntities;
+    public List<GenreBookEntity> getGenres() {
+        return genres;
     }
 
-    public void setGenreBookEntities(List<GenreBookEntity> genreBookEntities) {
-        this.genreBookEntities = genreBookEntities;
+    public void setGenres(List<GenreBookEntity> genres) {
+        this.genres = genres;
     }
 
-    public PublishingHouseEntity getPublishingHouseEntity() {
-        return publishingHouseEntity;
+    public PublishingHouseEntity getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setPublishingHouseEntity(PublishingHouseEntity publishingHouseEntity) {
-        this.publishingHouseEntity = publishingHouseEntity;
+    public void setPublishingHouse(PublishingHouseEntity publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     public LocalDate getPublicationDate() {
@@ -97,30 +97,30 @@ public class BookEntity {
         this.pathFile = pathFile;
     }
 
-    public List<CommentBookEntity> getCommentBookEntities() {
-        return commentBookEntities;
+    public List<CommentBookEntity> getComments() {
+        return comments;
     }
 
-    public void setCommentBookEntities(List<CommentBookEntity> commentBookEntities) {
-        this.commentBookEntities = commentBookEntities;
+    public void setComments(List<CommentBookEntity> comments) {
+        this.comments = comments;
     }
 
-    public Set<AuthorEntity> getAuthorEntities() {
-        return authorEntities;
+    public Set<AuthorEntity> getAuthors() {
+        return authors;
     }
 
-    public void setAuthorEntities(Set<AuthorEntity> authorEntities) {
-        this.authorEntities = authorEntities;
+    public void setAuthors(Set<AuthorEntity> authors) {
+        this.authors = authors;
     }
 
     public void addAuthor(AuthorEntity authorEntity) {
-        this.authorEntities.add(authorEntity);
-        authorEntity.getBookEntities().add(this);
+        this.authors.add(authorEntity);
+        authorEntity.getBooks().add(this);
     }
 
     public void removeAuthor(AuthorEntity authorEntity) {
-        this.authorEntities.remove(authorEntity);
-        authorEntity.getBookEntities().remove(this);
+        this.authors.remove(authorEntity);
+        authorEntity.getBooks().remove(this);
     }
 
     @Override
@@ -130,20 +130,20 @@ public class BookEntity {
         BookEntity that = (BookEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(genreBookEntities, that.genreBookEntities) &&
-                Objects.equals(publishingHouseEntity, that.publishingHouseEntity) &&
+                Objects.equals(genres, that.genres) &&
+                Objects.equals(publishingHouse, that.publishingHouse) &&
                 Objects.equals(publicationDate, that.publicationDate) &&
                 Objects.equals(pathFile, that.pathFile) &&
-                Objects.equals(commentBookEntities, that.commentBookEntities) &&
+                Objects.equals(comments, that.comments) &&
                 // TODO: Check it, a cyclic call will be triggered here.
-                Objects.equals(authorEntities, that.authorEntities);
+                Objects.equals(authors, that.authors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genreBookEntities, publishingHouseEntity, publicationDate, pathFile, commentBookEntities,
+        return Objects.hash(id, name, genres, publishingHouse, publicationDate, pathFile, comments,
                 // TODO: Check it, a cyclic call will be triggered here.
-                authorEntities);
+                authors);
     }
 
     @Override
@@ -151,13 +151,13 @@ public class BookEntity {
         return "BookEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", genreBookEntities=" + genreBookEntities +
-                ", publishingHouse=" + publishingHouseEntity +
+                ", genreBookEntities=" + genres +
+                ", publishingHouse=" + publishingHouse +
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
-                ", commentBookEntities=" + commentBookEntities +
+                ", commentBookEntities=" + comments +
                 // TODO: Check it, a cyclic call will be triggered here.
-                ", authors=" + authorEntities +
+                ", authors=" + authors +
                 '}';
     }
 }

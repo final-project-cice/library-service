@@ -10,7 +10,7 @@ public class AddressPublishingHouseDTO {
     private String street;
     private String houseNumber;
     private Integer postcode;
-    private PublishingHouseDTO publishingHouseDTO;
+    private PublishingHouseDTO publishingHouse;
 
     public AddressPublishingHouseDTO() { }
 
@@ -62,12 +62,12 @@ public class AddressPublishingHouseDTO {
         this.postcode = postcode;
     }
 
-    public PublishingHouseDTO getPublishingHouseDTO() {
-        return publishingHouseDTO;
+    public PublishingHouseDTO getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setPublishingHouseDTO(PublishingHouseDTO publishingHouseDTO) {
-        this.publishingHouseDTO = publishingHouseDTO;
+    public void setPublishingHouse(PublishingHouseDTO publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     @Override

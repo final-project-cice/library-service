@@ -6,7 +6,7 @@ public class GenreAuthorDTO {
 
     private Long id;
     private String name;
-    private AuthorDTO authorDTO;
+    private AuthorDTO author;
 
     public GenreAuthorDTO() { }
 
@@ -26,12 +26,12 @@ public class GenreAuthorDTO {
         this.name = name;
     }
 
-    public AuthorDTO getAuthorDTO() {
-        return authorDTO;
+    public AuthorDTO getAuthor() {
+        return author;
     }
 
-    public void setAuthorDTO(AuthorDTO authorDTO) {
-        this.authorDTO = authorDTO;
+    public void setAuthor(AuthorDTO author) {
+        this.author = author;
     }
 
     @Override

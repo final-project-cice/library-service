@@ -8,7 +8,7 @@ public class PhoneNumberAuthorDTO {
     private String phoneNumber;
     private String countryCode;
     private String type;
-    private AuthorDTO authorDTO;
+    private AuthorDTO author;
 
     public PhoneNumberAuthorDTO() { }
 
@@ -44,12 +44,12 @@ public class PhoneNumberAuthorDTO {
         this.type = type;
     }
 
-    public AuthorDTO getAuthorDTO() {
-        return authorDTO;
+    public AuthorDTO getAuthor() {
+        return author;
     }
 
-    public void setAuthorDTO(AuthorDTO authorDTO) {
-        this.authorDTO = authorDTO;
+    public void setAuthor(AuthorDTO author) {
+        this.author = author;
     }
 
     @Override

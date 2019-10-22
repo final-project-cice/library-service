@@ -6,7 +6,7 @@ public class GenreBookDTO {
 
     private Long id;
     private String name;
-    private BookDTO bookDTO;
+    private BookDTO book;
 
     public GenreBookDTO() { }
 
@@ -26,12 +26,12 @@ public class GenreBookDTO {
         this.name = name;
     }
 
-    public BookDTO getBookDTO() {
-        return bookDTO;
+    public BookDTO getBook() {
+        return book;
     }
 
-    public void setBookDTO(BookDTO bookDTO) {
-        this.bookDTO = bookDTO;
+    public void setBook(BookDTO book) {
+        this.book = book;
     }
 
     @Override

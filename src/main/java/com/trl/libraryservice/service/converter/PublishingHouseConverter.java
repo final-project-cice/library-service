@@ -2,7 +2,6 @@ package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.PublishingHouseDTO;
 import com.trl.libraryservice.repository.entity.PublishingHouseEntity;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,14 +28,14 @@ public final class PublishingHouseConverter {
             result = new PublishingHouseDTO();
             result.setId(entity.getId());
             result.setName(entity.getName());
-            result.setAddressPublishingHouseDTOS(
-                    AddressPublishingHouseConverter.mapListEntityToListDTO(entity.getAddressPublishingHouseEntities())
+            result.setAddresses(
+                    AddressPublishingHouseConverter.mapListEntityToListDTO(entity.getAddresses())
             );
-            result.setPhoneNumberPublishingHouseDTOS(
-                    PhoneNumberPublishingHouseConverter.mapListEntityToListDTO(entity.getPhoneNumberPublishingHouseEntities())
+            result.setPhoneNumbers(
+                    PhoneNumberPublishingHouseConverter.mapListEntityToListDTO(entity.getPhoneNumbers())
             );
-            result.setEmailPublishingHouseDTOS(
-                    EmailPublishingHouseConverter.mapListEntityToListDTO(entity.getEmailPublishingHouseEntities())
+            result.setEmails(
+                    EmailPublishingHouseConverter.mapListEntityToListDTO(entity.getEmails())
             );
         }
 
@@ -81,14 +80,14 @@ public final class PublishingHouseConverter {
             result = new PublishingHouseEntity();
             result.setId(dto.getId());
             result.setName(dto.getName());
-            result.setAddressPublishingHouseEntities(
-                    AddressPublishingHouseConverter.mapListDTOToListEntity(dto.getAddressPublishingHouseDTOS())
+            result.setAddresses(
+                    AddressPublishingHouseConverter.mapListDTOToListEntity(dto.getAddresses())
             );
-            result.setPhoneNumberPublishingHouseEntities(
-                    PhoneNumberPublishingHouseConverter.mapListDTOToListEntity(dto.getPhoneNumberPublishingHouseDTOS())
+            result.setPhoneNumbers(
+                    PhoneNumberPublishingHouseConverter.mapListDTOToListEntity(dto.getPhoneNumbers())
             );
-            result.setEmailPublishingHouseEntities(
-                    EmailPublishingHouseConverter.mapListDTOToListEntity(dto.getEmailPublishingHouseDTOS())
+            result.setEmails(
+                    EmailPublishingHouseConverter.mapListDTOToListEntity(dto.getEmails())
             );
         }
 

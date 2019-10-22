@@ -15,8 +15,8 @@ public class CommentBookDTO {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
 
-    private List<SubCommentCommentDTO> subCommentCommentDTOS;
-    private BookDTO bookDTO;
+    private List<SubCommentCommentDTO> subComments;
+    private BookDTO book;
 
     public CommentBookDTO() { }
 
@@ -52,20 +52,20 @@ public class CommentBookDTO {
         this.date = date;
     }
 
-    public List<SubCommentCommentDTO> getSubCommentCommentDTOS() {
-        return subCommentCommentDTOS;
+    public List<SubCommentCommentDTO> getSubComments() {
+        return subComments;
     }
 
-    public void setSubCommentCommentDTOS(List<SubCommentCommentDTO> subCommentCommentDTOS) {
-        this.subCommentCommentDTOS = subCommentCommentDTOS;
+    public void setSubComments(List<SubCommentCommentDTO> subComments) {
+        this.subComments = subComments;
     }
 
-    public BookDTO getBookDTO() {
-        return bookDTO;
+    public BookDTO getBook() {
+        return book;
     }
 
-    public void setBookDTO(BookDTO bookDTO) {
-        this.bookDTO = bookDTO;
+    public void setBook(BookDTO book) {
+        this.book = book;
     }
 
     @Override
@@ -77,12 +77,12 @@ public class CommentBookDTO {
                 Objects.equals(user, that.user) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(date, that.date) &&
-                Objects.equals(subCommentCommentDTOS, that.subCommentCommentDTOS);
+                Objects.equals(subComments, that.subComments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, text, date, subCommentCommentDTOS);
+        return Objects.hash(id, user, text, date, subComments);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CommentBookDTO {
                 ", user=" + user +
                 ", text='" + text + '\'' +
                 ", date=" + date +
-                ", subCommentCommentDTOS=" + subCommentCommentDTOS +
+                ", subCommentCommentDTOS=" + subComments +
                 '}';
     }
 }

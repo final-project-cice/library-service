@@ -24,7 +24,7 @@ public class SubCommentCommentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
-    private CommentBookEntity commentBookEntity;
+    private CommentBookEntity comment;
 
     public SubCommentCommentEntity() { }
 
@@ -60,12 +60,12 @@ public class SubCommentCommentEntity {
         this.date = date;
     }
 
-    public CommentBookEntity getCommentBookEntity() {
-        return commentBookEntity;
+    public CommentBookEntity getComment() {
+        return comment;
     }
 
-    public void setCommentBookEntity(CommentBookEntity commentBookEntity) {
-        this.commentBookEntity = commentBookEntity;
+    public void setComment(CommentBookEntity comment) {
+        this.comment = comment;
     }
 
     @Override

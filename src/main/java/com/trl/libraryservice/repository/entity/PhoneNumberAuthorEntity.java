@@ -23,7 +23,7 @@ public class PhoneNumberAuthorEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
-    private AuthorEntity authorEntity;
+    private AuthorEntity author;
 
     public PhoneNumberAuthorEntity() {
     }
@@ -60,12 +60,12 @@ public class PhoneNumberAuthorEntity {
         this.type = type;
     }
 
-    public AuthorEntity getAuthorEntity() {
-        return authorEntity;
+    public AuthorEntity getAuthor() {
+        return author;
     }
 
-    public void setAuthorEntity(AuthorEntity authorEntity) {
-        this.authorEntity = authorEntity;
+    public void setAuthor(AuthorEntity author) {
+        this.author = author;
     }
 
     @Override

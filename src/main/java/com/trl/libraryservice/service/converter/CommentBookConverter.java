@@ -2,7 +2,6 @@ package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.CommentBookDTO;
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +27,7 @@ public final class CommentBookConverter {
             result.setUser(UserConverter.mapEntityToDTO(entity.getUser()));
             result.setText(entity.getText());
             result.setDate(entity.getDate());
-            result.setSubCommentCommentDTOS(SubCommentCommentConverter.mapListEntityToListDTO(entity.getSubCommentCommentEntities()));
+            result.setSubComments(SubCommentCommentConverter.mapListEntityToListDTO(entity.getSubComments()));
             // TODO: Check it, a cyclic call will be triggered here.
 //            result.setBookDTO(BookConverter.mapEntityToDTO(entity.getBookEntity()));
         }
@@ -76,7 +75,7 @@ public final class CommentBookConverter {
             result.setUser(UserConverter.mapDTOToEntity(dto.getUser()));
             result.setText(dto.getText());
             result.setDate(dto.getDate());
-            result.setSubCommentCommentEntities(SubCommentCommentConverter.mapListDTOToListEntity(dto.getSubCommentCommentDTOS()));
+            result.setSubComments(SubCommentCommentConverter.mapListDTOToListEntity(dto.getSubComments()));
             // TODO: Check it, a cyclic call will be triggered here.
 //            result.setBookEntity(BookConverter.mapDTOToEntity(dto.getBookDTO()));
         }

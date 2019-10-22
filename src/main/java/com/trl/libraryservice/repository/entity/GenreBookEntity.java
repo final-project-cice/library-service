@@ -17,7 +17,7 @@ public class GenreBookEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
-    private BookEntity bookEntity;
+    private BookEntity book;
 
     public GenreBookEntity() { }
 
@@ -38,12 +38,12 @@ public class GenreBookEntity {
 
     }
 
-    public BookEntity getBookEntity() {
-        return bookEntity;
+    public BookEntity getBook() {
+        return book;
     }
 
-    public void setBookEntity(BookEntity bookEntity) {
-        this.bookEntity = bookEntity;
+    public void setBook(BookEntity book) {
+        this.book = book;
     }
 
     @Override

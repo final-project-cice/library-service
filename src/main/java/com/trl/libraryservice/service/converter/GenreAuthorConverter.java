@@ -2,7 +2,6 @@ package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.GenreAuthorDTO;
 import com.trl.libraryservice.repository.entity.GenreAuthorEntity;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,7 +75,7 @@ public final class GenreAuthorConverter {
             result.setId(dto.getId());
             result.setName(dto.getName());
             // TODO: Check it, a cyclic call will be triggered here.
-            result.setAuthorEntity(AuthorConverter.mapDTOToEntity(dto.getAuthorDTO()));
+            result.setAuthor(AuthorConverter.mapDTOToEntity(dto.getAuthor()));
         }
 
         LOG.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = "

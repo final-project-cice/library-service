@@ -20,7 +20,7 @@ public class EmailPublishingHouseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publishing_house_id")
-    private PublishingHouseEntity publishingHouseEntity;
+    private PublishingHouseEntity publishingHouse;
 
     public EmailPublishingHouseEntity() { }
 
@@ -48,12 +48,12 @@ public class EmailPublishingHouseEntity {
         this.emailType = emailType;
     }
 
-    public PublishingHouseEntity getPublishingHouseEntity() {
-        return publishingHouseEntity;
+    public PublishingHouseEntity getPublishingHouse() {
+        return publishingHouse;
     }
 
-    public void setPublishingHouseEntity(PublishingHouseEntity publishingHouseEntity) {
-        this.publishingHouseEntity = publishingHouseEntity;
+    public void setPublishingHouse(PublishingHouseEntity publishingHouse) {
+        this.publishingHouse = publishingHouse;
     }
 
     @Override

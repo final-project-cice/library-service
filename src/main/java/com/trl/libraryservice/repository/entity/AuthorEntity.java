@@ -22,19 +22,19 @@ public class AuthorEntity {
     private String lastName;
 
     @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EmailAuthorEntity> emailAuthorEntities;
+    private List<EmailAuthorEntity> emails;
 
     @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PhoneNumberAuthorEntity> phoneNumberAuthorEntities;
+    private List<PhoneNumberAuthorEntity> phoneNumbers;
 
     @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AddressAuthorEntity> addressAuthorEntities;
+    private List<AddressAuthorEntity> addresses;
 
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
     @OneToMany(mappedBy = "authorEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<GenreAuthorEntity> genreAuthorEntities;
+    private List<GenreAuthorEntity> genres;
 
     @ManyToMany(
             fetch = FetchType.LAZY,
@@ -47,7 +47,7 @@ public class AuthorEntity {
             joinColumns = @JoinColumn(name = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
-    private Set<BookEntity> bookEntities;
+    private Set<BookEntity> books;
 
     public AuthorEntity() {
     }
@@ -76,28 +76,28 @@ public class AuthorEntity {
         this.lastName = lastName;
     }
 
-    public List<EmailAuthorEntity> getEmailAuthorEntities() {
-        return emailAuthorEntities;
+    public List<EmailAuthorEntity> getEmails() {
+        return emails;
     }
 
-    public void setEmailAuthorEntities(List<EmailAuthorEntity> emailAuthorEntities) {
-        this.emailAuthorEntities = emailAuthorEntities;
+    public void setEmails(List<EmailAuthorEntity> emails) {
+        this.emails = emails;
     }
 
-    public List<PhoneNumberAuthorEntity> getPhoneNumberAuthorEntities() {
-        return phoneNumberAuthorEntities;
+    public List<PhoneNumberAuthorEntity> getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setPhoneNumberAuthorEntities(List<PhoneNumberAuthorEntity> phoneNumberAuthorEntities) {
-        this.phoneNumberAuthorEntities = phoneNumberAuthorEntities;
+    public void setPhoneNumbers(List<PhoneNumberAuthorEntity> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 
-    public List<AddressAuthorEntity> getAddressAuthorEntities() {
-        return addressAuthorEntities;
+    public List<AddressAuthorEntity> getAddresses() {
+        return addresses;
     }
 
-    public void setAddressAuthorEntities(List<AddressAuthorEntity> addressAuthorEntities) {
-        this.addressAuthorEntities = addressAuthorEntities;
+    public void setAddresses(List<AddressAuthorEntity> addresses) {
+        this.addresses = addresses;
     }
 
     public LocalDate getBirthday() {
@@ -108,30 +108,30 @@ public class AuthorEntity {
         this.birthday = birthday;
     }
 
-    public List<GenreAuthorEntity> getGenreAuthorEntities() {
-        return genreAuthorEntities;
+    public List<GenreAuthorEntity> getGenres() {
+        return genres;
     }
 
-    public void setGenreAuthorEntities(List<GenreAuthorEntity> genreAuthorEntities) {
-        this.genreAuthorEntities = genreAuthorEntities;
+    public void setGenres(List<GenreAuthorEntity> genres) {
+        this.genres = genres;
     }
 
-    public Set<BookEntity> getBookEntities() {
-        return bookEntities;
+    public Set<BookEntity> getBooks() {
+        return books;
     }
 
-    public void setBookEntities(Set<BookEntity> bookEntities) {
-        this.bookEntities = bookEntities;
+    public void setBooks(Set<BookEntity> books) {
+        this.books = books;
     }
 
     public void addBook(BookEntity bookEntity) {
-        this.bookEntities.add(bookEntity);
-        bookEntity.getAuthorEntities().add(this);
+        this.books.add(bookEntity);
+        bookEntity.getAuthors().add(this);
     }
 
     public void removeBook(BookEntity bookEntity) {
-        this.bookEntities.remove(bookEntity);
-        bookEntity.getAuthorEntities().remove(this);
+        this.books.remove(bookEntity);
+        bookEntity.getAuthors().remove(this);
     }
 
     @Override
@@ -142,21 +142,21 @@ public class AuthorEntity {
         return Objects.equals(id, that.id) &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
-                Objects.equals(emailAuthorEntities, that.emailAuthorEntities) &&
-                Objects.equals(phoneNumberAuthorEntities, that.phoneNumberAuthorEntities) &&
-                Objects.equals(addressAuthorEntities, that.addressAuthorEntities) &&
+                Objects.equals(emails, that.emails) &&
+                Objects.equals(phoneNumbers, that.phoneNumbers) &&
+                Objects.equals(addresses, that.addresses) &&
                 Objects.equals(birthday, that.birthday) &&
-                Objects.equals(genreAuthorEntities, that.genreAuthorEntities) &&
+                Objects.equals(genres, that.genres) &&
                 // TODO: Check it, a cyclic call will be triggered here.
-                Objects.equals(bookEntities, that.bookEntities);
+                Objects.equals(books, that.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, emailAuthorEntities, phoneNumberAuthorEntities,
-                addressAuthorEntities, birthday, genreAuthorEntities,
+        return Objects.hash(id, firstName, lastName, emails, phoneNumbers,
+                addresses, birthday, genres,
                 // TODO: Check it, a cyclic call will be triggered here.
-                bookEntities);
+                books);
     }
 
     @Override
@@ -165,13 +165,13 @@ public class AuthorEntity {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", emailEntities=" + emailAuthorEntities +
-                ", phoneNumberEntities=" + phoneNumberAuthorEntities +
-                ", addressEntities=" + addressAuthorEntities +
+                ", emailEntities=" + emails +
+                ", phoneNumberEntities=" + phoneNumbers +
+                ", addressEntities=" + addresses +
                 ", birthday=" + birthday +
-                ", genreEntities=" + genreAuthorEntities +
+                ", genreEntities=" + genres +
                 // TODO: Check it, a cyclic call will be triggered here.
-                ", bookEntities=" + bookEntities +
+                ", bookEntities=" + books +
                 '}';
     }
 }
