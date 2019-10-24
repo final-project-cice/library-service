@@ -10,3 +10,11 @@ La base de datos de "libraryservice" tiene que tener la tabla user?
 O hacer RestAPI, y cada vez cuando se llama "libraryservice.user" llama "userservice.user" con RestAPI.
 Pensar...
 De momento dejo que service "libraryservice" guarda y busca "Users" en su base de datos.
+
+
+                         Esta problema esta en clase User y provaca en otros calsses que esta relacionados.
+User tiene campo email de tipo String. Pensar para hacer campo email de un objeto Email.
+
+
+                                      Todos methodos find...
+Intentar hacer todos methodos "find..." con Pagination.

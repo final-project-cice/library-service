@@ -5,17 +5,17 @@ import com.trl.libraryservice.exception.*;
 import com.trl.libraryservice.repository.UserRepository;
 import com.trl.libraryservice.repository.entity.UserEntity;
 import com.trl.libraryservice.service.UserService;
-import com.trl.libraryservice.service.converter.UserConverter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import static com.trl.libraryservice.service.converter.UserConverter.*;
+import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -59,11 +59,11 @@ public class UserServiceImpl implements UserService {
                     + "' exist. It is not allowed to register multiple users with the same email.");
         }
 
-        UserEntity savedUser = userRepository.save(UserConverter.mapDTOToEntity(user));
+        UserEntity savedUser = userRepository.save(mapDTOToEntity(user));
 
         LOG.debug("************ create() ---> savedUser = " + savedUser);
 
-        userResult = UserConverter.mapEntityToDTO(savedUser);
+        userResult = mapEntityToDTO(savedUser);
 
         LOG.debug("************ create() ---> userResult = " + userResult);
 
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
         UserEntity updatedUser = userRepository.findById(id).get();
         LOG.debug("************ updateFirstName() ---> updatedUserFromRepository = " + updatedUser);
 
-        userResult = UserConverter.mapEntityToDTO(updatedUser);
+        userResult = mapEntityToDTO(updatedUser);
         LOG.debug("************ updateFirstName() ---> userResult = " + userResult);
 
         return userResult;
@@ -144,7 +144,7 @@ public class UserServiceImpl implements UserService {
         UserEntity updatedUser = userRepository.findById(id).get();
         LOG.debug("************ updateLastName() ---> updatedUserFromRepository = " + updatedUser);
 
-        userResult = UserConverter.mapEntityToDTO(updatedUser);
+        userResult = mapEntityToDTO(updatedUser);
         LOG.debug("************ updateLastName() ---> userResult = " + userResult);
 
         return userResult;
@@ -192,7 +192,7 @@ public class UserServiceImpl implements UserService {
 
         LOG.debug("************ updateEmail() ---> updatedUserFromRepository = " + updatedUser);
 
-        userResult = UserConverter.mapEntityToDTO(updatedUser);
+        userResult = mapEntityToDTO(updatedUser);
 
         LOG.debug("************ updateEmail() ---> userResult = " + userResult);
 
@@ -234,7 +234,7 @@ public class UserServiceImpl implements UserService {
 
         LOG.debug("************ updateBirthday() ---> updatedUserFromRepository = " + updatedUser);
 
-        userResult = UserConverter.mapEntityToDTO(updatedUser);
+        userResult = mapEntityToDTO(updatedUser);
 
         LOG.debug("************ updateBirthday() ---> userResult = " + userResult);
 
@@ -246,7 +246,7 @@ public class UserServiceImpl implements UserService {
     public Boolean delete(Long id) throws UserWithValueNotExistException, InvalidArgumentException {
         boolean isDeletedUser = false;
 
-        LOG.debug("************ delete() ---> userId = " + id);
+        LOG.debug("************ delete() ---> id = " + id);
 
         if (id <= 0) {
             LOG.debug("************ delete() ---> " +
@@ -293,12 +293,17 @@ public class UserServiceImpl implements UserService {
             throw new UserWithValueNotExistException("User with this id = '" + id + "' not exist.");
         }
 
-        userResult = UserConverter.mapEntityToDTO(userById.get());
+        userResult = mapEntityToDTO(userById.get());
         LOG.debug("************ findById() ---> userResult = " + userResult);
 
         return userResult;
     }
 
+    /**
+     * This method is very resource-intensive.
+     * Maybe it should be done differently.
+     * Carefully with this method.
+     */
     @Override
     public List<UserDTO> findByFirstName(String firstName) throws Exception {
         List<UserDTO> userListResult = null;
@@ -320,12 +325,18 @@ public class UserServiceImpl implements UserService {
             throw new UserWithValueNotExistException("Users with this firstName = '" + firstName + "' not exist.");
         }
 
-        userListResult = UserConverter.mapListEntityToListDTO(userListByFirstName);
+        userListResult = mapListEntityToListDTO(userListByFirstName);
         LOG.debug("************ findByFirstName() ---> userListResult = " + userListResult);
 
         return userListResult;
     }
 
+    /**
+     *
+     * This method is very resource-intensive.
+     * Maybe it should be done differently.
+     * Carefully with this method.
+     */
     @Override
     public List<UserDTO> findByLastName(String lastName) throws Exception {
         List<UserDTO> userListResult = null;
@@ -347,12 +358,18 @@ public class UserServiceImpl implements UserService {
             throw new UserWithValueNotExistException("Users with this lastName = '" + lastName + "' not exist.");
         }
 
-        userListResult = UserConverter.mapListEntityToListDTO(userListByLastName);
+        userListResult = mapListEntityToListDTO(userListByLastName);
         LOG.debug("************ findByLastName() ---> userListResult = " + userListResult);
 
         return userListResult;
     }
 
+    /**
+     *
+     * This method is very resource-intensive.
+     * Maybe it should be done differently.
+     * Carefully with this method.
+     */
     @Override
     public List<UserDTO> findByFirstNameAndLastName(String firstName, String lastName) throws Exception {
         List<UserDTO> userListResult = null;
@@ -378,7 +395,7 @@ public class UserServiceImpl implements UserService {
                     "' and lastName = '" + lastName + "' not exist.");
         }
 
-        userListResult = UserConverter.mapListEntityToListDTO(userListByFirstNameAndLastName);
+        userListResult = mapListEntityToListDTO(userListByFirstNameAndLastName);
         LOG.debug("************ findByFirstNameAndLastName() ---> userListResult = " + userListResult);
 
         return userListResult;
@@ -405,12 +422,18 @@ public class UserServiceImpl implements UserService {
             throw new UserWithValueNotExistException("Users with this email = '" + email + "' not exist.");
         }
 
-        userResult = UserConverter.mapEntityToDTO(userByEmail.get());
+        userResult = mapEntityToDTO(userByEmail.get());
         LOG.debug("************ findByEmail() ---> userResult = " + userResult);
 
         return userResult;
     }
 
+    /**
+     *
+     * This method is very resource-intensive.
+     * Maybe it should be done differently.
+     * Carefully with this method.
+     */
     @Override
     public List<UserDTO> findByBirthday(LocalDate birthday) throws Exception {
         List<UserDTO> userListResult = null;
@@ -432,12 +455,18 @@ public class UserServiceImpl implements UserService {
             throw new UserWithValueNotExistException("Users with this birthday = '" + birthday + "' not exist.");
         }
 
-        userListResult = UserConverter.mapListEntityToListDTO(userListByBirthday);
+        userListResult = mapListEntityToListDTO(userListByBirthday);
         LOG.debug("************ findByBirthday() ---> userListResult = " + userListResult);
 
         return userListResult;
     }
 
+    /**
+     *
+     * This method is very resource-intensive.
+     * Maybe it should be done differently.
+     * Carefully with this method.
+     */
     @Override
     public List<UserDTO> findAll() throws Exception{
         List<UserDTO> userListResult = null;
@@ -450,7 +479,7 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundObjectsException("Repository has no saved users.");
         }
 
-        userListResult = UserConverter.mapListEntityToListDTO(allUsers);
+        userListResult = mapListEntityToListDTO(allUsers);
         LOG.debug("************ findByBirthday() ---> userListResult = " + userListResult);
 
         return userListResult;
