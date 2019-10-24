@@ -8,26 +8,26 @@ import java.util.List;
 
 public interface SubCommentCommentService {
 
-    SubCommentCommentDTO create(SubCommentCommentDTO subCommentCommentDTO);
+    SubCommentCommentDTO create(SubCommentCommentDTO subComment) throws Exception;
 
 
-    SubCommentCommentDTO updateUser(Long id, UserDTO userDTO);
+    SubCommentCommentDTO updateUser(Long id, UserDTO user) throws Exception;
 
-    SubCommentCommentDTO updateText(Long id, String text);
+    SubCommentCommentDTO updateText(Long id, String text) throws Exception;
 
-    SubCommentCommentDTO updateDate(Long id, LocalDate date);
-
-
-    Boolean delete(Long id);
+    SubCommentCommentDTO updateDate(Long id, LocalDate date) throws Exception;
 
 
-    SubCommentCommentDTO findById(Long id);
+    Boolean delete(Long id) throws Exception;
 
-    List<SubCommentCommentDTO> findByUser(UserDTO userDTO);
 
-    List<SubCommentCommentDTO> findByText(String text);
+    SubCommentCommentDTO findById(Long id) throws Exception;
 
-    List<SubCommentCommentDTO> findByDate(LocalDate date);
+    List<SubCommentCommentDTO> findByUser(UserDTO user) throws Exception;
 
-    List<SubCommentCommentDTO> findAll();
+    List<SubCommentCommentDTO> findByText(String text) throws Exception;
+
+    List<SubCommentCommentDTO> findByDate(LocalDate date) throws Exception;
+
+    List<SubCommentCommentDTO> findAll() throws Exception;
 }
