@@ -27,10 +27,6 @@ public class AddressPublishingHouseEntity {
     @Column(name = "postcode", nullable = false)
     private Integer postcode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publishing_house_id")
-    private PublishingHouseEntity publishingHouse;
-
     public AddressPublishingHouseEntity() { }
 
     public Long getId() {
@@ -79,14 +75,6 @@ public class AddressPublishingHouseEntity {
 
     public void setPostcode(Integer postcode) {
         this.postcode = postcode;
-    }
-
-    public PublishingHouseEntity getPublishingHouse() {
-        return publishingHouse;
-    }
-
-    public void setPublishingHouse(PublishingHouseEntity publishingHouse) {
-        this.publishingHouse = publishingHouse;
     }
 
     @Override

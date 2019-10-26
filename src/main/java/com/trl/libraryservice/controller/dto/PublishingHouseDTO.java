@@ -7,7 +7,7 @@ public class PublishingHouseDTO {
 
     private Long id;
     private String name;
-    private List<AddressPublishingHouseDTO> addresses;
+    private AddressPublishingHouseDTO address;
     private List<PhoneNumberPublishingHouseDTO> phoneNumbers;
     private List<EmailPublishingHouseDTO> emails;
 
@@ -29,12 +29,12 @@ public class PublishingHouseDTO {
         this.name = name;
     }
 
-    public List<AddressPublishingHouseDTO> getAddresses() {
-        return addresses;
+    public AddressPublishingHouseDTO getAddress() {
+        return address;
     }
 
-    public void setAddresses(List<AddressPublishingHouseDTO> addresses) {
-        this.addresses = addresses;
+    public void setAddress(AddressPublishingHouseDTO address) {
+        this.address = address;
     }
 
     public List<PhoneNumberPublishingHouseDTO> getPhoneNumbers() {
@@ -60,14 +60,14 @@ public class PublishingHouseDTO {
         PublishingHouseDTO that = (PublishingHouseDTO) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(addresses, that.addresses) &&
+                Objects.equals(address, that.address) &&
                 Objects.equals(phoneNumbers, that.phoneNumbers) &&
                 Objects.equals(emails, that.emails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, addresses, phoneNumbers, emails);
+        return Objects.hash(id, name, address, phoneNumbers, emails);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class PublishingHouseDTO {
         return "PublishingHouseDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", addressPublishingHouseDTOS=" + addresses +
+                ", addressPublishingHouseDTOS=" + address +
                 ", phoneNumberPublishingHouseDTOS=" + phoneNumbers +
                 ", emailPublishingHouseDTOS=" + emails +
                 '}';

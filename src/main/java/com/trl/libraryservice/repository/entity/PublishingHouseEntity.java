@@ -16,13 +16,13 @@ public class PublishingHouseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AddressPublishingHouseEntity> addresses;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private AddressPublishingHouseEntity address;
 
-    @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "publishingHouse", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PhoneNumberPublishingHouseEntity> phoneNumbers;
 
-    @OneToMany(mappedBy = "publishingHouseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "publishingHouse", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EmailPublishingHouseEntity> emails;
 
     public PublishingHouseEntity() {
@@ -44,12 +44,12 @@ public class PublishingHouseEntity {
         this.name = name;
     }
 
-    public List<AddressPublishingHouseEntity> getAddresses() {
-        return addresses;
+    public AddressPublishingHouseEntity getAddress() {
+        return address;
     }
 
-    public void setAddresses(List<AddressPublishingHouseEntity> addresses) {
-        this.addresses = addresses;
+    public void setAddress(AddressPublishingHouseEntity address) {
+        this.address = address;
     }
 
     public List<PhoneNumberPublishingHouseEntity> getPhoneNumbers() {
@@ -75,14 +75,14 @@ public class PublishingHouseEntity {
         PublishingHouseEntity that = (PublishingHouseEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(addresses, that.addresses) &&
+                Objects.equals(address, that.address) &&
                 Objects.equals(phoneNumbers, that.phoneNumbers) &&
                 Objects.equals(emails, that.emails);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, addresses, phoneNumbers, emails);
+        return Objects.hash(id, name, address, phoneNumbers, emails);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class PublishingHouseEntity {
         return "PublishingHouseEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", addressEntities=" + addresses +
+                ", addressEntities=" + address +
                 ", phoneNumberEntities=" + phoneNumbers +
                 ", emailEntities=" + emails +
                 '}';

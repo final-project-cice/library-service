@@ -18,7 +18,7 @@ public class BookEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GenreBookEntity> genres;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -30,7 +30,7 @@ public class BookEntity {
     @Column(name = "path_file", nullable = false)
     private String pathFile;
 
-    @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentBookEntity> comments;
 
     @ManyToMany(
