@@ -134,16 +134,16 @@ public class BookEntity {
                 Objects.equals(publishingHouse, that.publishingHouse) &&
                 Objects.equals(publicationDate, that.publicationDate) &&
                 Objects.equals(pathFile, that.pathFile) &&
-                Objects.equals(comments, that.comments) &&
+                Objects.equals(comments, that.comments);
                 // TODO: Check it, a cyclic call will be triggered here.
-                Objects.equals(authors, that.authors);
+        /*Objects.equals(authors, that.authors);*/
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genres, publishingHouse, publicationDate, pathFile, comments,
+        return Objects.hash(id, name, genres, publishingHouse, publicationDate, pathFile, comments
                 // TODO: Check it, a cyclic call will be triggered here.
-                authors);
+                /*authors*/);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class BookEntity {
                 ", pathFile='" + pathFile + '\'' +
                 ", commentBookEntities=" + comments +
                 // TODO: Check it, a cyclic call will be triggered here.
-                ", authors=" + authors +
+                /*", authors=" + authors +*/
                 '}';
     }
 }
