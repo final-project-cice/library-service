@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      * @param firstName
      */
     @Modifying(clearAutomatically = true)
-    @Query("update UserEntity u set u.firstName=:firstName where u.id =:id")
+    @Query(value = "update UserEntity u set u.firstName=:firstName where u.id =:id", nativeQuery = true)
     void updateFirstName(@Param("id") Long id, @Param("firstName") String firstName);
 
     /**
@@ -26,7 +26,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      * @param lastName
      */
     @Modifying(clearAutomatically = true)
-    @Query("update UserEntity u set u.lastName=:lastName where u.id =:id")
+    @Query(value = "update UserEntity u set u.lastName=:lastName where u.id =:id", nativeQuery = true)
     void updateLastName(@Param("id") Long id, @Param("lastName") String lastName);
 
     /**
@@ -34,7 +34,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      * @param email
      */
     @Modifying(clearAutomatically = true)
-    @Query("update UserEntity u set u.email=:email where u.id =:id")
+    @Query(value = "update UserEntity u set u.email=:email where u.id =:id", nativeQuery = true)
     void updateEmail(@Param("id") Long id, @Param("email") String email);
 
     /**
@@ -42,7 +42,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      * @param birthday
      */
     @Modifying(clearAutomatically = true)
-    @Query("update UserEntity u set u.birthday=:birthday where u.id =:id")
+    @Query(value = "update UserEntity u set u.birthday=:birthday where u.id =:id", nativeQuery = true)
     void updateBirthday(@Param("id") Long id, @Param("birthday") LocalDate birthday);
 
 

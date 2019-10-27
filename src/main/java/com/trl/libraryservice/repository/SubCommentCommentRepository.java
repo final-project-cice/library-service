@@ -2,6 +2,7 @@ package com.trl.libraryservice.repository;
 
 import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 import com.trl.libraryservice.repository.entity.UserEntity;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +18,7 @@ public interface SubCommentCommentRepository extends JpaRepository<SubCommentCom
      * @param user
      */
     @Modifying(clearAutomatically = true)
-    @Query("update SubCommentCommentEntity sc set sc.user=:user where sc.id =:id")
+    @Query(value = "update SubCommentCommentEntity sc set sc.user=:user where sc.id =:id", nativeQuery = true)
     void updateUser(@Param("id") Long id, @Param("user") UserEntity user);
 
     /**
@@ -25,7 +26,7 @@ public interface SubCommentCommentRepository extends JpaRepository<SubCommentCom
      * @param text
      */
     @Modifying(clearAutomatically = true)
-    @Query("update SubCommentCommentEntity sc set sc.text=:text where sc.id =:id")
+    @Query(value = "update SubCommentCommentEntity sc set sc.text=:text where sc.id =:id", nativeQuery = true)
     void updateTest(@Param("id") Long id, @Param("text") String text);
 
     /**
@@ -33,7 +34,7 @@ public interface SubCommentCommentRepository extends JpaRepository<SubCommentCom
      * @param date
      */
     @Modifying(clearAutomatically = true)
-    @Query("update SubCommentCommentEntity sc set sc.date=:date where sc.id =:id")
+    @Query(value = "update SubCommentCommentEntity sc set sc.date=:date where sc.id =:id", nativeQuery = true)
     void updateDate(@Param("id") Long id, @Param("date") LocalDate date);
 
 
