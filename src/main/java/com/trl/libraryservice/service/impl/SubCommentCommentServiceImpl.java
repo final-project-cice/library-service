@@ -141,7 +141,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
                     "The value cannot be updated to the same value. Argument text is equals to subComment.getText().");
         }
 
-        subCommentRepository.updateTest(id, text);
+        subCommentRepository.updateText(id, text);
 
         SubCommentCommentEntity updatedSubComment = subCommentRepository.findById(id).get();
         LOG.debug("************ updateText() ---> updatedSubCommentFromRepository = " + updatedSubComment);

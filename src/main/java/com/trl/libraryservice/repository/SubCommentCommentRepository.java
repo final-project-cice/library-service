@@ -27,7 +27,7 @@ public interface SubCommentCommentRepository extends JpaRepository<SubCommentCom
      */
     @Modifying(clearAutomatically = true)
     @Query(value = "update SubCommentCommentEntity sc set sc.text=:text where sc.id =:id", nativeQuery = true)
-    void updateTest(@Param("id") Long id, @Param("text") String text);
+    void updateText(@Param("id") Long id, @Param("text") String text);
 
     /**
      * @param id
