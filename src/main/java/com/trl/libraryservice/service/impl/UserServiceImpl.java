@@ -5,6 +5,9 @@ import com.trl.libraryservice.exception.*;
 import com.trl.libraryservice.repository.UserRepository;
 import com.trl.libraryservice.repository.entity.UserEntity;
 import com.trl.libraryservice.service.UserService;
+
+import static com.trl.libraryservice.service.converter.UserConverter.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static com.trl.libraryservice.service.converter.UserConverter.*;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 @Service
@@ -29,7 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO create(UserDTO user) throws Exception {
+    public UserDTO create(UserDTO user)
+            throws InvalidArgumentException, InvalidVariableOfObjectException, UserWithEmailExistException {
         UserDTO userResult = null;
 
         LOG.debug("************ create() ---> user = " + user);
@@ -72,7 +75,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDTO updateFirstName(Long id, String firstName) throws Exception {
+    public UserDTO updateFirstName(Long id, String firstName)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
         UserDTO userResult = null;
 
         LOG.debug("************ updateFirstName() ---> id = " + id + " ---> firstName = " + firstName);
@@ -89,7 +93,7 @@ public class UserServiceImpl implements UserService {
 
         if (userById.isEmpty()) {
             LOG.debug("************ updateFirstName() ---> User with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("User with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("User with this id = '" + id + "' not exist.");
         }
 
         if (firstName.equals(userById.get().getFirstName())) {
@@ -112,7 +116,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDTO updateLastName(Long id, String lastName) throws Exception {
+    public UserDTO updateLastName(Long id, String lastName)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
         UserDTO userResult = null;
 
         LOG.debug("************ updateLastName() ---> id = " + id + " ---> lastName = " + lastName);
@@ -129,7 +134,7 @@ public class UserServiceImpl implements UserService {
 
         if (userById.isEmpty()) {
             LOG.debug("************ updateLastName() ---> User with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("User with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("User with this id = '" + id + "' not exist.");
         }
 
         if (!lastName.equals(userById.get().getLastName())) {
@@ -152,7 +157,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDTO updateEmail(Long id, String email) throws Exception {
+    public UserDTO updateEmail(Long id, String email)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException, UserWithEmailExistException {
         UserDTO userResult = null;
 
         LOG.debug("************ updateEmail() ---> id = " + id + " ---> email = " + email);
@@ -169,7 +175,7 @@ public class UserServiceImpl implements UserService {
 
         if (userById.isEmpty()) {
             LOG.debug("************ updateEmail() ---> User with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("User with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("User with this id = '" + id + "' not exist.");
         }
 
         if (email.equals(userById.get().getEmail())) {
@@ -201,7 +207,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDTO updateBirthday(Long id, LocalDate birthday) throws Exception {
+    public UserDTO updateBirthday(Long id, LocalDate birthday)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
         UserDTO userResult = null;
 
         LOG.debug("************ updateBirthday() ---> id = " + id + " ---> birthday = " + birthday);
@@ -218,7 +225,7 @@ public class UserServiceImpl implements UserService {
 
         if (userById.isEmpty()) {
             LOG.debug("************ updateBirthday() ---> User with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("User with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("User with this id = '" + id + "' not exist.");
         }
 
         if (birthday.equals(userById.get().getBirthday())) {
@@ -243,7 +250,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Boolean delete(Long id) throws UserWithValueNotExistException, InvalidArgumentException {
+    public Boolean delete(Long id) throws EntityNotFoundWithThisValueException, InvalidArgumentException {
         boolean isDeletedUser = false;
 
         LOG.debug("************ delete() ---> id = " + id);
@@ -260,7 +267,7 @@ public class UserServiceImpl implements UserService {
 
         if (userById.isEmpty()) {
             LOG.debug("************ delete() ---> User with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("User with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("User with this id = '" + id + "' not exist.");
         }
 
         userRepository.deleteById(id);
@@ -273,7 +280,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findById(Long id) throws Exception {
+    public UserDTO findById(Long id) throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         UserDTO userResult = null;
 
         LOG.debug("************ findById() ---> id = " + id);
@@ -290,7 +297,7 @@ public class UserServiceImpl implements UserService {
 
         if (userById.isEmpty()) {
             LOG.debug("************ findById() ---> User with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("User with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("User with this id = '" + id + "' not exist.");
         }
 
         userResult = mapEntityToDTO(userById.get());
@@ -305,7 +312,8 @@ public class UserServiceImpl implements UserService {
      * Carefully with this method.
      */
     @Override
-    public List<UserDTO> findByFirstName(String firstName) throws Exception {
+    public List<UserDTO> findByFirstName(String firstName)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         List<UserDTO> userListResult = null;
 
         LOG.debug("************ findByFirstName() ---> firstName = " + firstName);
@@ -322,7 +330,7 @@ public class UserServiceImpl implements UserService {
 
         if (userListByFirstName.isEmpty()) {
             LOG.debug("************ findByFirstName() ---> Users with this firstName = '" + firstName + "' not exist.");
-            throw new UserWithValueNotExistException("Users with this firstName = '" + firstName + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("Users with this firstName = '" + firstName + "' not exist.");
         }
 
         userListResult = mapListEntityToListDTO(userListByFirstName);
@@ -332,13 +340,13 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
      * This method is very resource-intensive.
      * Maybe it should be done differently.
      * Carefully with this method.
      */
     @Override
-    public List<UserDTO> findByLastName(String lastName) throws Exception {
+    public List<UserDTO> findByLastName(String lastName)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         List<UserDTO> userListResult = null;
 
         LOG.debug("************ findByLastName() ---> lastName = " + lastName);
@@ -355,7 +363,7 @@ public class UserServiceImpl implements UserService {
 
         if (userListByLastName.isEmpty()) {
             LOG.debug("************ findByLastName() ---> Users with this lastName = '" + lastName + "' not exist.");
-            throw new UserWithValueNotExistException("Users with this lastName = '" + lastName + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("Users with this lastName = '" + lastName + "' not exist.");
         }
 
         userListResult = mapListEntityToListDTO(userListByLastName);
@@ -365,13 +373,13 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
      * This method is very resource-intensive.
      * Maybe it should be done differently.
      * Carefully with this method.
      */
     @Override
-    public List<UserDTO> findByFirstNameAndLastName(String firstName, String lastName) throws Exception {
+    public List<UserDTO> findByFirstNameAndLastName(String firstName, String lastName)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         List<UserDTO> userListResult = null;
 
         LOG.debug("************ findByFirstNameAndLastName() ---> firstName = " + firstName + " ---> lastName = " + lastName);
@@ -391,7 +399,7 @@ public class UserServiceImpl implements UserService {
         if (userListByFirstNameAndLastName.isEmpty()) {
             LOG.debug("************ findByFirstNameAndLastName() ---> " + "Users with this firstName = '" + firstName +
                     "' and lastName = '" + lastName + "' not exist.");
-            throw new UserWithValueNotExistException("Users with this firstName = '" + firstName +
+            throw new EntityNotFoundWithThisValueException("Users with this firstName = '" + firstName +
                     "' and lastName = '" + lastName + "' not exist.");
         }
 
@@ -402,7 +410,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findByEmail(String email) throws Exception {
+    public UserDTO findByEmail(String email)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         UserDTO userResult = null;
 
         LOG.debug("************ findByEmail() ---> email = " + email);
@@ -419,7 +428,7 @@ public class UserServiceImpl implements UserService {
 
         if (userByEmail.isEmpty()) {
             LOG.debug("************ findByEmail() ---> Users with this email = '" + email + "' not exist.");
-            throw new UserWithValueNotExistException("Users with this email = '" + email + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("Users with this email = '" + email + "' not exist.");
         }
 
         userResult = mapEntityToDTO(userByEmail.get());
@@ -429,13 +438,13 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
      * This method is very resource-intensive.
      * Maybe it should be done differently.
      * Carefully with this method.
      */
     @Override
-    public List<UserDTO> findByBirthday(LocalDate birthday) throws Exception {
+    public List<UserDTO> findByBirthday(LocalDate birthday)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         List<UserDTO> userListResult = null;
 
         LOG.debug("************ findByBirthday() ---> birthday = " + birthday);
@@ -452,7 +461,7 @@ public class UserServiceImpl implements UserService {
 
         if (userListByBirthday.isEmpty()) {
             LOG.debug("************ findByBirthday() ---> Users with this birthday = '" + birthday + "' not exist.");
-            throw new UserWithValueNotExistException("Users with this birthday = '" + birthday + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("Users with this birthday = '" + birthday + "' not exist.");
         }
 
         userListResult = mapListEntityToListDTO(userListByBirthday);
@@ -462,13 +471,12 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
      * This method is very resource-intensive.
      * Maybe it should be done differently.
      * Carefully with this method.
      */
     @Override
-    public List<UserDTO> findAll() throws Exception{
+    public List<UserDTO> findAll() throws EntitiesNotFoundException {
         List<UserDTO> userListResult = null;
 
         List<UserEntity> allUsers = userRepository.findAll();
@@ -476,7 +484,7 @@ public class UserServiceImpl implements UserService {
 
         if (allUsers.isEmpty()) {
             LOG.debug("************ findAll() ---> Repository has no saved users.");
-            throw new NotFoundObjectsException("Repository has no saved users.");
+            throw new EntitiesNotFoundException("Repository has no saved users.");
         }
 
         userListResult = mapListEntityToListDTO(allUsers);
