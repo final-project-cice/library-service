@@ -17,7 +17,7 @@ public class CommentBookEntity {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private UserEntity user;
 
-    @Column(name = "test", nullable = false)
+    @Column(name = "text", nullable = false)
     private String text;
 
     @Column(name = "date", nullable = false)
