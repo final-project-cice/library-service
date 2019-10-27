@@ -28,8 +28,8 @@ public final class PublishingHouseConverter {
             result = new PublishingHouseDTO();
             result.setId(entity.getId());
             result.setName(entity.getName());
-            result.setAddresses(
-                    AddressPublishingHouseConverter.mapListEntityToListDTO(entity.getAddresses())
+            result.setAddress(
+                    AddressPublishingHouseConverter.mapEntityToDTO(entity.getAddress())
             );
             result.setPhoneNumbers(
                     PhoneNumberPublishingHouseConverter.mapListEntityToListDTO(entity.getPhoneNumbers())
@@ -80,8 +80,8 @@ public final class PublishingHouseConverter {
             result = new PublishingHouseEntity();
             result.setId(dto.getId());
             result.setName(dto.getName());
-            result.setAddresses(
-                    AddressPublishingHouseConverter.mapListDTOToListEntity(dto.getAddresses())
+            result.setAddress(
+                    AddressPublishingHouseConverter.mapDTOToEntity(dto.getAddress())
             );
             result.setPhoneNumbers(
                     PhoneNumberPublishingHouseConverter.mapListDTOToListEntity(dto.getPhoneNumbers())

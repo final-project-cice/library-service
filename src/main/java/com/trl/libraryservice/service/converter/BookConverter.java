@@ -2,6 +2,7 @@ package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
 import com.trl.libraryservice.repository.entity.BookEntity;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,8 +31,6 @@ public final class BookConverter {
             result.setPublicationDate(entity.getPublicationDate());
             result.setPathFile(entity.getPathFile());
             result.setComments(CommentBookConverter.mapListEntityToListDTO(entity.getComments()));
-            // TODO: Check it, a cyclic call will be triggered here.
-//            result.setAuthorDTOS(AuthorConverter.mapSetEntityToSetDTO(entity.getAuthorEntities()));
         }
 
         LOG.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = "
@@ -80,8 +79,6 @@ public final class BookConverter {
             result.setPublicationDate(dto.getPublicationDate());
             result.setPathFile(dto.getPathFile());
             result.setComments(CommentBookConverter.mapListDTOToListEntity(dto.getComments()));
-            // TODO: Check it, a cyclic call will be triggered here.
-//            result.setAuthorEntities(AuthorConverter.mapSetDTOToSetEntity(dto.getAuthorDTOS()));
         }
 
         LOG.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = "

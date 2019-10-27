@@ -109,16 +109,12 @@ public class BookDTO {
                 Objects.equals(publishingHouse, bookDTO.publishingHouse) &&
                 Objects.equals(publicationDate, bookDTO.publicationDate) &&
                 Objects.equals(pathFile, bookDTO.pathFile) &&
-                Objects.equals(comments, bookDTO.comments) &&
-                // TODO: Check it, a cyclic call will be triggered here.
-                Objects.equals(authors, bookDTO.authors);
+                Objects.equals(comments, bookDTO.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genres, publishingHouse, publicationDate, pathFile, comments,
-                // TODO: Check it, a cyclic call will be triggered here.
-                authors);
+        return Objects.hash(id, name, genres, publishingHouse, publicationDate, pathFile, comments);
     }
 
     @Override
@@ -131,8 +127,6 @@ public class BookDTO {
                 ", publicationDate=" + publicationDate +
                 ", pathFile='" + pathFile + '\'' +
                 ", commentBookDTOS=" + comments +
-                // TODO: Check it, a cyclic call will be triggered here.
-                ", authorDTOS=" + authors +
                 '}';
     }
 }
