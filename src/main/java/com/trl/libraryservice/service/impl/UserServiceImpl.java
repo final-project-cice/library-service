@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO create(UserDTO user)
-            throws InvalidArgumentException, InvalidVariableOfObjectException, UserWithEmailExistException {
+            throws InvalidArgumentException, InvalidObjectVariableValueException, UserWithTheEmailExistException {
         UserDTO userResult = null;
 
         LOG.debug("************ create() ---> user = " + user);
@@ -51,14 +51,14 @@ public class UserServiceImpl implements UserService {
                 || (user.getEmail() == null) || (deleteWhitespace(user.getEmail()).isEmpty())) {
             LOG.debug("************ create() ---> " +
                     "One of the variable from parameter 'user' is incorrect, check the variables that it has the 'user'.");
-            throw new InvalidVariableOfObjectException(
+            throw new InvalidObjectVariableValueException(
                     "One of the variable from parameter 'user' is incorrect, check the variables that it has the 'user'.");
         }
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             LOG.debug("************ create() ---> User with this email = '" + user.getEmail()
                     + "' exist. It is not allowed to register multiple users with the same email.");
-            throw new UserWithEmailExistException("User with this email = '" + user.getEmail()
+            throw new UserWithTheEmailExistException("User with this email = '" + user.getEmail()
                     + "' exist. It is not allowed to register multiple users with the same email.");
         }
 
@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserDTO updateEmail(Long id, String email)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException, UserWithEmailExistException {
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException, UserWithTheEmailExistException {
         UserDTO userResult = null;
 
         LOG.debug("************ updateEmail() ---> id = " + id + " ---> email = " + email);
@@ -188,7 +188,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(email).isPresent()) {
             LOG.debug("************ updateEmail() ---> User with this email = '" + email
                     + "' exist. It is not allowed to register multiple users with the same email.");
-            throw new UserWithEmailExistException("User with this email = '" + email
+            throw new UserWithTheEmailExistException("User with this email = '" + email
                     + "' exist. It is not allowed to register multiple users with the same email.");
         }
 

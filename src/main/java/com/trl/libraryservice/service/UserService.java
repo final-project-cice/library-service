@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserService {
 
     UserDTO create(UserDTO userDTO)
-            throws InvalidArgumentException, InvalidVariableOfObjectException, UserWithEmailExistException;
+            throws InvalidArgumentException, InvalidObjectVariableValueException, UserWithTheEmailExistException;
 
 
     UserDTO updateFirstName(Long id, String firstName)
@@ -19,7 +19,7 @@ public interface UserService {
             throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException;
 
     UserDTO updateEmail(Long id, String email)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException, UserWithEmailExistException;
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException, UserWithTheEmailExistException;
 
     UserDTO updateBirthday(Long id, LocalDate birthday)
             throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException;

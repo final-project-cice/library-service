@@ -7,17 +7,19 @@ import com.trl.libraryservice.repository.SubCommentCommentRepository;
 import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 import com.trl.libraryservice.service.SubCommentCommentService;
 import com.trl.libraryservice.service.converter.UserConverter;
+
+import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
-import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.*;
-import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 @Service
 public class SubCommentCommentServiceImpl implements SubCommentCommentService {
@@ -31,7 +33,8 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
     }
 
     @Override
-    public SubCommentCommentDTO create(SubCommentCommentDTO subComment) throws Exception {
+    public SubCommentCommentDTO create(SubCommentCommentDTO subComment)
+            throws InvalidArgumentException, InvalidObjectVariableValueException {
         SubCommentCommentDTO subCommentResult = null;
 
         LOG.debug("************ create() ---> subComment = " + subComment);
@@ -50,7 +53,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
                 || (subComment.getDate() == null)) {
             LOG.debug("************ create() ---> " +
                     "One of the variable from parameter 'subComment' is incorrect, check the variables that it has the 'subComment'.");
-            throw new InvalidVariableOfObjectException(
+            throw new InvalidObjectVariableValueException(
                     "One of the variable from parameter 'subComment' is incorrect, check the variables that it has the 'subComment'.");
         }
 
@@ -67,7 +70,8 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
     @Transactional
     @Override
-    public SubCommentCommentDTO updateUser(Long id, UserDTO user) throws Exception {
+    public SubCommentCommentDTO updateUser(Long id, UserDTO user)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
         SubCommentCommentDTO subCommentResult = null;
 
         LOG.debug("************ updateUser() ---> id = " + id + " ---> user = " + user);
@@ -79,12 +83,14 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
                     "One of the parameters is incorrect, check the parameters that are passed to the method.");
         }
 
+        // TODO: Think about this. Check all user fields for validity or do not check?
+
         Optional<SubCommentCommentEntity> subCommentById = subCommentRepository.findById(id);
         LOG.debug("************ updateUser() ---> subCommentFromRepositoryById = " + subCommentById);
 
         if (subCommentById.isEmpty()) {
             LOG.debug("************ updateUser() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
         }
 
         if (user.equals(UserConverter.mapEntityToDTO(subCommentById.get().getUser()))) {
@@ -93,8 +99,6 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
             throw new TheSameValueException(
                     "The value cannot be updated to the same value. Argument user is equals to subComment.getUser().");
         }
-
-        // TODO: Think about this. Check all user fields for validity or do not check?
 
         subCommentRepository.updateUser(id, UserConverter.mapDTOToEntity(user));
 
@@ -109,7 +113,8 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
     @Transactional
     @Override
-    public SubCommentCommentDTO updateText(Long id, String text) throws Exception {
+    public SubCommentCommentDTO updateText(Long id, String text)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
         SubCommentCommentDTO subCommentResult = null;
 
         LOG.debug("************ updateText() ---> id = " + id + " ---> text = " + text);
@@ -126,7 +131,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         if (subCommentById.isEmpty()) {
             LOG.debug("************ updateText() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
         }
 
         if (text.equals(subCommentById.get().getText())) {
@@ -149,7 +154,8 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
     @Transactional
     @Override
-    public SubCommentCommentDTO updateDate(Long id, LocalDate date) throws Exception {
+    public SubCommentCommentDTO updateDate(Long id, LocalDate date)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
         SubCommentCommentDTO subCommentResult = null;
 
         LOG.debug("************ updateDate() ---> id = " + id + " ---> date = " + date);
@@ -166,7 +172,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         if (subCommentById.isEmpty()) {
             LOG.debug("************ updateDate() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
         }
 
         if (date.equals(subCommentById.get().getDate())) {
@@ -189,7 +195,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
     @Transactional
     @Override
-    public Boolean delete(Long id) throws Exception {
+    public Boolean delete(Long id) throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         boolean isDeletedSubComment = false;
 
         LOG.debug("************ delete() ---> id = " + id);
@@ -206,7 +212,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         if (subCommentById.isEmpty()) {
             LOG.debug("************ delete() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
         }
 
         subCommentRepository.deleteById(id);
@@ -219,7 +225,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
     }
 
     @Override
-    public SubCommentCommentDTO findById(Long id) throws Exception {
+    public SubCommentCommentDTO findById(Long id) throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         SubCommentCommentDTO subCommentResult = null;
 
         LOG.debug("************ findById() ---> id = " + id);
@@ -236,7 +242,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         if (subCommentById.isEmpty()) {
             LOG.debug("************ findById() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this id = '" + id + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
         }
 
         subCommentResult = mapEntityToDTO(subCommentById.get());
@@ -251,7 +257,8 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      * Carefully with this method.
      */
     @Override
-    public List<SubCommentCommentDTO> findByUser(UserDTO user) throws Exception {
+    public List<SubCommentCommentDTO> findByUser(UserDTO user)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         List<SubCommentCommentDTO> subCommentListResult = null;
 
         LOG.debug("************ findByUser() ---> user = " + user);
@@ -263,15 +270,15 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
                     "One of the parameters is incorrect, check the parameters that are passed to the method.");
         }
 
+        // TODO: Think about this. Check all user fields for validity or do not check?
+
         List<SubCommentCommentEntity> subCommentListByUser = subCommentRepository.findByUser(UserConverter.mapDTOToEntity(user));
         LOG.debug("************ findByUser() ---> subCommentListFromRepositoryByUser = " + subCommentListByUser);
 
         if (subCommentListByUser.isEmpty()) {
             LOG.debug("************ findByUser() ---> SubComment with this user = '" + user + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this user = '" + user + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this user = '" + user + "' not exist.");
         }
-
-        // TODO: Think about this. Check all user fields for validity or do not check?
 
         subCommentListResult = mapListEntityToListDTO(subCommentListByUser);
         LOG.debug("************ findByUser() ---> subCommentListResult = " + subCommentListResult);
@@ -285,7 +292,8 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      * Carefully with this method.
      */
     @Override
-    public List<SubCommentCommentDTO> findByText(String text) throws Exception {
+    public List<SubCommentCommentDTO> findByText(String text)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         List<SubCommentCommentDTO> subCommentListResult = null;
 
         LOG.debug("************ findByText() ---> text = " + text);
@@ -302,7 +310,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         if (subCommentListByText.isEmpty()) {
             LOG.debug("************ findByText() ---> SubComment with this 'text' = '" + text + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this 'text' = '" + text + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this 'text' = '" + text + "' not exist.");
         }
 
         subCommentListResult = mapListEntityToListDTO(subCommentListByText);
@@ -317,7 +325,8 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      * Carefully with this method.
      */
     @Override
-    public List<SubCommentCommentDTO> findByDate(LocalDate date) throws Exception {
+    public List<SubCommentCommentDTO> findByDate(LocalDate date)
+            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
         List<SubCommentCommentDTO> subCommentListResult = null;
 
         LOG.debug("************ findByDate() ---> date = " + date);
@@ -334,7 +343,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         if (subCommentListByDate.isEmpty()) {
             LOG.debug("************ findByDate() ---> SubComment with this 'date' = '" + date + "' not exist.");
-            throw new UserWithValueNotExistException("SubComment with this 'date' = '" + date + "' not exist.");
+            throw new EntityNotFoundWithThisValueException("SubComment with this 'date' = '" + date + "' not exist.");
         }
 
         subCommentListResult = mapListEntityToListDTO(subCommentListByDate);
@@ -349,7 +358,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      * Carefully with this method.
      */
     @Override
-    public List<SubCommentCommentDTO> findAll() throws Exception {
+    public List<SubCommentCommentDTO> findAll() throws EntitiesNotFoundException {
         List<SubCommentCommentDTO> subCommentListResult = null;
 
         List<SubCommentCommentEntity> allSubComments = subCommentRepository.findAll();
@@ -357,7 +366,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         if (allSubComments.isEmpty()) {
             LOG.debug("************ findAll() ---> Repository has no saved subComments.");
-            throw new NotFoundObjectsException("Repository has no saved subComments.");
+            throw new EntitiesNotFoundException("Repository has no saved subComments.");
         }
 
         subCommentListResult = mapListEntityToListDTO(allSubComments);
