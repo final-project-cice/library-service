@@ -5,16 +5,22 @@ Porejemplo EmailPublishingHouseEntity y EmailAuthorEntity.
 O esto tiene que se asi de esta forma?
 
                                          Problema en la clase UserService
-Pensar buscar la solucion como hacer la relacion entre "userservice.User" y "libraryservice.User".
-La base de datos de "libraryservice" tiene que tener la tabla user?
-O hacer RestAPI, y cada vez cuando se llama "libraryservice.user" llama "userservice.user" con RestAPI.
+Pensar buscar la solucion como hacer la relacion entre microservices "userservice.User" y "libraryservice.User".
+La base de datos de microservice "libraryservice" tiene que tener la tabla user?
+O hacer RestAPI, y cada vez cuando se llama microservice "libraryservice.user" llama a microservice "userservice.user" con RestAPI.
 Pensar...
-De momento dejo que service "libraryservice" guarda y busca "Users" en su base de datos.
+De momento dejo que microservice "libraryservice" guarda y busca "Users" en su base de datos.
 
 
                          Esta problema esta en clase User y provaca en otros calsses que esta relacionados.
-User tiene campo email de tipo String. Pensar para hacer campo email de un objeto Email.
+User tiene campo email de tipo String. Pensar para hacer campo email de un tipo de objeto Email.
 
 
-                                      Todos methodos find...
-Intentar hacer todos methodos "find..." con Pagination.
+                                      Todos methodos find... en "layout service".
+Intentar hacer todos methodos "find..." con Pagination, Sorting... etc.
+Link: https://www.baeldung.com/spring-data-jpa-pagination-sorting
+
+
+                               Dudas con exceptiones en cada methodo de "layout service".
+No estoy seguro si el uso de excepiones en cada methodo de "layout service" es correcto.
+Buscar la informacion sobre esto.
