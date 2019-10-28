@@ -1,55 +1,78 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.EmailPublishingHouseDTO;
+import com.trl.libraryservice.exception.InvalidArgumentException;
 import com.trl.libraryservice.repository.entity.EmailPublishingHouseEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * This class is designed to convert EmailPublishingHouseEntity to EmailPublishingHouseDTO and vice versa.
+ * And also, this class is designed to convert List of EmailPublishingHouseEntity to List EmailPublishingHouseDTO and vice versa.
+ */
 public final class EmailPublishingHouseConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailPublishingHouseConverter.class);
 
-    private EmailPublishingHouseConverter() { }
+    private EmailPublishingHouseConverter() {
+    }
 
-    public static EmailPublishingHouseDTO mapEntityToDTO(EmailPublishingHouseEntity entity) {
+    /**
+     * This method is designed to convert EmailPublishingHouseEntity to EmailPublishingHouseDTO.
+     *
+     * @param entity That be converted to EmailPublishingHouseDTO. Parameter 'entity' must not be equal to null.
+     * @return An object of type EmailPublishingHouseDTO.
+     * @throws InvalidArgumentException If parameter 'entity' is equal null value.
+     */
+    public static EmailPublishingHouseDTO mapEntityToDTO(EmailPublishingHouseEntity entity) throws InvalidArgumentException {
         EmailPublishingHouseDTO result = null;
 
-        LOG.debug("************ mapEntityToDTO() ---> emailPublishingHouseEntity = " + entity
-                + " ---> emailPublishingHouseEntity.getClass().getSimpleName() = "
-                + (entity != null ? entity.getClass().getSimpleName() : "null"));
-
-        if (entity != null) {
-            result = new EmailPublishingHouseDTO();
-            result.setId(entity.getId());
-            result.setEmail(entity.getEmail());
-            result.setEmailType(entity.getEmailType());
-            // TODO: Check it, a cyclic call will be triggered here.
-//            result.setPublishingHouseDTO(PublishingHouseConverter.mapEntityToDTO(entity.getPublishingHouseEntity()));
+        if (entity == null) {
+            LOG.debug("************ mapEntityToDTO() ---> "
+                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            throw new InvalidArgumentException(
+                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
         }
 
-        LOG.debug("************ mapEntityToDTO() ---> result = " + result + " ---> result.getClass().getSimpleName() = "
-                + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapEntityToDTO() ---> emailPublishingHouseEntity = " + entity
+                + " ---> emailPublishingHouseEntity.getClass().getSimpleName() = " + entity.getClass().getSimpleName());
+
+        result = new EmailPublishingHouseDTO();
+        result.setId(entity.getId());
+        result.setEmail(entity.getEmail());
+        result.setEmailType(entity.getEmailType());
+
+        LOG.debug("************ mapEntityToDTO() ---> result = " + result
+                + " ---> result.getClass().getSimpleName() = " + result.getClass().getSimpleName());
 
         return result;
     }
 
     /**
-     * @param entities
-     * @return
+     * This method is designed to convert List of EmailPublishingHouseEntity to List of EmailPublishingHouseDTO.
+     *
+     * @param entities That be converted to List of EmailPublishingHouseDTO. Parameter 'entities' must not be equal to null.
+     * @return An List of EmailPublishingHouseDTO.
+     * @throws InvalidArgumentException If parameter 'entities' is equal null value.
      */
-    public static List<EmailPublishingHouseDTO> mapListEntityToListDTO(List<EmailPublishingHouseEntity> entities) {
-        List<EmailPublishingHouseDTO> resultList = null;
+    public static List<EmailPublishingHouseDTO> mapListEntityToListDTO(List<EmailPublishingHouseEntity> entities) throws InvalidArgumentException {
+        List<EmailPublishingHouseDTO> resultList = new ArrayList<>();
+
+        if (entities == null) {
+            LOG.debug("************ mapListEntityToListDTO() ---> "
+                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            throw new InvalidArgumentException(
+                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+        }
 
         LOG.debug("************ mapListEntityToListDTO() ---> emailPublishingHouseEntityList = " + entities);
 
-        if (entities != null) {
-            resultList = entities.parallelStream()
-                    .map(EmailPublishingHouseConverter::mapEntityToDTO)
-                    .collect(Collectors.toList());
+        for (EmailPublishingHouseEntity entity : entities) {
+            resultList.add(mapEntityToDTO(entity));
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
@@ -58,44 +81,57 @@ public final class EmailPublishingHouseConverter {
     }
 
     /**
-     * @param dto
-     * @return
+     * This method is designed to convert EmailPublishingHouseDTO to EmailPublishingHouseEntity.
+     *
+     * @param dto That be converted to EmailPublishingHouseEntity. Parameter 'dto' must not be equal to null.
+     * @return An object of type EmailPublishingHouseEntity.
+     * @throws InvalidArgumentException If parameter 'dto' is equal null value.
      */
-    public static EmailPublishingHouseEntity mapDTOToEntity(EmailPublishingHouseDTO dto) {
+    public static EmailPublishingHouseEntity mapDTOToEntity(EmailPublishingHouseDTO dto) throws InvalidArgumentException {
         EmailPublishingHouseEntity result = null;
 
-        LOG.debug("************ mapDTOToEntity() ---> emailPublishingHouseDTO = " + dto
-                + " ---> emailPublishingHouseDTO.getClass().getSimpleName() = "
-                + (dto != null ? dto.getClass().getSimpleName() : "null"));
-
-        if (dto != null) {
-            result = new EmailPublishingHouseEntity();
-            result.setId(dto.getId());
-            result.setEmail(dto.getEmail());
-            result.setEmailType(dto.getEmailType());
-            // TODO: Check it, a cyclic call will be triggered here.
-//            result.setPublishingHouseEntity(PublishingHouseConverter.mapDTOToEntity(dto.getPublishingHouseDTO()));
+        if (dto == null) {
+            LOG.debug("************ mapDTOToEntity() ---> "
+                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            throw new InvalidArgumentException(
+                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
         }
 
-        LOG.debug("************ mapDTOToEntity() ---> result = " + result + " ---> result.getClass().getSimpleName() = "
-                + (result != null ? result.getClass().getSimpleName() : "null"));
+        LOG.debug("************ mapDTOToEntity() ---> emailPublishingHouseDTO = " + dto
+                + " ---> emailPublishingHouseDTO.getClass().getSimpleName() = " + dto.getClass().getSimpleName());
+
+        result = new EmailPublishingHouseEntity();
+        result.setId(dto.getId());
+        result.setEmail(dto.getEmail());
+        result.setEmailType(dto.getEmailType());
+
+        LOG.debug("************ mapDTOToEntity() ---> result = " + result
+                + " ---> result.getClass().getSimpleName() = " + result.getClass().getSimpleName());
 
         return result;
     }
 
     /**
-     * @param dtos
-     * @return
+     * This method is designed to convert List of EmailPublishingHouseDTO to List of EmailPublishingHouseEntity.
+     *
+     * @param dtos That be converted to List of EmailPublishingHouseEntity. Parameter 'dtos' must not be equal to null.
+     * @return An List of EmailPublishingHouseEntity.
+     * @throws InvalidArgumentException If parameter 'dtos' is equal null value.
      */
-    public static List<EmailPublishingHouseEntity> mapListDTOToListEntity(List<EmailPublishingHouseDTO> dtos) {
-        List<EmailPublishingHouseEntity> resultList = null;
+    public static List<EmailPublishingHouseEntity> mapListDTOToListEntity(List<EmailPublishingHouseDTO> dtos) throws InvalidArgumentException {
+        List<EmailPublishingHouseEntity> resultList = new ArrayList<>();
+
+        if (dtos == null) {
+            LOG.debug("************ mapListDTOToListEntity() ---> "
+                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            throw new InvalidArgumentException(
+                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+        }
 
         LOG.debug("************ mapListDTOToListEntity() ---> emailPublishingHouseDTOList = " + dtos);
 
-        if (dtos != null) {
-            resultList = dtos.stream()
-                    .map(EmailPublishingHouseConverter::mapDTOToEntity)
-                    .collect(Collectors.toList());
+        for (EmailPublishingHouseDTO dto : dtos) {
+            resultList.add(mapDTOToEntity(dto));
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);
