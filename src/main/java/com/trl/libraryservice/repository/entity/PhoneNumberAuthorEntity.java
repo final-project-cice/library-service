@@ -1,5 +1,7 @@
 package com.trl.libraryservice.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -21,6 +23,7 @@ public class PhoneNumberAuthorEntity {
     @Column(name = "type")
     private String type;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private AuthorEntity author;

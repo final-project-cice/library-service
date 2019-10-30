@@ -1,5 +1,7 @@
 package com.trl.libraryservice.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -22,6 +24,7 @@ public class SubCommentCommentEntity {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     private CommentBookEntity comment;

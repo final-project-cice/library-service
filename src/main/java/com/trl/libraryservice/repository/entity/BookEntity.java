@@ -2,9 +2,7 @@ package com.trl.libraryservice.repository.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity(name = "BookEntity")
 @Table(name = "book")
@@ -19,7 +17,7 @@ public class BookEntity {
     private String name;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<GenreBookEntity> genres;
+    private List<GenreBookEntity> genres = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private PublishingHouseEntity publishingHouse;
@@ -31,7 +29,7 @@ public class BookEntity {
     private String pathFile;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CommentBookEntity> comments;
+    private List<CommentBookEntity> comments = new ArrayList<>();
 
     @ManyToMany(
             fetch = FetchType.LAZY,
@@ -44,7 +42,7 @@ public class BookEntity {
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )
-    private Set<AuthorEntity> authors;
+    private Set<AuthorEntity> authors = new HashSet<>();
 
     public BookEntity() {
     }
@@ -71,6 +69,20 @@ public class BookEntity {
 
     public void setGenres(List<GenreBookEntity> genres) {
         this.genres = genres;
+    }
+
+    public void addGenre(GenreBookEntity genre) {
+        this.genres.add(genre);
+        genre.setBook(this);
+    }
+
+    public void addGenres(List<GenreBookEntity> genreList) {
+        genreList.forEach(this::addGenre);
+    }
+
+    public void removeGenre(GenreBookEntity genre) {
+        this.genres.remove(genre);
+        genre.setBook(null);
     }
 
     public PublishingHouseEntity getPublishingHouse() {
@@ -105,6 +117,20 @@ public class BookEntity {
         this.comments = comments;
     }
 
+    public void addComment(CommentBookEntity comment) {
+        this.comments.add(comment);
+        comment.setBook(this);
+    }
+
+    public void addComments(List<CommentBookEntity> commentList) {
+        commentList.forEach(this::addComment);
+    }
+
+    public void removeComment(CommentBookEntity comment) {
+        this.comments.remove(comment);
+        comment.setBook(null);
+    }
+
     public Set<AuthorEntity> getAuthors() {
         return authors;
     }
@@ -113,14 +139,18 @@ public class BookEntity {
         this.authors = authors;
     }
 
-    public void addAuthor(AuthorEntity authorEntity) {
-        this.authors.add(authorEntity);
-        authorEntity.getBooks().add(this);
+    public void addAuthor(AuthorEntity author) {
+        this.authors.add(author);
+        author.getBooks().add(this);
     }
 
-    public void removeAuthor(AuthorEntity authorEntity) {
-        this.authors.remove(authorEntity);
-        authorEntity.getBooks().remove(this);
+    public void addAuthors(Set<AuthorEntity> authorSet) {
+        authorSet.forEach(this::addAuthor);
+    }
+
+    public void removeAuthor(AuthorEntity author) {
+        this.authors.remove(author);
+        author.getBooks().remove(this);
     }
 
     @Override

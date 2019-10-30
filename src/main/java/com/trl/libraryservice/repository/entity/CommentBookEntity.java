@@ -1,7 +1,10 @@
 package com.trl.libraryservice.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,8 +27,9 @@ public class CommentBookEntity {
     private LocalDate date;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)    // Not Work
-    private List<SubCommentCommentEntity> subComments;
+    private List<SubCommentCommentEntity> subComments = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private BookEntity book;
@@ -70,6 +74,20 @@ public class CommentBookEntity {
 
     public void setSubComments(List<SubCommentCommentEntity> subComments) {
         this.subComments = subComments;
+    }
+
+    public void addSubComment(SubCommentCommentEntity subComment) {
+        this.subComments.add(subComment);
+        subComment.setComment(this);
+    }
+
+    public void addSubComments(List<SubCommentCommentEntity> subCommentList) {
+        subCommentList.forEach(this::addSubComment);
+    }
+
+    public void removeSubComment(SubCommentCommentEntity subComment) {
+        this.subComments.remove(subComment);
+        subComment.setComment(null);
     }
 
     public BookEntity getBook() {

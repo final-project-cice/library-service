@@ -1,5 +1,7 @@
 package com.trl.libraryservice.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -18,6 +20,7 @@ public class EmailPublishingHouseEntity {
     @Column(name = "email_type")
     private String emailType;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publishing_house_id")
     private PublishingHouseEntity publishingHouse;

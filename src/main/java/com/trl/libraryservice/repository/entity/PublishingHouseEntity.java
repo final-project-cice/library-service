@@ -1,6 +1,7 @@
 package com.trl.libraryservice.repository.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,10 +21,10 @@ public class PublishingHouseEntity {
     private AddressPublishingHouseEntity address;
 
     @OneToMany(mappedBy = "publishingHouse", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PhoneNumberPublishingHouseEntity> phoneNumbers;
+    private List<PhoneNumberPublishingHouseEntity> phoneNumbers = new ArrayList<>();
 
     @OneToMany(mappedBy = "publishingHouse", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EmailPublishingHouseEntity> emails;
+    private List<EmailPublishingHouseEntity> emails = new ArrayList<>();
 
     public PublishingHouseEntity() {
     }
@@ -60,12 +61,40 @@ public class PublishingHouseEntity {
         this.phoneNumbers = phoneNumbers;
     }
 
+    public void addPhoneNumber(PhoneNumberPublishingHouseEntity phoneNumber) {
+        this.phoneNumbers.add(phoneNumber);
+        phoneNumber.setPublishingHouse(this);
+    }
+
+    public void addPhoneNumbers(List<PhoneNumberPublishingHouseEntity> phoneNumberList) {
+        phoneNumberList.forEach(this::addPhoneNumber);
+    }
+
+    public void removePhoneNumber(PhoneNumberPublishingHouseEntity phoneNumber) {
+        this.phoneNumbers.remove(phoneNumber);
+        phoneNumber.setPublishingHouse(null);
+    }
+
     public List<EmailPublishingHouseEntity> getEmails() {
         return emails;
     }
 
     public void setEmails(List<EmailPublishingHouseEntity> emails) {
         this.emails = emails;
+    }
+
+    public void addEmail(EmailPublishingHouseEntity email) {
+        this.emails.add(email);
+        email.setPublishingHouse(this);
+    }
+
+    public void addEmails(List<EmailPublishingHouseEntity> emailList) {
+        emailList.forEach(this::addEmail);
+    }
+
+    public void removeEmail(EmailPublishingHouseEntity email) {
+        this.emails.remove(email);
+        email.setPublishingHouse(null);
     }
 
     @Override
