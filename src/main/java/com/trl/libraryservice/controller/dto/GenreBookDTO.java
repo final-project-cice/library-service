@@ -1,11 +1,15 @@
 package com.trl.libraryservice.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class GenreBookDTO {
 
     private Long id;
     private String name;
+
+    @JsonIgnore
     private BookDTO book;
 
     public GenreBookDTO() { }

@@ -3,24 +3,22 @@ package com.trl.libraryservice.controller.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class BookDTO {
 
     private Long id;
     private String name;
-    private List<GenreBookDTO> genres;
+    private List<GenreBookDTO> genres = new ArrayList<>();
     private PublishingHouseDTO publishingHouse;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate publicationDate;
 
     private String pathFile;
-    private List<CommentBookDTO> comments;
+    private List<CommentBookDTO> comments = new ArrayList<>();
 
-    private Set<AuthorDTO> authors;
+    private Set<AuthorDTO> authors = new HashSet<>();
 
     public BookDTO() { }
 
@@ -46,6 +44,20 @@ public class BookDTO {
 
     public void setGenres(List<GenreBookDTO> genres) {
         this.genres = genres;
+    }
+
+    public void addGenre(GenreBookDTO genre) {
+        this.genres.add(genre);
+        genre.setBook(this);
+    }
+
+    public void addGenres(List<GenreBookDTO> genreList) {
+        genreList.forEach(this::addGenre);
+    }
+
+    public void removeGenre(GenreBookDTO genre) {
+        this.genres.remove(genre);
+        genre.setBook(null);
     }
 
     public PublishingHouseDTO getPublishingHouse() {
@@ -80,6 +92,20 @@ public class BookDTO {
         this.comments = comments;
     }
 
+    public void addComment(CommentBookDTO comment) {
+        this.comments.add(comment);
+        comment.setBook(this);
+    }
+
+    public void addComments(List<CommentBookDTO> commentList) {
+        commentList.forEach(this::addComment);
+    }
+
+    public void removeComment(CommentBookDTO comment) {
+        this.comments.remove(comment);
+        comment.setBook(null);
+    }
+
     public Set<AuthorDTO> getAuthors() {
         return authors;
     }
@@ -88,14 +114,18 @@ public class BookDTO {
         this.authors = authors;
     }
 
-    public void addAuthor(AuthorDTO authorDTO) {
-        this.authors.add(authorDTO);
-        authorDTO.getBooks().add(this);
+    public void addAuthor(AuthorDTO author) {
+        this.authors.add(author);
+        author.getBooks().add(this);
     }
 
-    public void removeAuthor(AuthorDTO authorDTO) {
-        this.authors.remove(authorDTO);
-        authorDTO.getBooks().remove(this);
+    public void addAuthors(Set<AuthorDTO> authorSet) {
+        authorSet.forEach(this::addAuthor);
+    }
+
+    public void removeAuthor(AuthorDTO author) {
+        this.authors.remove(author);
+        author.getBooks().remove(this);
     }
 
     @Override

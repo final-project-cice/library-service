@@ -1,5 +1,6 @@
 package com.trl.libraryservice.controller.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,8 +9,8 @@ public class PublishingHouseDTO {
     private Long id;
     private String name;
     private AddressPublishingHouseDTO address;
-    private List<PhoneNumberPublishingHouseDTO> phoneNumbers;
-    private List<EmailPublishingHouseDTO> emails;
+    private List<PhoneNumberPublishingHouseDTO> phoneNumbers = new ArrayList<>();
+    private List<EmailPublishingHouseDTO> emails = new ArrayList<>();
 
     public PublishingHouseDTO() { }
 
@@ -45,12 +46,40 @@ public class PublishingHouseDTO {
         this.phoneNumbers = phoneNumbers;
     }
 
+    public void addPhoneNumber(PhoneNumberPublishingHouseDTO phoneNumber) {
+        this.phoneNumbers.add(phoneNumber);
+        phoneNumber.setPublishingHouse(this);
+    }
+
+    public void addPhoneNumbers(List<PhoneNumberPublishingHouseDTO> phoneNumberList) {
+        phoneNumberList.forEach(this::addPhoneNumber);
+    }
+
+    public void removePhoneNumber(PhoneNumberPublishingHouseDTO phoneNumber) {
+        this.phoneNumbers.remove(phoneNumber);
+        phoneNumber.setPublishingHouse(null);
+    }
+
     public List<EmailPublishingHouseDTO> getEmails() {
         return emails;
     }
 
     public void setEmails(List<EmailPublishingHouseDTO> emails) {
         this.emails = emails;
+    }
+
+    public void addEmail(EmailPublishingHouseDTO email) {
+        this.emails.add(email);
+        email.setPublishingHouse(this);
+    }
+
+    public void addEmails(List<EmailPublishingHouseDTO> emailList) {
+        emailList.forEach(this::addEmail);
+    }
+
+    public void removeEmail(EmailPublishingHouseDTO email) {
+        this.emails.remove(email);
+        email.setPublishingHouse(null);
     }
 
     @Override

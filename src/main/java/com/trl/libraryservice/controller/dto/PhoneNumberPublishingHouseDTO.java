@@ -1,5 +1,7 @@
 package com.trl.libraryservice.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class PhoneNumberPublishingHouseDTO {
@@ -8,6 +10,8 @@ public class PhoneNumberPublishingHouseDTO {
     private String phoneNumber;
     private String countryCode;
     private String type;
+
+    @JsonIgnore
     private PublishingHouseDTO publishingHouse;
 
     public PhoneNumberPublishingHouseDTO() { }

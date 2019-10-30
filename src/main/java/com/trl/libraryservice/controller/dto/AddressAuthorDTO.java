@@ -1,5 +1,7 @@
 package com.trl.libraryservice.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class AddressAuthorDTO {
@@ -10,6 +12,8 @@ public class AddressAuthorDTO {
     private String street;
     private String houseNumber;
     private Integer postcode;
+
+    @JsonIgnore
     private AuthorDTO author;
 
     public AddressAuthorDTO() { }

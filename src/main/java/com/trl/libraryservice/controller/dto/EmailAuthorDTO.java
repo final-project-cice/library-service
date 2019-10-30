@@ -1,5 +1,7 @@
 package com.trl.libraryservice.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 
 public class EmailAuthorDTO {
@@ -7,6 +9,8 @@ public class EmailAuthorDTO {
     private Long id;
     private String email;
     private String emailType;
+
+    @JsonIgnore
     private AuthorDTO author;
 
     public EmailAuthorDTO() { }
