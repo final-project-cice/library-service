@@ -24,3 +24,14 @@ Link: https://www.baeldung.com/spring-data-jpa-pagination-sorting
                                Dudas con exceptiones en cada methodo de "layout service".
 No estoy seguro si el uso de excepiones en cada methodo de "layout service" es correcto.
 Buscar la informacion sobre esto.
+
+
+Explicar prque estou usando mi exceptio InvalidArgumentException
+
+
+                                               Mirar en proyecto entero.
+Pensar en la situacion cuando se repite un una parte de codigo. Como se puede sacar este codigo a un methodo y bien hacer
+los exceptiones y los logs, para que se puede entender bien de donde vienen estos excepciones y logs.
+
+
+Pensar en classes Convectores sobre seters y geters.
