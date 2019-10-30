@@ -1,7 +1,7 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.GenreBookDTO;
-import com.trl.libraryservice.exception.InvalidArgumentException;
+import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.GenreBookEntity;
 
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import java.util.List;
 public final class GenreBookConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(GenreBookConverter.class);
+    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
     private GenreBookConverter() {
     }
@@ -26,16 +27,14 @@ public final class GenreBookConverter {
      *
      * @param entity That be converted to GenreBookDTO. Parameter 'entity' must not be equal to null.
      * @return An object of type GenreBookDTO.
-     * @throws InvalidArgumentException If parameter 'entity' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
      */
-    public static GenreBookDTO mapEntityToDTO(GenreBookEntity entity) throws InvalidArgumentException {
+    public static GenreBookDTO mapEntityToDTO(GenreBookEntity entity) throws IllegalMethodParameterException {
         GenreBookDTO result = null;
 
         if (entity == null) {
-            LOG.debug("************ mapEntityToDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> genreBookEntity = " + entity
@@ -56,16 +55,14 @@ public final class GenreBookConverter {
      *
      * @param entities That be converted to List of GenreBookDTO. Parameter 'entities' must not be equal to null.
      * @return An List of GenreBookDTO.
-     * @throws InvalidArgumentException If parameter 'entities' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
      */
-    public static List<GenreBookDTO> mapListEntityToListDTO(List<GenreBookEntity> entities) throws InvalidArgumentException {
+    public static List<GenreBookDTO> mapListEntityToListDTO(List<GenreBookEntity> entities) throws IllegalMethodParameterException {
         List<GenreBookDTO> resultList = new ArrayList<>();
 
         if (entities == null) {
-            LOG.debug("************ mapListEntityToListDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> genreBookEntityList = " + entities);
@@ -84,16 +81,14 @@ public final class GenreBookConverter {
      *
      * @param dto That be converted to GenreBookEntity. Parameter 'dto' must not be equal to null.
      * @return An object of type GenreBookEntity.
-     * @throws InvalidArgumentException If parameter 'dto' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
      */
-    public static GenreBookEntity mapDTOToEntity(GenreBookDTO dto) throws InvalidArgumentException {
+    public static GenreBookEntity mapDTOToEntity(GenreBookDTO dto) throws IllegalMethodParameterException {
         GenreBookEntity result = null;
 
         if (dto == null) {
-            LOG.debug("************ mapDTOToEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> genreBookDTO = " + dto
@@ -114,16 +109,14 @@ public final class GenreBookConverter {
      *
      * @param dtos That be converted to List of GenreBookEntity. Parameter 'dtos' must not be equal to null.
      * @return An List of GenreBookEntity.
-     * @throws InvalidArgumentException If parameter 'dtos' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
      */
-    public static List<GenreBookEntity> mapListDTOToListEntity(List<GenreBookDTO> dtos) throws InvalidArgumentException {
+    public static List<GenreBookEntity> mapListDTOToListEntity(List<GenreBookDTO> dtos) throws IllegalMethodParameterException {
         List<GenreBookEntity> resultList = new ArrayList<>();
 
         if (dtos == null) {
-            LOG.debug("************ mapListDTOToListEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> genreBookDTOList = " + dtos);

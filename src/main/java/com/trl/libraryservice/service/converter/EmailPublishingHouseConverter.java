@@ -1,7 +1,7 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.EmailPublishingHouseDTO;
-import com.trl.libraryservice.exception.InvalidArgumentException;
+import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.EmailPublishingHouseEntity;
 
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import java.util.List;
 public final class EmailPublishingHouseConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailPublishingHouseConverter.class);
+    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
     private EmailPublishingHouseConverter() {
     }
@@ -26,16 +27,14 @@ public final class EmailPublishingHouseConverter {
      *
      * @param entity That be converted to EmailPublishingHouseDTO. Parameter 'entity' must not be equal to null.
      * @return An object of type EmailPublishingHouseDTO.
-     * @throws InvalidArgumentException If parameter 'entity' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
      */
-    public static EmailPublishingHouseDTO mapEntityToDTO(EmailPublishingHouseEntity entity) throws InvalidArgumentException {
+    public static EmailPublishingHouseDTO mapEntityToDTO(EmailPublishingHouseEntity entity) throws IllegalMethodParameterException {
         EmailPublishingHouseDTO result = null;
 
         if (entity == null) {
-            LOG.debug("************ mapEntityToDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> emailPublishingHouseEntity = " + entity
@@ -57,16 +56,14 @@ public final class EmailPublishingHouseConverter {
      *
      * @param entities That be converted to List of EmailPublishingHouseDTO. Parameter 'entities' must not be equal to null.
      * @return An List of EmailPublishingHouseDTO.
-     * @throws InvalidArgumentException If parameter 'entities' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
      */
-    public static List<EmailPublishingHouseDTO> mapListEntityToListDTO(List<EmailPublishingHouseEntity> entities) throws InvalidArgumentException {
+    public static List<EmailPublishingHouseDTO> mapListEntityToListDTO(List<EmailPublishingHouseEntity> entities) throws IllegalMethodParameterException {
         List<EmailPublishingHouseDTO> resultList = new ArrayList<>();
 
         if (entities == null) {
-            LOG.debug("************ mapListEntityToListDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> emailPublishingHouseEntityList = " + entities);
@@ -85,16 +82,14 @@ public final class EmailPublishingHouseConverter {
      *
      * @param dto That be converted to EmailPublishingHouseEntity. Parameter 'dto' must not be equal to null.
      * @return An object of type EmailPublishingHouseEntity.
-     * @throws InvalidArgumentException If parameter 'dto' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
      */
-    public static EmailPublishingHouseEntity mapDTOToEntity(EmailPublishingHouseDTO dto) throws InvalidArgumentException {
+    public static EmailPublishingHouseEntity mapDTOToEntity(EmailPublishingHouseDTO dto) throws IllegalMethodParameterException {
         EmailPublishingHouseEntity result = null;
 
         if (dto == null) {
-            LOG.debug("************ mapDTOToEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> emailPublishingHouseDTO = " + dto
@@ -116,16 +111,14 @@ public final class EmailPublishingHouseConverter {
      *
      * @param dtos That be converted to List of EmailPublishingHouseEntity. Parameter 'dtos' must not be equal to null.
      * @return An List of EmailPublishingHouseEntity.
-     * @throws InvalidArgumentException If parameter 'dtos' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
      */
-    public static List<EmailPublishingHouseEntity> mapListDTOToListEntity(List<EmailPublishingHouseDTO> dtos) throws InvalidArgumentException {
+    public static List<EmailPublishingHouseEntity> mapListDTOToListEntity(List<EmailPublishingHouseDTO> dtos) throws IllegalMethodParameterException {
         List<EmailPublishingHouseEntity> resultList = new ArrayList<>();
 
         if (dtos == null) {
-            LOG.debug("************ mapListDTOToListEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> emailPublishingHouseDTOList = " + dtos);

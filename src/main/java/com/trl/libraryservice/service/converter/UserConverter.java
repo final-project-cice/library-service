@@ -1,7 +1,7 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.UserDTO;
-import com.trl.libraryservice.exception.InvalidArgumentException;
+import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.UserEntity;
 
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import java.util.List;
 public final class UserConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserConverter.class);
+    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
     private UserConverter() {
     }
@@ -26,16 +27,14 @@ public final class UserConverter {
      *
      * @param entity That be converted to UserDTO. Parameter 'entity' must not be equal to null.
      * @return An object of type UserDTO.
-     * @throws InvalidArgumentException If parameter 'entity' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
      */
-    public static UserDTO mapEntityToDTO(UserEntity entity) throws InvalidArgumentException {
+    public static UserDTO mapEntityToDTO(UserEntity entity) throws IllegalMethodParameterException {
         UserDTO result = null;
 
         if (entity == null) {
-            LOG.debug("************ mapEntityToDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> userEntity = " + entity
@@ -59,16 +58,14 @@ public final class UserConverter {
      *
      * @param entities That be converted to List of UserDTO. Parameter 'entities' must not be equal to null.
      * @return An List of UserDTO.
-     * @throws InvalidArgumentException If parameter 'entities' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
      */
-    public static List<UserDTO> mapListEntityToListDTO(List<UserEntity> entities) throws InvalidArgumentException {
+    public static List<UserDTO> mapListEntityToListDTO(List<UserEntity> entities) throws IllegalMethodParameterException {
         List<UserDTO> resultList = new ArrayList<>();
 
         if (entities == null) {
-            LOG.debug("************ mapListEntityToListDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> userEntityList = " + entities);
@@ -87,16 +84,14 @@ public final class UserConverter {
      *
      * @param dto That be converted to UserEntity. Parameter 'dto' must not be equal to null.
      * @return An object of type UserEntity.
-     * @throws InvalidArgumentException If parameter 'dto' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
      */
-    public static UserEntity mapDTOToEntity(UserDTO dto) throws InvalidArgumentException {
+    public static UserEntity mapDTOToEntity(UserDTO dto) throws IllegalMethodParameterException {
         UserEntity result = null;
 
         if (dto == null) {
-            LOG.debug("************ mapDTOToEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> userDTO = " + dto
@@ -120,16 +115,14 @@ public final class UserConverter {
      *
      * @param dtos That be converted to List of UserEntity. Parameter 'dtos' must not be equal to null.
      * @return An List of UserEntity.
-     * @throws InvalidArgumentException If parameter 'dtos' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
      */
-    public static List<UserEntity> mapListDTOToListEntity(List<UserDTO> dtos) throws InvalidArgumentException {
+    public static List<UserEntity> mapListDTOToListEntity(List<UserDTO> dtos) throws IllegalMethodParameterException {
         List<UserEntity> resultList = new ArrayList<>();
 
         if (dtos == null) {
-            LOG.debug("************ mapListDTOToListEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> userDTOList = " + dtos);

@@ -1,7 +1,7 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.EmailAuthorDTO;
-import com.trl.libraryservice.exception.InvalidArgumentException;
+import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.EmailAuthorEntity;
 
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import java.util.List;
 public final class EmailAuthorConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(EmailAuthorConverter.class);
+    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
     private EmailAuthorConverter() {
     }
@@ -26,16 +27,14 @@ public final class EmailAuthorConverter {
      *
      * @param entity That be converted to EmailAuthorDTO. Parameter 'entity' must not be equal to null.
      * @return An object of type EmailAuthorDTO.
-     * @throws InvalidArgumentException If parameter 'entity' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
      */
-    public static EmailAuthorDTO mapEntityToDTO(EmailAuthorEntity entity) throws InvalidArgumentException {
+    public static EmailAuthorDTO mapEntityToDTO(EmailAuthorEntity entity) throws IllegalMethodParameterException {
         EmailAuthorDTO result = null;
 
         if (entity == null) {
-            LOG.debug("************ mapEntityToDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> emailAuthorEntity = " + entity
@@ -57,16 +56,14 @@ public final class EmailAuthorConverter {
      *
      * @param entities That be converted to List of EmailAuthorDTO. Parameter 'entities' must not be equal to null.
      * @return An List of EmailAuthorDTO.
-     * @throws InvalidArgumentException If parameter 'entities' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
      */
-    public static List<EmailAuthorDTO> mapListEntityToListDTO(List<EmailAuthorEntity> entities) throws InvalidArgumentException {
+    public static List<EmailAuthorDTO> mapListEntityToListDTO(List<EmailAuthorEntity> entities) throws IllegalMethodParameterException {
         List<EmailAuthorDTO> resultList = new ArrayList<>();
 
         if (entities == null) {
-            LOG.debug("************ mapListEntityToListDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> emailAuthorEntityList = " + entities);
@@ -85,16 +82,14 @@ public final class EmailAuthorConverter {
      *
      * @param dto That be converted to EmailAuthorEntity. Parameter 'dto' must not be equal to null.
      * @return An object of type EmailAuthorEntity.
-     * @throws InvalidArgumentException If parameter 'dto' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
      */
-    public static EmailAuthorEntity mapDTOToEntity(EmailAuthorDTO dto) throws InvalidArgumentException {
+    public static EmailAuthorEntity mapDTOToEntity(EmailAuthorDTO dto) throws IllegalMethodParameterException {
         EmailAuthorEntity result = null;
 
         if (dto == null) {
-            LOG.debug("************ mapDTOToEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> emailAuthorDTO = " + dto
@@ -116,16 +111,14 @@ public final class EmailAuthorConverter {
      *
      * @param dtos That be converted to List of EmailAuthorEntity. Parameter 'dtos' must not be equal to null.
      * @return An List of EmailAuthorEntity.
-     * @throws InvalidArgumentException If parameter 'dtos' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
      */
-    public static List<EmailAuthorEntity> mapListDTOToListEntity(List<EmailAuthorDTO> dtos) throws InvalidArgumentException {
+    public static List<EmailAuthorEntity> mapListDTOToListEntity(List<EmailAuthorDTO> dtos) throws IllegalMethodParameterException {
         List<EmailAuthorEntity> resultList = new ArrayList<>();
 
         if (dtos == null) {
-            LOG.debug("************ mapListDTOToListEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> emailAuthorDTOList = " + dtos);

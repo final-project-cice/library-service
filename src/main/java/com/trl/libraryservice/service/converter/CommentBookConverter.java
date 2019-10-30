@@ -1,7 +1,7 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.CommentBookDTO;
-import com.trl.libraryservice.exception.InvalidArgumentException;
+import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
 
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import java.util.List;
 public final class CommentBookConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(CommentBookConverter.class);
+    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
     private CommentBookConverter() {
     }
@@ -26,16 +27,14 @@ public final class CommentBookConverter {
      *
      * @param entity That be converted to CommentBookDTO. Parameter 'entity' must not be equal to null.
      * @return An object of type CommentBookDTO.
-     * @throws InvalidArgumentException If parameter 'entity' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
      */
-    public static CommentBookDTO mapEntityToDTO(CommentBookEntity entity) throws InvalidArgumentException {
+    public static CommentBookDTO mapEntityToDTO(CommentBookEntity entity) throws IllegalMethodParameterException {
         CommentBookDTO result = null;
 
         if (entity == null) {
-            LOG.debug("************ mapEntityToDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> commentBookEntity = " + entity
@@ -46,7 +45,7 @@ public final class CommentBookConverter {
         result.setUser(UserConverter.mapEntityToDTO(entity.getUser()));
         result.setText(entity.getText());
         result.setDate(entity.getDate());
-        result.setSubComments(SubCommentCommentConverter.mapListEntityToListDTO(entity.getSubComments()));
+        result.addSubComments(SubCommentCommentConverter.mapListEntityToListDTO(entity.getSubComments()));
 
         LOG.debug("************ mapEntityToDTO() ---> result = " + result
                 + " ---> result.getClass().getSimpleName() = " + result.getClass().getSimpleName());
@@ -59,16 +58,14 @@ public final class CommentBookConverter {
      *
      * @param entities That be converted to List of CommentBookDTO. Parameter 'entities' must not be equal to null.
      * @return An List of CommentBookDTO.
-     * @throws InvalidArgumentException If parameter 'entities' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
      */
-    public static List<CommentBookDTO> mapListEntityToListDTO(List<CommentBookEntity> entities) throws InvalidArgumentException {
+    public static List<CommentBookDTO> mapListEntityToListDTO(List<CommentBookEntity> entities) throws IllegalMethodParameterException {
         List<CommentBookDTO> resultList = new ArrayList<>();
 
         if (entities == null) {
-            LOG.debug("************ mapListEntityToListDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> commentBookEntityList = " + entities);
@@ -87,16 +84,14 @@ public final class CommentBookConverter {
      *
      * @param dto That be converted to CommentBookEntity. Parameter 'dto' must not be equal to null.
      * @return An object of type CommentBookEntity.
-     * @throws InvalidArgumentException If parameter 'dto' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
      */
-    public static CommentBookEntity mapDTOToEntity(CommentBookDTO dto) throws InvalidArgumentException {
+    public static CommentBookEntity mapDTOToEntity(CommentBookDTO dto) throws IllegalMethodParameterException {
         CommentBookEntity result = null;
 
         if (dto == null) {
-            LOG.debug("************ mapDTOToEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> commentBookDTO = " + dto
@@ -107,7 +102,7 @@ public final class CommentBookConverter {
         result.setUser(UserConverter.mapDTOToEntity(dto.getUser()));
         result.setText(dto.getText());
         result.setDate(dto.getDate());
-        result.setSubComments(SubCommentCommentConverter.mapListDTOToListEntity(dto.getSubComments()));
+        result.addSubComments(SubCommentCommentConverter.mapListDTOToListEntity(dto.getSubComments()));
 
         LOG.debug("************ mapDTOToEntity() ---> result = " + result
                 + " ---> result.getClass().getSimpleName() = " + result.getClass().getSimpleName());
@@ -120,16 +115,14 @@ public final class CommentBookConverter {
      *
      * @param dtos That be converted to List of CommentBookEntity. Parameter 'dtos' must not be equal to null.
      * @return An List of CommentBookEntity.
-     * @throws InvalidArgumentException If parameter 'dtos' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
      */
-    public static List<CommentBookEntity> mapListDTOToListEntity(List<CommentBookDTO> dtos) throws InvalidArgumentException {
+    public static List<CommentBookEntity> mapListDTOToListEntity(List<CommentBookDTO> dtos) throws IllegalMethodParameterException {
         List<CommentBookEntity> resultList = new ArrayList<>();
 
         if (dtos == null) {
-            LOG.debug("************ mapListDTOToListEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> commentBookDTOList = " + dtos);

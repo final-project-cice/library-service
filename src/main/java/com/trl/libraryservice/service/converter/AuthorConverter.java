@@ -1,7 +1,7 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.AuthorDTO;
-import com.trl.libraryservice.exception.InvalidArgumentException;
+import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.AuthorEntity;
 
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import java.util.Set;
 public final class AuthorConverter {
 
     private static final Logger LOG = LoggerFactory.getLogger(AuthorConverter.class);
+    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
     private AuthorConverter() {
     }
@@ -26,16 +27,14 @@ public final class AuthorConverter {
      *
      * @param entity That be converted to AuthorDTO. Parameter 'entity' must not be equal to null.
      * @return An object of type AuthorDTO.
-     * @throws InvalidArgumentException If parameter 'entity' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
      */
-    public static AuthorDTO mapEntityToDTO(AuthorEntity entity) throws InvalidArgumentException {
+    public static AuthorDTO mapEntityToDTO(AuthorEntity entity) throws IllegalMethodParameterException {
         AuthorDTO result = null;
 
         if (entity == null) {
-            LOG.debug("************ mapEntityToDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> authorEntity = " + entity
@@ -45,19 +44,11 @@ public final class AuthorConverter {
         result.setId(entity.getId());
         result.setFirstName(entity.getFirstName());
         result.setLastName(entity.getLastName());
-        result.setEmails(
-                EmailAuthorConverter.mapListEntityToListDTO(entity.getEmails())
-        );
-        result.setPhoneNumbers(
-                PhoneNumberAuthorConverter.mapListEntityToListDTO(entity.getPhoneNumbers())
-        );
-        result.setAddresses(
-                AddressAuthorConverter.mapListEntityToListDTO(entity.getAddresses())
-        );
+        result.addEmails(EmailAuthorConverter.mapListEntityToListDTO(entity.getEmails()));
+        result.addPhoneNumbers(PhoneNumberAuthorConverter.mapListEntityToListDTO(entity.getPhoneNumbers()));
+        result.addAddresses(AddressAuthorConverter.mapListEntityToListDTO(entity.getAddresses()));
         result.setBirthday(entity.getBirthday());
-        result.setGenres(
-                GenreAuthorConverter.mapListEntityToListDTO(entity.getGenres())
-        );
+        result.addGenres(GenreAuthorConverter.mapListEntityToListDTO(entity.getGenres()));
 
         LOG.debug("************ mapEntityToDTO() ---> result = " + result
                 + " ---> result.getClass().getSimpleName() = " + result.getClass().getSimpleName());
@@ -70,16 +61,14 @@ public final class AuthorConverter {
      *
      * @param entities That be converted to Set of AuthorDTO. Parameter 'entities' must not be equal to null.
      * @return An Set of AuthorDTO.
-     * @throws InvalidArgumentException If parameter 'entities' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
      */
-    public static Set<AuthorDTO> mapSetEntityToSetDTO(Set<AuthorEntity> entities) throws InvalidArgumentException {
+    public static Set<AuthorDTO> mapSetEntityToSetDTO(Set<AuthorEntity> entities) throws IllegalMethodParameterException {
         Set<AuthorDTO> resultSet = new HashSet<>();
 
         if (entities == null) {
-            LOG.debug("************ mapSetEntityToSetDTO() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapSetEntityToSetDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapSetEntityToSetDTO() ---> authorEntitySet = " + entities);
@@ -98,16 +87,14 @@ public final class AuthorConverter {
      *
      * @param dto That be converted to AuthorEntity. Parameter 'dto' must not be equal to null.
      * @return An object of type AuthorEntity.
-     * @throws InvalidArgumentException If parameter 'dto' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
      */
-    public static AuthorEntity mapDTOToEntity(AuthorDTO dto) throws InvalidArgumentException {
+    public static AuthorEntity mapDTOToEntity(AuthorDTO dto) throws IllegalMethodParameterException {
         AuthorEntity result = null;
 
         if (dto == null) {
-            LOG.debug("************ mapDTOToEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> authorDTO = " + dto
@@ -117,19 +104,11 @@ public final class AuthorConverter {
         result.setId(dto.getId());
         result.setFirstName(dto.getFirstName());
         result.setLastName(dto.getLastName());
-        result.setEmails(
-                EmailAuthorConverter.mapListDTOToListEntity(dto.getEmails())
-        );
-        result.setPhoneNumbers(
-                PhoneNumberAuthorConverter.mapListDTOToListEntity(dto.getPhoneNumbers())
-        );
-        result.setAddresses(
-                AddressAuthorConverter.mapListDTOToListEntity(dto.getAddresses())
-        );
+        result.addEmails(EmailAuthorConverter.mapListDTOToListEntity(dto.getEmails()));
+        result.addPhoneNumbers(PhoneNumberAuthorConverter.mapListDTOToListEntity(dto.getPhoneNumbers()));
+        result.addAddresses(AddressAuthorConverter.mapListDTOToListEntity(dto.getAddresses()));
         result.setBirthday(dto.getBirthday());
-        result.setGenres(
-                GenreAuthorConverter.mapListDTOToListEntity(dto.getGenres())
-        );
+        result.addGenres(GenreAuthorConverter.mapListDTOToListEntity(dto.getGenres()));
 
         LOG.debug("************ mapDTOToEntity() ---> result = " + result
                 + " ---> result.getClass().getSimpleName() = " + result.getClass().getSimpleName());
@@ -142,16 +121,14 @@ public final class AuthorConverter {
      *
      * @param dtos That be converted to Set of AuthorEntity. Parameter 'dtos' must not be equal to null.
      * @return An Set of AuthorEntity.
-     * @throws InvalidArgumentException If parameter 'dtos' is equal null value.
+     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
      */
-    public static Set<AuthorEntity> mapSetDTOToSetEntity(Set<AuthorDTO> dtos) throws InvalidArgumentException {
+    public static Set<AuthorEntity> mapSetDTOToSetEntity(Set<AuthorDTO> dtos) throws IllegalMethodParameterException {
         Set<AuthorEntity> resultSet = new HashSet<>();
 
         if (dtos == null) {
-            LOG.debug("************ mapSetDTOToSetEntity() ---> "
-                    + "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+            LOG.debug("************ mapSetDTOToSetEntity() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapSetDTOToSetEntity() ---> authorDTOSet = " + dtos);
