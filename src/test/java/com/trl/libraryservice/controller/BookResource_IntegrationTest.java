@@ -119,7 +119,7 @@ public class BookResource_IntegrationTest {
                 .andExpect(content().string(containsString(userWithIdResult)));
     }
 
-    @Sql(value = {"/BookResource_getById_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/BookResource_getById_IllegalId_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getById_IllegalId_ZeroValue() throws Exception {
@@ -130,7 +130,7 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Sql(value = {"/BookResource_getById_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/BookResource_getById_IllegalId_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getById_IllegalId_NegativeValue() throws Exception {
@@ -141,13 +141,13 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Sql(value = {"/BookResource_getById_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/BookResource_getById_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getById_NotFoundBookById() throws Exception {
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/2"))
+                get("http://localhost:8082/books/1"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
