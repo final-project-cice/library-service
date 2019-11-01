@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.PhoneNumberPublishingHouseDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.PhoneNumberPublishingHouseEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert PhoneNumberPublishingHouseEntity to PhoneNumberPublishingHouseDTO and vice versa.
- * And also, this class is designed to convert List of PhoneNumberPublishingHouseEntity to List PhoneNumberPublishingHouseDTO and vice versa.
+ * This class is designed to convert {@literal PhoneNumberPublishingHouseEntity} to {@literal PhoneNumberPublishingHouseDTO} and vice versa.
+ * And also, this class is designed to convert {@literal List<PhoneNumberPublishingHouseEntity>} to {@literal List<PhoneNumberPublishingHouseDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class PhoneNumberPublishingHouseConverter {
 
@@ -23,18 +24,18 @@ public final class PhoneNumberPublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert PhoneNumberPublishingHouseEntity to PhoneNumberPublishingHouseDTO.
+     * Convert {@literal PhoneNumberPublishingHouseEntity} to {@literal PhoneNumberPublishingHouseDTO}.
      *
-     * @param entity That be converted to PhoneNumberPublishingHouseDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type PhoneNumberPublishingHouseDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal PhoneNumberPublishingHouseDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static PhoneNumberPublishingHouseDTO mapEntityToDTO(PhoneNumberPublishingHouseEntity entity) throws IllegalMethodParameterException {
+    public static PhoneNumberPublishingHouseDTO mapEntityToDTO(PhoneNumberPublishingHouseEntity entity) {
         PhoneNumberPublishingHouseDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> phoneNumberPublishingHouseEntity = " + entity
@@ -53,25 +54,25 @@ public final class PhoneNumberPublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert List of PhoneNumberPublishingHouseEntity to List of PhoneNumberPublishingHouseDTO.
+     * Convert {@literal List<PhoneNumberPublishingHouseEntity>} to {@literal List<PhoneNumberPublishingHouseDTO>}.
      *
-     * @param entities That be converted to List of PhoneNumberPublishingHouseDTO. Parameter 'entities' must not be equal to null.
-     * @return An List of PhoneNumberPublishingHouseDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal List<PhoneNumberPublishingHouseDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<PhoneNumberPublishingHouseDTO> mapListEntityToListDTO(List<PhoneNumberPublishingHouseEntity> entities) throws IllegalMethodParameterException {
-        List<PhoneNumberPublishingHouseDTO> resultList = new ArrayList<>();
+    public static List<PhoneNumberPublishingHouseDTO> mapListEntityToListDTO(List<PhoneNumberPublishingHouseEntity> entities) {
+        List<PhoneNumberPublishingHouseDTO> resultList;
 
         if (entities == null) {
             LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> phoneNumberPublishingHouseEntityList = " + entities);
 
-        for (PhoneNumberPublishingHouseEntity entity : entities) {
-            resultList.add(mapEntityToDTO(entity));
-        }
+        resultList = entities.parallelStream()
+                .map(PhoneNumberPublishingHouseConverter::mapEntityToDTO)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
@@ -79,18 +80,18 @@ public final class PhoneNumberPublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert PhoneNumberPublishingHouseDTO to PhoneNumberPublishingHouseEntity.
+     * Convert {@literal PhoneNumberPublishingHouseDTO} to {@literal PhoneNumberPublishingHouseEntity}.
      *
-     * @param dto That be converted to PhoneNumberPublishingHouseEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type PhoneNumberPublishingHouseEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal PhoneNumberPublishingHouseEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static PhoneNumberPublishingHouseEntity mapDTOToEntity(PhoneNumberPublishingHouseDTO dto) throws IllegalMethodParameterException {
+    public static PhoneNumberPublishingHouseEntity mapDTOToEntity(PhoneNumberPublishingHouseDTO dto) {
         PhoneNumberPublishingHouseEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> phoneNumberPublishingHouseDTO = " + dto
@@ -109,25 +110,25 @@ public final class PhoneNumberPublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert List of PhoneNumberPublishingHouseDTO to List of PhoneNumberPublishingHouseEntity.
+     * Convert {@literal List<PhoneNumberPublishingHouseDTO} to {@literal List<PhoneNumberPublishingHouseEntity>}.
      *
-     * @param dtos That be converted to List of PhoneNumberPublishingHouseEntity. Parameter 'dtos' must not be equal to null.
-     * @return An List of PhoneNumberPublishingHouseEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal List<PhoneNumberPublishingHouseEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<PhoneNumberPublishingHouseEntity> mapListDTOToListEntity(List<PhoneNumberPublishingHouseDTO> dtos) throws IllegalMethodParameterException {
-        List<PhoneNumberPublishingHouseEntity> resultList = new ArrayList<>();
+    public static List<PhoneNumberPublishingHouseEntity> mapListDTOToListEntity(List<PhoneNumberPublishingHouseDTO> dtos) {
+        List<PhoneNumberPublishingHouseEntity> resultList;
 
         if (dtos == null) {
             LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> phoneNumberPublishingHouseDTOList = " + dtos);
 
-        for (PhoneNumberPublishingHouseDTO dto : dtos) {
-            resultList.add(mapDTOToEntity(dto));
-        }
+        resultList = dtos.parallelStream()
+                .map(PhoneNumberPublishingHouseConverter::mapDTOToEntity)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);
 

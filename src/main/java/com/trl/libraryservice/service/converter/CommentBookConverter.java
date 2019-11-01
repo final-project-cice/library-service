@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.CommentBookDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert CommentBookEntity to CommentBookDTO and vice versa.
- * And also, this class is designed to convert List of CommentBookEntity to List CommentBookDTO and vice versa.
+ * This class is designed to convert {@literal CommentBookEntity} to {@literal CommentBookDTO} and vice versa.
+ * And also, this class is designed to convert {@literal List<CommentBookEntity>} to {@literal List<CommentBookDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class CommentBookConverter {
 
@@ -23,18 +24,18 @@ public final class CommentBookConverter {
     }
 
     /**
-     * This method is designed to convert CommentBookEntity to CommentBookDTO.
+     * Convert {@literal CommentBookEntity} to {@literal CommentBookDTO}.
      *
-     * @param entity That be converted to CommentBookDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type CommentBookDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal CommentBookDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static CommentBookDTO mapEntityToDTO(CommentBookEntity entity) throws IllegalMethodParameterException {
+    public static CommentBookDTO mapEntityToDTO(CommentBookEntity entity) {
         CommentBookDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> commentBookEntity = " + entity
@@ -54,25 +55,25 @@ public final class CommentBookConverter {
     }
 
     /**
-     * This method is designed to convert List of CommentBookEntity to List of CommentBookDTO.
+     * Convert {@literal List<CommentBookEntity>} to {@literal List<CommentBookDTO>}.
      *
-     * @param entities That be converted to List of CommentBookDTO. Parameter 'entities' must not be equal to null.
-     * @return An List of CommentBookDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal List<CommentBookDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<CommentBookDTO> mapListEntityToListDTO(List<CommentBookEntity> entities) throws IllegalMethodParameterException {
-        List<CommentBookDTO> resultList = new ArrayList<>();
+    public static List<CommentBookDTO> mapListEntityToListDTO(List<CommentBookEntity> entities) {
+        List<CommentBookDTO> resultList;
 
         if (entities == null) {
             LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> commentBookEntityList = " + entities);
 
-        for (CommentBookEntity entity : entities) {
-            resultList.add(mapEntityToDTO(entity));
-        }
+        resultList = entities.parallelStream()
+                .map(CommentBookConverter::mapEntityToDTO)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
@@ -80,18 +81,18 @@ public final class CommentBookConverter {
     }
 
     /**
-     * This method is designed to convert CommentBookDTO to CommentBookEntity.
+     * Convert {@literal CommentBookDTO} to {@literal CommentBookEntity}.
      *
-     * @param dto That be converted to CommentBookEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type CommentBookEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal CommentBookEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static CommentBookEntity mapDTOToEntity(CommentBookDTO dto) throws IllegalMethodParameterException {
+    public static CommentBookEntity mapDTOToEntity(CommentBookDTO dto) {
         CommentBookEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> commentBookDTO = " + dto
@@ -111,25 +112,25 @@ public final class CommentBookConverter {
     }
 
     /**
-     * This method is designed to convert List of CommentBookDTO to List of CommentBookEntity.
+     * Convert {@literal List<CommentBookDTO} to {@literal List<CommentBookEntity>}.
      *
-     * @param dtos That be converted to List of CommentBookEntity. Parameter 'dtos' must not be equal to null.
-     * @return An List of CommentBookEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal List<CommentBookEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<CommentBookEntity> mapListDTOToListEntity(List<CommentBookDTO> dtos) throws IllegalMethodParameterException {
-        List<CommentBookEntity> resultList = new ArrayList<>();
+    public static List<CommentBookEntity> mapListDTOToListEntity(List<CommentBookDTO> dtos) {
+        List<CommentBookEntity> resultList;
 
         if (dtos == null) {
             LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> commentBookDTOList = " + dtos);
 
-        for (CommentBookDTO dto : dtos) {
-            resultList.add(mapDTOToEntity(dto));
-        }
+        resultList = dtos.parallelStream()
+                .map(CommentBookConverter::mapDTOToEntity)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);
 

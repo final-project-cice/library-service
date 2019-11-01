@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.GenreAuthorDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.GenreAuthorEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert GenreAuthorEntity to GenreAuthorDTO and vice versa.
- * And also, this class is designed to convert List of GenreAuthorEntity to List GenreAuthorDTO and vice versa.
+ * This class is designed to convert {@literal GenreAuthorEntity} to {@literal GenreAuthorDTO} and vice versa.
+ * And also, this class is designed to convert {@literal List<GenreAuthorEntity>} to {@literal List<GenreAuthorDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class GenreAuthorConverter {
 
@@ -23,18 +24,18 @@ public final class GenreAuthorConverter {
     }
 
     /**
-     * This method is designed to convert GenreAuthorEntity to GenreAuthorDTO.
+     * Convert {@literal GenreAuthorEntity} to {@literal GenreAuthorDTO}.
      *
-     * @param entity That be converted to GenreAuthorDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type GenreAuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal GenreAuthorDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static GenreAuthorDTO mapEntityToDTO(GenreAuthorEntity entity) throws IllegalMethodParameterException {
+    public static GenreAuthorDTO mapEntityToDTO(GenreAuthorEntity entity) {
         GenreAuthorDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> genreAuthorEntity = " + entity
@@ -51,25 +52,25 @@ public final class GenreAuthorConverter {
     }
 
     /**
-     * This method is designed to convert List of GenreAuthorEntity to List of GenreAuthorDTO.
+     * Convert {@literal List<GenreAuthorEntity>} to {@literal List<GenreAuthorDTO>}.
      *
-     * @param entities That be converted to List of GenreAuthorDTO. Parameter 'entities' must not be equal to null.
-     * @return An List of GenreAuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal List<GenreAuthorDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<GenreAuthorDTO> mapListEntityToListDTO(List<GenreAuthorEntity> entities) throws IllegalMethodParameterException {
-        List<GenreAuthorDTO> resultList = new ArrayList<>();
+    public static List<GenreAuthorDTO> mapListEntityToListDTO(List<GenreAuthorEntity> entities) {
+        List<GenreAuthorDTO> resultList;
 
         if (entities == null) {
             LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> genreAuthorEntityList = " + entities);
 
-        for (GenreAuthorEntity entity : entities) {
-            resultList.add(mapEntityToDTO(entity));
-        }
+        resultList = entities.parallelStream()
+                .map(GenreAuthorConverter::mapEntityToDTO)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
@@ -77,18 +78,18 @@ public final class GenreAuthorConverter {
     }
 
     /**
-     * This method is designed to convert GenreAuthorDTO to GenreAuthorEntity.
+     * Convert {@literal GenreAuthorDTO} to {@literal GenreAuthorEntity}.
      *
-     * @param dto That be converted to GenreAuthorEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type GenreAuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal GenreAuthorEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static GenreAuthorEntity mapDTOToEntity(GenreAuthorDTO dto) throws IllegalMethodParameterException {
+    public static GenreAuthorEntity mapDTOToEntity(GenreAuthorDTO dto) {
         GenreAuthorEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> genreAuthorDTO = " + dto
@@ -105,25 +106,25 @@ public final class GenreAuthorConverter {
     }
 
     /**
-     * This method is designed to convert List of GenreAuthorDTO to List of GenreAuthorEntity.
+     * Convert {@literal List<GenreAuthorDTO} to {@literal List<GenreAuthorEntity>}.
      *
-     * @param dtos That be converted to List of GenreAuthorEntity. Parameter 'dtos' must not be equal to null.
-     * @return An List of GenreAuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal List<GenreAuthorEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<GenreAuthorEntity> mapListDTOToListEntity(List<GenreAuthorDTO> dtos) throws IllegalMethodParameterException {
-        List<GenreAuthorEntity> resultList = new ArrayList<>();
+    public static List<GenreAuthorEntity> mapListDTOToListEntity(List<GenreAuthorDTO> dtos) {
+        List<GenreAuthorEntity> resultList;
 
         if (dtos == null) {
             LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> genreAuthorDTOList = " + dtos);
 
-        for (GenreAuthorDTO dto : dtos) {
-            resultList.add(mapDTOToEntity(dto));
-        }
+        resultList = dtos.parallelStream()
+                .map(GenreAuthorConverter::mapDTOToEntity)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);
 

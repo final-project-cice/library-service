@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.AuthorDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.AuthorEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert AuthorEntity to AuthorDTO and vice versa.
- * And also, this class is designed to convert Set of AuthorEntity to Set AuthorDTO and vice versa.
+ * This class is designed to convert {@literal AuthorEntity} to {@literal AuthorDTO} and vice versa.
+ * And also, this class is designed to convert {@literal Set<AuthorEntity>} to {@literal Set<AuthorDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class AuthorConverter {
 
@@ -23,18 +24,18 @@ public final class AuthorConverter {
     }
 
     /**
-     * This method is designed to convert AuthorEntity to AuthorDTO.
+     * Convert {@literal AuthorEntity} to {@literal AuthorDTO}.
      *
-     * @param entity That be converted to AuthorDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type AuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal AuthorDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static AuthorDTO mapEntityToDTO(AuthorEntity entity) throws IllegalMethodParameterException {
+    public static AuthorDTO mapEntityToDTO(AuthorEntity entity) {
         AuthorDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> authorEntity = " + entity
@@ -57,25 +58,25 @@ public final class AuthorConverter {
     }
 
     /**
-     * This method is designed to convert Set of AuthorEntity to Set of AuthorDTO.
+     * Convert {@literal Set<AuthorEntity>} to {@literal Set<AuthorDTO>}.
      *
-     * @param entities That be converted to Set of AuthorDTO. Parameter 'entities' must not be equal to null.
-     * @return An Set of AuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal Set<AuthorDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static Set<AuthorDTO> mapSetEntityToSetDTO(Set<AuthorEntity> entities) throws IllegalMethodParameterException {
-        Set<AuthorDTO> resultSet = new HashSet<>();
+    public static Set<AuthorDTO> mapSetEntityToSetDTO(Set<AuthorEntity> entities) {
+        Set<AuthorDTO> resultSet;
 
         if (entities == null) {
             LOG.debug("************ mapSetEntityToSetDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapSetEntityToSetDTO() ---> authorEntitySet = " + entities);
 
-        for (AuthorEntity entity : entities) {
-            resultSet.add(mapEntityToDTO(entity));
-        }
+        resultSet = entities.parallelStream()
+                .map(AuthorConverter::mapEntityToDTO)
+                .collect(Collectors.toSet());
 
         LOG.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
 
@@ -83,18 +84,18 @@ public final class AuthorConverter {
     }
 
     /**
-     * This method is designed to convert AuthorDTO to AuthorEntity.
+     * Convert {@literal AuthorDTO} to {@literal AuthorEntity}.
      *
-     * @param dto That be converted to AuthorEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type AuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal AuthorEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static AuthorEntity mapDTOToEntity(AuthorDTO dto) throws IllegalMethodParameterException {
+    public static AuthorEntity mapDTOToEntity(AuthorDTO dto) {
         AuthorEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> authorDTO = " + dto
@@ -117,25 +118,25 @@ public final class AuthorConverter {
     }
 
     /**
-     * This method is designed to convert Set of AuthorDTO to Set of AuthorEntity.
+     * Convert {@literal Set<AuthorDTO} to {@literal Set<AuthorEntity>}.
      *
-     * @param dtos That be converted to Set of AuthorEntity. Parameter 'dtos' must not be equal to null.
-     * @return An Set of AuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal Set<AuthorEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static Set<AuthorEntity> mapSetDTOToSetEntity(Set<AuthorDTO> dtos) throws IllegalMethodParameterException {
-        Set<AuthorEntity> resultSet = new HashSet<>();
+    public static Set<AuthorEntity> mapSetDTOToSetEntity(Set<AuthorDTO> dtos) {
+        Set<AuthorEntity> resultSet;
 
         if (dtos == null) {
             LOG.debug("************ mapSetDTOToSetEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapSetDTOToSetEntity() ---> authorDTOSet = " + dtos);
 
-        for (AuthorDTO dto : dtos) {
-            resultSet.add(mapDTOToEntity(dto));
-        }
+        resultSet = dtos.parallelStream()
+                .map(AuthorConverter::mapDTOToEntity)
+                .collect(Collectors.toSet());
 
         LOG.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
 

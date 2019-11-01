@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.EmailAuthorDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.EmailAuthorEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert EmailAuthorEntity to EmailAuthorDTO and vice versa.
- * And also, this class is designed to convert List of EmailAuthorEntity to List EmailAuthorDTO and vice versa.
+ * This class is designed to convert {@literal EmailAuthorEntity} to {@literal EmailAuthorDTO} and vice versa.
+ * And also, this class is designed to convert {@literal List<EmailAuthorEntity>} to {@literal List<EmailAuthorDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class EmailAuthorConverter {
 
@@ -23,18 +24,18 @@ public final class EmailAuthorConverter {
     }
 
     /**
-     * This method is designed to convert EmailAuthorEntity to EmailAuthorDTO.
+     * Convert {@literal EmailAuthorEntity} to {@literal EmailAuthorDTO}.
      *
-     * @param entity That be converted to EmailAuthorDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type EmailAuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal EmailAuthorDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static EmailAuthorDTO mapEntityToDTO(EmailAuthorEntity entity) throws IllegalMethodParameterException {
+    public static EmailAuthorDTO mapEntityToDTO(EmailAuthorEntity entity) {
         EmailAuthorDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> emailAuthorEntity = " + entity
@@ -52,25 +53,25 @@ public final class EmailAuthorConverter {
     }
 
     /**
-     * This method is designed to convert List of EmailAuthorEntity to List of EmailAuthorDTO.
+     * Convert {@literal List<EmailAuthorEntity>} to {@literal List<EmailAuthorDTO>}.
      *
-     * @param entities That be converted to List of EmailAuthorDTO. Parameter 'entities' must not be equal to null.
-     * @return An List of EmailAuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal List<EmailAuthorDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<EmailAuthorDTO> mapListEntityToListDTO(List<EmailAuthorEntity> entities) throws IllegalMethodParameterException {
-        List<EmailAuthorDTO> resultList = new ArrayList<>();
+    public static List<EmailAuthorDTO> mapListEntityToListDTO(List<EmailAuthorEntity> entities) {
+        List<EmailAuthorDTO> resultList;
 
         if (entities == null) {
             LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> emailAuthorEntityList = " + entities);
 
-        for (EmailAuthorEntity entity : entities) {
-            resultList.add(mapEntityToDTO(entity));
-        }
+        resultList = entities.parallelStream()
+                .map(EmailAuthorConverter::mapEntityToDTO)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
@@ -78,18 +79,18 @@ public final class EmailAuthorConverter {
     }
 
     /**
-     * This method is designed to convert EmailAuthorDTO to EmailAuthorEntity.
+     * Convert {@literal EmailAuthorDTO} to {@literal EmailAuthorEntity}.
      *
-     * @param dto That be converted to EmailAuthorEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type EmailAuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal EmailAuthorEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static EmailAuthorEntity mapDTOToEntity(EmailAuthorDTO dto) throws IllegalMethodParameterException {
+    public static EmailAuthorEntity mapDTOToEntity(EmailAuthorDTO dto) {
         EmailAuthorEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> emailAuthorDTO = " + dto
@@ -107,25 +108,25 @@ public final class EmailAuthorConverter {
     }
 
     /**
-     * This method is designed to convert List of EmailAuthorDTO to List of EmailAuthorEntity.
+     * Convert {@literal List<EmailAuthorDTO} to {@literal List<EmailAuthorEntity>}.
      *
-     * @param dtos That be converted to List of EmailAuthorEntity. Parameter 'dtos' must not be equal to null.
-     * @return An List of EmailAuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal List<EmailAuthorEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<EmailAuthorEntity> mapListDTOToListEntity(List<EmailAuthorDTO> dtos) throws IllegalMethodParameterException {
-        List<EmailAuthorEntity> resultList = new ArrayList<>();
+    public static List<EmailAuthorEntity> mapListDTOToListEntity(List<EmailAuthorDTO> dtos) {
+        List<EmailAuthorEntity> resultList;
 
         if (dtos == null) {
             LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> emailAuthorDTOList = " + dtos);
 
-        for (EmailAuthorDTO dto : dtos) {
-            resultList.add(mapDTOToEntity(dto));
-        }
+        resultList = dtos.parallelStream()
+                .map(EmailAuthorConverter::mapDTOToEntity)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);
 

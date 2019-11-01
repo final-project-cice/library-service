@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.PublishingHouseDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.PublishingHouseEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert PublishingHouseEntity to PublishingHouseDTO and vice versa.
- * And also, this class is designed to convert List of PublishingHouseEntity to List PublishingHouseDTO and vice versa.
+ * This class is designed to convert {@literal PublishingHouseEntity} to {@literal PublishingHouseDTO} and vice versa.
+ * And also, this class is designed to convert {@literal List<PublishingHouseEntity>} to {@literal List<PublishingHouseDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class PublishingHouseConverter {
 
@@ -23,18 +24,18 @@ public final class PublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert PublishingHouseEntity to PublishingHouseDTO.
+     * Convert {@literal PublishingHouseEntity} to {@literal PublishingHouseDTO}.
      *
-     * @param entity That be converted to PublishingHouseDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type PublishingHouseDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal PublishingHouseDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static PublishingHouseDTO mapEntityToDTO(PublishingHouseEntity entity) throws IllegalMethodParameterException {
+    public static PublishingHouseDTO mapEntityToDTO(PublishingHouseEntity entity) {
         PublishingHouseDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> publishingHouseEntity = " + entity
@@ -54,25 +55,25 @@ public final class PublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert List of PublishingHouseEntity to List of PublishingHouseDTO.
+     * Convert {@literal List<PublishingHouseEntity>} to {@literal List<PublishingHouseDTO>}.
      *
-     * @param entities That be converted to List of PublishingHouseDTO. Parameter 'entities' must not be equal to null.
-     * @return An List of PublishingHouseDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal List<PublishingHouseDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<PublishingHouseDTO> mapListEntityToListDTO(List<PublishingHouseEntity> entities) throws IllegalMethodParameterException {
-        List<PublishingHouseDTO> resultList = new ArrayList<>();
+    public static List<PublishingHouseDTO> mapListEntityToListDTO(List<PublishingHouseEntity> entities) {
+        List<PublishingHouseDTO> resultList;
 
         if (entities == null) {
             LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> publishingHouseEntityList = " + entities);
 
-        for (PublishingHouseEntity entity : entities) {
-            resultList.add(mapEntityToDTO(entity));
-        }
+        resultList = entities.parallelStream()
+                .map(PublishingHouseConverter::mapEntityToDTO)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
@@ -80,18 +81,18 @@ public final class PublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert PublishingHouseDTO to PublishingHouseEntity.
+     * Convert {@literal PublishingHouseDTO} to {@literal PublishingHouseEntity}.
      *
-     * @param dto That be converted to PublishingHouseEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type PublishingHouseEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal PublishingHouseEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static PublishingHouseEntity mapDTOToEntity(PublishingHouseDTO dto) throws IllegalMethodParameterException {
+    public static PublishingHouseEntity mapDTOToEntity(PublishingHouseDTO dto) {
         PublishingHouseEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> publishingHouseDTO = " + dto
@@ -111,25 +112,25 @@ public final class PublishingHouseConverter {
     }
 
     /**
-     * This method is designed to convert List of PublishingHouseDTO to List of PublishingHouseEntity.
+     * Convert {@literal List<PublishingHouseDTO} to {@literal List<PublishingHouseEntity>}.
      *
-     * @param dtos That be converted to List of PublishingHouseEntity. Parameter 'dtos' must not be equal to null.
-     * @return An List of PublishingHouseEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal List<PublishingHouseEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<PublishingHouseEntity> mapListDTOToListEntity(List<PublishingHouseDTO> dtos) throws IllegalMethodParameterException {
-        List<PublishingHouseEntity> resultList = new ArrayList<>();
+    public static List<PublishingHouseEntity> mapListDTOToListEntity(List<PublishingHouseDTO> dtos) {
+        List<PublishingHouseEntity> resultList;
 
         if (dtos == null) {
             LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> publishingHouseDTOList = " + dtos);
 
-        for (PublishingHouseDTO dto : dtos) {
-            resultList.add(mapDTOToEntity(dto));
-        }
+        resultList = dtos.parallelStream()
+                .map(PublishingHouseConverter::mapDTOToEntity)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);
 

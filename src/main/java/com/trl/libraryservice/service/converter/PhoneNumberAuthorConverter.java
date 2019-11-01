@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.PhoneNumberAuthorDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.PhoneNumberAuthorEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert PhoneNumberAuthorEntity to PhoneNumberAuthorDTO and vice versa.
- * And also, this class is designed to convert List of PhoneNumberAuthorEntity to List PhoneNumberAuthorDTO and vice versa.
+ * This class is designed to convert {@literal PhoneNumberAuthorEntity} to {@literal PhoneNumberAuthorDTO} and vice versa.
+ * And also, this class is designed to convert {@literal List<PhoneNumberAuthorEntity>} to {@literal List<PhoneNumberAuthorDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class PhoneNumberAuthorConverter {
 
@@ -23,18 +24,18 @@ public final class PhoneNumberAuthorConverter {
     }
 
     /**
-     * This method is designed to convert PhoneNumberAuthorEntity to PhoneNumberAuthorDTO.
+     * Convert {@literal PhoneNumberAuthorEntity} to {@literal PhoneNumberAuthorDTO}.
      *
-     * @param entity That be converted to PhoneNumberAuthorDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type PhoneNumberAuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal PhoneNumberAuthorDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static PhoneNumberAuthorDTO mapEntityToDTO(PhoneNumberAuthorEntity entity) throws IllegalMethodParameterException {
+    public static PhoneNumberAuthorDTO mapEntityToDTO(PhoneNumberAuthorEntity entity) {
         PhoneNumberAuthorDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> phoneNumberAuthorEntity = " + entity
@@ -53,25 +54,25 @@ public final class PhoneNumberAuthorConverter {
     }
 
     /**
-     * This method is designed to convert List of PhoneNumberAuthorEntity to List of PhoneNumberAuthorDTO.
+     * Convert {@literal List<PhoneNumberAuthorEntity>} to {@literal List<PhoneNumberAuthorDTO>}.
      *
-     * @param entities That be converted to List of PhoneNumberAuthorDTO. Parameter 'entities' must not be equal to null.
-     * @return An List of PhoneNumberAuthorDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal List<PhoneNumberAuthorDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static List<PhoneNumberAuthorDTO> mapListEntityToListDTO(List<PhoneNumberAuthorEntity> entities) throws IllegalMethodParameterException {
-        List<PhoneNumberAuthorDTO> resultList = new ArrayList<>();
+    public static List<PhoneNumberAuthorDTO> mapListEntityToListDTO(List<PhoneNumberAuthorEntity> entities) {
+        List<PhoneNumberAuthorDTO> resultList;
 
         if (entities == null) {
             LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListEntityToListDTO() ---> phoneNumberAuthorEntityList = " + entities);
 
-        for (PhoneNumberAuthorEntity entity : entities) {
-            resultList.add(mapEntityToDTO(entity));
-        }
+        resultList = entities.parallelStream()
+                .map(PhoneNumberAuthorConverter::mapEntityToDTO)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
@@ -79,18 +80,18 @@ public final class PhoneNumberAuthorConverter {
     }
 
     /**
-     * This method is designed to convert PhoneNumberAuthorDTO to PhoneNumberAuthorEntity.
+     * Convert {@literal PhoneNumberAuthorDTO} to {@literal PhoneNumberAuthorEntity}.
      *
-     * @param dto That be converted to PhoneNumberAuthorEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type PhoneNumberAuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal PhoneNumberAuthorEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static PhoneNumberAuthorEntity mapDTOToEntity(PhoneNumberAuthorDTO dto) throws IllegalMethodParameterException {
+    public static PhoneNumberAuthorEntity mapDTOToEntity(PhoneNumberAuthorDTO dto) {
         PhoneNumberAuthorEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> phoneNumberAuthorDTO = " + dto
@@ -109,25 +110,25 @@ public final class PhoneNumberAuthorConverter {
     }
 
     /**
-     * This method is designed to convert List of PhoneNumberAuthorDTO to List of PhoneNumberAuthorEntity.
+     * Convert {@literal List<PhoneNumberAuthorDTO} to {@literal List<PhoneNumberAuthorEntity>}.
      *
-     * @param dtos That be converted to List of PhoneNumberAuthorEntity. Parameter 'dtos' must not be equal to null.
-     * @return An List of PhoneNumberAuthorEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal List<PhoneNumberAuthorEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static List<PhoneNumberAuthorEntity> mapListDTOToListEntity(List<PhoneNumberAuthorDTO> dtos) throws IllegalMethodParameterException {
-        List<PhoneNumberAuthorEntity> resultList = new ArrayList<>();
+    public static List<PhoneNumberAuthorEntity> mapListDTOToListEntity(List<PhoneNumberAuthorDTO> dtos) {
+        List<PhoneNumberAuthorEntity> resultList;
 
         if (dtos == null) {
             LOG.debug("************ mapListDTOToListEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapListDTOToListEntity() ---> phoneNumberAuthorDTOList = " + dtos);
 
-        for (PhoneNumberAuthorDTO dto : dtos) {
-            resultList.add(mapDTOToEntity(dto));
-        }
+        resultList = dtos.parallelStream()
+                .map(PhoneNumberAuthorConverter::mapDTOToEntity)
+                .collect(Collectors.toList());
 
         LOG.debug("************ mapListDTOToListEntity() ---> resultList = " + resultList);
 

@@ -1,18 +1,19 @@
 package com.trl.libraryservice.service.converter;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.BookEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- * This class is designed to convert BookEntity to BookDTO and vice versa.
- * And also, this class is designed to convert Set of BookEntity to Set BookDTO and vice versa.
+ * This class is designed to convert {@literal BookEntity} to {@literal BookDTO} and vice versa.
+ * And also, this class is designed to convert {@literal Set<BookEntity>} to {@literal Set<BookDTO>} and vice versa.
+ *
+ * @author Tsyupryk Roman
  */
 public final class BookConverter {
 
@@ -23,18 +24,18 @@ public final class BookConverter {
     }
 
     /**
-     * This method is designed to convert BookEntity to BookDTO.
+     * Convert {@literal BookEntity} to {@literal BookDTO}.
      *
-     * @param entity That be converted to BookDTO. Parameter 'entity' must not be equal to null.
-     * @return An object of type BookDTO.
-     * @throws IllegalMethodParameterException If parameter 'entity' is equal null value.
+     * @param entity must not be {@literal null}.
+     * @return the {@literal BookDTO}.
+     * @throws IllegalArgumentException in case the given {@code entity} is {@literal null}.
      */
-    public static BookDTO mapEntityToDTO(BookEntity entity) throws IllegalMethodParameterException {
+    public static BookDTO mapEntityToDTO(BookEntity entity) {
         BookDTO result = null;
 
         if (entity == null) {
             LOG.debug("************ mapEntityToDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapEntityToDTO() ---> bookEntity = " + entity
@@ -57,25 +58,25 @@ public final class BookConverter {
     }
 
     /**
-     * This method is designed to convert Set of BookEntity to Set of BookDTO.
+     * Convert {@literal Set<BookEntity>} to {@literal Set<BookDTO>}.
      *
-     * @param entities That be converted to Set of BookDTO. Parameter 'entities' must not be equal to null.
-     * @return An Set of BookDTO.
-     * @throws IllegalMethodParameterException If parameter 'entities' is equal null value.
+     * @param entities must not be {@literal null}.
+     * @return the {@literal Set<BookDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
      */
-    public static Set<BookDTO> mapSetEntityToSetDTO(Set<BookEntity> entities) throws IllegalMethodParameterException {
-        Set<BookDTO> resultSet = new HashSet<>();
+    public static Set<BookDTO> mapSetEntityToSetDTO(Set<BookEntity> entities) {
+        Set<BookDTO> resultSet;
 
         if (entities == null) {
             LOG.debug("************ mapSetEntityToSetDTO() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapSetEntityToSetDTO() ---> bookEntitySet = " + entities);
 
-        for (BookEntity entity : entities) {
-            resultSet.add(mapEntityToDTO(entity));
-        }
+        resultSet = entities.parallelStream()
+                .map(BookConverter::mapEntityToDTO)
+                .collect(Collectors.toSet());
 
         LOG.debug("************ mapSetEntityToSetDTO() ---> resultSet = " + resultSet);
 
@@ -83,18 +84,18 @@ public final class BookConverter {
     }
 
     /**
-     * This method is designed to convert BookDTO to BookEntity.
+     * Convert {@literal BookDTO} to {@literal BookEntity}.
      *
-     * @param dto That be converted to BookEntity. Parameter 'dto' must not be equal to null.
-     * @return An object of type BookEntity.
-     * @throws IllegalMethodParameterException If parameter 'dto' is equal null value.
+     * @param dto must not be {@literal null}.
+     * @return the {@literal BookEntity}.
+     * @throws IllegalArgumentException in case the given {@code dto} is {@literal null}.
      */
-    public static BookEntity mapDTOToEntity(BookDTO dto) throws IllegalMethodParameterException {
+    public static BookEntity mapDTOToEntity(BookDTO dto) {
         BookEntity result = null;
 
         if (dto == null) {
             LOG.debug("************ mapDTOToEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapDTOToEntity() ---> bookDTO = " + dto
@@ -117,25 +118,25 @@ public final class BookConverter {
     }
 
     /**
-     * This method is designed to convert Set of BookDTO to Set of BookEntity.
+     * Convert {@literal Set<BookDTO} to {@literal Set<BookEntity>}.
      *
-     * @param dtos That be converted to Set of BookEntity. Parameter 'dtos' must not be equal to null.
-     * @return An Set of BookEntity.
-     * @throws IllegalMethodParameterException If parameter 'dtos' is equal null value.
+     * @param dtos must not be {@literal null}.
+     * @return the {@literal Set<BookEntity>}.
+     * @throws IllegalArgumentException in case the given {@code dtos} is {@literal null}.
      */
-    public static Set<BookEntity> mapSetDTOToSetEntity(Set<BookDTO> dtos) throws IllegalMethodParameterException {
-        Set<BookEntity> resultSet = new HashSet<>();
+    public static Set<BookEntity> mapSetDTOToSetEntity(Set<BookDTO> dtos) {
+        Set<BookEntity> resultSet;
 
         if (dtos == null) {
             LOG.debug("************ mapSetDTOToSetEntity() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
         LOG.debug("************ mapSetDTOToSetEntity() ---> userDTOSet = " + dtos);
 
-        for (BookDTO dto : dtos) {
-            resultSet.add(mapDTOToEntity(dto));
-        }
+        resultSet = dtos.parallelStream()
+                .map(BookConverter::mapDTOToEntity)
+                .collect(Collectors.toSet());
 
         LOG.debug("************ mapSetDTOToSetEntity() ---> resultSet = " + resultSet);
 
