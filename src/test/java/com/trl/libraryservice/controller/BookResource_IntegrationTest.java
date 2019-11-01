@@ -11,8 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.core.StringContains.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -119,8 +118,6 @@ public class BookResource_IntegrationTest {
                 .andExpect(content().string(containsString(userWithIdResult)));
     }
 
-    @Sql(value = {"/BookResource_getById_IllegalId_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getById_IllegalId_ZeroValue() throws Exception {
 
@@ -130,8 +127,6 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Sql(value = {"/BookResource_getById_IllegalId_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getById_IllegalId_NegativeValue() throws Exception {
 
@@ -142,7 +137,6 @@ public class BookResource_IntegrationTest {
     }
 
     @Sql(value = {"/BookResource_getById_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getById_NotFoundBookById() throws Exception {
 
@@ -150,5 +144,39 @@ public class BookResource_IntegrationTest {
                 get("http://localhost:8082/books/1"))
                 .andDo(print())
                 .andExpect(status().isNotFound());
+    }
+
+    @Sql(value = {"/BookResource_deleteById.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void deleteById() throws Exception {
+
+        this.mockMvc.perform(
+                delete("http://localhost:8082/books/1"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        this.mockMvc.perform(
+                get("http://localhost:8082/books/1"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void deleteById_IllegalId_ZeroValue() throws Exception {
+
+        this.mockMvc.perform(
+                delete("http://localhost:8082/books/0"))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void deleteById_IllegalId_NegativeValue() throws Exception {
+
+        this.mockMvc.perform(
+                delete("http://localhost:8082/books/-1"))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 }
