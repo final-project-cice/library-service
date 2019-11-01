@@ -35,7 +35,8 @@ public class BookEntity {
             fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
-                    CascadeType.MERGE
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
             })
     @JoinTable(
             name = "book_author",
