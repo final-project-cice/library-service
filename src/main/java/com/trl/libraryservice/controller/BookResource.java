@@ -1,7 +1,6 @@
 package com.trl.libraryservice.controller;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.exception.IllegalValueException;
 import com.trl.libraryservice.service.BookService;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookResource {
 
     private static final Logger LOG = LoggerFactory.getLogger(BookResource.class);
+    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
 
     private final BookService bookService;
 
@@ -36,9 +36,8 @@ public class BookResource {
 
         try {
             resultService = bookService.add(book);
-        } catch (IllegalMethodParameterException illegalMethodParameterException) {
-            LOG.error("************ add() ---> " +
-                    "Parameter is illegal, check the parameter that are passed to the method.", illegalMethodParameterException);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            LOG.error("************ add() ---> " + EXCEPTION_MESSAGE, illegalArgumentException);
             return ResponseEntity.badRequest().build();
         } catch (IllegalValueException illegalValueException) {
             LOG.error("************ add() ---> "
@@ -68,9 +67,8 @@ public class BookResource {
         BookDTO resultService = null;
         try {
             resultService = bookService.getById(id);
-        } catch (IllegalMethodParameterException illegalMethodParameterException) {
-            LOG.error("************ getById() ---> "
-                    + "Parameter is illegal, check the parameter that are passed to the method.", illegalMethodParameterException);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            LOG.error("************ getById() ---> " + EXCEPTION_MESSAGE, illegalArgumentException);
             return ResponseEntity.badRequest().build();
         }
 
@@ -84,6 +82,31 @@ public class BookResource {
         response = ResponseEntity.ok(resultService);
 
         LOG.debug("************ getById() ---> response = " + response);
+
+        return response;
+    }
+
+    /**
+     *
+     */
+    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteById(@PathVariable Long id) {
+        ResponseEntity response = null;
+
+        LOG.debug("************ deleteById() ---> id = " + id);
+
+        try {
+            bookService.deleteById(id);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            LOG.error("************ getById() ---> " + EXCEPTION_MESSAGE, illegalArgumentException);
+            return ResponseEntity.badRequest().build();
+        }
+
+        LOG.debug("************ deleteById() ---> Deleted book by id = " + id);
+
+        response = ResponseEntity.ok().build();
+
+        LOG.debug("************ deleteById() ---> response = " + response);
 
         return response;
     }
