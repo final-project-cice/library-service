@@ -11,6 +11,11 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * This interface is designed to support JPA for {@literal SubCommentCommentEntity}.
+ *
+ * @author Tsyupryk Roman
+ */
 public interface SubCommentCommentRepository extends JpaRepository<SubCommentCommentEntity, Long> {
 
     /**
