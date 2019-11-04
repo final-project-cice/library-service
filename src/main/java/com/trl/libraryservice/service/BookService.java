@@ -1,13 +1,15 @@
 package com.trl.libraryservice.service;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
-import com.trl.libraryservice.exception.IllegalValueException;
 
 public interface BookService {
 
-    BookDTO add(BookDTO book) throws IllegalMethodParameterException, IllegalValueException;
+    BookDTO add(BookDTO book);
 
-    BookDTO getById(Long id) throws IllegalMethodParameterException;
+    BookDTO getById(Long id);
+
+    BookDTO updateById(Long id, BookDTO book);
+
+    void deleteById(Long id);
 
 }

@@ -1,11 +1,10 @@
 package com.trl.libraryservice.service.impl;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
+import com.trl.libraryservice.exception.DataNotFoundException;
 import com.trl.libraryservice.exception.IllegalValueException;
 import com.trl.libraryservice.repository.BookRepository;
 import com.trl.libraryservice.repository.entity.BookEntity;
-import com.trl.libraryservice.service.AuthorService;
 import com.trl.libraryservice.service.BookService;
 import com.trl.libraryservice.service.converter.BookConverter;
 
@@ -14,53 +13,49 @@ import static com.trl.libraryservice.service.converter.BookConverter.mapEntityTo
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 import java.util.Optional;
 
+/**
+ * This class is designed to support service layout for {@literal BookDTO}.
+ *
+ * @author Tsyupryk Roman
+ */
 @Service
 public class BookServiceImpl implements BookService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BookServiceImpl.class);
-    private static final String EXCEPTION_MESSAGE = "Parameter is illegal, check the parameter that are passed to the method.";
+    private static final String EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT = "Parameter '%s' is illegal, check the parameter that are passed to the method.";
+    private static final String EXCEPTION_MESSAGE_BOOK_NOT_EXIST = "Book with this id = %s not exist.";
 
     private final BookRepository bookRepository;
-    private final AuthorService authorService;
 
-    public BookServiceImpl(BookRepository bookRepository, AuthorService authorService) {
+    public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.authorService = authorService;
     }
 
     /**
-     * This method is designed to add the BookDTO.
+     * Add the {@literal BookDTO}.
      *
-     * @return An object of type BookDTO.
-     * @throws IllegalMethodParameterException If parameter 'book' is equal null.
-     * @throws IllegalValueException           If one of the parameter fields is null, this exception will be thrown.
+     * @param book must not be {@literal null}.
+     * @return The {@literal BookDTO}.
+     * @throws IllegalArgumentException in case the given {@code book} is {@literal null},
+     * @throws IllegalValueException    in case if one of the parameter fields is {@literal null}
      */
     @Override
-    public BookDTO add(BookDTO book) throws IllegalMethodParameterException, IllegalValueException {
+    public BookDTO add(BookDTO book) {
         BookDTO bookResult = null;
 
         if (book == null) {
-            LOG.debug("************ add() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+            LOG.debug("************ add() ---> " + format(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT, "null"));
+            throw new IllegalArgumentException(format(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT, "null"));
         }
 
-        LOG.debug("************ add() ---> book = " + book);
-
-        if ((book.getName() == null) || (deleteWhitespace(book.getName()).isEmpty())
-                || (book.getGenres() == null) || (book.getGenres().isEmpty())
-                || (book.getPublishingHouse() == null)
-                || (book.getPublicationDate() == null)
-                || (book.getAuthors() == null) || book.getAuthors().isEmpty()) {
-            LOG.debug("************ add() ---> "
-                    + "One of the fields from parameter 'book' is incorrect, check the variables that it has the 'book'.");
-            throw new IllegalValueException(
-                    "One of the fields from parameter 'book' is incorrect, check the variables that it has the 'book'.");
-        }
+        checkParameterBook(book);
 
         BookEntity savedBook = bookRepository.save(BookConverter.mapDTOToEntity(book));
 
@@ -75,19 +70,20 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * This method is designed to get the BookDTO by 'id' value.
+     * Retrieves a {@literal BookDTO} by this {@code id}.
      *
-     * @param id The search for a book by this 'id'. Parameter 'id' must be greater than zero.
-     * @return An object of type BookDTO.
-     * @throws IllegalMethodParameterException If parameter 'id' is equal or less zero.
+     * @param id must not be {@literal null}, and {@code id} must be greater than zero.
+     * @return the {@literal BookDTO} with the given {@code id}.
+     * @throws IllegalArgumentException in case the given {@code id} is {@literal null}, and if {@code id} is equal or less zero.
+     * @throws DataNotFoundException    in case if {@literal BookDTO} not exist with this {@code id}.
      */
     @Override
-    public BookDTO getById(Long id) throws IllegalMethodParameterException {
+    public BookDTO getById(Long id) {
         BookDTO bookResult = null;
 
-        if (id <= 0) {
-            LOG.debug("************ getById() ---> " + EXCEPTION_MESSAGE);
-            throw new IllegalMethodParameterException(EXCEPTION_MESSAGE);
+        if ((id == null) || (id <= 0)) {
+            LOG.debug("************ getById() ---> " + format(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT, id));
+            throw new IllegalArgumentException(format(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT, id));
         }
 
         LOG.debug("************ getById() ---> id = " + id);
@@ -96,13 +92,104 @@ public class BookServiceImpl implements BookService {
         LOG.debug("************ getById() ---> bookFromRepositoryById = " + bookById);
 
         if (bookById.isEmpty()) {
-            LOG.debug("************ getById() ---> Book with this id = '" + id + "' not exist.");
-            return bookResult;
+            LOG.debug("************ getById() ---> " + format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
+            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
         }
 
         bookResult = mapEntityToDTO(bookById.get());
         LOG.debug("************ getById() ---> bookResult = " + bookResult);
 
         return bookResult;
+    }
+
+    /**
+     * Update an {@literal BookDTO} by this {@code id}.
+     *
+     * @param id   must not be {@literal null}, and {@code id} must be greater than zero.
+     * @param book must not be {@literal null}.
+     * @return The {@literal BookDTO}.
+     * @throws IllegalArgumentException in case the given {@code book} is {@literal null},
+     */
+    @Override
+    public BookDTO updateById(Long id, BookDTO book) {
+        BookDTO bookResult = null;
+
+        if ((id == null) || (id <= 0) || (book == null)) {
+            LOG.debug("************ updateById() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT);
+        }
+
+        // TODO: Finish this method.
+
+        return bookResult;
+    }
+
+    /**
+     * Deletes the {@literal BookDTO} with the given {@code id}.
+     *
+     * @param id must not be {@literal null}, and {@code id} must be greater than zero.
+     * @throws IllegalArgumentException in case the given {@code id} is {@literal null}, and if {@code id} is equal or less zero.
+     * @throws DataNotFoundException    in case if {@literal BookDTO} not exist with this {@code id}.
+     */
+    @Transactional
+    @Override
+    public void deleteById(Long id) {
+
+        if ((id == null) || (id <= 0)) {
+            LOG.debug("************ deleteById() ---> " + format(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT, id));
+            throw new IllegalArgumentException(format(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT, id));
+        }
+
+        LOG.debug("************ deleteById() ---> id = " + id);
+
+        Optional<BookEntity> bookById = bookRepository.findById(id);
+        LOG.debug("************ deleteById() ---> bookFromRepositoryById = " + bookById);
+
+        if (bookById.isEmpty()) {
+            LOG.debug("************ deleteById() ---> " + format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
+            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
+        }
+
+        bookRepository.deleteById(id);
+
+        LOG.debug("************ deleteById() ---> Deleted book by id = " + id);
+    }
+
+    private void checkParameterBook(BookDTO book) {
+        String message = "Field '%s' is illegal, check the field that it has the 'book' parameter.";
+
+        if (book.getName() == null) {
+            LOG.debug("************ add() ---> " + format(message, "book.getName() == null"));
+            throw new IllegalValueException(format(message, "book.getName() == null"));
+        } else if (deleteWhitespace(book.getName()).isEmpty()) {
+            LOG.debug("************ add() ---> " + format(message, "book.getName() is empty"));
+            throw new IllegalValueException(format(message, "book.getName() == is empty"));
+        }
+
+        if (book.getGenres() == null) {
+            LOG.debug("************ add() ---> " + format(message, "book.getGenres() == null"));
+            throw new IllegalValueException(format(message, "book.getGenres() == null"));
+        } else if (book.getGenres().isEmpty()) {
+            LOG.debug("************ add() ---> " + format(message, "book.getGenres() is empty"));
+            throw new IllegalValueException(format(message, "book.getGenres() is empty"));
+        }
+
+        if (book.getPublishingHouse() == null) {
+            LOG.debug("************ add() ---> " + format(message, "book.getPublishingHouse() == null"));
+            throw new IllegalValueException(format(message, "book.getPublishingHouse() == null"));
+        }
+
+        if (book.getPublicationDate() == null) {
+            LOG.debug("************ add() ---> " + format(message, "book.getPublicationDate() == null"));
+            throw new IllegalValueException(format(message, "book.getPublicationDate() == null"));
+        }
+
+        if (book.getAuthors() == null) {
+            LOG.debug("************ add() ---> " + format(message, "book.getAuthors() == null"));
+            throw new IllegalValueException(format(message, "book.getAuthors() == null"));
+        } else if (book.getAuthors().isEmpty()) {
+            LOG.debug("************ add() ---> " + format(message, "book.getAuthors() is empty"));
+            throw new IllegalValueException(format(message, "book.getAuthors() is empty"));
+        }
     }
 }
