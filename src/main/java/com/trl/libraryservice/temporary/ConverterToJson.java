@@ -2,7 +2,6 @@ package com.trl.libraryservice.temporary;
 
 import com.trl.libraryservice.controller.dto.AuthorDTO;
 import com.trl.libraryservice.controller.dto.BookDTO;
-import com.trl.libraryservice.exception.IllegalMethodParameterException;
 import com.trl.libraryservice.repository.entity.*;
 import com.trl.libraryservice.service.converter.AuthorConverter;
 import com.trl.libraryservice.service.converter.BookConverter;
@@ -28,11 +27,7 @@ public class ConverterToJson {
 
         // Book Convert
         BookDTO bookDTO = null;
-        try {
             bookDTO = BookConverter.mapEntityToDTO(bookEntity);
-        } catch (IllegalMethodParameterException e) {
-            e.printStackTrace();
-        }
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -44,11 +39,7 @@ public class ConverterToJson {
 
         // Author Convert
         Set<AuthorDTO> authorDTOS = null;
-        try {
             authorDTOS = AuthorConverter.mapSetEntityToSetDTO(authorEntities);
-        } catch (IllegalMethodParameterException e) {
-            e.printStackTrace();
-        }
 
         try {
             System.out.println();
@@ -131,25 +122,12 @@ public class ConverterToJson {
 
         CommentBookEntity commentBookEntity_1 = new CommentBookEntity();
 
-        // The creation user for CommentBookEntity
-        UserEntity userEntity = new UserEntity();
-        userEntity.setFirstName("User FirstName");
-        userEntity.setLastName("User LastName");
-        userEntity.setEmail("email_user9QZ@email.com");
-        userEntity.setBirthday(LocalDate.now());
-
         // The creation SubComment for CommentBookEntity
         List<SubCommentCommentEntity> subCommentCommentEntities = new ArrayList<>();
         SubCommentCommentEntity subCommentCommentEntity_1 = new SubCommentCommentEntity();
 
-        // The creation user for CommentBookEntity
-        UserEntity userEntity_SubComment = new UserEntity();
-        userEntity_SubComment.setFirstName("User FirstName");
-        userEntity_SubComment.setLastName("User LastName");
-        userEntity_SubComment.setEmail("email_user911QZ@email.com");
-        userEntity_SubComment.setBirthday(LocalDate.now());
 
-        subCommentCommentEntity_1.setUser(userEntity_SubComment);
+        subCommentCommentEntity_1.setUserId(1L);
         subCommentCommentEntity_1.setText("test sub comment");
         subCommentCommentEntity_1.setDate(LocalDate.now());
         subCommentCommentEntity_1.setComment(commentBookEntity_1);
@@ -158,7 +136,7 @@ public class ConverterToJson {
 
 
         // ================================= Filling in commentBook Book
-        commentBookEntity_1.setUser(userEntity);
+        commentBookEntity_1.setUserId(1L);
         commentBookEntity_1.setText("Text Comment");
         commentBookEntity_1.setDate(LocalDate.now());
         commentBookEntity_1.setSubComments(subCommentCommentEntities);

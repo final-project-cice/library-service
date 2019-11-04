@@ -3,8 +3,10 @@ package com.trl.libraryservice.temporary;
 import com.trl.libraryservice.repository.AuthorRepository;
 import com.trl.libraryservice.repository.BookRepository;
 import com.trl.libraryservice.repository.entity.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Profile("dev")
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
@@ -102,25 +105,11 @@ public class DatabaseLoader implements CommandLineRunner {
 
         CommentBookEntity commentBookEntity_1 = new CommentBookEntity();
 
-        // The creation user for CommentBookEntity
-        UserEntity userEntity = new UserEntity();
-        userEntity.setFirstName("User FirstName");
-        userEntity.setLastName("User LastName");
-        userEntity.setEmail("email_user9@email.com");
-        userEntity.setBirthday(LocalDate.now());
-
         // The creation SubComment for CommentBookEntity
         List<SubCommentCommentEntity> subCommentCommentEntities = new ArrayList<>();
         SubCommentCommentEntity subCommentCommentEntity_1 = new SubCommentCommentEntity();
 
-        // The creation user for CommentBookEntity
-        UserEntity userEntity_SubComment = new UserEntity();
-        userEntity_SubComment.setFirstName("User FirstName");
-        userEntity_SubComment.setLastName("User LastName");
-        userEntity_SubComment.setEmail("email_user911@email.com");
-        userEntity_SubComment.setBirthday(LocalDate.now());
-
-        subCommentCommentEntity_1.setUser(userEntity_SubComment);
+        subCommentCommentEntity_1.setUserId(1L);
         subCommentCommentEntity_1.setText("test sub comment");
         subCommentCommentEntity_1.setDate(LocalDate.now());
         subCommentCommentEntity_1.setComment(commentBookEntity_1);
@@ -129,7 +118,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
 
         // ================================= Filling in commentBook Book
-        commentBookEntity_1.setUser(userEntity);
+        commentBookEntity_1.setUserId(1L);
         commentBookEntity_1.setText("Text Comment");
         commentBookEntity_1.setDate(LocalDate.now());
         commentBookEntity_1.setSubComments(subCommentCommentEntities);
