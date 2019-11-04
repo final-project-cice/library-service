@@ -44,7 +44,7 @@ public class BookResource {
     }
 
     /**
-     * Retrieves a {@literal BookDTO)} by this {@code id}.
+     * Retrieves the {@literal BookDTO)} by this {@code id}.
      *
      * @param id must not be {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(BookDTO)} with the given {@code id}.
@@ -62,7 +62,7 @@ public class BookResource {
     }
 
     /**
-     * Update a {@literal BookDTO)} by this {@code id}.
+     * Update the {@literal BookDTO)} by this {@code id}.
      *
      * @param id must not be {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(BookDTO)} with the given {@code id}.

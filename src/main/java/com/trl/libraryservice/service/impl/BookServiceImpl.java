@@ -70,7 +70,7 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Retrieves a {@literal BookDTO} by this {@code id}.
+     * Retrieves the {@literal BookDTO} by this {@code id}.
      *
      * @param id must not be {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal BookDTO} with the given {@code id}.
@@ -103,7 +103,7 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Update an {@literal BookDTO} by this {@code id}.
+     * Update the {@literal BookDTO} by this {@code id}.
      *
      * @param id   must not be {@literal null}, and {@code id} must be greater than zero.
      * @param book must not be {@literal null}.
