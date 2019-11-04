@@ -9,7 +9,7 @@ import java.util.Objects;
 public class SubCommentCommentDTO {
 
     private Long id;
-    private UserDTO user;
+    private Long userId;
     private String text;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
@@ -28,12 +28,12 @@ public class SubCommentCommentDTO {
         this.id = id;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getText() {
@@ -66,21 +66,21 @@ public class SubCommentCommentDTO {
         if (o == null || getClass() != o.getClass()) return false;
         SubCommentCommentDTO that = (SubCommentCommentDTO) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
+                Objects.equals(userId, that.userId) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, text, date);
+        return Objects.hash(id, userId, text, date);
     }
 
     @Override
     public String toString() {
         return "SubCommentCommentDTO{" +
                 "id=" + id +
-                ", user=" + user +
+                ", user=" + userId +
                 ", text='" + text + '\'' +
                 ", date=" + date +
                 '}';

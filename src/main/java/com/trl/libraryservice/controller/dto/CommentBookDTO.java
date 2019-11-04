@@ -11,7 +11,7 @@ import java.util.Objects;
 public class CommentBookDTO {
 
     private Long id;
-    private UserDTO user;
+    private Long userId;
     private String text;
 
     @JsonFormat(pattern = "dd.MM.yyyy")
@@ -32,12 +32,12 @@ public class CommentBookDTO {
         this.id = id;
     }
 
-    public UserDTO getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserDTO user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getText() {
@@ -92,7 +92,7 @@ public class CommentBookDTO {
         if (o == null || getClass() != o.getClass()) return false;
         CommentBookDTO that = (CommentBookDTO) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
+                Objects.equals(userId, that.userId) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(subComments, that.subComments);
@@ -100,14 +100,14 @@ public class CommentBookDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, text, date, subComments);
+        return Objects.hash(id, userId, text, date, subComments);
     }
 
     @Override
     public String toString() {
         return "CommentBookDTO{" +
                 "id=" + id +
-                ", user=" + user +
+                ", user=" + userId +
                 ", text='" + text + '\'' +
                 ", date=" + date +
                 ", subCommentCommentDTOS=" + subComments +

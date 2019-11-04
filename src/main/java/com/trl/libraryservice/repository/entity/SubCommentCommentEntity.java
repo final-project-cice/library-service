@@ -15,8 +15,7 @@ public class SubCommentCommentEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private UserEntity user;
+    private Long userId;
 
     @Column(name = "test", nullable = false)
     private String text;
@@ -39,12 +38,12 @@ public class SubCommentCommentEntity {
         this.id = id;
     }
 
-    public UserEntity getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getText() {
@@ -77,21 +76,21 @@ public class SubCommentCommentEntity {
         if (o == null || getClass() != o.getClass()) return false;
         SubCommentCommentEntity that = (SubCommentCommentEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
+                Objects.equals(userId, that.userId) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, text, date);
+        return Objects.hash(id, userId, text, date);
     }
 
     @Override
     public String toString() {
         return "SubCommentEntity{" +
                 "id=" + id +
-                ", user=" + user +
+                ", user=" + userId +
                 ", text='" + text + '\'' +
                 ", date=" + date +
                 '}';

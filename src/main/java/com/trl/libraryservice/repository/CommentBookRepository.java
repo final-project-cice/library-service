@@ -1,7 +1,6 @@
 package com.trl.libraryservice.repository;
 
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
-import com.trl.libraryservice.repository.entity.UserEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,11 +19,11 @@ public interface CommentBookRepository extends JpaRepository<CommentBookEntity, 
 
     /**
      * @param id
-     * @param user
+     * @param userId
      */
     @Modifying(clearAutomatically = true)
-    @Query(value = "update CommentBookEntity cb set cb.user=:user where cb.id =:id", nativeQuery = true)
-    void updateUser(@Param("id") Long id, @Param("user") UserEntity user);
+    @Query(value = "update CommentBookEntity cb set cb.userId=:userId where cb.id =:id", nativeQuery = true)
+    void updateUserId(@Param("id") Long id, @Param("userId") Long userId);
 
     /**
      * @param id
@@ -44,10 +43,10 @@ public interface CommentBookRepository extends JpaRepository<CommentBookEntity, 
 
 
     /**
-     * @param user
+     * @param userId
      * @return
      */
-    List<CommentBookEntity> findByUser(UserEntity user);
+    List<CommentBookEntity> findByUserId(Long userId);
 
     /**
      * @param text
