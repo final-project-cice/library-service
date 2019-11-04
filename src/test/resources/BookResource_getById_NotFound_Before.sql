@@ -28,9 +28,6 @@ DELETE
 FROM library_test.public.comment_book;
 
 DELETE
-FROM library_test.public.usr;
-
-DELETE
 FROM library_test.public.book;
 
 

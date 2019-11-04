@@ -16,15 +16,11 @@ VALUES (2, '222222', '02222222222222', 'Fax', 1);
 INSERT INTO library_test.public.book (id, name, path_file, publication_date, publishing_house_id)
 VALUES (1, 'My first Book', 'path/path/book', '2019-10-30', 1);
 
-INSERT INTO library_test.public.usr (id, birthday, email, first_name, last_name)
-VALUES (1, '2019-10-30', 'email_user9@email.com', 'User FirstName', 'User LastName');
-INSERT INTO library_test.public.comment_book (id, date, text, book_id, user_id)
-VALUES (1, '2019-10-30', 'Text Comment', 1, 1);
+INSERT INTO library_test.public.comment_book (id, date, text, user_id, book_id)
+VALUES (1, '2019-11-02', 'Text Comment', 1, 1);
 
-INSERT INTO library_test.public.usr (id, birthday, email, first_name, last_name)
-VALUES (2, '2019-10-30', 'email_user911@email.com', 'User FirstName', 'User LastName');
-INSERT INTO library_test.public.sub_comment_comment (id, date, test, comment_id, user_id)
-VALUES (1, '2019-10-30', 'test sub comment', 1, 2);
+INSERT INTO library_test.public.sub_comment_comment (id, date, test, user_id, comment_id)
+VALUES (1, '2019-11-02', 'test sub comment', 1, 1);
 
 INSERT INTO library_test.public.genre_book (id, name, book_id)
 VALUES (1, 'Genre Book Uno', 1);
