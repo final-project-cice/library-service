@@ -210,7 +210,7 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isNotFound());
     }
 
-    @Sql(value = {"/BookResource_deleteById.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/BookResource_deleteById_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void deleteById() throws Exception {
