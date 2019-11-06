@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This interface is designed to support JPA for {@literal CommentBookEntity}.
@@ -17,46 +19,24 @@ import java.util.List;
  */
 public interface CommentBookRepository extends JpaRepository<CommentBookEntity, Long> {
 
-    /**
-     * @param id
-     * @param userId
-     */
-    @Modifying(clearAutomatically = true)
-    @Query(value = "update CommentBookEntity cb set cb.userId=:userId where cb.id =:id", nativeQuery = true)
-    void updateUserId(@Param("id") Long id, @Param("userId") Long userId);
+    // TODO: Thing of how to make all query using a JPQL.
 
-    /**
-     * @param id
-     * @param text
-     */
-    @Modifying(clearAutomatically = true)
-    @Query(value = "update CommentBookEntity cb set cb.text=:text where cb.id =:id", nativeQuery = true)
-    void updateText(@Param("id") Long id, @Param("text") String text);
-
-    /**
-     * @param id
-     * @param date
-     */
-    @Modifying(clearAutomatically = true)
-    @Query(value = "update CommentBookEntity cb set cb.date=:date where cb.id =:id", nativeQuery = true)
-    void updateDate(@Param("id") Long id, @Param("date") LocalDate date);
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO comment_book (date, text, user_id, book_id) VALUES (:date, :text, :userId, :bookId)", nativeQuery = true)
+    void add(@Param("date") LocalDate date,
+             @Param("text") String text, @Param("userId") Long userId, @Param("bookId") Long bookId);
 
 
-    /**
-     * @param userId
-     * @return
-     */
-    List<CommentBookEntity> findByUserId(Long userId);
+    @Query(value = "SELECT * FROM comment_book cb WHERE book_id=:bookId", nativeQuery = true)
+    List<CommentBookEntity> findByBookId(@Param("bookId") Long bookId);
 
-    /**
-     * @param text
-     * @return
-     */
-    List<CommentBookEntity> findByText(String text);
+    @Query(value = "SELECT * FROM comment_book cb WHERE book_id=:bookId AND id=:commentId", nativeQuery = true)
+    Optional<CommentBookEntity> findByBookIdAndCommentId(@Param("bookId") Long bookId, @Param("commentId") Long commentId);
 
-    /**
-     * @param date
-     * @return
-     */
-    List<CommentBookEntity> findByDate(LocalDate date);
+    @Query(value = "DELETE FROM comment_book WHERE book_id=:bookId AND id=:commentId", nativeQuery = true)
+    void deleteByBookIdAndByCommentId(@Param("bookId") Long bookId, @Param("commentId") Long commentId);
+
+    @Query(value = "DELETE FROM comment_book WHERE book_id=:bookId", nativeQuery = true)
+    void deleteAllByBookId(@Param("bookId") Long bookId);
 }
