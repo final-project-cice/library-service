@@ -88,10 +88,27 @@ public class CommentBookResource {
      * @return the {@literal ResponseEntity.ok()} if {@literal CommentBookDTO} is deleted correctly.
      */
     @DeleteMapping(path = "/{bookId}/comments/{commentId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteById(@PathVariable Long bookId, @PathVariable Long commentId) {
+    public ResponseEntity deleteByBookIdAndByCommentId(@PathVariable Long bookId, @PathVariable Long commentId) {
         ResponseEntity response = null;
 
         commentBookService.deleteByBookIdAndByCommentId(bookId, commentId);
+
+        response = ResponseEntity.ok().build();
+
+        return response;
+    }
+
+    /**
+     * Deletes all {@literal CommentBookDTO} with the given {@code bookId}.
+     *
+     * @param bookId must not be {@literal null}, and {@code id} must be greater than zero.
+     * @return the {@literal ResponseEntity.ok()} if {@literal CommentBookDTO} is deleted correctly.
+     */
+    @DeleteMapping(path = "/{bookId}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteAllByBookId(@PathVariable Long bookId) {
+        ResponseEntity response = null;
+
+        commentBookService.deleteAllByBookId(bookId);
 
         response = ResponseEntity.ok().build();
 
