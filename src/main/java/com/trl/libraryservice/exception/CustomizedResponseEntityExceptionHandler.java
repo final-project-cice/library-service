@@ -45,4 +45,37 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserNotExistException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleUserNotExistException(UserNotExistException ex, WebRequest request) {
+        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BookNotExistException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleBookNotExistException(BookNotExistException ex, WebRequest request) {
+        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CommentNotExistException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleCommentNotExistException(CommentNotExistException ex, WebRequest request) {
+        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 }
