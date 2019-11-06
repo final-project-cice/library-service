@@ -1,10 +1,8 @@
 package com.trl.libraryservice.temporary;
 
-import com.trl.libraryservice.controller.dto.AuthorDTO;
-import com.trl.libraryservice.controller.dto.BookDTO;
+import com.trl.libraryservice.controller.dto.CommentBookDTO;
+import com.trl.libraryservice.controller.dto.SubCommentCommentDTO;
 import com.trl.libraryservice.repository.entity.*;
-import com.trl.libraryservice.service.converter.AuthorConverter;
-import com.trl.libraryservice.service.converter.BookConverter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,16 +18,17 @@ public class ConverterToJson {
     private static BookEntity bookEntity = new BookEntity();
     private static Set<AuthorEntity> authorEntities = new HashSet<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
 
-        // Initialization
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        /*// Initialization
         init();
 
         // Book Convert
         BookDTO bookDTO = null;
             bookDTO = BookConverter.mapEntityToDTO(bookEntity);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             String jsonBookDTO = objectMapper.writeValueAsString(bookDTO);
             System.out.println(jsonBookDTO);
@@ -37,7 +36,7 @@ public class ConverterToJson {
             e.printStackTrace();
         }
 
-        // Author Convert
+         // Author Convert
         Set<AuthorDTO> authorDTOS = null;
             authorDTOS = AuthorConverter.mapSetEntityToSetDTO(authorEntities);
 
@@ -47,7 +46,30 @@ public class ConverterToJson {
             System.out.println(jsonAuthorDTO);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        CommentBookDTO commentBook = new CommentBookDTO();
+        commentBook.setUserId(1L);
+        commentBook.setText("new comment added");
+        commentBook.setDate(LocalDate.now());
+
+        SubCommentCommentDTO s1 = new SubCommentCommentDTO();
+        s1.setUserId(1L);
+        s1.setText("sub comm");
+        s1.setDate(LocalDate.now());
+        SubCommentCommentDTO s2 = new SubCommentCommentDTO();
+        s2.setUserId(1L);
+        s2.setText("sub comm");
+        s2.setDate(LocalDate.now());
+        List<SubCommentCommentDTO> list = new ArrayList<>();
+        list.add(s1);
+        list.add(s2);
+
+        commentBook.setSubComments(new ArrayList<>());
+
+        String commentJSON = objectMapper.writeValueAsString(commentBook);
+        System.out.println(commentJSON);
+
     }
 
     private static void init() {

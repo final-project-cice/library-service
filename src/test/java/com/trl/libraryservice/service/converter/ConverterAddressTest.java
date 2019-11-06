@@ -1,18 +1,9 @@
 package com.trl.libraryservice.service.converter;
 
-import com.trl.libraryservice.controller.dto.AddressDTO;
-import com.trl.libraryservice.repository.entity.AddressEntity;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.junit.Assert.*;
 
 public class ConverterAddressTest {
 
-    private AddressDTO expected_AddressDTO;
+    /*private AddressDTO expected_AddressDTO;
 
     private AddressEntity expected_AddressEntity;
 
@@ -183,7 +174,7 @@ public class ConverterAddressTest {
     public void mapSetDTOToSetEntity_Parameter_Null() {
         Set<AddressEntity> actual_AddressEntitySet = ConverterAddress.mapSetDTOToSetEntity(null);
         assertNull(actual_AddressEntitySet);
-    }
+    }*/
 
 
 }
