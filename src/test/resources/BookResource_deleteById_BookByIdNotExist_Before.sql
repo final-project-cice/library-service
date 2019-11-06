@@ -1,45 +1,45 @@
 DELETE
-FROM library_test.public.author_book;
+FROM author_book;
 DELETE
-FROM library_test.public.book_author;
-
-
-
-DELETE
-FROM library_test.public.phone_number_author;
-DELETE
-FROM library_test.public.genre_author;
-DELETE
-FROM library_test.public.email_author;
-DELETE
-FROM library_test.public.address_author;
-DELETE
-FROM library_test.public.author;
+FROM book_author;
 
 
 
 DELETE
-FROM library_test.public.genre_book;
+FROM phone_number_author;
+DELETE
+FROM genre_author;
+DELETE
+FROM email_author;
+DELETE
+FROM address_author;
+DELETE
+FROM author;
+
+
 
 DELETE
-FROM library_test.public.sub_comment_comment;
+FROM genre_book;
 
 DELETE
-FROM library_test.public.comment_book;
+FROM sub_comment_comment;
 
 DELETE
-FROM library_test.public.book;
+FROM comment_book;
+
+DELETE
+FROM book;
 
 
 
 DELETE
-FROM library_test.public.phone_number_publishing_house;
+FROM phone_number_publishing_house;
 
 DELETE
-FROM library_test.public.email_publishing_house;
+FROM email_publishing_house;
 
 DELETE
-FROM library_test.public.publishing_house;
+FROM publishing_house;
 
 DELETE
-FROM library_test.public.address_publishing_house;
+FROM address_publishing_house;
