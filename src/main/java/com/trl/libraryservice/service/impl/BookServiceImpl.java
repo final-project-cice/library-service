@@ -1,6 +1,7 @@
 package com.trl.libraryservice.service.impl;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
+import com.trl.libraryservice.exception.BookNotExistException;
 import com.trl.libraryservice.exception.DataNotFoundException;
 import com.trl.libraryservice.exception.IllegalValueException;
 import com.trl.libraryservice.repository.BookRepository;
@@ -13,7 +14,6 @@ import static com.trl.libraryservice.service.converter.BookConverter.mapEntityTo
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
@@ -131,7 +131,6 @@ public class BookServiceImpl implements BookService {
      * @throws IllegalArgumentException in case the given {@code id} is {@literal null}, and if {@code id} is equal or less zero.
      * @throws DataNotFoundException    in case if {@literal BookDTO} not exist with this {@code id}.
      */
-    @Transactional
     @Override
     public void deleteById(Long id) {
 
@@ -147,7 +146,7 @@ public class BookServiceImpl implements BookService {
 
         if (bookById.isEmpty()) {
             LOG.debug("************ deleteById() ---> " + format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
-            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
+            throw new BookNotExistException(format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
         }
 
         bookRepository.deleteById(id);

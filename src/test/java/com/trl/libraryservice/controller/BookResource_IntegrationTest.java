@@ -258,12 +258,12 @@ public class BookResource_IntegrationTest {
     public void deleteById_BookByIdNotExist() throws Exception {
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1\"}";
 
         this.mockMvc.perform(
                 delete("http://localhost:8082/books/1"))
                 .andDo(print())
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isBadRequest());
     }
 }

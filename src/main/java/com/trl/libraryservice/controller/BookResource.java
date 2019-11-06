@@ -3,7 +3,6 @@ package com.trl.libraryservice.controller;
 import com.trl.libraryservice.controller.dto.BookDTO;
 import com.trl.libraryservice.service.BookService;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +48,6 @@ public class BookResource {
      * @param id must not be {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(BookDTO)} with the given {@code id}.
      */
-    @LoadBalanced
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookDTO> getById(@PathVariable Long id) {
         ResponseEntity<BookDTO> response = null;
