@@ -3,375 +3,282 @@ package com.trl.libraryservice.service.impl;
 import com.trl.libraryservice.controller.dto.SubCommentCommentDTO;
 import com.trl.libraryservice.controller.dto.UserDTO;
 import com.trl.libraryservice.exception.*;
+import com.trl.libraryservice.repository.CommentBookRepository;
 import com.trl.libraryservice.repository.SubCommentCommentRepository;
 import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 import com.trl.libraryservice.service.SubCommentCommentService;
-import com.trl.libraryservice.service.converter.UserConverter;
 
-import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.*;
+import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.mapEntityToDTO;
+import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.mapListEntityToListDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
+import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This class is designed to support service layout for {@literal SubCommentCommentDTO}.
+ *
+ * @author Tsyupryk Roman
+ */
 @Service
 public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SubCommentCommentServiceImpl.class);
+    private static final String EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS = "One of parameters is illegal. Parameters must be " +
+            "not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.";
+    private static final String EXCEPTION_MESSAGE_SUB_COMMENTS_BY_COMMENT_ID_NOT_EXIST = "SubComments with this commentId = %s not exist.";
+    private static final String EXCEPTION_MESSAGE_SUB_COMMENT_BY_SUB_COMMENT_ID_NOT_EXIST = "SubComment with this subCommentId = %s not exist.";
 
     private final SubCommentCommentRepository subCommentRepository;
+    private final CommentBookRepository commentBookRepository;
+    private final WebClient.Builder webClientBuilder;
 
-    public SubCommentCommentServiceImpl(SubCommentCommentRepository subCommentRepository) {
+    public SubCommentCommentServiceImpl(SubCommentCommentRepository subCommentRepository, CommentBookRepository commentBookRepository, WebClient.Builder webClientBuilder) {
         this.subCommentRepository = subCommentRepository;
+        this.commentBookRepository = commentBookRepository;
+        this.webClientBuilder = webClientBuilder;
     }
 
+    /**
+     * Add the {@literal SubCommentCommentDTO} by this {@code commentId}.
+     *
+     * @param commentId  must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
+     * @param subComment must not be equal to {@literal null}.
+     * @throws IllegalArgumentException in case the given {@code commentId} is {@literal null}
+     *                                  or if {@code commentId} is equal or less zero.
+     *                                  And if {@code subComment} is equals to {@literal null}.
+     * @throws IllegalValueException    in case if one of the fields of {@code subComment} is equals {@literal null},
+     *                                  or less zero, or is empty.
+     * @throws UserNotExistException    in case if user not exist by {@code subComment.userId}.
+     * @throws CommentNotExistException in case if comment not exist by {@code commentId}.
+     */
     @Override
-    public SubCommentCommentDTO create(SubCommentCommentDTO subComment)
-            throws InvalidArgumentException, InvalidObjectVariableValueException {
+    public void add(Long commentId, SubCommentCommentDTO subComment) {
+
+        if ((commentId == null) || (commentId <= 0) || (subComment == null)) {
+            LOG.debug("************ add() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        }
+
+        LOG.debug("************ add() ---> commentId = " + commentId + " ---> sbComment = " + subComment);
+        checkParametersSubCommentBook(subComment);
+
+        LOG.debug("************ add() ---> commentId = " + commentId);
+        checkExistsCommentById(commentId);
+
+        LOG.debug("************ add() ---> userId = " + subComment.getUserId());
+        checkExistsUserById(subComment.getUserId());
+
+        subCommentRepository.add(subComment.getUserId(), subComment.getText(), subComment.getDate(), commentId);
+
+        LOG.debug("************ add() ---> subComment is added.");
+    }
+
+    /**
+     * Retrieves the {@literal SubCommentCommentDTO} by this {@code subCommentId}.
+     *
+     * @param subCommentId must not be equal to {@literal null}, and {@code subCommentId} must be greater than zero.
+     * @return the {@literal SubCommentCommentDTO} with the given {@code subCommentId}.
+     * @throws IllegalArgumentException In case the given {@code subCommentId} is {@literal null} or if {@code subCommentId} is equal or less zero.
+     * @throws DataNotFoundException    In case if {@literal SubCommentCommentDTO} not exist with this {@code subCommentId}.
+     */
+    @Override
+    public SubCommentCommentDTO getById(Long subCommentId) {
         SubCommentCommentDTO subCommentResult = null;
 
-        LOG.debug("************ create() ---> subComment = " + subComment);
-
-        if (subComment == null) {
-            LOG.debug("************ create() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+        if ((subCommentId == null) || (subCommentId <= 0)) {
+            LOG.debug("************ getById() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        // TODO: This operation is very resource-intensive. I'm not sure whether to do it.
-        if ((subComment.getId() <= 0)
-                || (subComment.getUser() == null)
-                || (subComment.getText() == null) || (deleteWhitespace(subComment.getText()).isEmpty())
-                || (subComment.getDate() == null)) {
-            LOG.debug("************ create() ---> " +
-                    "One of the variable from parameter 'subComment' is incorrect, check the variables that it has the 'subComment'.");
-            throw new InvalidObjectVariableValueException(
-                    "One of the variable from parameter 'subComment' is incorrect, check the variables that it has the 'subComment'.");
+        LOG.debug("************ getById() ---> subCommentId = " + subCommentId);
+
+        Optional<SubCommentCommentEntity> subCommentBySubCommentId = subCommentRepository.findById(subCommentId);
+        LOG.debug("************ getById() ---> " +
+                "subCommentFromRepositoryBySubCommentId = " + subCommentBySubCommentId);
+
+        if (subCommentBySubCommentId.isEmpty()) {
+            LOG.debug("************ getByCommentId() ---> " +
+                    format(EXCEPTION_MESSAGE_SUB_COMMENT_BY_SUB_COMMENT_ID_NOT_EXIST, subCommentId));
+            throw new DataNotFoundException(
+                    format(EXCEPTION_MESSAGE_SUB_COMMENT_BY_SUB_COMMENT_ID_NOT_EXIST, subCommentId));
         }
 
-        SubCommentCommentEntity savedSubComment = subCommentRepository.save(mapDTOToEntity(subComment));
+        subCommentResult = mapEntityToDTO(subCommentBySubCommentId.get());
 
-        LOG.debug("************ create() ---> savedSubComment = " + savedSubComment);
-
-        subCommentResult = mapEntityToDTO(savedSubComment);
-
-        LOG.debug("************ create() ---> subCommentResult = " + subCommentResult);
-
-        return subCommentResult;
-    }
-
-    @Transactional
-    @Override
-    public SubCommentCommentDTO updateUser(Long id, UserDTO user)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
-        SubCommentCommentDTO subCommentResult = null;
-
-        LOG.debug("************ updateUser() ---> id = " + id + " ---> user = " + user);
-
-        if ((id <= 0) || (user == null)) {
-            LOG.debug("************ updateUser() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-        }
-
-        // TODO: Think about this. Check all user fields for validity or do not check?
-
-        Optional<SubCommentCommentEntity> subCommentById = subCommentRepository.findById(id);
-        LOG.debug("************ updateUser() ---> subCommentFromRepositoryById = " + subCommentById);
-
-        if (subCommentById.isEmpty()) {
-            LOG.debug("************ updateUser() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
-        }
-
-        if (user.equals(UserConverter.mapEntityToDTO(subCommentById.get().getUser()))) {
-            LOG.debug("************ updateUser() ---> " +
-                    "The value cannot be updated to the same value. Argument user is equals to subComment.getUser().");
-            throw new TheSameValueException(
-                    "The value cannot be updated to the same value. Argument user is equals to subComment.getUser().");
-        }
-
-        subCommentRepository.updateUser(id, UserConverter.mapDTOToEntity(user));
-
-        SubCommentCommentEntity updatedSubComment = subCommentRepository.findById(id).get();
-        LOG.debug("************ updateUser() ---> updatedSubCommentFromRepository = " + updatedSubComment);
-
-        subCommentResult = mapEntityToDTO(updatedSubComment);
-        LOG.debug("************ updateUser() ---> subCommentResult = " + subCommentResult);
-
-        return subCommentResult;
-    }
-
-    @Transactional
-    @Override
-    public SubCommentCommentDTO updateText(Long id, String text)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
-        SubCommentCommentDTO subCommentResult = null;
-
-        LOG.debug("************ updateText() ---> id = " + id + " ---> text = " + text);
-
-        if ((id <= 0) || (text == null) || (deleteWhitespace(text).isEmpty())) {
-            LOG.debug("************ updateText() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-        }
-
-        Optional<SubCommentCommentEntity> subCommentById = subCommentRepository.findById(id);
-        LOG.debug("************ updateText() ---> subCommentFromRepositoryById = " + subCommentById);
-
-        if (subCommentById.isEmpty()) {
-            LOG.debug("************ updateText() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
-        }
-
-        if (text.equals(subCommentById.get().getText())) {
-            LOG.debug("************ updateText() ---> " +
-                    "The value cannot be updated to the same value. Argument text is equals to subComment.getText().");
-            throw new TheSameValueException(
-                    "The value cannot be updated to the same value. Argument text is equals to subComment.getText().");
-        }
-
-        subCommentRepository.updateText(id, text);
-
-        SubCommentCommentEntity updatedSubComment = subCommentRepository.findById(id).get();
-        LOG.debug("************ updateText() ---> updatedSubCommentFromRepository = " + updatedSubComment);
-
-        subCommentResult = mapEntityToDTO(updatedSubComment);
-        LOG.debug("************ updateText() ---> subCommentResult = " + subCommentResult);
-
-        return subCommentResult;
-    }
-
-    @Transactional
-    @Override
-    public SubCommentCommentDTO updateDate(Long id, LocalDate date)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException, TheSameValueException {
-        SubCommentCommentDTO subCommentResult = null;
-
-        LOG.debug("************ updateDate() ---> id = " + id + " ---> date = " + date);
-
-        if ((id <= 0) || (date == null)) {
-            LOG.debug("************ updateDate() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-        }
-
-        Optional<SubCommentCommentEntity> subCommentById = subCommentRepository.findById(id);
-        LOG.debug("************ updateDate() ---> subCommentFromRepositoryById = " + subCommentById);
-
-        if (subCommentById.isEmpty()) {
-            LOG.debug("************ updateDate() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
-        }
-
-        if (date.equals(subCommentById.get().getDate())) {
-            LOG.debug("************ updateDate() ---> " +
-                    "The value cannot be updated to the same value. Argument date is equals to subComment.getDate().");
-            throw new TheSameValueException(
-                    "The value cannot be updated to the same value. Argument date is equals to subComment.getDate().");
-        }
-
-        subCommentRepository.updateDate(id, date);
-
-        SubCommentCommentEntity updatedSubComment = subCommentRepository.findById(id).get();
-        LOG.debug("************ updateDate() ---> updatedSubCommentFromRepository = " + updatedSubComment);
-
-        subCommentResult = mapEntityToDTO(updatedSubComment);
-        LOG.debug("************ updateDate() ---> subCommentResult = " + subCommentResult);
-
-        return subCommentResult;
-    }
-
-    @Transactional
-    @Override
-    public Boolean delete(Long id) throws InvalidArgumentException, EntityNotFoundWithThisValueException {
-        boolean isDeletedSubComment = false;
-
-        LOG.debug("************ delete() ---> id = " + id);
-
-        if (id <= 0) {
-            LOG.debug("************ delete() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-        }
-
-        Optional<SubCommentCommentEntity> subCommentById = subCommentRepository.findById(id);
-        LOG.debug("************ delete() ---> subCommentFromRepositoryById = " + subCommentById);
-
-        if (subCommentById.isEmpty()) {
-            LOG.debug("************ delete() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
-        }
-
-        subCommentRepository.deleteById(id);
-        // TODO: Think about this. Is it worth checking that the user is deleted correctly?
-        isDeletedSubComment = true;
-
-        LOG.debug("************ delete() ---> isDeletedSubComment = " + isDeletedSubComment);
-
-        return isDeletedSubComment;
-    }
-
-    @Override
-    public SubCommentCommentDTO findById(Long id) throws InvalidArgumentException, EntityNotFoundWithThisValueException {
-        SubCommentCommentDTO subCommentResult = null;
-
-        LOG.debug("************ findById() ---> id = " + id);
-
-        if (id <= 0) {
-            LOG.debug("************ findById() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-        }
-
-        Optional<SubCommentCommentEntity> subCommentById = subCommentRepository.findById(id);
-        LOG.debug("************ findById() ---> subCommentFromRepositoryById = " + subCommentById);
-
-        if (subCommentById.isEmpty()) {
-            LOG.debug("************ findById() ---> SubComment with this id = '" + id + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this id = '" + id + "' not exist.");
-        }
-
-        subCommentResult = mapEntityToDTO(subCommentById.get());
-        LOG.debug("************ findById() ---> subCommentResult = " + subCommentResult);
+        LOG.debug("************ getById() ---> subCommentResult = " + subCommentResult);
 
         return subCommentResult;
     }
 
     /**
-     * This method is very resource-intensive.
-     * Maybe it should be done differently.
-     * Carefully with this method.
+     * Retrieves all {@literal SubCommentCommentDTO} by this {@code commentId}.
+     *
+     * @param commentId must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
+     * @return the {@literal List<SubCommentCommentDTO>} with the given {@code commentId}.
+     * @throws IllegalArgumentException in case the given {@code commentId} is {@literal null} or if {@code commentId} is equal or less zero.
+     * @throws CommentNotExistException in case if comment with this {@literal commentId} not exist.
+     * @throws DataNotFoundException    in case if {@literal List<SubCommentCommentDTO>} not exist with this {@code commentId}.
      */
     @Override
-    public List<SubCommentCommentDTO> findByUser(UserDTO user)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
+    public List<SubCommentCommentDTO> getAllByCommentId(Long commentId) {
         List<SubCommentCommentDTO> subCommentListResult = null;
 
-        LOG.debug("************ findByUser() ---> user = " + user);
-
-        if (user == null) {
-            LOG.debug("************ findByUser() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+        if ((commentId == null) || (commentId <= 0)) {
+            LOG.debug("************ getAllByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        // TODO: Think about this. Check all user fields for validity or do not check?
+        LOG.debug("************ getAllByCommentId() ---> commentId = " + commentId);
 
-        List<SubCommentCommentEntity> subCommentListByUser = subCommentRepository.findByUser(UserConverter.mapDTOToEntity(user));
-        LOG.debug("************ findByUser() ---> subCommentListFromRepositoryByUser = " + subCommentListByUser);
+        checkExistsCommentById(commentId);
 
-        if (subCommentListByUser.isEmpty()) {
-            LOG.debug("************ findByUser() ---> SubComment with this user = '" + user + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this user = '" + user + "' not exist.");
+        List<SubCommentCommentEntity> subCommentsByCommentId = subCommentRepository.findByCommentId(commentId);
+        LOG.debug("************ getAllByCommentId() ---> subCommentsFromRepositoryByCommentId = " + subCommentsByCommentId);
+
+        if (subCommentsByCommentId.isEmpty()) {
+            LOG.debug("************ getAllByCommentId() ---> " + format(EXCEPTION_MESSAGE_SUB_COMMENTS_BY_COMMENT_ID_NOT_EXIST, commentId));
+            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_SUB_COMMENTS_BY_COMMENT_ID_NOT_EXIST, commentId));
         }
 
-        subCommentListResult = mapListEntityToListDTO(subCommentListByUser);
-        LOG.debug("************ findByUser() ---> subCommentListResult = " + subCommentListResult);
+        subCommentListResult = mapListEntityToListDTO(subCommentsByCommentId);
+        LOG.debug("************ getAllByCommentId() ---> subCommentsListResult = " + subCommentListResult);
 
         return subCommentListResult;
     }
 
     /**
-     * This method is very resource-intensive.
-     * Maybe it should be done differently.
-     * Carefully with this method.
+     * Update the {@literal SubCommentCommentDTO} by this {@code subCommentId}.
+     *
+     * @param subCommentId must not be equal to {@literal null}, and {@code subCommentId} must be greater than zero.
+     * @param subComment must not be equal to {@literal null}.
+     * @return the updated {@literal SubCommentCommentDTO} with the given {@code subCommentId}.
+     * @throws IllegalArgumentException in case the given {@code subCommentId} is {@literal null} or if {@code subCommentId} is equal or less zero.
+     *                                  And if {@code subComment} is equls to {@literal null}.
+     * @throws SubCommentNotExistException in case if subComment with this {@literal subCommentId} not exist.
      */
     @Override
-    public List<SubCommentCommentDTO> findByText(String text)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
-        List<SubCommentCommentDTO> subCommentListResult = null;
-
-        LOG.debug("************ findByText() ---> text = " + text);
-
-        if (text == null || (deleteWhitespace(text).isEmpty())) {
-            LOG.debug("************ findByText() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-        }
-
-        List<SubCommentCommentEntity> subCommentListByText = subCommentRepository.findByText(text);
-        LOG.debug("************ findByText() ---> subCommentListFromRepositoryByText = " + subCommentListByText);
-
-        if (subCommentListByText.isEmpty()) {
-            LOG.debug("************ findByText() ---> SubComment with this 'text' = '" + text + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this 'text' = '" + text + "' not exist.");
-        }
-
-        subCommentListResult = mapListEntityToListDTO(subCommentListByText);
-        LOG.debug("************ findByText() ---> subCommentListResult = " + subCommentListResult);
-
-        return subCommentListResult;
+    public SubCommentCommentDTO updateById(Long subCommentId, SubCommentCommentDTO subComment) {
+        // TODO: Finish this.
+        return null;
     }
 
     /**
-     * This method is very resource-intensive.
-     * Maybe it should be done differently.
-     * Carefully with this method.
+     * Delete the {@literal SubCommentCommentDTO} with the given {@code subCommentId}.
+     *
+     * @param subCommentId must not be equal to {@literal null}, and {@code subCommentId} must be greater than zero.
+     * @throws IllegalArgumentException In case if the given {@code subCommentId} is {@literal null}, and if {@code subCommentId} is equal or less zero.
+     * @throws SubCommentNotExistException If subComment not exist with the {@code subCommentId}.
      */
     @Override
-    public List<SubCommentCommentDTO> findByDate(LocalDate date)
-            throws InvalidArgumentException, EntityNotFoundWithThisValueException {
-        List<SubCommentCommentDTO> subCommentListResult = null;
+    public void deleteById(Long subCommentId) {
 
-        LOG.debug("************ findByDate() ---> date = " + date);
-
-        if (date == null) {
-            LOG.debug("************ findByDate() ---> " +
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
-            throw new InvalidArgumentException(
-                    "One of the parameters is incorrect, check the parameters that are passed to the method.");
+        if ((subCommentId == null) || (subCommentId <= 0)) {
+            LOG.debug("************ deleteById() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        List<SubCommentCommentEntity> subCommentListByDate = subCommentRepository.findByDate(date);
-        LOG.debug("************ findByDate() ---> subCommentListFromRepositoryByDate = " + subCommentListByDate);
+        LOG.debug("************ deleteById() --->  subCommentId = " + subCommentId);
 
-        if (subCommentListByDate.isEmpty()) {
-            LOG.debug("************ findByDate() ---> SubComment with this 'date' = '" + date + "' not exist.");
-            throw new EntityNotFoundWithThisValueException("SubComment with this 'date' = '" + date + "' not exist.");
-        }
+        checkExistsSubCommentBySubCommentId(subCommentId);
 
-        subCommentListResult = mapListEntityToListDTO(subCommentListByDate);
-        LOG.debug("************ findByDate() ---> subCommentListResult = " + subCommentListResult);
+        subCommentRepository.deleteById(subCommentId);
 
-        return subCommentListResult;
+        LOG.debug("************ deleteById() ---> " + "Deleted subComment by subCommentId = " + subCommentId);
     }
 
     /**
-     * This method is very resource-intensive.
-     * Maybe it should be done differently.
-     * Carefully with this method.
+     * Delete all subComments by {@code commentId}.
+     *
+     * @param commentId must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
+     * @throws IllegalArgumentException In case if the given {@code commentId} is {@literal null}, and if {@code commentId} is equal or less zero.
+     * @throws CommentNotExistException    If comment not exist with the {@code commentId}.
+     * @throws SubCommentNotExistException If subComments not exist with the {@code commentId}.
      */
     @Override
-    public List<SubCommentCommentDTO> findAll() throws EntitiesNotFoundException {
-        List<SubCommentCommentDTO> subCommentListResult = null;
+    public void deleteAllByCommentId(Long commentId) {
 
-        List<SubCommentCommentEntity> allSubComments = subCommentRepository.findAll();
-        LOG.debug("************ findAll() ---> allSubCommentFromRepository = " + allSubComments);
-
-        if (allSubComments.isEmpty()) {
-            LOG.debug("************ findAll() ---> Repository has no saved subComments.");
-            throw new EntitiesNotFoundException("Repository has no saved subComments.");
+        if ((commentId == null) || (commentId <= 0)) {
+            LOG.debug("************ deleteAllByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        subCommentListResult = mapListEntityToListDTO(allSubComments);
-        LOG.debug("************ findByDate() ---> subCommentListResult = " + subCommentListResult);
+        LOG.debug("************ deleteAllByCommentId() ---> commentId = " + commentId);
 
-        return subCommentListResult;
+        checkExistsCommentById(commentId);
+        checkExistsSubCommentsByCommentId(commentId);
+
+        subCommentRepository.deleteAllByCommentId(commentId);
+
+        LOG.debug("************ deleteAllByCommentId() ---> " + "Deleted all subComments by commentId = " + commentId);
+    }
+
+    private void checkParametersSubCommentBook(SubCommentCommentDTO subComment) {
+        String message = "Field '%s', check the field that it has the 'subComment' parameter.";
+
+        if (subComment.getUserId() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'userId' not be equals to null"));
+            throw new IllegalValueException(format(message, "'userId' not be equals to null"));
+        } else if (subComment.getUserId() <= 0) {
+            LOG.debug("************ add() ---> " + format(message, "'userId' must be greater that zero"));
+            throw new IllegalValueException(format(message, "'userId' must be greater that zero"));
+        }
+
+        if (subComment.getText() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'text' not be equals to null"));
+            throw new IllegalValueException(format(message, "'text' not be equals to null"));
+        } else if ((deleteWhitespace(subComment.getText()).isEmpty())) {
+            LOG.debug("************ add() ---> " + format(message, "'text' is empty"));
+            throw new IllegalValueException(format(message, "'text' is empty"));
+        }
+
+        if (subComment.getDate() == null) {
+            LOG.debug("************ add() ---> " + format(message, "'date' not be equals to null"));
+            throw new IllegalValueException(format(message, "'date' not be equals to null"));
+        }
+    }
+
+    private void checkExistsUserById(Long userId) {
+        webClientBuilder
+                .build()
+                .get()
+                .uri("http://user-service/user/" + userId)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, clientResponse ->
+                        Mono.error(new UserNotExistException("User by this id = " + userId + " not exist.")))
+                .bodyToMono(UserDTO.class)
+                .block();
+    }
+
+    private void checkExistsCommentById(Long commentId) {
+        if (commentBookRepository.findById(commentId).isEmpty()) {
+            LOG.debug("************ checkExistsCommentById() ---> " + "Comment with this id = " + commentId + " not exist.");
+            throw new CommentNotExistException("Comment with this id = " + commentId + " not exist.");
+        }
+    }
+
+    private void checkExistsSubCommentBySubCommentId(Long subCommentId) {
+        if (subCommentRepository.findById(subCommentId).isEmpty()) {
+            LOG.debug("************ checkExistsSubCommentBySubCommentId() ---> " + "SubComment with this subCommentId = " + subCommentId + " not exist.");
+            throw new CommentNotExistException("SubComment with this subCommentId = " + subCommentId + " not exist.");
+        }
+    }
+
+    private void checkExistsSubCommentsByCommentId(Long commentId) {
+        if (subCommentRepository.findByCommentId(commentId).isEmpty()) {
+            LOG.debug("************ checkExistsSubCommentsByCommentId() ---> SubComments with this commentId = " + commentId + " not exist.");
+            throw new CommentNotExistException("SubComments with this commentId = " + commentId + " not exist.");
+        }
     }
 }

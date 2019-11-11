@@ -26,16 +26,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(DataNotFoundException.class)
-    public final ResponseEntity<ErrorDetailsDTO> handleDataNotFoundException(DataNotFoundException ex, WebRequest request) {
-        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
-        errorDetails.setErrorMessage(ex.getMessage());
-        errorDetails.setErrorCode(HttpStatus.NOT_FOUND.value());
-        errorDetails.setTimestamp(LocalDateTime.now());
-        errorDetails.setDescription(request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(IllegalValueException.class)
     public final ResponseEntity<ErrorDetailsDTO> handleIllegalValueException(IllegalValueException ex, WebRequest request) {
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
@@ -77,5 +67,26 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SubCommentNotExistException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleSubCommentNotExistException(SubCommentNotExistException ex, WebRequest request) {
+        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleDataNotFoundException(DataNotFoundException ex, WebRequest request) {
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.NOT_FOUND.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 }

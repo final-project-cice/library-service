@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity(name = "SubCommentEntity")
+@Entity(name = "SubCommentCommentEntity")
 @Table(name = "sub_comment_comment")
 public class SubCommentCommentEntity {
 
