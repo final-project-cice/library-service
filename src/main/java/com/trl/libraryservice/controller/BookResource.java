@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 /**
  * This class is designed to support resource layout for {@literal BookDTO}.
  *
@@ -26,7 +28,7 @@ public class BookResource {
     /**
      * Add the {@literal BookDTO}.
      *
-     * @param book must not be {@literal null}.
+     * @param book must not be equals to {@literal null}.
      * @return the {@literal ResponseEntity.ok(BookDTO)}.
      */
     @PostMapping(
@@ -43,9 +45,9 @@ public class BookResource {
     }
 
     /**
-     * Retrieves the {@literal BookDTO)} by this {@code id}.
+     * Retrieves the {@literal BookDTO} by this {@code id}.
      *
-     * @param id must not be {@literal null}, and {@code id} must be greater than zero.
+     * @param id must not be equals to {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(BookDTO)} with the given {@code id}.
      */
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -60,9 +62,25 @@ public class BookResource {
     }
 
     /**
+     * Retrieves all {@literal BookDTO}.
+     *
+     * @return the {@literal ResponseEntity.ok(Set<BookDTO>)}.
+     */
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<BookDTO>> getAll() {
+        ResponseEntity<Set<BookDTO>> response = null;
+
+        Set<BookDTO> resultService = bookService.getAll();
+
+        response = ResponseEntity.ok(resultService);
+
+        return response;
+    }
+
+    /**
      * Update the {@literal BookDTO)} by this {@code id}.
      *
-     * @param id must not be {@literal null}, and {@code id} must be greater than zero.
+     * @param id must not be equals to {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(BookDTO)} with the given {@code id}.
      */
     @PostMapping(path = "/{id}",
@@ -83,7 +101,7 @@ public class BookResource {
     /**
      * Deletes the {@literal BookDTO} with the given {@code id}.
      *
-     * @param id must not be {@literal null}, and {@code id} must be greater than zero.
+     * @param id must not be equals to {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok()} if {@literal BookDTO} is deleted correctly.
      */
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

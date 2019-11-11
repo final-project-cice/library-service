@@ -19,6 +19,7 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * This class is designed to support service layout for {@literal BookDTO}.
@@ -31,6 +32,7 @@ public class BookServiceImpl implements BookService {
     private static final Logger LOG = LoggerFactory.getLogger(BookServiceImpl.class);
     private static final String EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT = "Parameter '%s' is illegal, check the parameter that are passed to the method.";
     private static final String EXCEPTION_MESSAGE_BOOK_NOT_EXIST = "Book with this id = %s not exist.";
+    private static final String EXCEPTION_MESSAGE_BOOKS_NOT_EXIST = "Books not found.";
 
     private final BookRepository bookRepository;
 
@@ -98,6 +100,30 @@ public class BookServiceImpl implements BookService {
 
         bookResult = mapEntityToDTO(bookById.get());
         LOG.debug("************ getById() ---> bookResult = " + bookResult);
+
+        return bookResult;
+    }
+
+    /**
+     * Retrieves all {@literal BookDTO}.
+     *
+     * @return the {@literal Set<BookDTO>}.
+     * @throws DataNotFoundException in case if {@literal BookDTO} not exist.
+     */
+    @Override
+    public Set<BookDTO> getAll() {
+        Set<BookDTO> bookResult = null;
+
+        Set<BookEntity> allBooks = Set.copyOf(bookRepository.findAll());
+        LOG.debug("************ getAll() ---> allBooksFromRepository = " + allBooks);
+
+        if (allBooks.isEmpty()) {
+            LOG.debug("************ getAll() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+            throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+        }
+
+        bookResult = BookConverter.mapSetEntityToSetDTO(allBooks);
+        LOG.debug("************ getAll() ---> bookResult = " + bookResult);
 
         return bookResult;
     }

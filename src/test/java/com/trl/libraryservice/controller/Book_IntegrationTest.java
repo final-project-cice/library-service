@@ -23,13 +23,13 @@ import java.time.format.DateTimeFormatter;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class BookResource_IntegrationTest {
+public class Book_IntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Sql(value = {"/BookResource_add_Before.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/Book_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/Book_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void add() throws Exception {
         final String responseBodyContent = "{\"id\":1,\"name\":\"My first Book\",\"genres\":[{\"id\":1,\"name\":\"Genre Book Uno\"},{\"id\":2,\"name\":\"Genre Book Dos\"}],\"publishingHouse\":{\"id\":1,\"name\":\"Publication House\",\"address\":{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":1111},\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"0111111111111111\",\"countryCode\":\"11111\",\"type\":\"Office\"},{\"id\":2,\"phoneNumber\":\"02222222222222\",\"countryCode\":\"222222\",\"type\":\"Fax\"}],\"emails\":[{\"id\":1,\"email\":\"email_1_publicationHouse9QZ@email.com\",\"emailType\":\"Office\"},{\"id\":2,\"email\":\"email_2_publicationHouse9QZ@email.com\",\"emailType\":\"Office 2\"}]},\"publicationDate\":\"12.06.2019\",\"pathFile\":\"path/path/book\",\"comments\":[{\"id\":1,\"userId\":1,\"text\":\"Text Comment\",\"date\":\"12.06.2019\",\"subComments\":[{\"id\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"12.06.2019\"}]}],\"authors\":[{\"id\":1,\"firstName\":\"Author_1 FirstName\",\"lastName\":\"Author_1 LastName\",\"emails\":[{\"id\":1,\"email\":\"email_1.author_19QZ@email.com\",\"emailType\":\"Personal\"},{\"id\":2,\"email\":\"email_2.author_19QZ@email.com\",\"emailType\":\"Personal\"}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"01111111111111\",\"countryCode\":\"111\",\"type\":\"Personal\"},{\"id\":2,\"phoneNumber\":\"0222222222222222\",\"countryCode\":\"222\",\"type\":\"Work\"}],\"addresses\":[{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":111111},{\"id\":2,\"country\":\"Spain\",\"city\":\"Barcelona\",\"street\":\"Calle Dos\",\"houseNumber\":\"2A\",\"postcode\":222222}],\"birthday\":\"12.06.2019\",\"genres\":[{\"id\":1,\"name\":\"Genre Uno\"},{\"id\":2,\"name\":\"Genre Dos\"}]}]}";
@@ -157,8 +157,8 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Sql(value = {"/BookResource_getById_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/Book_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/Book_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getById() throws Exception {
         final String responseBodyContent = "{\"id\":1,\"name\":\"My first Book\",\"genres\":[{\"id\":1,\"name\":\"Genre Book Uno\"},{\"id\":2,\"name\":\"Genre Book Dos\"}],\"publishingHouse\":{\"id\":1,\"name\":\"Publication House\",\"address\":{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":1111},\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"0111111111111111\",\"countryCode\":\"11111\",\"type\":\"Office\"},{\"id\":2,\"phoneNumber\":\"02222222222222\",\"countryCode\":\"222222\",\"type\":\"Fax\"}],\"emails\":[{\"id\":1,\"email\":\"email_1_publicationHouse9@email.com\",\"emailType\":\"Office\"},{\"id\":2,\"email\":\"email_2_publicationHouse9@email.com\",\"emailType\":\"Office 2\"}]},\"publicationDate\":\"30.10.2019\",\"pathFile\":\"path/path/book\",\"comments\":[{\"id\":1,\"userId\":1,\"text\":\"Text Comment\",\"date\":\"02.11.2019\",\"subComments\":[{\"id\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}]}],\"authors\":[{\"id\":1,\"firstName\":\"Author_1 FirstName\",\"lastName\":\"Author_1 LastName\",\"emails\":[{\"id\":1,\"email\":\"email_1.author_19@email.com\",\"emailType\":\"Personal\"},{\"id\":2,\"email\":\"email_2.author_19@email.com\",\"emailType\":\"Personal\"}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"01111111111111\",\"countryCode\":\"111\",\"type\":\"Personal\"},{\"id\":2,\"phoneNumber\":\"0222222222222222\",\"countryCode\":\"222\",\"type\":\"Work\"}],\"addresses\":[{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":111111},{\"id\":2,\"country\":\"Spain\",\"city\":\"Barcelona\",\"street\":\"Calle Dos\",\"houseNumber\":\"2A\",\"postcode\":222222}],\"birthday\":\"30.10.2019\",\"genres\":[{\"id\":1,\"name\":\"Genre Uno\"},{\"id\":2,\"name\":\"Genre Dos\"}]}]}";
@@ -196,7 +196,7 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Sql(value = {"/BookResource_getById_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/Book_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Test
     public void getById_NotFoundBookById() throws Exception {
 
@@ -210,10 +210,45 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isNotFound());
     }
 
-    @Sql(value = {"/BookResource_deleteById_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    // =================================================================================================================
+
+    @Sql(value = {"/Book_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/Book_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void getAll() throws Exception {
+        final String responseBodyContent = "[{\"id\":1,\"name\":\"My first Book\",\"genres\":[{\"id\":1,\"name\":\"Genre Book Uno\"},{\"id\":2,\"name\":\"Genre Book Dos\"}],\"publishingHouse\":{\"id\":1,\"name\":\"Publication House\",\"address\":{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":1111},\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"0111111111111111\",\"countryCode\":\"11111\",\"type\":\"Office\"},{\"id\":2,\"phoneNumber\":\"02222222222222\",\"countryCode\":\"222222\",\"type\":\"Fax\"}],\"emails\":[{\"id\":1,\"email\":\"email_1_publicationHouse9@email.com\",\"emailType\":\"Office\"},{\"id\":2,\"email\":\"email_2_publicationHouse9@email.com\",\"emailType\":\"Office 2\"}]},\"publicationDate\":\"30.10.2019\",\"pathFile\":\"path/path/book\",\"comments\":[{\"id\":1,\"userId\":1,\"text\":\"Text Comment\",\"date\":\"02.11.2019\",\"subComments\":[{\"id\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}]}],\"authors\":[{\"id\":1,\"firstName\":\"Author_1 FirstName\",\"lastName\":\"Author_1 LastName\",\"emails\":[{\"id\":1,\"email\":\"email_1.author_19@email.com\",\"emailType\":\"Personal\"},{\"id\":2,\"email\":\"email_2.author_19@email.com\",\"emailType\":\"Personal\"}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"01111111111111\",\"countryCode\":\"111\",\"type\":\"Personal\"},{\"id\":2,\"phoneNumber\":\"0222222222222222\",\"countryCode\":\"222\",\"type\":\"Work\"}],\"addresses\":[{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":111111},{\"id\":2,\"country\":\"Spain\",\"city\":\"Barcelona\",\"street\":\"Calle Dos\",\"houseNumber\":\"2A\",\"postcode\":222222}],\"birthday\":\"30.10.2019\",\"genres\":[{\"id\":1,\"name\":\"Genre Uno\"},{\"id\":2,\"name\":\"Genre Dos\"}]}]},{\"id\":2,\"name\":\"My first Book\",\"genres\":[{\"id\":3,\"name\":\"Genre Book Uno\"},{\"id\":4,\"name\":\"Genre Book Dos\"}],\"publishingHouse\":{\"id\":2,\"name\":\"Publication House\",\"address\":{\"id\":2,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":1111},\"phoneNumbers\":[{\"id\":3,\"phoneNumber\":\"0111111111111111\",\"countryCode\":\"11111\",\"type\":\"Office\"},{\"id\":4,\"phoneNumber\":\"02222222222222\",\"countryCode\":\"222222\",\"type\":\"Fax\"}],\"emails\":[{\"id\":3,\"email\":\"email_1_publicationHouse92@email.com\",\"emailType\":\"Office\"},{\"id\":4,\"email\":\"email_2_publicationHouse92@email.com\",\"emailType\":\"Office 2\"}]},\"publicationDate\":\"30.10.2019\",\"pathFile\":\"path/path/book\",\"comments\":[{\"id\":2,\"userId\":1,\"text\":\"Text Comment\",\"date\":\"02.11.2019\",\"subComments\":[{\"id\":2,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}]}],\"authors\":[{\"id\":2,\"firstName\":\"Author_1 FirstName\",\"lastName\":\"Author_1 LastName\",\"emails\":[{\"id\":3,\"email\":\"email_1.author_194@email.com\",\"emailType\":\"Personal\"},{\"id\":4,\"email\":\"email_2.author_194@email.com\",\"emailType\":\"Personal\"}],\"phoneNumbers\":[{\"id\":3,\"phoneNumber\":\"01111111111111\",\"countryCode\":\"111\",\"type\":\"Personal\"},{\"id\":4,\"phoneNumber\":\"0222222222222222\",\"countryCode\":\"222\",\"type\":\"Work\"}],\"addresses\":[{\"id\":3,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":111111},{\"id\":4,\"country\":\"Spain\",\"city\":\"Barcelona\",\"street\":\"Calle Dos\",\"houseNumber\":\"2A\",\"postcode\":222222}],\"birthday\":\"30.10.2019\",\"genres\":[{\"id\":3,\"name\":\"Genre Uno\"},{\"id\":4,\"name\":\"Genre Dos\"}]}]}]";
+
+        this.mockMvc.perform(
+                get("http://localhost:8082/books"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString(responseBodyContent)));
+    }
+
+    @Sql(value = {"/Book_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Test
+    public void getAll_NotFoundBook() throws Exception {
+
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
+        final String responseBodyContent = "{\"errorMessage\":\"Books not found.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books\"}";
+
+        this.mockMvc.perform(
+                get("http://localhost:8082/books"))
+                .andDo(print())
+                .andExpect(content().string(containsString(responseBodyContent)))
+                .andExpect(status().isNotFound());
+    }
+
+
+    // =================================================================================================================
+
+    @Sql(value = {"/Book_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/Book_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void deleteById() throws Exception {
+
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1\"}";
 
         this.mockMvc.perform(
                 delete("http://localhost:8082/books/1"))
@@ -223,6 +258,7 @@ public class BookResource_IntegrationTest {
         this.mockMvc.perform(
                 get("http://localhost:8082/books/1"))
                 .andDo(print())
+                .andExpect(content().string(containsString(responseBodyContent)))
                 .andExpect(status().isNotFound());
     }
 
@@ -252,8 +288,8 @@ public class BookResource_IntegrationTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Sql(value = {"/BookResource_deleteById_BookByIdNotExist_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/BookResource_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/Book_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/Book_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void deleteById_BookByIdNotExist() throws Exception {
 
