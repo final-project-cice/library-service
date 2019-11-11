@@ -1,9 +1,10 @@
-
+========================================================================================================================
                                         Esta problema se repite ne todos modulos
 Buscar informacion con que manera se puede hacer para no repetir definicion de los classes entities y dto.
 Porejemplo EmailPublishingHouseEntity y EmailAuthorEntity.
 O esto tiene que se asi de esta forma?
 
+========================================================================================================================
                                          Problema en la clase UserService
 Pensar buscar la solucion como hacer la relacion entre microservices "userservice.User" y "libraryservice.User".
 La base de datos de microservice "libraryservice" tiene que tener la tabla user?
@@ -11,27 +12,47 @@ O hacer RestAPI, y cada vez cuando se llama microservice "libraryservice.user" l
 Pensar...
 De momento dejo que microservice "libraryservice" guarda y busca "Users" en su base de datos.
 
-
+========================================================================================================================
                          Esta problema esta en clase User y provaca en otros calsses que esta relacionados.
 User tiene campo email de tipo String. Pensar para hacer campo email de un tipo de objeto Email.
 
-
+========================================================================================================================
                                       Todos methodos find... en "layout service".
 Intentar hacer todos methodos "find..." con Pagination, Sorting... etc.
 Link: https://www.baeldung.com/spring-data-jpa-pagination-sorting
 
-
+========================================================================================================================
                                Dudas con exceptiones en cada methodo de "layout service".
 No estoy seguro si el uso de excepiones en cada methodo de "layout service" es correcto.
 Buscar la informacion sobre esto.
 
+========================================================================================================================
+Explicar porque estoy usando mi exceptio InvalidArgumentException
 
-Explicar prque estou usando mi exceptio InvalidArgumentException
-
-
+========================================================================================================================
                                                Mirar en proyecto entero.
 Pensar en la situacion cuando se repite un una parte de codigo. Como se puede sacar este codigo a un methodo y bien hacer
 los exceptiones y los logs, para que se puede entender bien de donde vienen estos excepciones y logs.
 
-
+========================================================================================================================
 Pensar en classes Convectores sobre seters y geters.
+
+========================================================================================================================
+                                    CommentBook.delete()
+Ocurre una situacion myu curiosa. Yo tengo implementado dos methodos para borrar los commentarios.
+Un metodo borra todos commentarios que tiene libro.
+
+Segundo methodo borra los commentarios con bookId y commentId. Pero en este methodo occurre una cosa para borrar commentario
+no necesito id de libro "bookId"  porque cada commentario tiene su individual id.
+Como es mejor hacerlo este metodo, solo con id de comentario o con id de libro y comentario.
+Si ago metodo solo con id de commentario, luego url(books/comments/id) sale un poco raro. Se ve mejor el url(books/id/comments/id).
+Que ago ???
+
+========================================================================================================================
+Pensar sobre nombre de la tabla "sub_comment_comment". Es mejor cambiar al nombre "subcomment_comment"
+
+========================================================================================================================
+Pensar sobre cambiar nombre a: dto, entity, resource, service, converter. Al classe SubCommentComment...
+Poner nombre SubComment... y no SubCommentComment...
+
+========================================================================================================================

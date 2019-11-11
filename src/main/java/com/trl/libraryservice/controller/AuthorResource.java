@@ -1,14 +1,19 @@
 package com.trl.libraryservice.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.trl.libraryservice.service.AuthorService;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/author")
+@RequestMapping(path = "/books")
 public class AuthorResource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AuthorResource.class);
+    private final AuthorService authorService;
+
+    public AuthorResource(AuthorService authorService) {
+        this.authorService = authorService;
+    }
+
 
 }
