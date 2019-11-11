@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "CommentEntity")
+@Entity(name = "CommentBookEntity")
 @Table(name = "comment_book")
 public class CommentBookEntity {
 
@@ -25,7 +25,7 @@ public class CommentBookEntity {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)    // Not Work
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubCommentCommentEntity> subComments = new ArrayList<>();
 
     @JsonIgnore

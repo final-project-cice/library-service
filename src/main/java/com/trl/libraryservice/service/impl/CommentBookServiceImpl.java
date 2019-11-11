@@ -5,6 +5,7 @@ import com.trl.libraryservice.controller.dto.UserDTO;
 import com.trl.libraryservice.exception.*;
 import com.trl.libraryservice.repository.BookRepository;
 import com.trl.libraryservice.repository.CommentBookRepository;
+import com.trl.libraryservice.repository.SubCommentCommentRepository;
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
 import com.trl.libraryservice.service.CommentBookService;
 
@@ -37,17 +38,18 @@ public class CommentBookServiceImpl implements CommentBookService {
     private static final String EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS = "One of parameters is illegal. Parameters must be " +
             "not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.";
     private static final String EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST = "Comments with this bookId = %s not exist.";
-    private static final String EXCEPTION_MESSAGE_COMMENT_BY_BOOK_ID_AND_COMMENT_ID_NOT_EXIST =
-            "Comment with this bookId = %s and commentId = %s not exist.";
+    private static final String EXCEPTION_MESSAGE_COMMENT_BY_COMMENT_ID_NOT_EXIST = "Comment with this commentId = %s not exist.";
 
 
     private final CommentBookRepository commentBookRepository;
     private final BookRepository bookRepository;
+    private final SubCommentCommentRepository subCommentRepository;
     private final WebClient.Builder webClientBuilder;
 
-    public CommentBookServiceImpl(CommentBookRepository commentBookRepository, BookRepository bookRepository, WebClient.Builder webClientBuilder) {
+    public CommentBookServiceImpl(CommentBookRepository commentBookRepository, BookRepository bookRepository, SubCommentCommentRepository subCommentRepository, WebClient.Builder webClientBuilder) {
         this.commentBookRepository = commentBookRepository;
         this.bookRepository = bookRepository;
+        this.subCommentRepository = subCommentRepository;
         this.webClientBuilder = webClientBuilder;
     }
 
@@ -55,8 +57,8 @@ public class CommentBookServiceImpl implements CommentBookService {
      * Add the {@literal CommentBookDTO} by this {@code bookId}.
      * If the {@code commentBook} have field subComments, this method not be added subComments.
      *
-     * @param bookId      must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @param commentBook must not be {@literal null}.
+     * @param bookId      must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
+     * @param commentBook must not be equal to {@literal null}.
      * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null}
      *                                  or if {@code bookId} is equal or less zero.
      *                                  And if {@code commentBook} is equals to {@literal null}.
@@ -73,131 +75,129 @@ public class CommentBookServiceImpl implements CommentBookService {
         }
 
         LOG.debug("************ add() ---> bookId = " + bookId + " ---> commentBook = " + commentBook);
-
         checkParametersCommentBook(commentBook);
-
-        LOG.debug("************ add() ---> userId = " + commentBook.getUserId());
-        checkExistsUserById(commentBook.getUserId());
 
         LOG.debug("************ add() ---> bookId = " + bookId);
         checkExistsBookById(bookId);
 
-        commentBookRepository.add(commentBook.getDate(), commentBook.getText(), commentBook.getUserId(), bookId);
+        LOG.debug("************ add() ---> userId = " + commentBook.getUserId());
+        checkExistsUserById(commentBook.getUserId());
+
+        commentBookRepository.add(commentBook.getUserId(), commentBook.getText(), commentBook.getDate(), bookId);
 
         LOG.debug("************ add() ---> commentBook is added.");
     }
 
     /**
-     * Retrieves the {@literal List<CommentBookDTO>} by this {@code bookId}.
+     * Retrieves the {@literal CommentBookDTO} by this {@code commentId}.
      *
-     * @param bookId must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @return the {@literal List<CommentBookDTO>} with the given {@code bookId}.
-     * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null}
-     *                                  or if {@code bookId} is equal or less zero.
-     * @throws DataNotFoundException    in case if {@literal List<CommentBookDTO>} not exist with this {@code bookId}.
+     * @param commentId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
+     * @return the {@literal CommentBookDTO} with the given {@code commentId}.
+     * @throws IllegalArgumentException In case the given {@code commentId} is {@literal null} or if {@code commentId} is equal or less zero.
+     * @throws DataNotFoundException    In case if {@literal CommentBookDTO} not exist with this {@code commentId}.
      */
     @Override
-    public List<CommentBookDTO> getByBookId(Long bookId) {
-        List<CommentBookDTO> commentBookListResult = null;
-
-        if ((bookId == null) || (bookId <= 0)) {
-            LOG.debug("************ getByBookId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
-            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
-        }
-
-        LOG.debug("************ getByBookId() ---> bookId = " + bookId);
-
-        List<CommentBookEntity> commentsByBookId = commentBookRepository.findByBookId(bookId);
-        LOG.debug("************ getByBookId() ---> commentBookFromRepositoryByBookId = " + commentsByBookId);
-
-        if (commentsByBookId.isEmpty()) {
-            LOG.debug("************ getByBookId() ---> " + format(EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST, bookId));
-            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST, bookId));
-        }
-
-        commentBookListResult = mapListEntityToListDTO(commentsByBookId);
-        LOG.debug("************ getByBookId() ---> commentBookListResult = " + commentBookListResult);
-
-        return commentBookListResult;
-    }
-
-    /**
-     * Retrieves the {@literal CommentBookDTO} by this {@code bookId} and {@code commentId}.
-     *
-     * @param bookId    must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @param commentId must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @return the {@literal CommentBookDTO} with the given {@code bookId} and {@code commentId}.
-     * @throws IllegalArgumentException In case the given {@code bookId} is {@literal null} or if {@code bookId} is equal or less zero.
-     *                                  And in case the given {@code commentId} is {@literal null} or if {@code commentId} is equal or less zero.
-     * @throws DataNotFoundException    In case if {@literal CommentBookDTO} not exist with this {@code bookId} and {@code commentId}.
-     */
-    @Override
-    public CommentBookDTO getByBookIdAndByCommentId(Long bookId, Long commentId) {
+    public CommentBookDTO getById(Long commentId) {
         CommentBookDTO commentBookResult = null;
 
-        if ((bookId == null) || (bookId <= 0)
-                || (commentId == null) || (commentId <= 0)) {
-            LOG.debug("************ getByBookIdAndByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        if ((commentId == null) || (commentId <= 0)) {
+            LOG.debug("************ getById() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ getByBookIdAndByCommentId() ---> bookId = " + bookId + " --> commentId = " + commentId);
+        LOG.debug("************ getById() ---> commentId = " + commentId);
 
-        Optional<CommentBookEntity> commentByBookIdAndCommentId = commentBookRepository.findByBookIdAndCommentId(bookId, commentId);
-        LOG.debug("************ getByBookIdAndByCommentId() ---> " +
-                "commentBookFromRepositoryByBookIdAndCommentId = " + commentByBookIdAndCommentId);
+        Optional<CommentBookEntity> commentByCommentId = commentBookRepository.findById(commentId);
+        LOG.debug("************ getById() ---> " +
+                "commentBookFromRepositoryByCommentId = " + commentByCommentId);
 
-
-        if (commentByBookIdAndCommentId.isEmpty()) {
-            LOG.debug("************ getByBookIdAndByCommentId() ---> " +
-                    format(EXCEPTION_MESSAGE_COMMENT_BY_BOOK_ID_AND_COMMENT_ID_NOT_EXIST, bookId, commentId));
+        if (commentByCommentId.isEmpty()) {
+            LOG.debug("************ getById() ---> " +
+                    format(EXCEPTION_MESSAGE_COMMENT_BY_COMMENT_ID_NOT_EXIST, commentId));
             throw new DataNotFoundException(
-                    format(EXCEPTION_MESSAGE_COMMENT_BY_BOOK_ID_AND_COMMENT_ID_NOT_EXIST, bookId, commentId));
+                    format(EXCEPTION_MESSAGE_COMMENT_BY_COMMENT_ID_NOT_EXIST, commentId));
         }
 
-        commentBookResult = mapEntityToDTO(commentByBookIdAndCommentId.get());
+        commentBookResult = mapEntityToDTO(commentByCommentId.get());
 
-        LOG.debug("************ getByBookIdAndByCommentId() ---> commentBookListResult = " + commentBookResult);
+        LOG.debug("************ getById() ---> commentBookResult = " + commentBookResult);
 
         return commentBookResult;
     }
 
     /**
-     * Deletes the {@literal CommentBookDTO} with the given {@code bookId} and by {@code commentId}.
+     * Retrieves all {@literal CommentBookDTO} by this {@code bookId}.
      *
-     * @param bookId must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @param commentId must not be {@literal null}, and {@code commentId} must be greater than zero.
-     * @throws IllegalArgumentException In case if the given {@code bookId} is {@literal null}, and if {@code bookId} is equal or less zero.
-     *                                  In case if the given {@code commentId} is {@literal null}, and if {@code commentId} is equal or less zero.
-     * @throws BootstrapMethodError If book not exist with the {@code bookId}.
-     * @throws CommentNotExistException If comment not exist with the {@code bookId} and {@code commentId}.
+     * @param bookId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
+     * @return the {@literal List<CommentBookDTO>} with the given {@code bookId}.
+     * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null} or if {@code bookId} is equal or less zero.
+     * @throws BookNotExistException in case if book with this {@literal bookId} not exist.
+     * @throws DataNotFoundException    in case if {@literal List<CommentBookDTO>} not exist with this {@code bookId}.
      */
     @Override
-    public void deleteByBookIdAndByCommentId(Long bookId, Long commentId) {
+    public List<CommentBookDTO> getAllByBookId(Long bookId) {
+        List<CommentBookDTO> commentBookListResult = null;
 
-        if ((bookId == null) || (bookId <= 0)
-                || (commentId == null) || (commentId <= 0)) {
-            LOG.debug("************ deleteByBookIdAndByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        if ((bookId == null) || (bookId <= 0)) {
+            LOG.debug("************ getAllByBookId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ deleteByBookIdAndByCommentId() ---> bookId = " + bookId + " --> commentId = " + commentId);
+        LOG.debug("************ getAllByBookId() ---> bookId = " + bookId);
 
         checkExistsBookById(bookId);
-        checkExistsCommentByBookIdAndByCommentId(bookId, commentId);
 
-        commentBookRepository.deleteByBookIdAndByCommentId(bookId, commentId);
+        List<CommentBookEntity> commentsByBookId = commentBookRepository.findByBookId(bookId);
+        LOG.debug("************ getAllByBookId() ---> commentBookFromRepositoryByBookId = " + commentsByBookId);
 
-        LOG.debug("************ deleteByBookIdAndByCommentId() ---> " +
-                "Deleted comment by bookId = " + bookId + " and by commentId = " + commentId);
+        if (commentsByBookId.isEmpty()) {
+            LOG.debug("************ getAllByBookId() ---> " + format(EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST, bookId));
+            throw new DataNotFoundException(format(EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST, bookId));
+        }
+
+        commentBookListResult = mapListEntityToListDTO(commentsByBookId);
+        LOG.debug("************ getAllByBookId() ---> commentBookListResult = " + commentBookListResult);
+
+        return commentBookListResult;
+    }
+
+    @Override
+    public CommentBookDTO updateById(Long commentId, CommentBookDTO commentBook) {
+        // TODO: Terminar este methodo
+        return null;
     }
 
     /**
-     * Deletes all comments by {@code bookId}.
+     * Delete the {@literal CommentBookDTO} with the given {@code commentId}.
      *
-     * @param bookId must not be {@literal null}, and {@code bookId} must be greater than zero.
+     * @param commentId must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
+     * @throws IllegalArgumentException In case if the given {@code commentId} is {@literal null}, and if {@code commentId} is equal or less zero.
+     * @throws CommentNotExistException If comment not exist with the {@code commentId}.
+     */
+    @Override
+    public void deleteById(Long commentId) {
+
+        if ((commentId == null) || (commentId <= 0)) {
+            LOG.debug("************ deleteById() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        }
+
+        LOG.debug("************ deleteById() --->  commentId = " + commentId);
+
+        checkExistsCommentByCommentId(commentId);
+
+        subCommentRepository.deleteAllByCommentId(commentId);
+        commentBookRepository.deleteById(commentId);
+
+        LOG.debug("************ deleteById() ---> " + "Deleted comment by commentId = " + commentId);
+    }
+
+    /**
+     * Delete all comments by {@code bookId}.
+     *
+     * @param bookId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
      * @throws IllegalArgumentException In case if the given {@code bookId} is {@literal null}, and if {@code bookId} is equal or less zero.
-     * @throws BookNotExistException If book not exist with the {@code bookId}.
+     * @throws BookNotExistException    If book not exist with the {@code bookId}.
      * @throws CommentNotExistException If comments not exist with the {@code bookId}.
      */
     @Override
@@ -211,7 +211,11 @@ public class CommentBookServiceImpl implements CommentBookService {
         LOG.debug("************ deleteAllByBookId() ---> bookId = " + bookId);
 
         checkExistsBookById(bookId);
-        checkExistsCommentByBookId(bookId);
+        checkExistsCommentsByBookId(bookId);
+
+        for (CommentBookEntity entity : commentBookRepository.findByBookId(bookId)) {
+            subCommentRepository.deleteAllByCommentId(entity.getId());
+        }
 
         commentBookRepository.deleteAllByBookId(bookId);
 
@@ -263,18 +267,16 @@ public class CommentBookServiceImpl implements CommentBookService {
         }
     }
 
-    private void checkExistsCommentByBookIdAndByCommentId(Long bookId, Long commentId) {
-        if (commentBookRepository.findByBookIdAndCommentId(bookId, commentId).isEmpty()) {
-            LOG.debug("************ checkExistsCommentByBookIdAndByCommentId() ---> "
-                    + "Comment with this bookId = " + bookId + " and commentId = " + commentId + " not exist.");
-            throw new CommentNotExistException(
-                    "Comment with this bookId = " + bookId + " and commentId = " + commentId + " not exist.");
+    private void checkExistsCommentByCommentId(Long commentId) {
+        if (commentBookRepository.findById(commentId).isEmpty()) {
+            LOG.debug("************ checkExistsCommentByCommentId() ---> " + "Comment with this commentId = " + commentId + " not exist.");
+            throw new CommentNotExistException("Comment with this commentId = " + commentId + " not exist.");
         }
     }
 
-    private void checkExistsCommentByBookId(Long bookId) {
+    private void checkExistsCommentsByBookId(Long bookId) {
         if (commentBookRepository.findByBookId(bookId).isEmpty()) {
-            LOG.debug("************ checkExistsCommentByBookId() ---> Comments with this bookId = " + bookId + " not exist.");
+            LOG.debug("************ checkExistsCommentsByBookId() ---> Comments with this bookId = " + bookId + " not exist.");
             throw new CommentNotExistException("Comments with this bookId = " + bookId + " not exist.");
         }
     }

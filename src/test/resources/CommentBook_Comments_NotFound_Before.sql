@@ -16,11 +16,7 @@ VALUES (2, '222222', '02222222222222', 'Fax', 1);
 INSERT INTO book (id, name, path_file, publication_date, publishing_house_id)
 VALUES (1, 'My first Book', 'path/path/book', '2019-10-30', 1);
 
-INSERT INTO comment_book (id, date, text, user_id, book_id)
-VALUES (1, '2019-11-02', 'Text Comment', 1, 1);
-
-INSERT INTO sub_comment_comment (id, date, test, user_id, comment_id)
-VALUES (1, '2019-11-02', 'test sub comment', 1, 1);
+-- Comment not found...
 
 INSERT INTO genre_book (id, name, book_id)
 VALUES (1, 'Genre Book Uno', 1);

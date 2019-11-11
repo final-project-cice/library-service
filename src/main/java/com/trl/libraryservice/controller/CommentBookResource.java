@@ -23,8 +23,8 @@ public class CommentBookResource {
      * Add the {@literal CommentBookDTO}.
      * If the {@code commentBook} have field subComments, this method not be added subComments.
      *
-     * @param bookId      must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @param commentBook must not be {@literal null}.
+     * @param bookId      must not be equals to {@literal null}, and {@code bookId} must be greater than zero.
+     * @param commentBook must not be equals to {@literal null}.
      * @return the {@literal ResponseEntity.ok(CommentBookDTO)}.
      */
     @PostMapping(
@@ -42,38 +42,18 @@ public class CommentBookResource {
     }
 
     /**
-     * Retrieves all comments by this {@code bookId}.
+     * Retrieves the {@literal CommentBookDTO} by ths {@code commentId}.
      *
-     * @param bookId must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @return the {@literal ResponseEntity.ok(List<CommentBookDTO>)} with the given {@code bookId}.
+     * @param commentId must not be equals to {@literal null}, and {@code commentId} must be greater than zero.
+     * @return the {@literal ResponseEntity.ok(CommentBookDTO)} with the given {@code commentId}.
      */
     @GetMapping(
-            path = "/{bookId}/comments",
+            path = "/comments/{commentId}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CommentBookDTO>> getByBookId(@PathVariable Long bookId) {
-        ResponseEntity<List<CommentBookDTO>> response = null;
-
-        List<CommentBookDTO> resultListService = commentBookService.getByBookId(bookId);
-
-        response = ResponseEntity.ok(resultListService);
-
-        return response;
-    }
-
-    /**
-     * Retrieves the {@literal CommentBookDTO} by this {@code bookId} and {@code commentId}.
-     *
-     * @param bookId    must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @param commentId must not be {@literal null}, and {@code bookId} must be greater than zero.
-     * @return the {@literal ResponseEntity.ok(CommentBookDTO)} with the given {@code bookId} and {@code commentId}.
-     */
-    @GetMapping(
-            path = "/{bookId}/comments/{commentId}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CommentBookDTO> getByBookIdAndCommentId(@PathVariable Long bookId, @PathVariable Long commentId) {
+    public ResponseEntity<CommentBookDTO> getById(@PathVariable Long commentId) {
         ResponseEntity<CommentBookDTO> response = null;
 
-        CommentBookDTO resultService = commentBookService.getByBookIdAndByCommentId(bookId, commentId);
+        CommentBookDTO resultService = commentBookService.getById(commentId);
 
         response = ResponseEntity.ok(resultService);
 
@@ -81,17 +61,57 @@ public class CommentBookResource {
     }
 
     /**
-     * Deletes the {@literal CommentBookDTO} with the given {@code bookId} and {@code commentId}.
+     * Retrieves all comments by this {@code bookId}.
      *
-     * @param bookId    must not be {@literal null}, and {@code id} must be greater than zero.
-     * @param commentId must not be {@literal null}, and {@code id} must be greater than zero.
+     * @param bookId must not be equals to {@literal null}, and {@code bookId} must be greater than zero.
+     * @return the {@literal ResponseEntity.ok(List<CommentBookDTO>)} with the given {@code bookId}.
+     */
+    @GetMapping(
+            path = "/{bookId}/comments",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<CommentBookDTO>> getAllByBookId(@PathVariable Long bookId) {
+        ResponseEntity<List<CommentBookDTO>> response = null;
+
+        List<CommentBookDTO> resultListService = commentBookService.getAllByBookId(bookId);
+
+        response = ResponseEntity.ok(resultListService);
+
+        return response;
+    }
+
+    /**
+     * Update the {@literal CommentBookDTO} by this {@code id}.
+     *
+     * @param commentId must not be equals to {@literal null}, and {@code commentId} must be greater than zero.
+     * @param commentBook must not be equals to {@literal null}.
+     * @return the {@literal ResponseEntity.ok(CommentBookDTO)} with the given {@code commentId}.
+     */
+    @PostMapping(path = "/comments/{commentId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CommentBookDTO> updateById(@PathVariable Long commentId, @RequestBody CommentBookDTO commentBook) {
+        ResponseEntity<CommentBookDTO> response = null;
+
+        CommentBookDTO resultService = null;
+
+        resultService = commentBookService.updateById(commentId, commentBook);
+
+        response = ResponseEntity.ok(resultService);
+
+        return response;
+    }
+
+    /**
+     * Deletes the {@literal CommentBookDTO} with the given {@code commentId}.
+     *
+     * @param commentId must not be equals to {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok()} if {@literal CommentBookDTO} is deleted correctly.
      */
-    @DeleteMapping(path = "/{bookId}/comments/{commentId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteByBookIdAndByCommentId(@PathVariable Long bookId, @PathVariable Long commentId) {
+    @DeleteMapping(path = "/comments/{commentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteByCommentId(@PathVariable Long commentId) {
         ResponseEntity response = null;
 
-        commentBookService.deleteByBookIdAndByCommentId(bookId, commentId);
+        commentBookService.deleteById(commentId);
 
         response = ResponseEntity.ok().build();
 
@@ -101,7 +121,7 @@ public class CommentBookResource {
     /**
      * Deletes all {@literal CommentBookDTO} with the given {@code bookId}.
      *
-     * @param bookId must not be {@literal null}, and {@code id} must be greater than zero.
+     * @param bookId must not be equals to {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok()} if {@literal CommentBookDTO} is deleted correctly.
      */
     @DeleteMapping(path = "/{bookId}/comments", produces = MediaType.APPLICATION_JSON_VALUE)

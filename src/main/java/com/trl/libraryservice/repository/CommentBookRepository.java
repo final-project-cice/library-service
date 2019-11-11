@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * This interface is designed to support JPA for {@literal CommentBookEntity}.
@@ -19,24 +18,18 @@ import java.util.Optional;
  */
 public interface CommentBookRepository extends JpaRepository<CommentBookEntity, Long> {
 
-    // TODO: Thing of how to make all query using a JPQL.
+    @Modifying
+    @Query(value = "INSERT INTO CommentBookEntity (userId, text, date, bookId) VALUES (:userId, :text, :date, :bookId)", nativeQuery = true)
+    void add(@Param("userId") Long userId, @Param("text") String text,
+             @Param("date") LocalDate date, @Param("bookId") Long bookId);
+
+
+    @Query(value = "SELECT cb FROM CommentBookEntity cb WHERE cb.book.id=:bookId")
+    List<CommentBookEntity> findByBookId(@Param("bookId") Long bookId);
+
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO comment_book (date, text, user_id, book_id) VALUES (:date, :text, :userId, :bookId)", nativeQuery = true)
-    void add(@Param("date") LocalDate date,
-             @Param("text") String text, @Param("userId") Long userId, @Param("bookId") Long bookId);
-
-
-    @Query(value = "SELECT * FROM comment_book cb WHERE book_id=:bookId", nativeQuery = true)
-    List<CommentBookEntity> findByBookId(@Param("bookId") Long bookId);
-
-    @Query(value = "SELECT * FROM comment_book cb WHERE book_id=:bookId AND id=:commentId", nativeQuery = true)
-    Optional<CommentBookEntity> findByBookIdAndCommentId(@Param("bookId") Long bookId, @Param("commentId") Long commentId);
-
-    @Query(value = "DELETE FROM comment_book WHERE book_id=:bookId AND id=:commentId", nativeQuery = true)
-    void deleteByBookIdAndByCommentId(@Param("bookId") Long bookId, @Param("commentId") Long commentId);
-
-    @Query(value = "DELETE FROM comment_book WHERE book_id=:bookId", nativeQuery = true)
+    @Query("DELETE FROM CommentBookEntity cb WHERE cb.book.id=:bookId")
     void deleteAllByBookId(@Param("bookId") Long bookId);
 }

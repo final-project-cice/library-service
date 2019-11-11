@@ -13,11 +13,16 @@ public interface CommentBookService {
 
     void add(Long bookId, CommentBookDTO commentBook);
 
-    List<CommentBookDTO> getByBookId(Long bookId);
 
-    CommentBookDTO getByBookIdAndByCommentId(Long bookId, Long commentId);
+    CommentBookDTO getById(Long commentId);
 
-    void deleteByBookIdAndByCommentId(Long bookId, Long commentId);
+    List<CommentBookDTO> getAllByBookId(Long bookId);
+
+
+    CommentBookDTO updateById(Long commentId, CommentBookDTO commentBook);
+
+
+    void deleteById(Long commentId);
 
     void deleteAllByBookId(Long bookId);
 }
