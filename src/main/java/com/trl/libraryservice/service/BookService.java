@@ -2,7 +2,7 @@ package com.trl.libraryservice.service;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
 
-import java.util.Set;
+import org.springframework.data.domain.Page;
 
 public interface BookService {
 
@@ -10,7 +10,9 @@ public interface BookService {
 
     BookDTO getById(Long id);
 
-    Set<BookDTO> getAll();
+    Page<BookDTO> getAll(int startPage, int pageSize);
+
+    Page<BookDTO> getAllAndSort(int startPage, int pageSize, String sortOrder);
 
     BookDTO updateById(Long id, BookDTO book);
 

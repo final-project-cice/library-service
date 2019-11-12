@@ -5,6 +5,7 @@ import com.trl.libraryservice.repository.entity.BookEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -84,6 +85,30 @@ public final class BookConverter {
     }
 
     /**
+     * Convert {@literal Page<BookEntity>} to {@literal Page<BookDTO>}.
+     *
+     * @param entities must not be {@literal null}.
+     * @return the {@literal Page<BookDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
+     */
+    public static Page<BookDTO> mapPageEntityToPageDTO(Page<BookEntity> entities) {
+        Page<BookDTO> resultPage;
+
+        if (entities == null) {
+            LOG.debug("************ mapPageEntityToPageDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+        }
+
+        LOG.debug("************ mapPageEntityToPageDTO() ---> bookEntityPage = " + entities);
+
+        resultPage = entities.map(BookConverter::mapEntityToDTO);
+
+        LOG.debug("************ mapPageEntityToPageDTO() ---> resultPage = " + resultPage);
+
+        return resultPage;
+    }
+
+    /**
      * Convert {@literal BookDTO} to {@literal BookEntity}.
      *
      * @param dto must not be {@literal null}.
@@ -118,7 +143,7 @@ public final class BookConverter {
     }
 
     /**
-     * Convert {@literal Set<BookDTO} to {@literal Set<BookEntity>}.
+     * Convert {@literal Set<BookDTO>} to {@literal Set<BookEntity>}.
      *
      * @param dtos must not be {@literal null}.
      * @return the {@literal Set<BookEntity>}.

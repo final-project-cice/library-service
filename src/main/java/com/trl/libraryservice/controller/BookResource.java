@@ -3,11 +3,11 @@ package com.trl.libraryservice.controller;
 import com.trl.libraryservice.controller.dto.BookDTO;
 import com.trl.libraryservice.service.BookService;
 
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
 
 /**
  * This class is designed to support resource layout for {@literal BookDTO}.
@@ -39,7 +39,7 @@ public class BookResource {
 
         BookDTO resultService = bookService.add(book);
 
-        response = ResponseEntity.ok(resultService);
+        response = ResponseEntity.status(HttpStatus.CREATED).body(resultService);
 
         return response;
     }
@@ -50,7 +50,9 @@ public class BookResource {
      * @param id must not be equals to {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(BookDTO)} with the given {@code id}.
      */
-    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(
+            path = "/{id}",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<BookDTO> getById(@PathVariable Long id) {
         ResponseEntity<BookDTO> response = null;
 
@@ -62,15 +64,37 @@ public class BookResource {
     }
 
     /**
-     * Retrieves all {@literal BookDTO}.
+     * Retrieves all {@literal BookDTO} by paging.
+     *
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @return the {@literal ResponseEntity.ok(Page<BookDTO>)}.
+     */
+    @GetMapping(
+            path = "/{startPage}/{pageSize}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<BookDTO>> getAll(@PathVariable Integer startPage, @PathVariable Integer pageSize) {
+        ResponseEntity<Page<BookDTO>> response = null;
+
+        Page<BookDTO> resultService = bookService.getAll(startPage, pageSize);
+
+        response = ResponseEntity.ok(resultService);
+
+        return response;
+    }
+
+    /**
+     * Retrieves all {@literal BookDTO} by paging and sort.
      *
      * @return the {@literal ResponseEntity.ok(Set<BookDTO>)}.
      */
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<BookDTO>> getAll() {
-        ResponseEntity<Set<BookDTO>> response = null;
+    @GetMapping(
+            path = "/{startPage}/{pageSize}/{sortOrder}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<BookDTO>> getAllAndSort(@PathVariable Integer startPage, @PathVariable Integer pageSize, @PathVariable String sortOrder) {
+        ResponseEntity<Page<BookDTO>> response = null;
 
-        Set<BookDTO> resultService = bookService.getAll();
+        Page<BookDTO> resultService = bookService.getAllAndSort(startPage, pageSize, sortOrder);
 
         response = ResponseEntity.ok(resultService);
 

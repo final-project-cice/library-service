@@ -10,16 +10,19 @@ import com.trl.libraryservice.service.BookService;
 import com.trl.libraryservice.service.converter.BookConverter;
 
 import static com.trl.libraryservice.service.converter.BookConverter.mapEntityToDTO;
+import static com.trl.libraryservice.service.converter.BookConverter.mapPageEntityToPageDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * This class is designed to support service layout for {@literal BookDTO}.
@@ -105,25 +108,54 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Retrieves all {@literal BookDTO}.
+     * Retrieves all {@literal BookDTO} for pagination.
      *
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize the size of the page to be returned, must be greater than 0.
      * @return the {@literal Set<BookDTO>}.
      * @throws DataNotFoundException in case if {@literal BookDTO} not exist.
      */
     @Override
-    public Set<BookDTO> getAll() {
-        Set<BookDTO> bookResult = null;
+    public Page<BookDTO> getAll(int startPage, int pageSize) {
+        Page<BookDTO> bookResult = null;
 
-        Set<BookEntity> allBooks = Set.copyOf(bookRepository.findAll());
-        LOG.debug("************ getAll() ---> allBooksFromRepository = " + allBooks);
+        Page<BookEntity> pagedResult = bookRepository.findAll(PageRequest.of(startPage, pageSize));
+        LOG.debug("************ getAll() ---> booksFromRepository = " + pagedResult);
 
-        if (allBooks.isEmpty()) {
+        if (pagedResult.isEmpty()) {
             LOG.debug("************ getAll() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
             throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
         }
 
-        bookResult = BookConverter.mapSetEntityToSetDTO(allBooks);
+        bookResult = mapPageEntityToPageDTO(pagedResult);
         LOG.debug("************ getAll() ---> bookResult = " + bookResult);
+
+        return bookResult;
+    }
+
+    /**
+     * Retrieves all {@literal BookDTO} for pagination and sort.
+     *
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
+     * @param sortOrder must not be {@literal null}.
+     * @return the {@literal Set<BookDTO>}.
+     * @throws DataNotFoundException in case if {@literal BookDTO} not exist.
+     */
+    @Override
+    public Page<BookDTO> getAllAndSort(int startPage, int pageSize, String sortOrder) {
+        Page<BookDTO> bookResult = null;
+
+        Page<BookEntity> pagedResult = bookRepository.findAll(PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
+        LOG.debug("************ getAllAndSort() ---> booksFromRepository = " + pagedResult);
+
+        if (pagedResult.isEmpty()) {
+            LOG.debug("************ getAllAndSort() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+            throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+        }
+
+        bookResult = mapPageEntityToPageDTO(pagedResult);
+        LOG.debug("************ getAllAndSort() ---> bookResult = " + bookResult);
 
         return bookResult;
     }
