@@ -1,0 +1,187 @@
+= Books REST API Documentation Guide.
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:author: Tsyupryk Roman
+:email: tsyupryk.roman@gmail.com
+:revdate: 15.11.2019
+
+[[introduction]]
+= Introduction
+
+Its documentation of CRUD API "book-service".
+
+[[overview-http-verbs]]
+= HTTP verbs
+
+Example Books defines HTTP verbs for all endpoints as follows:
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource, see endpoint for specifics
+
+| `PATCH`
+| Currently not supported
+
+| `DELETE`
+| Used to delete a resource
+|===
+
+= Book
+
+=== Get Book By Id.
+
+Obtains a specific Book by its unique identifier.
+
+====== CURL Request
+
+include::books/get-by-id/curl-request.adoc[]
+
+====== Path Parameters
+
+include::books/get-by-id/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::books/get-by-id/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::books/get-by-id/httpie-request.adoc[]
+
+====== Request Body
+
+include::books/get-by-id/request-body.adoc[]
+
+====== HTTP Response
+
+include::books/get-by-id/http-response.adoc[]
+
+====== Response Body
+
+include::books/get-by-id/response-body.adoc[]
+
+====== Response Fields
+
+include::books/get-by-id/response-fields.adoc[]
+
+=== Get Book By Page.
+
+Obtains a page of Books.
+
+====== CURL Request
+
+include::books/get-all-by-pagination/curl-request.adoc[]
+
+====== Path Parameters
+
+include::books/get-all-by-pagination/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::books/get-all-by-pagination/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::books/get-all-by-pagination/httpie-request.adoc[]
+
+====== Request Body
+
+include::books/get-all-by-pagination/request-body.adoc[]
+
+====== HTTP Response
+
+include::books/get-all-by-pagination/http-response.adoc[]
+
+====== Response Body
+
+include::books/get-all-by-pagination/response-body.adoc[]
+
+====== Response Fields
+
+include::books/get-all-by-pagination/response-fields.adoc[]
+
+=== Create Book.
+
+Create Book by this body request.
+
+====== CURL Request
+
+include::books/add/curl-request.adoc[]
+
+====== HTTP Request
+
+include::books/add/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::books/add/httpie-request.adoc[]
+
+====== Request Body
+
+include::books/add/request-body.adoc[]
+
+====== Request Fields
+
+include::books/add/request-fields.adoc[]
+
+====== Request Fields
+
+include::books/add/request-fields.adoc[]
+
+====== HTTP Response
+
+include::books/add/http-response.adoc[]
+
+====== Response Body
+
+include::books/add/response-body.adoc[]
+
+====== Response Fields
+
+include::books/add/response-fields.adoc[]
+
+=== Delete Book.
+
+Delete Book by ID.
+
+====== CURL Request
+
+include::books/delete-by-id/curl-request.adoc[]
+
+====== Path Parameters
+
+include::books/delete-by-id/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::books/delete-by-id/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::books/delete-by-id/httpie-request.adoc[]
+
+====== Request Body
+
+include::books/delete-by-id/request-body.adoc[]
+
+====== HTTP Response
+
+include::books/delete-by-id/http-response.adoc[]
+
+====== Response Body
+
+include::books/delete-by-id/response-body.adoc[]
+
+= Author of the Book.

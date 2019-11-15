@@ -1,0 +1,108 @@
+[source,options="nowrap"]
+----
+{
+  "id" : 1,
+  "name" : "My first Book",
+  "genres" : [ {
+    "id" : 1,
+    "name" : "Genre Book Uno"
+  }, {
+    "id" : 2,
+    "name" : "Genre Book Dos"
+  } ],
+  "publishingHouse" : {
+    "id" : 1,
+    "name" : "Publication House",
+    "address" : {
+      "id" : 1,
+      "country" : "Spain",
+      "city" : "Madrid",
+      "street" : "Calle Uno",
+      "houseNumber" : "1A",
+      "postcode" : 1111
+    },
+    "phoneNumbers" : [ {
+      "id" : 1,
+      "phoneNumber" : "0111111111111111",
+      "countryCode" : "11111",
+      "type" : "Office"
+    }, {
+      "id" : 2,
+      "phoneNumber" : "02222222222222",
+      "countryCode" : "222222",
+      "type" : "Fax"
+    } ],
+    "emails" : [ {
+      "id" : 1,
+      "email" : "email_1_publicationHouse9QZ@email.com",
+      "emailType" : "Office"
+    }, {
+      "id" : 2,
+      "email" : "email_2_publicationHouse9QZ@email.com",
+      "emailType" : "Office 2"
+    } ]
+  },
+  "publicationDate" : "12.06.2019",
+  "pathFile" : "path/path/book",
+  "comments" : [ {
+    "id" : 1,
+    "userId" : 1,
+    "text" : "Text Comment",
+    "date" : "12.06.2019",
+    "subComments" : [ {
+      "id" : 1,
+      "userId" : 1,
+      "text" : "test sub comment",
+      "date" : "12.06.2019"
+    } ]
+  } ],
+  "authors" : [ {
+    "id" : 1,
+    "firstName" : "Author_1 FirstName",
+    "lastName" : "Author_1 LastName",
+    "emails" : [ {
+      "id" : 1,
+      "email" : "email_1.author_19QZ@email.com",
+      "emailType" : "Personal"
+    }, {
+      "id" : 2,
+      "email" : "email_2.author_19QZ@email.com",
+      "emailType" : "Personal"
+    } ],
+    "phoneNumbers" : [ {
+      "id" : 1,
+      "phoneNumber" : "01111111111111",
+      "countryCode" : "111",
+      "type" : "Personal"
+    }, {
+      "id" : 2,
+      "phoneNumber" : "0222222222222222",
+      "countryCode" : "222",
+      "type" : "Work"
+    } ],
+    "addresses" : [ {
+      "id" : 1,
+      "country" : "Spain",
+      "city" : "Madrid",
+      "street" : "Calle Uno",
+      "houseNumber" : "1A",
+      "postcode" : 111111
+    }, {
+      "id" : 2,
+      "country" : "Spain",
+      "city" : "Barcelona",
+      "street" : "Calle Dos",
+      "houseNumber" : "2A",
+      "postcode" : 222222
+    } ],
+    "birthday" : "12.06.2019",
+    "genres" : [ {
+      "id" : 1,
+      "name" : "Genre Uno"
+    }, {
+      "id" : 2,
+      "name" : "Genre Dos"
+    } ]
+  } ]
+}
+----

@@ -119,11 +119,7 @@
         <dependency>
             <groupId>org.springframework.restdocs</groupId>
             <artifactId>spring-restdocs-mockmvc</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.restdocs</groupId>
-            <artifactId>spring-restdocs-asciidoctor</artifactId>
+            <version>2.0.4.RELEASE</version>
         </dependency>
 
     </dependencies>
@@ -155,7 +151,7 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.8</version>
+                <version>2.0.0-RC.1</version>
                 <executions>
                     <execution>
                         <id>generate-docs</id>
@@ -164,11 +160,21 @@
                             <goal>process-asciidoc</goal>
                         </goals>
                         <configuration>
+                            <sourceDocumentName>index.adoc</sourceDocumentName>
                             <backend>html</backend>
-                            <doctype>book</doctype>
+                            <attributes>
+                                <snippets>${project.build.directory}/generated-docs</snippets>
+                            </attributes>
                         </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework.restdocs</groupId>
+                        <artifactId>spring-restdocs-asciidoctor</artifactId>
+                        <version>2.0.4.RELEASE</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
@@ -183,7 +189,7 @@
                         </goals>
                         <configuration>
                             <outputDirectory>
-                                ${project.build.outputDirectory}/static/docs
+                                src/main/asciidoc
                             </outputDirectory>
                             <resources>
                                 <resource>

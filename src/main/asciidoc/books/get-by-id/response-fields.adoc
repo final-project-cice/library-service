@@ -1,0 +1,244 @@
+|===
+|Path|Type|Description
+
+|`+id+`
+|`+Number+`
+|The id of Book.
+
+|`+name+`
+|`+String+`
+|The name of Book.
+
+|`+genres.[]+`
+|`+Array+`
+|The array of Genres of the Book.
+
+|`+genres.[].id+`
+|`+Number+`
+|The id of Genre.
+
+|`+genres.[].name+`
+|`+String+`
+|The name of the genre of the Book.
+
+|`+publishingHouse+`
+|`+Object+`
+|The Publishing House of the Book.
+
+|`+publishingHouse.id+`
+|`+Number+`
+|The id of Publishing House.
+
+|`+publishingHouse.name+`
+|`+String+`
+|The name of the Publishing House of the Book.
+
+|`+publishingHouse.address+`
+|`+Object+`
+|The Address of the Publishing House.
+
+|`+publishingHouse.address.id+`
+|`+Number+`
+|The id of Address.
+
+|`+publishingHouse.address.country+`
+|`+String+`
+|The name of the country where located Publishing House.
+
+|`+publishingHouse.address.city+`
+|`+String+`
+|The name of the city where located Publishing House.
+
+|`+publishingHouse.address.street+`
+|`+String+`
+|The name of the street where located Publishing House.
+
+|`+publishingHouse.address.houseNumber+`
+|`+String+`
+|The house number where located Publishing House.
+
+|`+publishingHouse.address.postcode+`
+|`+Number+`
+|The postcode where located Publishing House.
+
+|`+publishingHouse.phoneNumbers.[]+`
+|`+Array+`
+|The array of phone number of the Publishing House.
+
+|`+publishingHouse.phoneNumbers.[].id+`
+|`+Number+`
+|The id of the phone number of the Publishing House.
+
+|`+publishingHouse.phoneNumbers.[].phoneNumber+`
+|`+String+`
+|The phone number of the Publishing House.
+
+|`+publishingHouse.phoneNumbers.[].countryCode+`
+|`+String+`
+|The country code of the Publishing House.
+
+|`+publishingHouse.phoneNumbers.[].type+`
+|`+String+`
+|The type of the phone number of the Publishing House.
+
+|`+publishingHouse.emails.[]+`
+|`+Array+`
+|The array of emails of the Publishing House.
+
+|`+publishingHouse.emails.[].id+`
+|`+Number+`
+|The id of the email of the Publishing House.
+
+|`+publishingHouse.emails.[].email+`
+|`+String+`
+|The email of the Publishing House.
+
+|`+publishingHouse.emails.[].emailType+`
+|`+String+`
+|The email type of the Publishing House.
+
+|`+publicationDate+`
+|`+String+`
+|The publicarion date of the Book.
+
+|`+pathFile+`
+|`+String+`
+|The path file of the Book.
+
+|`+comments.[]+`
+|`+Array+`
+|The array of comments of the Book.
+
+|`+comments.[].id+`
+|`+Number+`
+|The id of the comment of the Book.
+
+|`+comments.[].userId+`
+|`+Number+`
+|The id of use of the comment of the Book.
+
+|`+comments.[].text+`
+|`+String+`
+|The text of the comment of the Book.
+
+|`+comments.[].date+`
+|`+String+`
+|The date of the comment of the Book.
+
+|`+comments.[].subComments.[]+`
+|`+Array+`
+|The array of subComment of the Comment.
+
+|`+comments.[].subComments.[].id+`
+|`+Number+`
+|The id of the subComment of the Comment.
+
+|`+comments.[].subComments.[].userId+`
+|`+Number+`
+|The id of user of the SubComment.
+
+|`+comments.[].subComments.[].text+`
+|`+String+`
+|The text of the SubComment.
+
+|`+comments.[].subComments.[].date+`
+|`+String+`
+|The date of the SubComment.
+
+|`+authors.[]+`
+|`+Array+`
+|The array of Authors of the Book.
+
+|`+authors.[].id+`
+|`+Number+`
+|The id of the Author of the Book.
+
+|`+authors.[].firstName+`
+|`+String+`
+|The first name  of the Author.
+
+|`+authors.[].lastName+`
+|`+String+`
+|The last name  of the Author.
+
+|`+authors.[].emails.[]+`
+|`+Array+`
+|The array of emails of the Author.
+
+|`+authors.[].emails.[].id+`
+|`+Number+`
+|The id of email of the Author.
+
+|`+authors.[].emails.[].email+`
+|`+String+`
+|The email of the Author.
+
+|`+authors.[].emails.[].emailType+`
+|`+String+`
+|The email type of the email.
+
+|`+authors.[].phoneNumbers.[]+`
+|`+Array+`
+|The array of phone numbers of the Author.
+
+|`+authors.[].phoneNumbers.[].id+`
+|`+Number+`
+|The id of the phone number of the Author.
+
+|`+authors.[].phoneNumbers.[].phoneNumber+`
+|`+String+`
+|The phone number of the Author.
+
+|`+authors.[].phoneNumbers.[].countryCode+`
+|`+String+`
+|The country code of the phone number.
+
+|`+authors.[].phoneNumbers.[].type+`
+|`+String+`
+|The type of the phone number.
+
+|`+authors.[].addresses.[]+`
+|`+Array+`
+|The array of addresses of the Author.
+
+|`+authors.[].addresses.[].id+`
+|`+Number+`
+|The id of address of the Author.
+
+|`+authors.[].addresses.[].country+`
+|`+String+`
+|The country of the Author.
+
+|`+authors.[].addresses.[].city+`
+|`+String+`
+|The city of the Author.
+
+|`+authors.[].addresses.[].street+`
+|`+String+`
+|The street of the Author.
+
+|`+authors.[].addresses.[].houseNumber+`
+|`+String+`
+|The house number of the Author.
+
+|`+authors.[].addresses.[].postcode+`
+|`+Number+`
+|The postcode of the Author.
+
+|`+authors.[].birthday+`
+|`+String+`
+|The birthday of the Author.
+
+|`+authors.[].genres.[]+`
+|`+Array+`
+|The array of genres of the Author.
+
+|`+authors.[].genres.[].id+`
+|`+Number+`
+|The id of the genre of the Author.
+
+|`+authors.[].genres.[].name+`
+|`+String+`
+|The name of the genre of the Author.
+
+|===

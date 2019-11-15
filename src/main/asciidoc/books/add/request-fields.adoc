@@ -1,0 +1,244 @@
+|===
+|Path|Type|Description
+
+|`+id+`
+|`+Null+`
+|The id of Book.
+
+|`+name+`
+|`+String+`
+|The name of Book. This field is required.
+
+|`+genres.[]+`
+|`+Array+`
+|The array of Genres of the Book. This array of genres is required.
+
+|`+genres.[].id+`
+|`+Null+`
+|The id of Genre.
+
+|`+genres.[].name+`
+|`+String+`
+|The name of the genre of the Book. This field is required.
+
+|`+publishingHouse+`
+|`+Object+`
+|The Publishing House of the Book. This field is required.
+
+|`+publishingHouse.id+`
+|`+Null+`
+|The id of Publishing House.
+
+|`+publishingHouse.name+`
+|`+String+`
+|The name of the Publishing House of the Book. This field is required.
+
+|`+publishingHouse.address+`
+|`+Object+`
+|The Address of the Publishing House. This field is required.
+
+|`+publishingHouse.address.id+`
+|`+Null+`
+|The id of Address.
+
+|`+publishingHouse.address.country+`
+|`+String+`
+|The name of the country where located Publishing House. This field is required.
+
+|`+publishingHouse.address.city+`
+|`+String+`
+|The name of the city where located Publishing House. This field is required.
+
+|`+publishingHouse.address.street+`
+|`+String+`
+|The name of the street where located Publishing House. This field is required.
+
+|`+publishingHouse.address.houseNumber+`
+|`+String+`
+|The house number where located Publishing House. This field is required.
+
+|`+publishingHouse.address.postcode+`
+|`+Number+`
+|The postcode where located Publishing House. This field is required.
+
+|`+publishingHouse.phoneNumbers.[]+`
+|`+Array+`
+|The array of phone numbers of the Publishing House. This array of phone numbers is required.
+
+|`+publishingHouse.phoneNumbers.[].id+`
+|`+Null+`
+|The id of the phone number of the Publishing House. This field is required.
+
+|`+publishingHouse.phoneNumbers.[].phoneNumber+`
+|`+String+`
+|The phone number of the Publishing House. This field is required.
+
+|`+publishingHouse.phoneNumbers.[].countryCode+`
+|`+String+`
+|The country code of the Publishing House. This field is required.
+
+|`+publishingHouse.phoneNumbers.[].type+`
+|`+String+`
+|The type of the phone number of the Publishing House. This field is required.
+
+|`+publishingHouse.emails.[]+`
+|`+Array+`
+|The array of email of the Publishing House. This array of emails is required.
+
+|`+publishingHouse.emails.[].id+`
+|`+Null+`
+|The id of the email of the Publishing House.
+
+|`+publishingHouse.emails.[].email+`
+|`+String+`
+|The email of the Publishing House. This field is required.
+
+|`+publishingHouse.emails.[].emailType+`
+|`+String+`
+|The email type of the Publishing House. This field is required.
+
+|`+publicationDate+`
+|`+String+`
+|The publicarion date of the Book. This field is required.
+
+|`+pathFile+`
+|`+String+`
+|The path file of the Book. This field is required.
+
+|`+comments.[]+`
+|`+Array+`
+|The array of comment of the Book. This array of comments is oprional.
+
+|`+comments.[].id+`
+|`+Null+`
+|The id of the comment of the Book.
+
+|`+comments.[].userId+`
+|`+Number+`
+|The id of use of the comment of the Book.
+
+|`+comments.[].text+`
+|`+String+`
+|The text of the comment of the Book.
+
+|`+comments.[].date+`
+|`+String+`
+|The date of the comment of the Book.
+
+|`+comments.[].subComments.[]+`
+|`+Array+`
+|The array of subComment of the Comment. This array of subComments is oprional.
+
+|`+comments.[].subComments.[].id+`
+|`+Null+`
+|The id of the subComment of the Comment.
+
+|`+comments.[].subComments.[].userId+`
+|`+Number+`
+|The id of user of the SubComment.
+
+|`+comments.[].subComments.[].text+`
+|`+String+`
+|The text of the SubComment.
+
+|`+comments.[].subComments.[].date+`
+|`+String+`
+|The date of the SubComment.
+
+|`+authors.[]+`
+|`+Array+`
+|The array of the Author of the Book. This array of authors is required.
+
+|`+authors.[].id+`
+|`+Null+`
+|The id of the Author of the Book.
+
+|`+authors.[].firstName+`
+|`+String+`
+|The first name  of the Author. This field is required.
+
+|`+authors.[].lastName+`
+|`+String+`
+|The last name  of the Author. This field is required.
+
+|`+authors.[].emails.[]+`
+|`+Array+`
+|The array of emails of the Author. This array of emails is required.
+
+|`+authors.[].emails.[].id+`
+|`+Null+`
+|The id of email of the Author.
+
+|`+authors.[].emails.[].email+`
+|`+String+`
+|The email of the Author. This field is required.
+
+|`+authors.[].emails.[].emailType+`
+|`+String+`
+|The email type of the email. This field is required.
+
+|`+authors.[].phoneNumbers.[]+`
+|`+Array+`
+|The array of phone number of the Author. This array of phone numbers is required.
+
+|`+authors.[].phoneNumbers.[].id+`
+|`+Null+`
+|The id of the phone number of the Author.
+
+|`+authors.[].phoneNumbers.[].phoneNumber+`
+|`+String+`
+|The phone number of the Author. This field is required.
+
+|`+authors.[].phoneNumbers.[].countryCode+`
+|`+String+`
+|The country code of the phone number. This field is required.
+
+|`+authors.[].phoneNumbers.[].type+`
+|`+String+`
+|The type of the phone number. This field is required.
+
+|`+authors.[].addresses.[]+`
+|`+Array+`
+|The array of addresses of the Author. This array of addresses is required.
+
+|`+authors.[].addresses.[].id+`
+|`+Null+`
+|The id of address of the Author.
+
+|`+authors.[].addresses.[].country+`
+|`+String+`
+|The country of the Author. This field is required.
+
+|`+authors.[].addresses.[].city+`
+|`+String+`
+|The city of the Author. This field is required.
+
+|`+authors.[].addresses.[].street+`
+|`+String+`
+|The street of the Author. This field is required.
+
+|`+authors.[].addresses.[].houseNumber+`
+|`+String+`
+|The house number of the Author. This field is required.
+
+|`+authors.[].addresses.[].postcode+`
+|`+Number+`
+|The postcode of the Author. This field is required.
+
+|`+authors.[].birthday+`
+|`+String+`
+|The birthday of the Author. This field is required.
+
+|`+authors.[].genres.[]+`
+|`+Array+`
+|The array of genres of the Author. This array of genres is required.
+
+|`+authors.[].genres.[].id+`
+|`+Null+`
+|The id of the genre of the Author.
+
+|`+authors.[].genres.[].name+`
+|`+String+`
+|The name of the genre of the Author. This field is required.
+
+|===
