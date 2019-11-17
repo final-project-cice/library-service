@@ -3,11 +3,10 @@ package com.trl.libraryservice.controller;
 import com.trl.libraryservice.controller.dto.CommentBookDTO;
 import com.trl.libraryservice.service.CommentBookService;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/books")
@@ -61,18 +60,20 @@ public class CommentBookResource {
     }
 
     /**
-     * Retrieves all comments by this {@code bookId}.
+     * Retrieve Page of {@literal CommentBookDTOs} by this {@code bookId}.
      *
      * @param bookId must not be equals to {@literal null}, and {@code bookId} must be greater than zero.
-     * @return the {@literal ResponseEntity.ok(List<CommentBookDTO>)} with the given {@code bookId}.
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @return the {@literal ResponseEntity.ok(Page<CommentBookDTO>)} with the given {@code bookId}.
      */
     @GetMapping(
-            path = "/{bookId}/comments",
+            path = "/{bookId}/comments/{startPage}/{pageSize}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CommentBookDTO>> getAllByBookId(@PathVariable Long bookId) {
-        ResponseEntity<List<CommentBookDTO>> response = null;
+    public ResponseEntity<Page<CommentBookDTO>> getAllByBookId(@PathVariable Long bookId, @PathVariable Integer startPage, @PathVariable Integer pageSize) {
+        ResponseEntity<Page<CommentBookDTO>> response = null;
 
-        List<CommentBookDTO> resultListService = commentBookService.getAllByBookId(bookId);
+        Page<CommentBookDTO> resultListService = commentBookService.getAllByBookId(bookId, startPage, pageSize);
 
         response = ResponseEntity.ok(resultListService);
 

@@ -2,7 +2,7 @@ package com.trl.libraryservice.service;
 
 import com.trl.libraryservice.controller.dto.CommentBookDTO;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 /**
  * This interface is designed to support service for {@literal CommentBookDTO}.
@@ -16,7 +16,7 @@ public interface CommentBookService {
 
     CommentBookDTO getById(Long commentId);
 
-    List<CommentBookDTO> getAllByBookId(Long bookId);
+    Page<CommentBookDTO> getAllByBookId(Long bookId, Integer startPage, Integer pageSize);
 
 
     CommentBookDTO updateById(Long commentId, CommentBookDTO commentBook);

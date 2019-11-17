@@ -10,10 +10,12 @@ import com.trl.libraryservice.repository.entity.CommentBookEntity;
 import com.trl.libraryservice.service.CommentBookService;
 
 import static com.trl.libraryservice.service.converter.CommentBookConverter.mapEntityToDTO;
-import static com.trl.libraryservice.service.converter.CommentBookConverter.mapListEntityToListDTO;
+import static com.trl.libraryservice.service.converter.CommentBookConverter.mapPageEntityToPageDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,6 @@ import reactor.core.publisher.Mono;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -39,7 +40,6 @@ public class CommentBookServiceImpl implements CommentBookService {
             "not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.";
     private static final String EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST = "Comments with this bookId = %s not exist.";
     private static final String EXCEPTION_MESSAGE_COMMENT_BY_COMMENT_ID_NOT_EXIST = "Comment with this commentId = %s not exist.";
-
 
     private final CommentBookRepository commentBookRepository;
     private final BookRepository bookRepository;
@@ -126,39 +126,41 @@ public class CommentBookServiceImpl implements CommentBookService {
     }
 
     /**
-     * Retrieves all {@literal CommentBookDTO} by this {@code bookId}.
+     * Retrieve Page of {@literal CommentBookDTOs} by this {@code bookId}.
      *
      * @param bookId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
-     * @return the {@literal List<CommentBookDTO>} with the given {@code bookId}.
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @return the {@literal Page<CommentBookDTO>} with the given {@code bookId}.
      * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null} or if {@code bookId} is equal or less zero.
      * @throws BookNotExistException in case if book with this {@literal bookId} not exist.
      * @throws DataNotFoundException    in case if {@literal List<CommentBookDTO>} not exist with this {@code bookId}.
      */
     @Override
-    public List<CommentBookDTO> getAllByBookId(Long bookId) {
-        List<CommentBookDTO> commentBookListResult = null;
+    public Page<CommentBookDTO> getAllByBookId(Long bookId, Integer startPage, Integer pageSize) {
+        Page<CommentBookDTO> pageOfCommentBookResult = null;
 
         if ((bookId == null) || (bookId <= 0)) {
             LOG.debug("************ getAllByBookId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ getAllByBookId() ---> bookId = " + bookId);
+        LOG.debug("************ getAllByBookId() ---> bookId = " + bookId + " ---> startPage = " + startPage + " ---> pageSize = " + pageSize);
 
         checkExistsBookById(bookId);
 
-        List<CommentBookEntity> commentsByBookId = commentBookRepository.findByBookId(bookId);
-        LOG.debug("************ getAllByBookId() ---> commentBookFromRepositoryByBookId = " + commentsByBookId);
+        Page<CommentBookEntity> pageOfCommentsByBookId = commentBookRepository.findByBookId_RetrievePage(bookId, PageRequest.of(startPage, pageSize));
+        LOG.debug("************ getAllByBookId() ---> pageOfCommentsFromRepositoryByBookId = " + pageOfCommentsByBookId);
 
-        if (commentsByBookId.isEmpty()) {
+        if (pageOfCommentsByBookId.isEmpty()) {
             LOG.debug("************ getAllByBookId() ---> " + format(EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST, bookId));
             throw new DataNotFoundException(format(EXCEPTION_MESSAGE_COMMENTS_BY_BOOK_ID_NOT_EXIST, bookId));
         }
 
-        commentBookListResult = mapListEntityToListDTO(commentsByBookId);
-        LOG.debug("************ getAllByBookId() ---> commentBookListResult = " + commentBookListResult);
+        pageOfCommentBookResult = mapPageEntityToPageDTO(pageOfCommentsByBookId);
+        LOG.debug("************ getAllByBookId() ---> pageOfCommentBooResult = " + pageOfCommentBookResult);
 
-        return commentBookListResult;
+        return pageOfCommentBookResult;
     }
 
     @Override

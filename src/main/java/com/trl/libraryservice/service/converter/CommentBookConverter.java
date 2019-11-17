@@ -5,6 +5,7 @@ import com.trl.libraryservice.repository.entity.CommentBookEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,6 +79,30 @@ public final class CommentBookConverter {
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
         return resultList;
+    }
+
+    /**
+     * Convert {@literal Page<CommentBookEntity>} to {@literal Page<CommentBookDTO>}.
+     *
+     * @param entities must not be {@literal null}.
+     * @return the {@literal Page<CommentBookDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
+     */
+    public static Page<CommentBookDTO> mapPageEntityToPageDTO(Page<CommentBookEntity> entities) {
+        Page<CommentBookDTO> resultPage;
+
+        if (entities == null) {
+            LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+        }
+
+        LOG.debug("************ mapPageEntityToPageDTO() ---> commentBookEntityPage = " + entities);
+
+        resultPage = entities.map(CommentBookConverter::mapEntityToDTO);
+
+        LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultPage);
+
+        return resultPage;
     }
 
     /**
