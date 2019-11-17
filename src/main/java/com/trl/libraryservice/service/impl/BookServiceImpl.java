@@ -108,7 +108,7 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Retrieves all {@literal BookDTO} for pagination.
+     * Retrieve page of {@literal BookDTOs}.
      *
      * @param startPage zero-based page index, must not be negative.
      * @param pageSize the size of the page to be returned, must be greater than 0.
@@ -134,7 +134,7 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Retrieves all {@literal BookDTO} for pagination and sort.
+     * Retrieve page of sorted {@literal BookDTOs}.
      *
      * @param startPage zero-based page index, must not be negative.
      * @param pageSize  the size of the page to be returned, must be greater than 0.
