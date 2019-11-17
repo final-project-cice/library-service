@@ -2,7 +2,7 @@ package com.trl.libraryservice.service;
 
 import com.trl.libraryservice.controller.dto.SubCommentCommentDTO;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface SubCommentCommentService {
 
@@ -11,7 +11,7 @@ public interface SubCommentCommentService {
 
     SubCommentCommentDTO getById(Long subCommentId);
 
-    List<SubCommentCommentDTO> getAllByCommentId(Long commentId);
+    Page<SubCommentCommentDTO> getAllByCommentId(Long commentId, Integer startPage, Integer pageSize);
 
 
     SubCommentCommentDTO updateById(Long subCommentId, SubCommentCommentDTO subComment);

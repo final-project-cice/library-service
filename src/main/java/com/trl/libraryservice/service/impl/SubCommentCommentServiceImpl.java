@@ -9,10 +9,12 @@ import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 import com.trl.libraryservice.service.SubCommentCommentService;
 
 import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.mapEntityToDTO;
-import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.mapListEntityToListDTO;
+import static com.trl.libraryservice.service.converter.SubCommentCommentConverter.mapPageEntityToPageDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,6 @@ import reactor.core.publisher.Mono;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -122,28 +123,31 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
     }
 
     /**
-     * Retrieves all {@literal SubCommentCommentDTO} by this {@code commentId}.
+     * Retrieves Page {@literal SubCommentCommentDTOs} by this {@code commentId}.
      *
      * @param commentId must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
-     * @return the {@literal List<SubCommentCommentDTO>} with the given {@code commentId}.
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @return the {@literal Page<SubCommentCommentDTO>} with the given {@code commentId}.
      * @throws IllegalArgumentException in case the given {@code commentId} is {@literal null} or if {@code commentId} is equal or less zero.
      * @throws CommentNotExistException in case if comment with this {@literal commentId} not exist.
-     * @throws DataNotFoundException    in case if {@literal List<SubCommentCommentDTO>} not exist with this {@code commentId}.
+     * @throws DataNotFoundException    in case if {@literal Page<SubCommentCommentDTO>} not exist with this {@code commentId}.
      */
     @Override
-    public List<SubCommentCommentDTO> getAllByCommentId(Long commentId) {
-        List<SubCommentCommentDTO> subCommentListResult = null;
+    public Page<SubCommentCommentDTO> getAllByCommentId(Long commentId, Integer startPage, Integer pageSize) {
+        Page<SubCommentCommentDTO> subCommentListResult = null;
 
         if ((commentId == null) || (commentId <= 0)) {
             LOG.debug("************ getAllByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
         }
 
-        LOG.debug("************ getAllByCommentId() ---> commentId = " + commentId);
+        LOG.debug("************ getAllByCommentId() ---> commentId = " + commentId
+                + " ---> startPage = " + startPage + " ---> pageSize = " + pageSize);
 
         checkExistsCommentById(commentId);
 
-        List<SubCommentCommentEntity> subCommentsByCommentId = subCommentRepository.findByCommentId(commentId);
+        Page<SubCommentCommentEntity> subCommentsByCommentId = subCommentRepository.findByCommentId_RetrievePage(commentId, PageRequest.of(startPage, pageSize));
         LOG.debug("************ getAllByCommentId() ---> subCommentsFromRepositoryByCommentId = " + subCommentsByCommentId);
 
         if (subCommentsByCommentId.isEmpty()) {
@@ -151,7 +155,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
             throw new DataNotFoundException(format(EXCEPTION_MESSAGE_SUB_COMMENTS_BY_COMMENT_ID_NOT_EXIST, commentId));
         }
 
-        subCommentListResult = mapListEntityToListDTO(subCommentsByCommentId);
+        subCommentListResult = mapPageEntityToPageDTO(subCommentsByCommentId);
         LOG.debug("************ getAllByCommentId() ---> subCommentsListResult = " + subCommentListResult);
 
         return subCommentListResult;

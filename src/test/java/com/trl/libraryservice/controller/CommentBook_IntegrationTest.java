@@ -65,7 +65,7 @@ public class CommentBook_IntegrationTest {
 
     @Test
     public void add_IllegalBookId_NullValue() throws Exception {
-        // TODO: Finish this test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -102,7 +102,7 @@ public class CommentBook_IntegrationTest {
 
     @Test
     public void add_IllegalParrameterCommntBook_NullValue() throws Exception {
-        // TODO: Busar la iforcion como se pede pasar valor null, y terminar ese test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -242,7 +242,7 @@ public class CommentBook_IntegrationTest {
 
     @Test
     public void getById_IllegalCommentId_NullValue() throws Exception {
-        // TODO: Busar la iforcion como se pede pasar valor null, y terminar ese test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -308,7 +308,7 @@ public class CommentBook_IntegrationTest {
 
     @Test
     public void getAllByBookId_IllegalBookId_NullValue() throws Exception {
-        // TODO: Busar la iforcion como se pede pasar valor null, y terminar ese test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -394,7 +394,7 @@ public class CommentBook_IntegrationTest {
 
     @Test
     public void deleteById_IllegalId_NullValue() throws Exception {
-        // TODO: Busar la iforcion como se pede pasar valor null, y terminar ese test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test

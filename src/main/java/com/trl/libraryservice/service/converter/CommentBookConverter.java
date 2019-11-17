@@ -92,7 +92,7 @@ public final class CommentBookConverter {
         Page<CommentBookDTO> resultPage;
 
         if (entities == null) {
-            LOG.debug("************ mapListEntityToListDTO() ---> " + EXCEPTION_MESSAGE);
+            LOG.debug("************ mapPageEntityToPageDTO() ---> " + EXCEPTION_MESSAGE);
             throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
@@ -100,7 +100,7 @@ public final class CommentBookConverter {
 
         resultPage = entities.map(CommentBookConverter::mapEntityToDTO);
 
-        LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultPage);
+        LOG.debug("************ mapPageEntityToPageDTO() ---> resultList = " + resultPage);
 
         return resultPage;
     }

@@ -3,11 +3,10 @@ package com.trl.libraryservice.controller;
 import com.trl.libraryservice.controller.dto.SubCommentCommentDTO;
 import com.trl.libraryservice.service.SubCommentCommentService;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/books")
@@ -60,20 +59,23 @@ public class SubCommentCommentResource {
     }
 
     /**
-     * Retrieves all subComments by this {@code commentId}.
+     * Retrieve Page of {@literal SubCommentCommentDTO} by this {@code commentId}.
      *
      * @param commentId must not be equals to {@literal null}, and {@code commentId} must be greater than zero.
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize the size of the page to be returned, must be greater than 0.
      * @return the {@literal ResponseEntity.ok(List<SubCommentCommentDTO>)} with the given {@code commentId}.
      */
     @GetMapping(
-            path = "/comments/{commentId}/subComments",
+            path = "/comments/{commentId}/subComments/{startPage}/{pageSize}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<SubCommentCommentDTO>> getAllByCommentId(@PathVariable Long commentId) {
-        ResponseEntity<List<SubCommentCommentDTO>> response = null;
+    public ResponseEntity<Page<SubCommentCommentDTO>> getAllByCommentId(
+            @PathVariable Long commentId, @PathVariable Integer startPage, @PathVariable Integer pageSize) {
+        ResponseEntity<Page<SubCommentCommentDTO>> response = null;
 
-        List<SubCommentCommentDTO> resultListService = subCommentService.getAllByCommentId(commentId);
+        Page<SubCommentCommentDTO> resultPageService = subCommentService.getAllByCommentId(commentId, startPage, pageSize);
 
-        response = ResponseEntity.ok(resultListService);
+        response = ResponseEntity.ok(resultPageService);
 
         return response;
     }

@@ -134,7 +134,7 @@ public class CommentBookServiceImpl implements CommentBookService {
      * @return the {@literal Page<CommentBookDTO>} with the given {@code bookId}.
      * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null} or if {@code bookId} is equal or less zero.
      * @throws BookNotExistException in case if book with this {@literal bookId} not exist.
-     * @throws DataNotFoundException    in case if {@literal List<CommentBookDTO>} not exist with this {@code bookId}.
+     * @throws DataNotFoundException    in case if {@literal Page<CommentBookDTO>} not exist with this {@code bookId}.
      */
     @Override
     public Page<CommentBookDTO> getAllByBookId(Long bookId, Integer startPage, Integer pageSize) {

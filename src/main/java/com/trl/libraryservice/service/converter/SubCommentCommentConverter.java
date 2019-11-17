@@ -5,6 +5,7 @@ import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,6 +78,30 @@ public final class SubCommentCommentConverter {
         LOG.debug("************ mapListEntityToListDTO() ---> resultList = " + resultList);
 
         return resultList;
+    }
+
+    /**
+     * Convert {@literal Page<SubCommentCommentEntity>} to {@literal Page<SubCommentCommentDTO>}.
+     *
+     * @param entities must not be {@literal null}.
+     * @return the {@literal Page<SubCommentCommentDTO>}.
+     * @throws IllegalArgumentException in case the given {@code entities} is {@literal null}.
+     */
+    public static Page<SubCommentCommentDTO> mapPageEntityToPageDTO(Page<SubCommentCommentEntity> entities) {
+        Page<SubCommentCommentDTO> resultPage;
+
+        if (entities == null) {
+            LOG.debug("************ mapPageEntityToPageDTO() ---> " + EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
+        }
+
+        LOG.debug("************ mapPageEntityToPageDTO() ---> subCommentCommentEntityList = " + entities);
+
+        resultPage = entities.map(SubCommentCommentConverter::mapEntityToDTO);
+
+        LOG.debug("************ mapPageEntityToPageDTO() ---> resultPage = " + resultPage);
+
+        return resultPage;
     }
 
     /**

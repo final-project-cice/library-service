@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,6 +26,8 @@ import java.time.format.DateTimeFormatter;
 @ActiveProfiles("test")
 public class SubCommentComment_IntegrationTest {
 
+    private static final String BASE_URL = "http://localhost:8082";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -38,7 +41,7 @@ public class SubCommentComment_IntegrationTest {
 
     @Test
     public void add_IllegalBookId_NullValue() throws Exception {
-        // TODO: Finish this test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -48,12 +51,13 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/0/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 0)
                         .content("{\"id\":null,\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -63,17 +67,18 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/-1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", -1)
                         .content("{\"id\":null,\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
     public void add_IllegalParrameterSubCommnt_NullValue() throws Exception {
-        // TODO: Busar laiforcion como se pede pasar valor null, y terminar ese test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -83,12 +88,13 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"id\":null,\"userId\":null,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -98,28 +104,29 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"id\":null,\"userId\":0,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
     public void add_ParrameterSubCommnt_IllegallFild_UserId_NegativeValue() throws Exception {
 
-
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
         final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"id\":null,\"userId\":-1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -129,12 +136,13 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"Field ''text' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"id\":null,\"userId\":1,\"text\":null,\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -144,12 +152,13 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"Field ''text' is empty', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"id\":null,\"userId\":1,\"text\":\"\",\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -159,12 +168,13 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"Field ''date' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"id\":null,\"userId\":1,\"text\":\"Comment Message added.\",\"date\":null,\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Sql(value = {"/CommentBook_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -176,12 +186,13 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                post("http://localhost:8082/books/comments/1/subComments")
+                post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"id\":null,\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
-                        .contentType("application/json;charset=UTF-8"))
-                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -198,15 +209,16 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"id\":1,\"userId\":1,\"text\":\"test sub comment First\",\"date\":\"01.11.2019\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/subComments/1"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/subComments/{subCommentId}", 1))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(responseBodyContent)));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().string(containsString(responseBodyContent)))
+                .andDo(print());
     }
 
     @Test
     public void getById_IllegalCommentId_NullValue() throws Exception {
-        // TODO: Finish this test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -216,10 +228,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/0\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/subComments/0"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/subComments/{subCommentId}", 0))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -229,10 +242,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/-1\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/subComments/-1"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/subComments/{subCommentId}", -1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Sql(value = {"/SubComment_SubComments_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -244,10 +258,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"SubComment with this subCommentId = 33 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/33\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/subComments/33"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/subComments/{subCommentId}", 33))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isNotFound());
+                .andDo(print());
     }
 
     @Sql(value = {"/SubCommentComment_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -255,44 +270,49 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getAllByCommentId() throws Exception {
 
-        final String responseBodyContent = "[{\"id\":1,\"userId\":1,\"text\":\"test sub comment First\",\"date\":\"01.11.2019\"},{\"id\":2,\"userId\":1,\"text\":\"test sub comment Second\",\"date\":\"02.11.2019\"},{\"id\":3,\"userId\":1,\"text\":\"test sub comment Three\",\"date\":\"03.11.2019\"}]";
+        // TODO: Search information how to test pageable 'responseBodyContent'.
+        // TODO: Each time it returns a different 'responseBodyContent'.
+//        final String responseBodyContent = "{\"content\":[{\"id\":1,\"userId\":1,\"text\":\"test sub comment First\",\"date\":\"01.11.2019\"}],\"pageable\":{\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"pageSize\":1,\"pageNumber\":0,\"offset\":0,\"paged\":true,\"unpaged\":false},\"totalPages\":3,\"totalElements\":3,\"last\":false,\"first\":true,\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"number\":0,\"numberOfElements\":1,\"size\":1,\"empty\":false}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/1/subComments"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 1, 0, 1))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(responseBodyContent)));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+//                .andExpect(content().string(containsString(responseBodyContent)))
+                .andDo(print());
     }
 
     @Test
     public void getAllByCommentId_IllegalBookId_NullValue() throws Exception {
-        // TODO: Finish this test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
     public void getAllByCommentId_IllegalId_ZeroValue() throws Exception {
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments/0/1\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/0/subComments"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 0, 0, 1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
     public void getAllByCommentId_IllegalId_NegativeValue() throws Exception {
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments/0/1\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/-1/subComments"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", -1, 0, 1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -301,13 +321,14 @@ public class SubCommentComment_IntegrationTest {
     public void getAllByCommentId_CommentById_NotExist() throws Exception {
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/33/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/33/subComments/0/1\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/33/subComments"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 33, 0, 1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Sql(value = {"/SubComment_SubComments_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -316,13 +337,14 @@ public class SubCommentComment_IntegrationTest {
     public void getAllByCommentId_NotFoundComments_ByBookId() throws Exception {
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments/0/1\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/1/subComments"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 1, 0, 1))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isNotFound());
+                .andDo(print());
     }
 
     @Sql(value = {"/SubCommentComment_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -331,23 +353,24 @@ public class SubCommentComment_IntegrationTest {
     public void deleteById() throws Exception {
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/subComments/1"))
-                .andDo(print())
-                .andExpect(status().isOk());
+                delete(BASE_URL + "/books/comments/subComments/{subCommentId}", 1))
+                .andExpect(status().isOk())
+                .andDo(print());
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
         final String responseBodyContent = "{\"errorMessage\":\"SubComment with this subCommentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/1\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/subComments/1"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/subComments/{subCommentId}", 1))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isNotFound());
+                .andDo(print());
     }
 
     @Test
     public void deleteById_IllegalId_NullValue() throws Exception {
-        // TODO: Finish this test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -357,10 +380,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/0\"}";
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/subComments/0"))
-                .andDo(print())
+                delete(BASE_URL + "/books/comments/subComments/{subCommentId}", 0))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -370,10 +394,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/-1\"}";
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/subComments/-1"))
-                .andDo(print())
+                delete(BASE_URL + "/books/comments/subComments/{subCommentId}", -1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Sql(value = {"/SubComment_SubComments_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -385,10 +410,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"SubComment with this subCommentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/1\"}";
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/subComments/1"))
-                .andDo(print())
+                delete(BASE_URL + "/books/comments/subComments/{subCommentId}", 1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Sql(value = {"/SubCommentComment_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -397,23 +423,24 @@ public class SubCommentComment_IntegrationTest {
     public void deleteAllByCommentId() throws Exception {
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/1/subComments"))
-                .andDo(print())
-                .andExpect(status().isOk());
+                delete(BASE_URL + "/books/comments/{commentId}/subComments", 1))
+                .andExpect(status().isOk())
+                .andDo(print());
 
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments/0/10\"}";
 
         this.mockMvc.perform(
-                get("http://localhost:8082/books/comments/1/subComments"))
-                .andDo(print())
+                get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 1, 0, 10))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isNotFound());
+                .andDo(print());
     }
 
     @Test
     public void deleteAllByCommentId_IllegalBookId_NullValue() throws Exception {
-        // TODO: Finish this test.
+        // TODO: Busar la informacion como se pede pasar valor null, y terminar ese test.
     }
 
     @Test
@@ -423,10 +450,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments\"}";
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/0/subComments"))
-                .andDo(print())
+                delete(BASE_URL + "/books/comments/{commentId}/subComments", 0))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -436,10 +464,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments\"}";
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/-1/subComments"))
-                .andDo(print())
+                delete(BASE_URL + "/books/comments/{commentId}/subComments", -1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Test
@@ -449,10 +478,11 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/33/subComments\"}";
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/33/subComments"))
-                .andDo(print())
+                delete(BASE_URL + "/books/comments/{commentId}/subComments", 33))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 
     @Sql(value = {"/SubComment_SubComments_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -464,9 +494,10 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
-                delete("http://localhost:8082/books/comments/1/subComments"))
-                .andDo(print())
+                delete(BASE_URL + "/books/comments/{commentId}/subComments", 1))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
-                .andExpect(status().isBadRequest());
+                .andDo(print());
     }
 }

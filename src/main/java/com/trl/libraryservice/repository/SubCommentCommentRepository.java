@@ -2,6 +2,8 @@ package com.trl.libraryservice.repository;
 
 import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,6 +28,9 @@ public interface SubCommentCommentRepository extends JpaRepository<SubCommentCom
 
     @Query(value = "SELECT e FROM SubCommentCommentEntity e WHERE e.comment.id=:commentId")
     List<SubCommentCommentEntity> findByCommentId(@Param("commentId") Long commentId);
+
+    @Query(value = "SELECT e FROM SubCommentCommentEntity e WHERE e.comment.id=:commentId")
+    Page<SubCommentCommentEntity> findByCommentId_RetrievePage(@Param("commentId") Long commentId, Pageable pageable);
 
 
     @Transactional
