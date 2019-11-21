@@ -3,6 +3,6 @@
 |Parameter|Description
 
 |`+bookId+`
-|By this 'bookId will be deleted Book'
+|By this 'bookId' will be deleted Book
 
 |===

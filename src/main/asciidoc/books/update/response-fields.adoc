@@ -243,11 +243,15 @@
 
 |`+_links.self.href+`
 |`+String+`
+|Link to self(update) the book resource by id.
+
+|`+_links.add.href+`
+|`+String+`
 |Link to add the book resource.
 
 |`+_links.get.href+`
 |`+String+`
-|Link to get the book resource by id.
+|Link to get the book resource.
 
 |`+_links.getByPage.href+`
 |`+String+`
@@ -256,10 +260,6 @@
 |`+_links.getByPageAndSort.href+`
 |`+String+`
 |Link to get the book resource by page and sort.
-
-|`+_links.update.href+`
-|`+String+`
-|Link to update the book resource.
 
 |`+_links.delete.href+`
 |`+String+`

@@ -1,12 +1,8 @@
-[source,http,options="nowrap"]
+[source,options="nowrap"]
 ----
-HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-Content-Length: 3013
-
 {
   "content" : [ {
-    "id" : 1,
+    "bookId" : 1,
     "name" : "BBBBBBBBB",
     "genres" : [ {
       "id" : 1,
@@ -108,6 +104,55 @@ Content-Length: 3013
         "id" : 2,
         "name" : "Genre Dos"
       } ]
+    } ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "get",
+      "href" : "http://localhost:8080/books/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByPageAndSort",
+      "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "update",
+      "href" : "http://localhost:8080/books/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "delete",
+      "href" : "http://localhost:8080/books/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {

@@ -1,7 +1,7 @@
 |===
 |Path|Type|Description
 
-|`+id+`
+|`+bookId+`
 |`+Number+`
 |The id of Book.
 
@@ -240,5 +240,29 @@
 |`+authors.[].genres.[].name+`
 |`+String+`
 |The name of the genre of the Author.
+
+|`+_links.self.href+`
+|`+String+`
+|Link to self(get) the book resource by id.
+
+|`+_links.add.href+`
+|`+String+`
+|Link to add the book resource.
+
+|`+_links.getByPage.href+`
+|`+String+`
+|Link to get the book resource by pate.
+
+|`+_links.getByPageAndSort.href+`
+|`+String+`
+|Link to get the book resource by page and sort.
+
+|`+_links.update.href+`
+|`+String+`
+|Link to update the book resource.
+
+|`+_links.delete.href+`
+|`+String+`
+|Link to delete the book resource.
 
 |===

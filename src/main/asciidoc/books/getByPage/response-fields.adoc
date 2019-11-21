@@ -9,7 +9,7 @@
 |`+Array+`
 |Array of the values Book that represent page.
 
-|`+content.[].id+`
+|`+content.[].bookId+`
 |`+Number+`
 |The id of Book.
 

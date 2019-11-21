@@ -243,6 +243,10 @@
 
 |`+_links.self.href+`
 |`+String+`
+|Link to self(deleteById) the book resource by id.
+
+|`+_links.add.href+`
+|`+String+`
 |Link to add the book resource.
 
 |`+_links.get.href+`
@@ -251,7 +255,7 @@
 
 |`+_links.getByPage.href+`
 |`+String+`
-|Link to get the book resource by pate.
+|Link to get the book resource by page.
 
 |`+_links.getByPageAndSort.href+`
 |`+String+`
@@ -260,9 +264,5 @@
 |`+_links.update.href+`
 |`+String+`
 |Link to update the book resource.
-
-|`+_links.delete.href+`
-|`+String+`
-|Link to delete the book resource.
 
 |===

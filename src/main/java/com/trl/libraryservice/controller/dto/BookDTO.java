@@ -1,13 +1,14 @@
 package com.trl.libraryservice.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.time.LocalDate;
 import java.util.*;
 
-public class BookDTO {
+public class BookDTO extends ResourceSupport {
 
-    private Long id;
+    private Long bookId;
     private String name;
     private List<GenreBookDTO> genres = new ArrayList<>();
     private PublishingHouseDTO publishingHouse;
@@ -22,12 +23,12 @@ public class BookDTO {
 
     public BookDTO() { }
 
-    public Long getId() {
-        return id;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
     public String getName() {
@@ -133,7 +134,7 @@ public class BookDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookDTO bookDTO = (BookDTO) o;
-        return Objects.equals(id, bookDTO.id) &&
+        return Objects.equals(bookId, bookDTO.bookId) &&
                 Objects.equals(name, bookDTO.name) &&
                 Objects.equals(genres, bookDTO.genres) &&
                 Objects.equals(publishingHouse, bookDTO.publishingHouse) &&
@@ -144,13 +145,13 @@ public class BookDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, genres, publishingHouse, publicationDate, pathFile, comments);
+        return Objects.hash(bookId, name, genres, publishingHouse, publicationDate, pathFile, comments);
     }
 
     @Override
     public String toString() {
         return "BookDTO{" +
-                "id=" + id +
+                "id=" + bookId +
                 ", name='" + name + '\'' +
                 ", genreBookDTOS=" + genres +
                 ", publishingHouse=" + publishingHouse +

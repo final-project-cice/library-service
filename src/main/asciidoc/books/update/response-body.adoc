@@ -34,11 +34,11 @@
     } ],
     "emails" : [ {
       "id" : 1,
-      "email" : "email_1_publicationHouse9QZ@email.com",
+      "email" : "email_1_publicationHouse9@email.com",
       "emailType" : "Office"
     }, {
       "id" : 2,
-      "email" : "email_2_publicationHouse9QZ@email.com",
+      "email" : "email_2_publicationHouse9@email.com",
       "emailType" : "Office 2"
     } ]
   },
@@ -48,12 +48,12 @@
     "id" : 1,
     "userId" : 1,
     "text" : "Text Comment",
-    "date" : "12.06.2019",
+    "date" : "02.11.2019",
     "subComments" : [ {
       "id" : 1,
       "userId" : 1,
       "text" : "test sub comment",
-      "date" : "12.06.2019"
+      "date" : "02.11.2019"
     } ]
   } ],
   "authors" : [ {
@@ -62,11 +62,11 @@
     "lastName" : "Author_1 LastName",
     "emails" : [ {
       "id" : 1,
-      "email" : "email_1.author_19QZ@email.com",
+      "email" : "email_1.author_19@email.com",
       "emailType" : "Personal"
     }, {
       "id" : 2,
-      "email" : "email_2.author_19QZ@email.com",
+      "email" : "email_2.author_19@email.com",
       "emailType" : "Personal"
     } ],
     "phoneNumbers" : [ {
@@ -95,7 +95,7 @@
       "houseNumber" : "2A",
       "postcode" : 222222
     } ],
-    "birthday" : "12.06.2019",
+    "birthday" : "30.10.2019",
     "genres" : [ {
       "id" : 1,
       "name" : "Genre Uno"
@@ -106,6 +106,9 @@
   } ],
   "_links" : {
     "self" : {
+      "href" : "http://localhost:8080/books/1"
+    },
+    "add" : {
       "href" : "http://localhost:8080/books"
     },
     "get" : {
@@ -118,9 +121,6 @@
     "getByPageAndSort" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
-    },
-    "update" : {
-      "href" : "http://localhost:8080/books/1"
     },
     "delete" : {
       "href" : "http://localhost:8080/books/1"

@@ -1,9 +1,8 @@
 package com.trl.libraryservice.service.impl;
 
 import com.trl.libraryservice.controller.dto.BookDTO;
-import com.trl.libraryservice.exception.BookNotExistException;
-import com.trl.libraryservice.exception.DataNotFoundException;
-import com.trl.libraryservice.exception.IllegalValueException;
+import com.trl.libraryservice.controller.dto.GenreBookDTO;
+import com.trl.libraryservice.exception.*;
 import com.trl.libraryservice.repository.BookRepository;
 import com.trl.libraryservice.repository.entity.BookEntity;
 import com.trl.libraryservice.service.BookService;
@@ -22,6 +21,8 @@ import org.springframework.stereotype.Service;
 import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.deleteWhitespace;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,6 +37,7 @@ public class BookServiceImpl implements BookService {
     private static final String EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT = "Parameter '%s' is illegal, check the parameter that are passed to the method.";
     private static final String EXCEPTION_MESSAGE_BOOK_NOT_EXIST = "Book with this id = %s not exist.";
     private static final String EXCEPTION_MESSAGE_BOOKS_NOT_EXIST = "Books not found.";
+    private static final String EXCEPTION_MESSAGE_THE_SAME_VALUE = "The value cannot be updated to the same value.";
 
     private final BookRepository bookRepository;
 
@@ -111,24 +113,24 @@ public class BookServiceImpl implements BookService {
      * Retrieve page of {@literal BookDTOs}.
      *
      * @param startPage zero-based page index, must not be negative.
-     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
      * @return the {@literal Set<BookDTO>}.
      * @throws DataNotFoundException in case if {@literal BookDTO} not exist.
      */
     @Override
-    public Page<BookDTO> getAll(int startPage, int pageSize) {
+    public Page<BookDTO> getByPage(int startPage, int pageSize) {
         Page<BookDTO> bookResult = null;
 
         Page<BookEntity> pagedResult = bookRepository.findAll(PageRequest.of(startPage, pageSize));
-        LOG.debug("************ getAll() ---> booksFromRepository = " + pagedResult);
+        LOG.debug("************ getByPage() ---> booksFromRepository = " + pagedResult);
 
         if (pagedResult.isEmpty()) {
-            LOG.debug("************ getAll() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+            LOG.debug("************ getByPage() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
             throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
         }
 
         bookResult = mapPageEntityToPageDTO(pagedResult);
-        LOG.debug("************ getAll() ---> bookResult = " + bookResult);
+        LOG.debug("************ getByPage() ---> bookResult = " + bookResult);
 
         return bookResult;
     }
@@ -143,19 +145,19 @@ public class BookServiceImpl implements BookService {
      * @throws DataNotFoundException in case if {@literal BookDTO} not exist.
      */
     @Override
-    public Page<BookDTO> getAllAndSort(int startPage, int pageSize, String sortOrder) {
+    public Page<BookDTO> getByPageAndSort(int startPage, int pageSize, String sortOrder) {
         Page<BookDTO> bookResult = null;
 
         Page<BookEntity> pagedResult = bookRepository.findAll(PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
-        LOG.debug("************ getAllAndSort() ---> booksFromRepository = " + pagedResult);
+        LOG.debug("************ getByPageAndSort() ---> booksFromRepository = " + pagedResult);
 
         if (pagedResult.isEmpty()) {
-            LOG.debug("************ getAllAndSort() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+            LOG.debug("************ getByPageAndSort() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
             throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
         }
 
         bookResult = mapPageEntityToPageDTO(pagedResult);
-        LOG.debug("************ getAllAndSort() ---> bookResult = " + bookResult);
+        LOG.debug("************ getByPageAndSort() ---> bookResult = " + bookResult);
 
         return bookResult;
     }
@@ -165,19 +167,32 @@ public class BookServiceImpl implements BookService {
      *
      * @param id   must not be {@literal null}, and {@code id} must be greater than zero.
      * @param book must not be {@literal null}.
-     * @return The {@literal BookDTO}.
-     * @throws IllegalArgumentException in case the given {@code book} is {@literal null},
+     * @return the {@literal BookDTO}.
+     * @throws IllegalArgumentException in case the given {@code book} is {@literal null}.
+     * @throws DataNotFoundException    in case if {@literal BookDTO} not exist by {@code id}.
+     * @throws TheSameValueException    in case if {@code name} equals to name book.
      */
     @Override
-    public BookDTO updateById(Long id, BookDTO book) {
+    public BookDTO update(Long id, BookDTO book) {
         BookDTO bookResult = null;
 
         if ((id == null) || (id <= 0) || (book == null)) {
-            LOG.debug("************ updateById() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT);
+            LOG.debug("************ update() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT);
             throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT);
         }
 
-        // TODO: Finish this method.
+        Optional<BookEntity> bookFromRepositoryById = bookRepository.findById(id);
+
+        if (bookFromRepositoryById.isEmpty()) {
+            LOG.debug("************ update() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+            throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+        }
+
+        updateFields(id, mapEntityToDTO(bookFromRepositoryById.get()), book);
+
+        bookResult = mapEntityToDTO(bookRepository.findById(id).get());
+
+        LOG.debug("************ update() ---> Book by id = " + id + " is updated ---> " + bookResult);
 
         return bookResult;
     }
@@ -190,7 +205,8 @@ public class BookServiceImpl implements BookService {
      * @throws DataNotFoundException    in case if {@literal BookDTO} not exist with this {@code id}.
      */
     @Override
-    public void deleteById(Long id) {
+    public BookDTO deleteById(Long id) {
+        BookDTO bookResult = null;
 
         if ((id == null) || (id <= 0)) {
             LOG.debug("************ deleteById() ---> " + format(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENT, id));
@@ -207,9 +223,13 @@ public class BookServiceImpl implements BookService {
             throw new BookNotExistException(format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
         }
 
+        bookResult = mapEntityToDTO(bookById.get());
+
         bookRepository.deleteById(id);
 
-        LOG.debug("************ deleteById() ---> Deleted book by id = " + id);
+        LOG.debug("************ deleteById() ---> Deleted book = " + bookResult);
+
+        return bookResult;
     }
 
     private void checkParameterBook(BookDTO book) {
@@ -248,5 +268,54 @@ public class BookServiceImpl implements BookService {
             LOG.debug("************ add() ---> " + format(message, "book.getAuthors() is empty"));
             throw new IllegalValueException(format(message, "book.getAuthors() is empty"));
         }
+    }
+
+    public void updateFields(Long id, BookDTO actualBook, BookDTO sourceBook) {
+
+        if ((sourceBook.getName() != null) && (!deleteWhitespace(sourceBook.getName()).isEmpty())) {
+            updateName(id, actualBook.getName(), sourceBook.getName());
+        }
+
+        // TODO: Terminar this method. Imlementar functionality of update fields.
+//        if ((sourceBook.getGenres() != null) && (!sourceBook.getGenres().isEmpty())){
+//            updateGenres(id, actualBook.getGenres(), sourceBook.getGenres());
+//        }
+
+        if (sourceBook.getPublicationDate() != null) {
+            updatePublishingDate(id, actualBook.getPublicationDate(), sourceBook.getPublicationDate());
+        }
+    }
+
+    public void updateName(Long id, String actualName, String sourceName) {
+
+        if (sourceName.equals(actualName)) {
+            LOG.debug("************ updateName() ---> " + EXCEPTION_MESSAGE_THE_SAME_VALUE);
+            throw new TheSameValueException(EXCEPTION_MESSAGE_THE_SAME_VALUE);
+        }
+
+        bookRepository.updateName(id, sourceName);
+        LOG.debug("************ updateName() ---> Book name updated.");
+    }
+
+    public void updateGenres(Long id, List<GenreBookDTO> actualGenres, List<GenreBookDTO> sourceGenres) {
+
+        if (sourceGenres.equals(actualGenres)) {
+            LOG.debug("************ updateGenres() ---> " + EXCEPTION_MESSAGE_THE_SAME_VALUE);
+            throw new TheSameValueException(EXCEPTION_MESSAGE_THE_SAME_VALUE);
+        }
+
+        // TODO: Terminar this method. Imlementar functionality of update genres.
+        throw new FunctionalityNotImplementedException("This functionality not terminated");
+    }
+
+    public void updatePublishingDate(Long id, LocalDate actualPublishingDate, LocalDate sourcePublishingDate) {
+
+        if (sourcePublishingDate.equals(actualPublishingDate)) {
+            LOG.debug("************ updatePublishingDate() ---> " + EXCEPTION_MESSAGE_THE_SAME_VALUE);
+            throw new TheSameValueException(EXCEPTION_MESSAGE_THE_SAME_VALUE);
+        }
+
+        bookRepository.updatePublicationDate(id, sourcePublishingDate);
+        LOG.debug("************ updatePublishingDate() ---> Book publishing date updated.");
     }
 }

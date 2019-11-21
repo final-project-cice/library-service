@@ -1,8 +1,12 @@
-[source,options="nowrap"]
+[source,http,options="nowrap"]
 ----
+HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 2893
+
 {
-  "id" : 1,
-  "name" : "BBBBBBBBB",
+  "bookId" : 1,
+  "name" : "My first Book",
   "genres" : [ {
     "id" : 1,
     "name" : "Genre Book Uno"
@@ -42,7 +46,7 @@
       "emailType" : "Office 2"
     } ]
   },
-  "publicationDate" : "30.10.2019",
+  "publicationDate" : "12.06.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
     "id" : 1,
@@ -103,6 +107,28 @@
       "id" : 2,
       "name" : "Genre Dos"
     } ]
-  } ]
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books"
+    },
+    "get" : {
+      "href" : "http://localhost:8080/books/1"
+    },
+    "getByPage" : {
+      "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getByPageAndSort" : {
+      "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "delete" : {
+      "href" : "http://localhost:8080/books/1"
+    }
+  }
 }
 ----

@@ -80,6 +80,26 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(TheSameValueException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleTheSameValueException(TheSameValueException ex, WebRequest request) {
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FunctionalityNotImplementedException.class)
+    public final ResponseEntity<ErrorDetailsDTO> handleFunctionalityNotImplementedException(FunctionalityNotImplementedException ex, WebRequest request) {
+        ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
+        errorDetails.setErrorMessage(ex.getMessage());
+        errorDetails.setErrorCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        errorDetails.setTimestamp(LocalDateTime.now());
+        errorDetails.setDescription(request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(DataNotFoundException.class)
     public final ResponseEntity<ErrorDetailsDTO> handleDataNotFoundException(DataNotFoundException ex, WebRequest request) {
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();

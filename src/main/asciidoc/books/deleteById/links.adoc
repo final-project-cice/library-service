@@ -1,0 +1,22 @@
+|===
+|Relation|Description
+
+|`+self+`
+|Link to self(deleteById the book) resource.
+
+|`+add+`
+|Link to add the book resource.
+
+|`+get+`
+|Link to get the book resource by id.
+
+|`+getByPage+`
+|Link to get the book resource by page.
+
+|`+getByPageAndSort+`
+|Link to get the book resource by page and sort.
+
+|`+update+`
+|Link to update the book resource.
+
+|===

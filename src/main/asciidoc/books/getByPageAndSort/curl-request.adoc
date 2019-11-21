@@ -1,0 +1,4 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/books/0/2/name' -i -X GET
+----

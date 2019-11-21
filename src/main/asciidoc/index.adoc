@@ -41,147 +41,191 @@ Example Books defines HTTP verbs for all endpoints as follows:
 = Book
 
 === Get Book By Id.
-
 Obtains a specific Book by its unique identifier.
 
 ====== CURL Request
 
-include::books/get-by-id/curl-request.adoc[]
+include::books/getById/curl-request.adoc[]
 
 ====== Path Parameters
 
-include::books/get-by-id/path-parameters.adoc[]
+include::books/getById/path-parameters.adoc[]
 
 ====== HTTP Request
 
-include::books/get-by-id/http-request.adoc[]
+include::books/getById/http-request.adoc[]
 
 ====== HTTPie Requests
 
-include::books/get-by-id/httpie-request.adoc[]
+include::books/getById/httpie-request.adoc[]
 
 ====== Request Body
 
-include::books/get-by-id/request-body.adoc[]
+include::books/getById/request-body.adoc[]
+
+====== Links
+
+include::books/getById/links.adoc[]
 
 ====== HTTP Response
 
-include::books/get-by-id/http-response.adoc[]
+include::books/getById/http-response.adoc[]
 
 ====== Response Body
 
-include::books/get-by-id/response-body.adoc[]
+include::books/getById/response-body.adoc[]
 
 ====== Response Fields
 
-include::books/get-by-id/response-fields.adoc[]
+include::books/getById/response-fields.adoc[]
 
-=== Get Book By Page.
-
+=== Get Books By Page.
 Obtains a page of Books.
 
 ====== CURL Request
 
-include::books/get-all-by-pagination/curl-request.adoc[]
+include::books/getByPage/curl-request.adoc[]
 
 ====== Path Parameters
 
-include::books/get-all-by-pagination/path-parameters.adoc[]
+include::books/getByPage/path-parameters.adoc[]
 
 ====== HTTP Request
 
-include::books/get-all-by-pagination/http-request.adoc[]
+include::books/getByPage/http-request.adoc[]
 
 ====== HTTPie Requests
 
-include::books/get-all-by-pagination/httpie-request.adoc[]
+include::books/getByPage/httpie-request.adoc[]
 
 ====== Request Body
 
-include::books/get-all-by-pagination/request-body.adoc[]
+include::books/getByPage/request-body.adoc[]
+
+====== Links
+
+include::books/getByPage/links.adoc[]
 
 ====== HTTP Response
 
-include::books/get-all-by-pagination/http-response.adoc[]
+include::books/getByPage/http-response.adoc[]
 
 ====== Response Body
 
-include::books/get-all-by-pagination/response-body.adoc[]
+include::books/getByPage/response-body.adoc[]
 
 ====== Response Fields
 
-include::books/get-all-by-pagination/response-fields.adoc[]
+include::books/getByPage/response-fields.adoc[]
 
-=== Create Book.
+=== Get Books By Page And Sort.
 
-Create Book by this body request.
+Obtains a page of Books and sorted.
 
 ====== CURL Request
 
-include::books/add/curl-request.adoc[]
+include::books/getByPageAndSort/curl-request.adoc[]
+
+====== Path Parameters
+
+include::books/getByPageAndSort/path-parameters.adoc[]
 
 ====== HTTP Request
 
-include::books/add/http-request.adoc[]
+include::books/getByPageAndSort/http-request.adoc[]
 
 ====== HTTPie Requests
 
-include::books/add/httpie-request.adoc[]
+include::books/getByPageAndSort/httpie-request.adoc[]
 
 ====== Request Body
 
-include::books/add/request-body.adoc[]
+include::books/getByPageAndSort/request-body.adoc[]
 
-====== Request Fields
+====== Links
 
-include::books/add/request-fields.adoc[]
-
-====== Request Fields
-
-include::books/add/request-fields.adoc[]
+include::books/getByPageAndSort/links.adoc[]
 
 ====== HTTP Response
 
-include::books/add/http-response.adoc[]
+include::books/getByPageAndSort/http-response.adoc[]
 
 ====== Response Body
 
-include::books/add/response-body.adoc[]
+include::books/getByPageAndSort/response-body.adoc[]
 
 ====== Response Fields
 
+include::books/getByPageAndSort/response-fields.adoc[]
+
+=== Create Book.
+Create Book by this body request.
+
+====== CURL Request
+include::books/add/curl-request.adoc[]
+
+====== HTTP Request
+include::books/add/http-request.adoc[]
+
+====== HTTPie Requests
+include::books/add/httpie-request.adoc[]
+
+====== Request Body
+include::books/add/request-body.adoc[]
+
+====== Request Fields
+include::books/add/request-fields.adoc[]
+
+====== Links
+
+include::books/add/links.adoc[]
+
+====== HTTP Response
+include::books/add/http-response.adoc[]
+
+====== Response Body
+include::books/add/response-body.adoc[]
+
+====== Response Fields
 include::books/add/response-fields.adoc[]
 
 === Delete Book.
-
 Delete Book by ID.
 
 ====== CURL Request
 
-include::books/delete-by-id/curl-request.adoc[]
+include::books/deleteById/curl-request.adoc[]
 
 ====== Path Parameters
 
-include::books/delete-by-id/path-parameters.adoc[]
+include::books/deleteById/path-parameters.adoc[]
 
 ====== HTTP Request
 
-include::books/delete-by-id/http-request.adoc[]
+include::books/deleteById/http-request.adoc[]
 
 ====== HTTPie Requests
 
-include::books/delete-by-id/httpie-request.adoc[]
+include::books/deleteById/httpie-request.adoc[]
 
 ====== Request Body
 
-include::books/delete-by-id/request-body.adoc[]
+include::books/deleteById/request-body.adoc[]
+
+====== Links
+
+include::books/deleteById/links.adoc[]
 
 ====== HTTP Response
 
-include::books/delete-by-id/http-response.adoc[]
+include::books/deleteById/http-response.adoc[]
 
 ====== Response Body
 
-include::books/delete-by-id/response-body.adoc[]
+include::books/deleteById/response-body.adoc[]
+
+====== Response Fienlds
+
+include::books/deleteById/response-fields.adoc[]
 
 = Author of the Book.

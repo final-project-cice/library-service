@@ -10,11 +10,11 @@ public interface BookService {
 
     BookDTO getById(Long id);
 
-    Page<BookDTO> getAll(int startPage, int pageSize);
+    Page<BookDTO> getByPage(int startPage, int pageSize);
 
-    Page<BookDTO> getAllAndSort(int startPage, int pageSize, String sortOrder);
+    Page<BookDTO> getByPageAndSort(int startPage, int pageSize, String sortOrder);
 
-    BookDTO updateById(Long id, BookDTO book);
+    BookDTO update(Long id, BookDTO book);
 
-    void deleteById(Long id);
+    BookDTO deleteById(Long id);
 }

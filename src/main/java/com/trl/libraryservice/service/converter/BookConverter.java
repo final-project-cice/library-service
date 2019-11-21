@@ -43,7 +43,7 @@ public final class BookConverter {
                 + " ---> bookEntity.getClass().getSimpleName() = " + entity.getClass().getSimpleName());
 
         result = new BookDTO();
-        result.setId(entity.getId());
+        result.setBookId(entity.getId());
         result.setName(entity.getName());
         result.addGenres(GenreBookConverter.mapListEntityToListDTO(entity.getGenres()));
         result.setPublishingHouse(PublishingHouseConverter.mapEntityToDTO(entity.getPublishingHouse()));
@@ -127,7 +127,7 @@ public final class BookConverter {
                 + " ---> bookDTO.getClass().getSimpleName() = " + dto.getClass().getSimpleName());
 
         result = new BookEntity();
-        result.setId(dto.getId());
+        result.setId(dto.getBookId());
         result.setName(dto.getName());
         result.addGenres(GenreBookConverter.mapListDTOToListEntity(dto.getGenres()));
         result.setPublishingHouse(PublishingHouseConverter.mapDTOToEntity(dto.getPublishingHouse()));

@@ -1,11 +1,11 @@
 [source,http,options="nowrap"]
 ----
 HTTP/1.1 201 Created
-Content-Type: application/json;charset=UTF-8
-Content-Length: 2343
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 2904
 
 {
-  "id" : 1,
+  "bookId" : 1,
   "name" : "My first Book",
   "genres" : [ {
     "id" : 1,
@@ -107,6 +107,28 @@ Content-Length: 2343
       "id" : 2,
       "name" : "Genre Dos"
     } ]
-  } ]
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books"
+    },
+    "get" : {
+      "href" : "http://localhost:8080/books/1"
+    },
+    "getByPage" : {
+      "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getByPageAndSort" : {
+      "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "update" : {
+      "href" : "http://localhost:8080/books/1"
+    },
+    "delete" : {
+      "href" : "http://localhost:8080/books/1"
+    }
+  }
 }
 ----

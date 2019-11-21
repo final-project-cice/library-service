@@ -6,7 +6,8 @@ logging:
   file: /tmp/log/library-service.log
   level:
     root: INFO
-    org.springframework: INFO
+    org.springframework: DEBUG
+    org.springframework.data: DEBUG
     guru.springframework.controllers: INFO
     org.hibernate: INFO
     com.trl.libraryservice: DEBUG
