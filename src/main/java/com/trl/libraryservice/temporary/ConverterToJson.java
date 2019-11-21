@@ -1,8 +1,8 @@
 package com.trl.libraryservice.temporary;
 
-import com.trl.libraryservice.controller.dto.CommentBookDTO;
-import com.trl.libraryservice.controller.dto.SubCommentCommentDTO;
+import com.trl.libraryservice.controller.dto.BookDTO;
 import com.trl.libraryservice.repository.entity.*;
+import com.trl.libraryservice.service.converter.BookConverter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@ public class ConverterToJson {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        /*// Initialization
+        // Initialization
         init();
 
         // Book Convert
@@ -36,7 +36,7 @@ public class ConverterToJson {
             e.printStackTrace();
         }
 
-         // Author Convert
+        /* // Author Convert
         Set<AuthorDTO> authorDTOS = null;
             authorDTOS = AuthorConverter.mapSetEntityToSetDTO(authorEntities);
 
@@ -48,7 +48,7 @@ public class ConverterToJson {
             e.printStackTrace();
         }*/
 
-        CommentBookDTO commentBook = new CommentBookDTO();
+        /*CommentBookDTO commentBook = new CommentBookDTO();
         commentBook.setUserId(1L);
         commentBook.setText("new comment added");
         commentBook.setDate(LocalDate.now());
@@ -68,7 +68,7 @@ public class ConverterToJson {
         commentBook.setSubComments(new ArrayList<>());
 
         String commentJSON = objectMapper.writeValueAsString(commentBook);
-        System.out.println(commentJSON);
+        System.out.println(commentJSON);*/
 
     }
 
@@ -268,8 +268,3 @@ public class ConverterToJson {
         bookEntity.setAuthors(authorEntities);
     }
 }
-/*
-
-"12.06.2019"
-
-*/

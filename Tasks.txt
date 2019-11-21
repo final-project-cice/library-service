@@ -56,3 +56,11 @@ Pensar sobre cambiar nombre a: dto, entity, resource, service, converter. Al cla
 Poner nombre SubComment... y no SubCommentComment...
 
 ========================================================================================================================
+                                        terminar metodo Book.update()
+Terminar este metodo.
+
+========================================================================================================================
+                                       terminar metodo update() en todos classes
+Terminar este metodo.
+
+========================================================================================================================

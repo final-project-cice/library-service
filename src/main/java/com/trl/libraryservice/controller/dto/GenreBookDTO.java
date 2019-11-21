@@ -12,7 +12,8 @@ public class GenreBookDTO {
     @JsonIgnore
     private BookDTO book;
 
-    public GenreBookDTO() { }
+    public GenreBookDTO() {
+    }
 
     public Long getId() {
         return id;

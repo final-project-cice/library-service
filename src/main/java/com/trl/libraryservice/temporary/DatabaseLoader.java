@@ -106,6 +106,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
         CommentBookEntity commentBookEntity_1 = new CommentBookEntity();
         CommentBookEntity commentBookEntity_2 = new CommentBookEntity();
+//        CommentBookEntity commentBookEntity_3 = new CommentBookEntity();
 
         // The creation SubComment for CommentBookEntity
         List<SubCommentCommentEntity> subCommentCommentEntities = new ArrayList<>();
@@ -131,8 +132,14 @@ public class DatabaseLoader implements CommandLineRunner {
         commentBookEntity_2.setDate(LocalDate.now());
         commentBookEntity_2.setBook(book);
 
+//        commentBookEntity_2.setUserId(1L);
+//        commentBookEntity_2.setText("Text Comment  comment 3");
+//        commentBookEntity_2.setDate(LocalDate.now());
+//        commentBookEntity_2.setBook(book);
+
         commentBookEntities.add(commentBookEntity_1);
         commentBookEntities.add(commentBookEntity_2);
+//        commentBookEntities.add(commentBookEntity_3);
 
 
         // ================================= The creation Author 1
@@ -337,8 +344,8 @@ public class DatabaseLoader implements CommandLineRunner {
         commentBookEntity_2.setDate(LocalDate.now());
         commentBookEntity_2.setBook(book_2);
 
-//        commentBookEntities.add(commentBookEntity_1);
-//        commentBookEntities.add(commentBookEntity_2);
+        commentBookEntities.add(commentBookEntity_1);
+        commentBookEntities.add(commentBookEntity_2);
 
 
         // ================================= The creation Author 1

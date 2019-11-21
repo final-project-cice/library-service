@@ -14,6 +14,4 @@ public class AuthorResource {
     public AuthorResource(AuthorService authorService) {
         this.authorService = authorService;
     }
-
-
 }
