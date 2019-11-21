@@ -7,14 +7,14 @@
 |`+add+`
 |Link to add the book resource.
 
-|`+get+`
+|`+getById+`
 |Link to get the book resource by id.
 
-|`+getByPage+`
-|Link to get the book resource by page.
+|`+getPageOfBooks+`
+|Link to get the page of the books resource.
 
-|`+getByPageAndSort+`
-|Link to get the book resource by page and sort.
+|`+getPageOfSortedBooks+`
+|Link to get the page of sorted books resource.
 
 |`+update+`
 |Link to update the book resource.

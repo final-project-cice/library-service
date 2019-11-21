@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2921
+Content-Length: 2934
 
 {
   "bookId" : 1,
@@ -116,18 +116,18 @@ Content-Length: 2921
     "add" : {
       "href" : "http://localhost:8080/books"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
     "update" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "delete" : {
+    "deleteById" : {
       "href" : "http://localhost:8080/books/1"
     }
   }

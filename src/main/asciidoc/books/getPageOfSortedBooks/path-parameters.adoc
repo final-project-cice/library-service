@@ -9,6 +9,6 @@
 |the size of the page to be returned, must be greater than 0
 
 |`+sortOrder+`
-|The value of the search of the Book.
+|The value by which the sorted books will be.
 
 |===

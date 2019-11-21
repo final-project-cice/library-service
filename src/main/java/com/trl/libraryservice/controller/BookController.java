@@ -44,11 +44,11 @@ public class BookController {
         BookDTO resultService = bookService.add(book);
 
         resultService.add(linkTo(methodOn(BookController.class).add(null)).withSelfRel());
-        resultService.add(linkTo(methodOn(BookController.class).getById(resultService.getBookId())).withRel("get"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPage(null, null)).withRel("getByPage"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPageAndSort(null, null, null)).withRel("getByPageAndSort"));
+        resultService.add(linkTo(methodOn(BookController.class).getById(resultService.getBookId())).withRel("getById"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
         resultService.add(linkTo(methodOn(BookController.class).update(resultService.getBookId(), null)).withRel("update"));
-        resultService.add(linkTo(methodOn(BookController.class).deleteById(resultService.getBookId())).withRel("delete"));
+        resultService.add(linkTo(methodOn(BookController.class).deleteById(resultService.getBookId())).withRel("deleteById"));
 
         response = ResponseEntity.status(HttpStatus.CREATED).body(resultService);
 
@@ -71,10 +71,10 @@ public class BookController {
 
         resultService.add(linkTo(methodOn(BookController.class).getById(null)).withSelfRel());
         resultService.add(linkTo(methodOn(BookController.class).add(null)).withRel("add"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPage(null, null)).withRel("getByPage"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPageAndSort(null, null, null)).withRel("getByPageAndSort"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
         resultService.add(linkTo(methodOn(BookController.class).update(resultService.getBookId(), null)).withRel("update"));
-        resultService.add(linkTo(methodOn(BookController.class).deleteById(resultService.getBookId())).withRel("delete"));
+        resultService.add(linkTo(methodOn(BookController.class).deleteById(resultService.getBookId())).withRel("deleteById"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -82,7 +82,7 @@ public class BookController {
     }
 
     /**
-     * Retrieves all {@literal BookDTO} by paging.
+     * Retrieve page of {@literal BookDTOs}.
      *
      * @param startPage zero-based page index, must not be negative.
      * @param pageSize  the size of the page to be returned, must be greater than 0.
@@ -91,18 +91,18 @@ public class BookController {
     @GetMapping(
             path = "/{startPage}/{pageSize}",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
-    public ResponseEntity<Page<BookDTO>> getByPage(@PathVariable Integer startPage, @PathVariable Integer pageSize) {
+    public ResponseEntity<Page<BookDTO>> getPageOfBooks(@PathVariable Integer startPage, @PathVariable Integer pageSize) {
         ResponseEntity<Page<BookDTO>> response = null;
 
-        Page<BookDTO> resultService = bookService.getByPage(startPage, pageSize);
+        Page<BookDTO> resultService = bookService.getPageOfBooks(startPage, pageSize);
 
         for (BookDTO book : resultService) {
-            book.add(linkTo(methodOn(BookController.class).getByPage(null, null)).withSelfRel());
+            book.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withSelfRel());
             book.add(linkTo(methodOn(BookController.class).add(null)).withRel("add"));
-            book.add(linkTo(methodOn(BookController.class).getById(book.getBookId())).withRel("get"));
-            book.add(linkTo(methodOn(BookController.class).getByPageAndSort(null, null, null)).withRel("getByPageAndSort"));
+            book.add(linkTo(methodOn(BookController.class).getById(book.getBookId())).withRel("getById"));
+            book.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
             book.add(linkTo(methodOn(BookController.class).update(book.getBookId(), null)).withRel("update"));
-            book.add(linkTo(methodOn(BookController.class).deleteById(book.getBookId())).withRel("delete"));
+            book.add(linkTo(methodOn(BookController.class).deleteById(book.getBookId())).withRel("deleteById"));
         }
 
         response = ResponseEntity.ok(resultService);
@@ -111,25 +111,28 @@ public class BookController {
     }
 
     /**
-     * Retrieves all {@literal BookDTO} by paging and sort.
+     * Retrieve page of sorted {@literal BookDTOs}.
      *
-     * @return the {@literal ResponseEntity.ok(Set<BookDTO>)}.
+     * @param startPage zero-based page index, must not be negative.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
+     * @param sortOrder the value by which the sorted books will be. Must not be {@literal null}.
+     * @return the {@literal ResponseEntity.ok(Page<BookDTO>)}.
      */
     @GetMapping(
             path = "/{startPage}/{pageSize}/{sortOrder}",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
-    public ResponseEntity<Page<BookDTO>> getByPageAndSort(@PathVariable Integer startPage, @PathVariable Integer pageSize, @PathVariable String sortOrder) {
+    public ResponseEntity<Page<BookDTO>> getPageOfSortedBooks(@PathVariable Integer startPage, @PathVariable Integer pageSize, @PathVariable String sortOrder) {
         ResponseEntity<Page<BookDTO>> response = null;
 
-        Page<BookDTO> resultService = bookService.getByPageAndSort(startPage, pageSize, sortOrder);
+        Page<BookDTO> resultService = bookService.getPageOfSortedBooks(startPage, pageSize, sortOrder);
 
         for (BookDTO book : resultService) {
-            book.add(linkTo(methodOn(BookController.class).getByPageAndSort(null, null, null)).withSelfRel());
+            book.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withSelfRel());
             book.add(linkTo(methodOn(BookController.class).add(null)).withRel("add"));
-            book.add(linkTo(methodOn(BookController.class).getById(book.getBookId())).withRel("get"));
-            book.add(linkTo(methodOn(BookController.class).getByPage(null, null)).withRel("getByPage"));
+            book.add(linkTo(methodOn(BookController.class).getById(book.getBookId())).withRel("getById"));
+            book.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
             book.add(linkTo(methodOn(BookController.class).update(book.getBookId(), null)).withRel("update"));
-            book.add(linkTo(methodOn(BookController.class).deleteById(book.getBookId())).withRel("delete"));
+            book.add(linkTo(methodOn(BookController.class).deleteById(book.getBookId())).withRel("deleteById"));
         }
 
         response = ResponseEntity.ok(resultService);
@@ -154,10 +157,10 @@ public class BookController {
 
         resultService.add(linkTo(methodOn(BookController.class).update(id, null)).withSelfRel());
         resultService.add(linkTo(methodOn(BookController.class).add(null)).withRel("add"));
-        resultService.add(linkTo(methodOn(BookController.class).getById(id)).withRel("get"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPage(null, null)).withRel("getByPage"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPageAndSort(null, null, null)).withRel("getByPageAndSort"));
-        resultService.add(linkTo(methodOn(BookController.class).deleteById(id)).withRel("delete"));
+        resultService.add(linkTo(methodOn(BookController.class).getById(id)).withRel("getById"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
+        resultService.add(linkTo(methodOn(BookController.class).deleteById(id)).withRel("deleteById"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -180,9 +183,9 @@ public class BookController {
 
         resultService.add(linkTo(methodOn(BookController.class).deleteById(null)).withSelfRel());
         resultService.add(linkTo(methodOn(BookController.class).add(null)).withRel("add"));
-        resultService.add(linkTo(methodOn(BookController.class).getById(id)).withRel("get"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPage(null, null)).withRel("getByPage"));
-        resultService.add(linkTo(methodOn(BookController.class).getByPageAndSort(null, null, null)).withRel("getByPageAndSort"));
+        resultService.add(linkTo(methodOn(BookController.class).getById(id)).withRel("getById"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
+        resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
         resultService.add(linkTo(methodOn(BookController.class).update(null, null)).withRel("update"));
 
         response = ResponseEntity.ok(resultService);

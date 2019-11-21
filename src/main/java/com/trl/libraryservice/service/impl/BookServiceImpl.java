@@ -77,7 +77,7 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Retrieves the {@literal BookDTO} by this {@code id}.
+     * Retrieve the {@literal BookDTO} by this {@code id}.
      *
      * @param id must not be {@literal null}, and {@code id} must be greater than zero.
      * @return the {@literal BookDTO} with the given {@code id}.
@@ -118,19 +118,19 @@ public class BookServiceImpl implements BookService {
      * @throws DataNotFoundException in case if {@literal BookDTO} not exist.
      */
     @Override
-    public Page<BookDTO> getByPage(int startPage, int pageSize) {
+    public Page<BookDTO> getPageOfBooks(int startPage, int pageSize) {
         Page<BookDTO> bookResult = null;
 
         Page<BookEntity> pagedResult = bookRepository.findAll(PageRequest.of(startPage, pageSize));
-        LOG.debug("************ getByPage() ---> booksFromRepository = " + pagedResult);
+        LOG.debug("************ getPageOfBooks() ---> booksFromRepository = " + pagedResult);
 
         if (pagedResult.isEmpty()) {
-            LOG.debug("************ getByPage() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+            LOG.debug("************ getPageOfBooks() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
             throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
         }
 
         bookResult = mapPageEntityToPageDTO(pagedResult);
-        LOG.debug("************ getByPage() ---> bookResult = " + bookResult);
+        LOG.debug("************ getPageOfBooks() ---> bookResult = " + bookResult);
 
         return bookResult;
     }
@@ -140,24 +140,24 @@ public class BookServiceImpl implements BookService {
      *
      * @param startPage zero-based page index, must not be negative.
      * @param pageSize  the size of the page to be returned, must be greater than 0.
-     * @param sortOrder must not be {@literal null}.
+     * @param sortOrder the value by which the sorted books will be. Must not be {@literal null}.
      * @return the {@literal Set<BookDTO>}.
      * @throws DataNotFoundException in case if {@literal BookDTO} not exist.
      */
     @Override
-    public Page<BookDTO> getByPageAndSort(int startPage, int pageSize, String sortOrder) {
+    public Page<BookDTO> getPageOfSortedBooks(int startPage, int pageSize, String sortOrder) {
         Page<BookDTO> bookResult = null;
 
         Page<BookEntity> pagedResult = bookRepository.findAll(PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
-        LOG.debug("************ getByPageAndSort() ---> booksFromRepository = " + pagedResult);
+        LOG.debug("************ getPageOfSortedBooks() ---> booksFromRepository = " + pagedResult);
 
         if (pagedResult.isEmpty()) {
-            LOG.debug("************ getByPageAndSort() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
+            LOG.debug("************ getPageOfSortedBooks() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
             throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
         }
 
         bookResult = mapPageEntityToPageDTO(pagedResult);
-        LOG.debug("************ getByPageAndSort() ---> bookResult = " + bookResult);
+        LOG.debug("************ getPageOfSortedBooks() ---> bookResult = " + bookResult);
 
         return bookResult;
     }
@@ -198,7 +198,7 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * Deletes the {@literal BookDTO} with the given {@code id}.
+     * Delete the {@literal BookDTO} with the given {@code id}.
      *
      * @param id must not be {@literal null}, and {@code id} must be greater than zero.
      * @throws IllegalArgumentException in case the given {@code id} is {@literal null}, and if {@code id} is equal or less zero.

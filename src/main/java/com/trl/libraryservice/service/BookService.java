@@ -10,9 +10,9 @@ public interface BookService {
 
     BookDTO getById(Long id);
 
-    Page<BookDTO> getByPage(int startPage, int pageSize);
+    Page<BookDTO> getPageOfBooks(int startPage, int pageSize);
 
-    Page<BookDTO> getByPageAndSort(int startPage, int pageSize, String sortOrder);
+    Page<BookDTO> getPageOfSortedBooks(int startPage, int pageSize, String sortOrder);
 
     BookDTO update(Long id, BookDTO book);
 

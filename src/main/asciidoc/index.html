@@ -2164,7 +2164,7 @@
                             <li><a href="#_response_fields">Response Fields</a></li>
                         </ul>
                     </li>
-                    <li><a href="#_get_books_by_page">Get Books By Page.</a>
+                    <li><a href="#_get_page_of_books">Get Page Of Books.</a>
                         <ul class="sectlevel5">
                             <li><a href="#_curl_request_2">CURL Request</a></li>
                             <li><a href="#_path_parameters_2">Path Parameters</a></li>
@@ -2177,7 +2177,7 @@
                             <li><a href="#_response_fields_2">Response Fields</a></li>
                         </ul>
                     </li>
-                    <li><a href="#_get_books_by_page_and_sort">Get Books By Page And Sort.</a>
+                    <li><a href="#_get_page_of_sorted_books">Get Page Of Sorted Books.</a>
                         <ul class="sectlevel5">
                             <li><a href="#_curl_request_3">CURL Request</a></li>
                             <li><a href="#_path_parameters_3">Path Parameters</a></li>
@@ -2362,15 +2362,16 @@ Host: localhost:8080</code></pre>
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getByPage</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfBooks</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of the
+                        books resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getByPageAndSort</code>
-                    </p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page and sort.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfSortedBooks</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        books resource.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>update</code></p></td>
@@ -2378,9 +2379,9 @@ Host: localhost:8080</code></pre>
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book
-                        resource.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteById</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
+                        by id.</p></td>
                 </tr>
                 </tbody>
             </table>
@@ -2391,7 +2392,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2921
+Content-Length: 2934
 
 {
   "bookId" : 1,
@@ -2505,18 +2506,18 @@ Content-Length: 2921
     "add" : {
       "href" : "http://localhost:8080/books"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
     "update" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "delete" : {
+    "deleteById" : {
       "href" : "http://localhost:8080/books/1"
     }
   }
@@ -2640,18 +2641,18 @@ Content-Length: 2921
     "add" : {
       "href" : "http://localhost:8080/books"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
     "update" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "delete" : {
+    "deleteById" : {
       "href" : "http://localhost:8080/books/1"
     }
   }
@@ -3101,17 +3102,17 @@ Content-Length: 2921
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">
-                        <code>_links.getByPage.href</code></p></td>
+                        <code>_links.getPageOfBooks.href</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        pate.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of the
+                        books resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getByPageAndSort.href</code>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedBooks.href</code>
                     </p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page and sort.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        books resource.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.update.href</code>
@@ -3121,20 +3122,20 @@ Content-Length: 2921
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.delete.href</code>
-                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.deleteById.href</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book
-                        resource.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
+                        by id.</p></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="sect2">
-        <h3 id="_get_books_by_page"><a class="link" href="#_get_books_by_page">Get Books By Page.</a></h3>
+        <h3 id="_get_page_of_books"><a class="link" href="#_get_page_of_books">Get Page Of Books.</a></h3>
         <div class="paragraph">
-            <p>Obtains a page of Books.</p>
+            <p>Obtains page of Books.</p>
         </div>
         <div class="sect5">
             <h6 id="_curl_request_2"><a class="link" href="#_curl_request_2">CURL Request</a></h6>
@@ -3218,7 +3219,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 4277
+Content-Length: 4289
 
 {
   "content" : [ {
@@ -3342,7 +3343,7 @@ Content-Length: 4277
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -3350,7 +3351,7 @@ Content-Length: 4277
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPageAndSort",
+      "rel" : "getPageOfSortedBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "hreflang" : null,
       "media" : null,
@@ -3366,7 +3367,7 @@ Content-Length: 4277
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -3530,7 +3531,7 @@ Content-Length: 4277
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -3538,7 +3539,7 @@ Content-Length: 4277
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPageAndSort",
+      "rel" : "getPageOfSortedBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "hreflang" : null,
       "media" : null,
@@ -3554,7 +3555,7 @@ Content-Length: 4277
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -4040,10 +4041,10 @@ Content-Length: 4277
         </div>
     </div>
     <div class="sect2">
-        <h3 id="_get_books_by_page_and_sort"><a class="link" href="#_get_books_by_page_and_sort">Get Books By Page And
-            Sort.</a></h3>
+        <h3 id="_get_page_of_sorted_books"><a class="link" href="#_get_page_of_sorted_books">Get Page Of Sorted
+            Books.</a></h3>
         <div class="paragraph">
-            <p>Obtains a page of Books and sorted.</p>
+            <p>Obtains a page of sorted books.</p>
         </div>
         <div class="sect5">
             <h6 id="_curl_request_3"><a class="link" href="#_curl_request_3">CURL Request</a></h6>
@@ -4080,8 +4081,8 @@ Content-Length: 4277
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sortOrder</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">The value of the search of the
-                        Book.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The value by which the sorted
+                        books will be.</p></td>
                 </tr>
                 </tbody>
             </table>
@@ -4132,7 +4133,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 8074
+Content-Length: 8100
 
 {
   "content" : [ {
@@ -4256,7 +4257,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/2",
       "hreflang" : null,
       "media" : null,
@@ -4264,7 +4265,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPage",
+      "rel" : "getPageOfBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "hreflang" : null,
       "media" : null,
@@ -4280,7 +4281,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/2",
       "hreflang" : null,
       "media" : null,
@@ -4409,7 +4410,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -4417,7 +4418,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPage",
+      "rel" : "getPageOfBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "hreflang" : null,
       "media" : null,
@@ -4433,7 +4434,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -4597,7 +4598,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/2",
       "hreflang" : null,
       "media" : null,
@@ -4605,7 +4606,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPage",
+      "rel" : "getPageOfBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "hreflang" : null,
       "media" : null,
@@ -4621,7 +4622,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/2",
       "hreflang" : null,
       "media" : null,
@@ -4750,7 +4751,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -4758,7 +4759,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPage",
+      "rel" : "getPageOfBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "hreflang" : null,
       "media" : null,
@@ -4774,7 +4775,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -5668,20 +5669,21 @@ Content-Length: 1678
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>get</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getById</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
                         id.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getByPage</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfBooks</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of the
+                        books resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getByPageAndSort</code>
-                    </p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page and sort.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfSortedBooks</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        books resource.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>update</code></p></td>
@@ -5689,9 +5691,9 @@ Content-Length: 1678
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book
-                        resource.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteById</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
+                        by id.</p></td>
                 </tr>
                 </tbody>
             </table>
@@ -5702,7 +5704,7 @@ Content-Length: 1678
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2904
+Content-Length: 2921
 
 {
   "bookId" : 1,
@@ -5812,21 +5814,21 @@ Content-Length: 2904
     "self" : {
       "href" : "http://localhost:8080/books"
     },
-    "get" : {
+    "getById" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
     "update" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "delete" : {
+    "deleteById" : {
       "href" : "http://localhost:8080/books/1"
     }
   }
@@ -5946,21 +5948,21 @@ Content-Length: 2904
     "self" : {
       "href" : "http://localhost:8080/books"
     },
-    "get" : {
+    "getById" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
     "update" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "delete" : {
+    "deleteById" : {
       "href" : "http://localhost:8080/books/1"
     }
   }
@@ -6402,25 +6404,25 @@ Content-Length: 2904
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.get.href</code></p>
-                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getById.href</code>
+                    </p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
                         id.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">
-                        <code>_links.getByPage.href</code></p></td>
+                        <code>_links.getPageOfBooks.href</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        pate.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of the
+                        books resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getByPageAndSort.href</code>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedBooks.href</code>
                     </p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page and sort.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        books resource.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.update.href</code>
@@ -6430,11 +6432,11 @@ Content-Length: 2904
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.delete.href</code>
-                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.deleteById.href</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book
-                        resource.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
+                        by id.</p></td>
                 </tr>
                 </tbody>
             </table>
@@ -6526,20 +6528,21 @@ Host: localhost:8080</code></pre>
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>get</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getById</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
                         id.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getByPage</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfBooks</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of the
+                        books resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getByPageAndSort</code>
-                    </p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page and sort.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfSortedBooks</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        books resource.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>update</code></p></td>
@@ -6555,7 +6558,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2947
+Content-Length: 2960
 
 {
   "bookId" : 1,
@@ -6669,14 +6672,14 @@ Content-Length: 2947
     "add" : {
       "href" : "http://localhost:8080/books"
     },
-    "get" : {
+    "getById" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
@@ -6805,14 +6808,14 @@ Content-Length: 2947
     "add" : {
       "href" : "http://localhost:8080/books"
     },
-    "get" : {
+    "getById" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
@@ -7266,25 +7269,25 @@ Content-Length: 2947
                         resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.get.href</code></p>
-                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getById.href</code>
+                    </p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
                         id.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">
-                        <code>_links.getByPage.href</code></p></td>
+                        <code>_links.getPageOfBooks.href</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of the
+                        books resource.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getByPageAndSort.href</code>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedBooks.href</code>
                     </p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the book resource by
-                        page and sort.</p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        books resource.</p></td>
                 </tr>
                 <tr>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.update.href</code>
@@ -7302,7 +7305,7 @@ Content-Length: 2947
 </div>
 <div id="footer">
     <div id="footer-text">
-        Last updated 2019-11-21 14:24:01 +0100
+        Last updated 2019-11-21 17:03:04 +0100
     </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

@@ -249,17 +249,17 @@
 |`+String+`
 |Link to add the book resource.
 
-|`+_links.get.href+`
+|`+_links.getById.href+`
 |`+String+`
 |Link to get the book resource by id.
 
-|`+_links.getByPage.href+`
+|`+_links.getPageOfBooks.href+`
 |`+String+`
-|Link to get the book resource by page.
+|Link to get the page of the books resource.
 
-|`+_links.getByPageAndSort.href+`
+|`+_links.getPageOfSortedBooks.href+`
 |`+String+`
-|Link to get the book resource by page and sort.
+|Link to get the page of sorted books resource.
 
 |`+_links.update.href+`
 |`+String+`

@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 8074
+Content-Length: 8100
 
 {
   "content" : [ {
@@ -126,7 +126,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/2",
       "hreflang" : null,
       "media" : null,
@@ -134,7 +134,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPage",
+      "rel" : "getPageOfBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "hreflang" : null,
       "media" : null,
@@ -150,7 +150,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/2",
       "hreflang" : null,
       "media" : null,
@@ -279,7 +279,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "get",
+      "rel" : "getById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -287,7 +287,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "getByPage",
+      "rel" : "getPageOfBooks",
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "hreflang" : null,
       "media" : null,
@@ -303,7 +303,7 @@ Content-Length: 8074
       "type" : null,
       "deprecation" : null
     }, {
-      "rel" : "delete",
+      "rel" : "deleteById",
       "href" : "http://localhost:8080/books/1",
       "hreflang" : null,
       "media" : null,
@@ -333,9 +333,9 @@ Content-Length: 8074
     "unsorted" : false,
     "empty" : false
   },
+  "size" : 2,
   "number" : 0,
   "numberOfElements" : 2,
-  "size" : 2,
   "empty" : false
 }
 ----

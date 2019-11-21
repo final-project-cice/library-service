@@ -79,84 +79,85 @@ include::books/getById/response-body.adoc[]
 
 include::books/getById/response-fields.adoc[]
 
-=== Get Books By Page.
-Obtains a page of Books.
+=== Get Page Of Books.
+
+Obtains page of Books.
 
 ====== CURL Request
 
-include::books/getByPage/curl-request.adoc[]
+include::books/getPageOfBooks/curl-request.adoc[]
 
 ====== Path Parameters
 
-include::books/getByPage/path-parameters.adoc[]
+include::books/getPageOfBooks/path-parameters.adoc[]
 
 ====== HTTP Request
 
-include::books/getByPage/http-request.adoc[]
+include::books/getPageOfBooks/http-request.adoc[]
 
 ====== HTTPie Requests
 
-include::books/getByPage/httpie-request.adoc[]
+include::books/getPageOfBooks/httpie-request.adoc[]
 
 ====== Request Body
 
-include::books/getByPage/request-body.adoc[]
+include::books/getPageOfBooks/request-body.adoc[]
 
 ====== Links
 
-include::books/getByPage/links.adoc[]
+include::books/getPageOfBooks/links.adoc[]
 
 ====== HTTP Response
 
-include::books/getByPage/http-response.adoc[]
+include::books/getPageOfBooks/http-response.adoc[]
 
 ====== Response Body
 
-include::books/getByPage/response-body.adoc[]
+include::books/getPageOfBooks/response-body.adoc[]
 
 ====== Response Fields
 
-include::books/getByPage/response-fields.adoc[]
+include::books/getPageOfBooks/response-fields.adoc[]
 
-=== Get Books By Page And Sort.
+=== Get Page Of Sorted Books.
 
-Obtains a page of Books and sorted.
+Obtains a page of sorted books.
 
 ====== CURL Request
 
-include::books/getByPageAndSort/curl-request.adoc[]
+include::books/getPageOfSortedBooks/curl-request.adoc[]
 
 ====== Path Parameters
 
-include::books/getByPageAndSort/path-parameters.adoc[]
+include::books/getPageOfSortedBooks/path-parameters.adoc[]
 
 ====== HTTP Request
 
-include::books/getByPageAndSort/http-request.adoc[]
+include::books/getPageOfSortedBooks/http-request.adoc[]
 
 ====== HTTPie Requests
 
-include::books/getByPageAndSort/httpie-request.adoc[]
+include::books/getPageOfSortedBooks/httpie-request.adoc[]
 
 ====== Request Body
 
-include::books/getByPageAndSort/request-body.adoc[]
+include::books/getPageOfSortedBooks/request-body.adoc[]
 
 ====== Links
 
-include::books/getByPageAndSort/links.adoc[]
+include::books/getPageOfSortedBooks/links.adoc[]
 
 ====== HTTP Response
 
-include::books/getByPageAndSort/http-response.adoc[]
+include::books/getPageOfSortedBooks/http-response.adoc[]
 
 ====== Response Body
 
-include::books/getByPageAndSort/response-body.adoc[]
+include::books/getPageOfSortedBooks/response-body.adoc[]
 
 ====== Response Fields
 
-include::books/getByPageAndSort/response-fields.adoc[]
+include::books/getPageOfSortedBooks/response-fields.adoc[]
 
 === Create Book.
 Create Book by this body request.

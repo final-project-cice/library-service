@@ -112,18 +112,18 @@
     "add" : {
       "href" : "http://localhost:8080/books"
     },
-    "getByPage" : {
+    "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
       "templated" : true
     },
-    "getByPageAndSort" : {
+    "getPageOfSortedBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}",
       "templated" : true
     },
     "update" : {
       "href" : "http://localhost:8080/books/1"
     },
-    "delete" : {
+    "deleteById" : {
       "href" : "http://localhost:8080/books/1"
     }
   }
