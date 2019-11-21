@@ -8,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.9.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.trl</groupId>
@@ -19,6 +19,33 @@
     <name>library-service</name>
     <description>This micro service is one part of one project library. This micro service performs Library.
     </description>
+
+    <inceptionYear>2019</inceptionYear>
+
+    <contributors>
+        <contributor>
+            <name>Tsyupryk Roman</name>
+            <organization>Not Company</organization>
+            <organizationUrl>Not Company URL</organizationUrl>
+            <roles>
+                <role>Project Owner</role>
+                <role>Project Lead</role>
+            </roles>
+            <timezone>+1</timezone>
+            <url>Not URL</url>
+            <email>tsyupryk.roman@gmail.com</email>
+        </contributor>
+    </contributors>
+
+    <licenses>
+        <license>
+            <name>Not name License.</name>
+            <url>Not URL of License.</url>
+            <comments>
+                Not Comments fo License.
+            </comments>
+        </license>
+    </licenses>
 
     <!--================================================ Properties =================================================-->
     <properties>
