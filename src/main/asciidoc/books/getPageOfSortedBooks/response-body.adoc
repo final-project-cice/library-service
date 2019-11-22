@@ -46,7 +46,7 @@
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 2,
+      "commentId" : 2,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -55,7 +55,8 @@
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 2,
@@ -199,7 +200,7 @@
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 1,
+      "commentId" : 1,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -208,7 +209,8 @@
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 1,
@@ -329,9 +331,9 @@
     "unsorted" : false,
     "empty" : false
   },
-  "size" : 2,
   "number" : 0,
   "numberOfElements" : 2,
+  "size" : 2,
   "empty" : false
 }
 ----

@@ -2218,7 +2218,74 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="#_author_of_the_book">Author of the Book.</a></li>
+            <li><a href="#_comments_of_the_book">Comments of the Book.</a>
+                <ul class="sectlevel2">
+                    <li><a href="#_get_comment_by_comment_id">Get Comment By Comment Id.</a>
+                        <ul class="sectlevel5">
+                            <li><a href="#_curl_request_6">CURL Request</a></li>
+                            <li><a href="#_path_parameters_5">Path Parameters</a></li>
+                            <li><a href="#_http_request_6">HTTP Request</a></li>
+                            <li><a href="#_httpie_request">HTTPie Request</a></li>
+                            <li><a href="#_request_body_6">Request Body</a></li>
+                            <li><a href="#_links_6">Links</a></li>
+                            <li><a href="#_http_response_6">HTTP Response</a></li>
+                            <li><a href="#_response_body_6">Response Body</a></li>
+                            <li><a href="#_response_fields_5">Response Fields</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#_get_page_of_comments_by_book_id">Get Page Of Comments By Book Id.</a>
+                        <ul class="sectlevel5">
+                            <li><a href="#_curl_request_7">CURL Request</a></li>
+                            <li><a href="#_path_parameters_6">Path Parameters</a></li>
+                            <li><a href="#_http_request_7">HTTP Request</a></li>
+                            <li><a href="#_httpie_request_2">HTTPie Request</a></li>
+                            <li><a href="#_request_body_7">Request Body</a></li>
+                            <li><a href="#_links_7">Links</a></li>
+                            <li><a href="#_http_response_7">HTTP Response</a></li>
+                            <li><a href="#_response_body_7">Response Body</a></li>
+                            <li><a href="#_response_fields_6">Response Fields</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#_get_page_of_sorted_comments_by_book_id">Get Page Of Sorted Comments By Book Id.</a>
+                        <ul class="sectlevel5">
+                            <li><a href="#_curl_request_8">CURL Request</a></li>
+                            <li><a href="#_path_parameters_7">Path Parameters</a></li>
+                            <li><a href="#_http_request_8">HTTP Request</a></li>
+                            <li><a href="#_httpie_request_3">HTTPie Request</a></li>
+                            <li><a href="#_request_body_8">Request Body</a></li>
+                            <li><a href="#_links_8">Links</a></li>
+                            <li><a href="#_http_response_8">HTTP Response</a></li>
+                            <li><a href="#_response_body_8">Response Body</a></li>
+                            <li><a href="#_response_fields_7">Response Fields</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#_delete_comment_by_comment_id">Delete Comment By Comment Id.</a>
+                        <ul class="sectlevel5">
+                            <li><a href="#_curl_request_9">CURL Request</a></li>
+                            <li><a href="#_path_parameters_8">Path Parameters</a></li>
+                            <li><a href="#_http_request_9">HTTP Request</a></li>
+                            <li><a href="#_httpie_request_4">HTTPie Request</a></li>
+                            <li><a href="#_request_body_9">Request Body</a></li>
+                            <li><a href="#_links_9">Links</a></li>
+                            <li><a href="#_http_response_9">HTTP Response</a></li>
+                            <li><a href="#_response_body_9">Response Body</a></li>
+                            <li><a href="#_response_fields_8">Response Fields</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#_delete_all_comments_by_book_id">Delete All Comments By Book Id.</a>
+                        <ul class="sectlevel5">
+                            <li><a href="#_curl_request_10">CURL Request</a></li>
+                            <li><a href="#_path_parameters_9">Path Parameters</a></li>
+                            <li><a href="#_http_request_10">HTTP Request</a></li>
+                            <li><a href="#_httpie_request_5">HTTPie Request</a></li>
+                            <li><a href="#_request_body_10">Request Body</a></li>
+                            <li><a href="#_http_response_10">HTTP Response</a></li>
+                            <li><a href="#_response_body_10">Response Body</a></li>
+                            <li><a href="#_response_fields_9">Response Fields</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
@@ -2392,7 +2459,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2934
+Content-Length: 2941
 
 {
   "bookId" : 1,
@@ -2439,7 +2506,7 @@ Content-Length: 2934
   "publicationDate" : "30.10.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "02.11.2019",
@@ -2574,7 +2641,7 @@ Content-Length: 2934
   "publicationDate" : "30.10.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "02.11.2019",
@@ -2858,8 +2925,8 @@ Content-Length: 2934
                         Book.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>comments.[].id</code></p>
-                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>comments.[].commentId</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">The id of the comment of the
                         Book.</p></td>
@@ -3219,7 +3286,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 4289
+Content-Length: 4317
 
 {
   "content" : [ {
@@ -3267,7 +3334,7 @@ Content-Length: 4289
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 1,
+      "commentId" : 1,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -3276,7 +3343,8 @@ Content-Length: 4289
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 1,
@@ -3392,13 +3460,13 @@ Content-Length: 4289
   "totalElements" : 2,
   "last" : false,
   "first" : true,
+  "size" : 1,
+  "number" : 0,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
-  "size" : 1,
-  "number" : 0,
   "numberOfElements" : 1,
   "empty" : false
 }</code></pre>
@@ -3455,7 +3523,7 @@ Content-Length: 4289
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 1,
+      "commentId" : 1,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -3464,7 +3532,8 @@ Content-Length: 4289
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 1,
@@ -3580,13 +3649,13 @@ Content-Length: 4289
   "totalElements" : 2,
   "last" : false,
   "first" : true,
+  "size" : 1,
+  "number" : 0,
   "sort" : {
     "sorted" : false,
     "unsorted" : true,
     "empty" : true
   },
-  "size" : 1,
-  "number" : 0,
   "numberOfElements" : 1,
   "empty" : false
 }</code></pre>
@@ -3807,8 +3876,8 @@ Content-Length: 4289
                         Book.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">
-                        <code>content.[].comments.[].id</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].comments.[].commentId</code>
+                    </p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">The id of the comment of the
                         Book.</p></td>
@@ -4133,7 +4202,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 8100
+Content-Length: 8156
 
 {
   "content" : [ {
@@ -4181,7 +4250,7 @@ Content-Length: 8100
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 2,
+      "commentId" : 2,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -4190,7 +4259,8 @@ Content-Length: 8100
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 2,
@@ -4334,7 +4404,7 @@ Content-Length: 8100
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 1,
+      "commentId" : 1,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -4343,7 +4413,8 @@ Content-Length: 8100
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 1,
@@ -4459,13 +4530,13 @@ Content-Length: 8100
   "totalElements" : 2,
   "last" : true,
   "first" : true,
+  "size" : 2,
+  "number" : 0,
   "sort" : {
     "sorted" : true,
     "unsorted" : false,
     "empty" : false
   },
-  "size" : 2,
-  "number" : 0,
   "numberOfElements" : 2,
   "empty" : false
 }</code></pre>
@@ -4522,7 +4593,7 @@ Content-Length: 8100
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 2,
+      "commentId" : 2,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -4531,7 +4602,8 @@ Content-Length: 8100
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 2,
@@ -4675,7 +4747,7 @@ Content-Length: 8100
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 1,
+      "commentId" : 1,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -4684,7 +4756,8 @@ Content-Length: 8100
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 1,
@@ -4800,13 +4873,13 @@ Content-Length: 8100
   "totalElements" : 2,
   "last" : true,
   "first" : true,
+  "size" : 2,
+  "number" : 0,
   "sort" : {
     "sorted" : true,
     "unsorted" : false,
     "empty" : false
   },
-  "size" : 2,
-  "number" : 0,
   "numberOfElements" : 2,
   "empty" : false
 }</code></pre>
@@ -5027,8 +5100,8 @@ Content-Length: 8100
                         Book.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock">
-                        <code>content.[].comments.[].id</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].comments.[].commentId</code>
+                    </p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">The id of the comment of the
                         Book.</p></td>
@@ -5704,7 +5777,7 @@ Content-Length: 1678
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2921
+Content-Length: 2928
 
 {
   "bookId" : 1,
@@ -5751,7 +5824,7 @@ Content-Length: 2921
   "publicationDate" : "12.06.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "12.06.2019",
@@ -5885,7 +5958,7 @@ Content-Length: 2921
   "publicationDate" : "12.06.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "12.06.2019",
@@ -6168,8 +6241,8 @@ Content-Length: 2921
                         Book.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>comments.[].id</code></p>
-                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>comments.[].commentId</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">The id of the comment of the
                         Book.</p></td>
@@ -6558,7 +6631,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2960
+Content-Length: 2967
 
 {
   "bookId" : 1,
@@ -6605,7 +6678,7 @@ Content-Length: 2960
   "publicationDate" : "30.10.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "02.11.2019",
@@ -6741,7 +6814,7 @@ Content-Length: 2960
   "publicationDate" : "30.10.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "02.11.2019",
@@ -7026,8 +7099,8 @@ Content-Length: 2960
                         Book.</p></td>
                 </tr>
                 <tr>
-                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>comments.[].id</code></p>
-                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>comments.[].commentId</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">The id of the comment of the
                         Book.</p></td>
@@ -7300,12 +7373,2175 @@ Content-Length: 2960
             </table>
         </div>
     </div>
-    <h1 id="_author_of_the_book" class="sect0"><a class="link" href="#_author_of_the_book">Author of the Book.</a></h1>
+    <h1 id="_comments_of_the_book" class="sect0"><a class="link" href="#_comments_of_the_book">Comments of the Book.</a>
+    </h1>
+    <div class="sect2">
+        <h3 id="_get_comment_by_comment_id"><a class="link" href="#_get_comment_by_comment_id">Get Comment By Comment
+            Id.</a></h3>
+        <div class="paragraph">
+            <p>Get Comment By Comment Id.</p>
+        </div>
+        <div class="sect5">
+            <h6 id="_curl_request_6"><a class="link" href="#_curl_request_6">CURL Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/books/comments/1' -i -X GET</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_path_parameters_5"><a class="link" href="#_path_parameters_5">Path Parameters</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <caption class="title">Table 5. http://localhost:8082/books/comments/{commentId}</caption>
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Parameter</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>commentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The commentId used to search for
+                        a comment.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_request_6"><a class="link" href="#_http_request_6">HTTP Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /books/comments/1 HTTP/1.1
+Host: localhost:8080</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_httpie_request"><a class="link" href="#_httpie_request">HTTPie Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http GET 'http://localhost:8080/books/comments/1'</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_request_body_6"><a class="link" href="#_request_body_6">Request Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_links_6"><a class="link" href="#_links_6">Links</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Relation</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>self</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to self(getBYCommentId) the
+                        comment resource by id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>add</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add the comment
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of comments
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSortedCommentsByBookId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        comments resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>updateByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to upgrade comment resource
+                        by comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comment resource
+                        by comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>deleteAllCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
+                        by book id.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_response_6"><a class="link" href="#_http_response_6">HTTP Response</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 1062
 
+{
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ {
+    "id" : 1,
+    "userId" : 1,
+    "text" : "test sub comment",
+    "date" : "02.11.2019"
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_body_6"><a class="link" href="#_response_body_6">Response Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ {
+    "id" : 1,
+    "userId" : 1,
+    "text" : "test sub comment",
+    "date" : "02.11.2019"
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_fields_5"><a class="link" href="#_response_fields_5">Response Fields</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3334%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Path</th>
+                    <th class="tableblock halign-left valign-top">Type</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>commentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of Comment</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>userId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>date</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>subComments.[]</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The array of sub comments by the
+                        comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>subComments.[].id</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of sub comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>subComments.[].userId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this sub comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>subComments.[].text</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the sub comment.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>subComments.[].date</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the sub comment.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.self.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to self(getBYCommentId) the
+                        comment resource by id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.add.href</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add the comment
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of comments
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        comments resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.updateByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to upgrade comment resource
+                        by comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comment resource
+                        by comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteAllCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
+                        by book id.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="sect2">
+        <h3 id="_get_page_of_comments_by_book_id"><a class="link" href="#_get_page_of_comments_by_book_id">Get Page Of
+            Comments By Book Id.</a></h3>
+        <div class="paragraph">
+            <p>Get Page Of Comments By Book Id.</p>
+        </div>
+        <div class="sect5">
+            <h6 id="_curl_request_7"><a class="link" href="#_curl_request_7">CURL Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/books/1/comments/0/2' -i -X GET</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_path_parameters_6"><a class="link" href="#_path_parameters_6">Path Parameters</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <caption class="title">Table 6. http://localhost:8082/books/{bookId}/comments/{startPage}/{pageSize}
+                </caption>
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Parameter</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>bookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The bookId used to search for a
+                        comments.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>startPage</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">zero-based page index, must not
+                        be negative</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageSize</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">the size of the page to be
+                        returned, must be greater than 0</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_request_7"><a class="link" href="#_http_request_7">HTTP Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /books/1/comments/0/2 HTTP/1.1
+Host: localhost:8080</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_httpie_request_2"><a class="link" href="#_httpie_request_2">HTTPie Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http GET 'http://localhost:8080/books/1/comments/0/2'</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_request_body_7"><a class="link" href="#_request_body_7">Request Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_links_7"><a class="link" href="#_links_7">Links</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Relation</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_response_7"><a class="link" href="#_http_response_7">HTTP Response</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 4027
+
+{
+  "content" : [ {
+    "commentId" : 1,
+    "userId" : 1,
+    "text" : "Text Comment One",
+    "date" : "01.11.2019",
+    "subComments" : [ {
+      "id" : 1,
+      "userId" : 1,
+      "text" : "test sub comment",
+      "date" : "02.11.2019"
+    } ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "commentId" : 2,
+    "userId" : 1,
+    "text" : "Text Comment Two",
+    "date" : "02.11.2019",
+    "subComments" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : false,
+      "unsorted" : true,
+      "empty" : true
+    },
+    "pageSize" : 2,
+    "pageNumber" : 0,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 2,
+  "totalElements" : 3,
+  "last" : false,
+  "first" : true,
+  "size" : 2,
+  "number" : 0,
+  "sort" : {
+    "sorted" : false,
+    "unsorted" : true,
+    "empty" : true
+  },
+  "numberOfElements" : 2,
+  "empty" : false
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_body_7"><a class="link" href="#_response_body_7">Response Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "content" : [ {
+    "commentId" : 1,
+    "userId" : 1,
+    "text" : "Text Comment One",
+    "date" : "01.11.2019",
+    "subComments" : [ {
+      "id" : 1,
+      "userId" : 1,
+      "text" : "test sub comment",
+      "date" : "02.11.2019"
+    } ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "commentId" : 2,
+    "userId" : 1,
+    "text" : "Text Comment Two",
+    "date" : "02.11.2019",
+    "subComments" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : false,
+      "unsorted" : true,
+      "empty" : true
+    },
+    "pageSize" : 2,
+    "pageNumber" : 0,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 2,
+  "totalElements" : 3,
+  "last" : false,
+  "first" : true,
+  "size" : 2,
+  "number" : 0,
+  "sort" : {
+    "sorted" : false,
+    "unsorted" : true,
+    "empty" : true
+  },
+  "numberOfElements" : 2,
+  "empty" : false
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_fields_6"><a class="link" href="#_response_fields_6">Response Fields</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3334%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Path</th>
+                    <th class="tableblock halign-left valign-top">Type</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>content.[].commentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of Comment</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].userId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].text</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].date</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>content.[].subComments.[]</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The array of sub comments by the
+                        comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].id</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of sub comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].userId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this sub comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].text</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the sub comment.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].date</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the sub comment.</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="sect2">
+        <h3 id="_get_page_of_sorted_comments_by_book_id"><a class="link"
+                                                            href="#_get_page_of_sorted_comments_by_book_id">Get Page Of
+            Sorted Comments By Book Id.</a></h3>
+        <div class="paragraph">
+            <p>Get Page Of Sorted Comments By Book Id.</p>
+        </div>
+        <div class="sect5">
+            <h6 id="_curl_request_8"><a class="link" href="#_curl_request_8">CURL Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/books/1/comments/0/2/date' -i -X GET</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_path_parameters_7"><a class="link" href="#_path_parameters_7">Path Parameters</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <caption class="title">Table 7.
+                    http://localhost:8082/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}
+                </caption>
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Parameter</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>bookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The bookId used to search for a
+                        comments.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>startPage</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">zero-based page index, must not
+                        be negative</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>pageSize</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">the size of the page to be
+                        returned, must be greater than 0</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sortOrder</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The value by which the sorted
+                        comments will be.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_request_8"><a class="link" href="#_http_request_8">HTTP Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /books/1/comments/0/2/date HTTP/1.1
+Host: localhost:8080</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_httpie_request_3"><a class="link" href="#_httpie_request_3">HTTPie Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http GET 'http://localhost:8080/books/1/comments/0/2/date'</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_request_body_8"><a class="link" href="#_request_body_8">Request Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_links_8"><a class="link" href="#_links_8">Links</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Relation</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_response_8"><a class="link" href="#_http_response_8">HTTP Response</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 4017
+
+{
+  "content" : [ {
+    "commentId" : 1,
+    "userId" : 1,
+    "text" : "Text Comment One",
+    "date" : "01.11.2019",
+    "subComments" : [ {
+      "id" : 1,
+      "userId" : 1,
+      "text" : "test sub comment",
+      "date" : "02.11.2019"
+    } ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "commentId" : 2,
+    "userId" : 1,
+    "text" : "Text Comment Two",
+    "date" : "02.11.2019",
+    "subComments" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : true,
+      "unsorted" : false,
+      "empty" : false
+    },
+    "pageSize" : 2,
+    "pageNumber" : 0,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 2,
+  "totalElements" : 3,
+  "last" : false,
+  "first" : true,
+  "size" : 2,
+  "number" : 0,
+  "sort" : {
+    "sorted" : true,
+    "unsorted" : false,
+    "empty" : false
+  },
+  "numberOfElements" : 2,
+  "empty" : false
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_body_8"><a class="link" href="#_response_body_8">Response Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "content" : [ {
+    "commentId" : 1,
+    "userId" : 1,
+    "text" : "Text Comment One",
+    "date" : "01.11.2019",
+    "subComments" : [ {
+      "id" : 1,
+      "userId" : 1,
+      "text" : "test sub comment",
+      "date" : "02.11.2019"
+    } ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "commentId" : 2,
+    "userId" : 1,
+    "text" : "Text Comment Two",
+    "date" : "02.11.2019",
+    "subComments" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : true,
+      "unsorted" : false,
+      "empty" : false
+    },
+    "pageSize" : 2,
+    "pageNumber" : 0,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 2,
+  "totalElements" : 3,
+  "last" : false,
+  "first" : true,
+  "size" : 2,
+  "number" : 0,
+  "sort" : {
+    "sorted" : true,
+    "unsorted" : false,
+    "empty" : false
+  },
+  "numberOfElements" : 2,
+  "empty" : false
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_fields_7"><a class="link" href="#_response_fields_7">Response Fields</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3334%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Path</th>
+                    <th class="tableblock halign-left valign-top">Type</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>content.[].commentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of Comment</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].userId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].text</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].date</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>content.[].subComments.[]</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The array of sub comments by the
+                        comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].id</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of sub comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].userId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this sub comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].text</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the sub comment.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content.[].subComments.[].date</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the sub comment.</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="sect2">
+        <h3 id="_delete_comment_by_comment_id"><a class="link" href="#_delete_comment_by_comment_id">Delete Comment By
+            Comment Id.</a></h3>
+        <div class="paragraph">
+            <p>Delete Comment By Comment Id.</p>
+        </div>
+        <div class="sect5">
+            <h6 id="_curl_request_9"><a class="link" href="#_curl_request_9">CURL Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/books/comments/1' -i -X DELETE</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_path_parameters_8"><a class="link" href="#_path_parameters_8">Path Parameters</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <caption class="title">Table 8. http://localhost:8082/books/comments/{commentId}</caption>
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Parameter</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>commentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The commentId used to search for
+                        a comment.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_request_9"><a class="link" href="#_http_request_9">HTTP Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /books/comments/1 HTTP/1.1
+Host: localhost:8080</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_httpie_request_4"><a class="link" href="#_httpie_request_4">HTTPie Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http DELETE 'http://localhost:8080/books/comments/1'</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_request_body_9"><a class="link" href="#_request_body_9">Request Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_links_9"><a class="link" href="#_links_9">Links</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Relation</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>self</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to self(deleteByCommentId)
+                        the comment resource by id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>add</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add the comment
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getByCommentId</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get comment resource by
+                        comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of comments
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSortedCommentsByBookId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        comments resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>updateByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to upgrade comment resource
+                        by comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>deleteAllCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
+                        by book id.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_response_9"><a class="link" href="#_http_response_9">HTTP Response</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 962
+
+{
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_body_9"><a class="link" href="#_response_body_9">Response Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_fields_8"><a class="link" href="#_response_fields_8">Response Fields</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3334%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Path</th>
+                    <th class="tableblock halign-left valign-top">Type</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>commentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of Comment</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>userId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>date</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>subComments.[]</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The array of sub comments by the
+                        comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.self.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to self(deleteByCommentId)
+                        the comment resource by id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.add.href</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add the comment
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.getByCommentId.href</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get comment resource by
+                        comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of comments
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get the page of sorted
+                        comments resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.updateByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to upgrade comment resource
+                        by comment id.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteAllCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
+                        by book id.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="sect2">
+        <h3 id="_delete_all_comments_by_book_id"><a class="link" href="#_delete_all_comments_by_book_id">Delete All
+            Comments By Book Id.</a></h3>
+        <div class="paragraph">
+            <p>Delete All Comments By Book Id.</p>
+        </div>
+        <div class="sect5">
+            <h6 id="_curl_request_10"><a class="link" href="#_curl_request_10">CURL Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/books/1/comments' -i -X DELETE</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_path_parameters_9"><a class="link" href="#_path_parameters_9">Path Parameters</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <caption class="title">Table 9. http://localhost:8082/books/{bookId}/comments</caption>
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Parameter</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>bookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The bookId used to search for a
+                        comment.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_request_10"><a class="link" href="#_http_request_10">HTTP Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /books/1/comments HTTP/1.1
+Host: localhost:8080</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_httpie_request_5"><a class="link" href="#_httpie_request_5">HTTPie Request</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http DELETE 'http://localhost:8080/books/1/comments'</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_request_body_10"><a class="link" href="#_request_body_10">Request Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+                    <pre class="highlightjs highlight nowrap"><code class="language-none hljs"></code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_http_response_10"><a class="link" href="#_http_response_10">HTTP Response</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 4798
+
+[ {
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByCommentId",
+    "href" : "http://localhost:8080/books/comments/1",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByCommentId",
+    "href" : "http://localhost:8080/books/comments/1",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByCommentId",
+    "href" : "http://localhost:8080/books/comments/1",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+}, {
+  "commentId" : 2,
+  "userId" : 1,
+  "text" : "Text Comment Two",
+  "date" : "02.11.2019",
+  "subComments" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByCommentId",
+    "href" : "http://localhost:8080/books/comments/2",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByCommentId",
+    "href" : "http://localhost:8080/books/comments/2",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByCommentId",
+    "href" : "http://localhost:8080/books/comments/2",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+}, {
+  "commentId" : 3,
+  "userId" : 1,
+  "text" : "Text Comment Three",
+  "date" : "03.11.2019",
+  "subComments" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByCommentId",
+    "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByCommentId",
+    "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByCommentId",
+    "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+} ]</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_body_10"><a class="link" href="#_response_body_10">Response Body</a></h6>
+            <div class="listingblock">
+                <div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">[ {
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByCommentId",
+    "href" : "http://localhost:8080/books/comments/1",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByCommentId",
+    "href" : "http://localhost:8080/books/comments/1",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByCommentId",
+    "href" : "http://localhost:8080/books/comments/1",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+}, {
+  "commentId" : 2,
+  "userId" : 1,
+  "text" : "Text Comment Two",
+  "date" : "02.11.2019",
+  "subComments" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByCommentId",
+    "href" : "http://localhost:8080/books/comments/2",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByCommentId",
+    "href" : "http://localhost:8080/books/comments/2",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByCommentId",
+    "href" : "http://localhost:8080/books/comments/2",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+}, {
+  "commentId" : 3,
+  "userId" : 1,
+  "text" : "Text Comment Three",
+  "date" : "03.11.2019",
+  "subComments" : [ ],
+  "links" : [ {
+    "rel" : "self",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "add",
+    "href" : "http://localhost:8080/books/1/comments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getByCommentId",
+    "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedCommentsByBookId",
+    "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateByCommentId",
+    "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteByCommentId",
+    "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  } ]
+} ]</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="sect5">
+            <h6 id="_response_fields_9"><a class="link" href="#_response_fields_9">Response Fields</a></h6>
+            <table class="tableblock frame-all grid-all stretch">
+                <colgroup>
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3333%;">
+                    <col style="width: 33.3334%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-top">Path</th>
+                    <th class="tableblock halign-left valign-top">Type</th>
+                    <th class="tableblock halign-left valign-top">Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].commentId</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The id of Comment</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].userId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The user id of the user who
+                        created this comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].text</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Text of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].date</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Date of the comment.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].subComments.[]</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">The array of sub comments by the
+                        comment.</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div id="footer">
     <div id="footer-text">
-        Last updated 2019-11-21 17:03:04 +0100
+        Last updated 2019-11-22 23:10:15 +0100
     </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

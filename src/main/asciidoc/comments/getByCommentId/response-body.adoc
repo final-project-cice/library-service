@@ -1,0 +1,42 @@
+[source,options="nowrap"]
+----
+{
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ {
+    "id" : 1,
+    "userId" : 1,
+    "text" : "test sub comment",
+    "date" : "02.11.2019"
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    }
+  }
+}
+----

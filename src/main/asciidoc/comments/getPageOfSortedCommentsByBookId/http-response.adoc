@@ -1,0 +1,166 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 4017
+
+{
+  "content" : [ {
+    "commentId" : 1,
+    "userId" : 1,
+    "text" : "Text Comment One",
+    "date" : "01.11.2019",
+    "subComments" : [ {
+      "id" : 1,
+      "userId" : 1,
+      "text" : "test sub comment",
+      "date" : "02.11.2019"
+    } ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  }, {
+    "commentId" : 2,
+    "userId" : 1,
+    "text" : "Text Comment Two",
+    "date" : "02.11.2019",
+    "subComments" : [ ],
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteByCommentId",
+      "href" : "http://localhost:8080/books/comments/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/1/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : true,
+      "unsorted" : false,
+      "empty" : false
+    },
+    "pageSize" : 2,
+    "pageNumber" : 0,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 2,
+  "totalElements" : 3,
+  "last" : false,
+  "first" : true,
+  "sort" : {
+    "sorted" : true,
+    "unsorted" : false,
+    "empty" : false
+  },
+  "number" : 0,
+  "numberOfElements" : 2,
+  "size" : 2,
+  "empty" : false
+}
+----

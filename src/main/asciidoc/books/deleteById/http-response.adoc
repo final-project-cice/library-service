@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2960
+Content-Length: 2967
 
 {
   "bookId" : 1,
@@ -49,7 +49,7 @@ Content-Length: 2960
   "publicationDate" : "30.10.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "02.11.2019",

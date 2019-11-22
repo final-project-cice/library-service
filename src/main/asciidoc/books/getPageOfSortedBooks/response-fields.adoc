@@ -117,7 +117,7 @@
 |`+Array+`
 |The array of comments of the Book.
 
-|`+content.[].comments.[].id+`
+|`+content.[].comments.[].commentId+`
 |`+Number+`
 |The id of the comment of the Book.
 

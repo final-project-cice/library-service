@@ -1,0 +1,40 @@
+|===
+|Path|Type|Description
+
+|`+content.[].commentId+`
+|`+Number+`
+|The id of Comment
+
+|`+content.[].userId+`
+|`+Number+`
+|The user id of the user who created this comment.
+
+|`+content.[].text+`
+|`+String+`
+|Text of the comment.
+
+|`+content.[].date+`
+|`+String+`
+|Date of the comment.
+
+|`+content.[].subComments.[]+`
+|`+Array+`
+|The array of sub comments by the comment.
+
+|`+content.[].subComments.[].id+`
+|`+Number+`
+|The id of sub comment.
+
+|`+content.[].subComments.[].userId+`
+|`+Number+`
+|The user id of the user who created this sub comment.
+
+|`+content.[].subComments.[].text+`
+|`+String+`
+|Text of the sub comment.
+
+|`+content.[].subComments.[].date+`
+|`+String+`
+|Date of the sub comment.
+
+|===

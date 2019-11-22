@@ -1,0 +1,25 @@
+|===
+|Relation|Description
+
+|`+self+`
+|Link to self(getBYCommentId) the comment resource by id.
+
+|`+add+`
+|Link to add the comment resource.
+
+|`+getPageOfCommentsByBookId+`
+|Link to get the page of comments resource.
+
+|`+getPageOfSortedCommentsByBookId+`
+|Link to get the page of sorted comments resource.
+
+|`+updateByCommentId+`
+|Link to upgrade comment resource by comment id.
+
+|`+deleteByCommentId+`
+|Link to delete comment resource by comment id.
+
+|`+deleteAllCommentsByBookId+`
+|Link to delete comments resource by book id.
+
+|===

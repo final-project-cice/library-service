@@ -1,0 +1,68 @@
+|===
+|Path|Type|Description
+
+|`+commentId+`
+|`+Number+`
+|The id of Comment
+
+|`+userId+`
+|`+Number+`
+|The user id of the user who created this comment.
+
+|`+text+`
+|`+String+`
+|Text of the comment.
+
+|`+date+`
+|`+String+`
+|Date of the comment.
+
+|`+subComments.[]+`
+|`+Array+`
+|The array of sub comments by the comment.
+
+|`+subComments.[].id+`
+|`+Number+`
+|The id of sub comment.
+
+|`+subComments.[].userId+`
+|`+Number+`
+|The user id of the user who created this sub comment.
+
+|`+subComments.[].text+`
+|`+String+`
+|Text of the sub comment.
+
+|`+subComments.[].date+`
+|`+String+`
+|Date of the sub comment.
+
+|`+_links.self.href+`
+|`+String+`
+|Link to self(getBYCommentId) the comment resource by id.
+
+|`+_links.add.href+`
+|`+String+`
+|Link to add the comment resource.
+
+|`+_links.getPageOfCommentsByBookId.href+`
+|`+String+`
+|Link to get the page of comments resource.
+
+|`+_links.getPageOfSortedCommentsByBookId.href+`
+|`+String+`
+|Link to get the page of sorted comments resource.
+
+|`+_links.updateByCommentId.href+`
+|`+String+`
+|Link to upgrade comment resource by comment id.
+
+|`+_links.deleteByCommentId.href+`
+|`+String+`
+|Link to delete comment resource by comment id.
+
+|`+_links.deleteAllCommentsByBookId.href+`
+|`+String+`
+|Link to delete comments resource by book id.
+
+|===

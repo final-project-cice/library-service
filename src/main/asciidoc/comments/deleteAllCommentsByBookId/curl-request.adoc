@@ -1,0 +1,4 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/books/1/comments' -i -X DELETE
+----

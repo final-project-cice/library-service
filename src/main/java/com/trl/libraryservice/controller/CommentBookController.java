@@ -3,6 +3,8 @@ package com.trl.libraryservice.controller;
 import com.trl.libraryservice.controller.dto.CommentBookDTO;
 import com.trl.libraryservice.service.CommentBookService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
@@ -17,6 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/books")
 public class CommentBookController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CommentBookController.class);
 
     private final CommentBookService commentBookService;
 
@@ -73,21 +77,24 @@ public class CommentBookController {
     public ResponseEntity<CommentBookDTO> getByCommentId(@PathVariable Long commentId) {
         ResponseEntity<CommentBookDTO> response = null;
 
+        LOG.debug("*****************************************************************     1");
+
         CommentBookDTO resultService = commentBookService.getByCommentId(commentId);
+        LOG.debug("*****************************************************************     2 = " + resultService);
 
         resultService.add(linkTo(methodOn(CommentBookController.class).getByCommentId(commentId))
                 .withSelfRel());
-        resultService.add(linkTo(methodOn(CommentBookController.class).add(resultService.getBook().getBookId(), null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).add(null, null))
                 .withRel("add"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(resultService.getBook().getBookId(), null, null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(null, null, null))
                 .withRel("getPageOfCommentsByBookId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(resultService.getBook().getBookId(), null, null, null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(null, null, null, null))
                 .withRel("getPageOfSortedCommentsByBookId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).updateByCommentId(commentId, null))
                 .withRel("updateByCommentId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteByCommentId(commentId))
                 .withRel("deleteByCommentId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(resultService.getBook().getBookId()))
+        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null))
                 .withRel("deleteAllCommentsByBookId"));
 
         response = ResponseEntity.ok(resultService);
@@ -193,17 +200,17 @@ public class CommentBookController {
 
         resultService.add(linkTo(methodOn(CommentBookController.class).updateByCommentId(commentId, null))
                 .withSelfRel());
-        resultService.add(linkTo(methodOn(CommentBookController.class).add(resultService.getBook().getBookId(), null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).add(null, null))
                 .withRel("add"));
         resultService.add(linkTo(methodOn(CommentBookController.class).getByCommentId(commentId))
                 .withRel("getByCommentId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(resultService.getBook().getBookId(), null, null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(null, null, null))
                 .withRel("getPageOfCommentsByBookId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(resultService.getBook().getBookId(), null, null, null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(null, null, null, null))
                 .withRel("getPageOfSortedCommentsByBookId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteByCommentId(commentId))
                 .withRel("deleteByCommentId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(resultService.getBook().getBookId()))
+        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null))
                 .withRel("deleteAllCommentsByBookId"));
 
         response = ResponseEntity.ok(resultService);
@@ -227,17 +234,17 @@ public class CommentBookController {
 
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteByCommentId(commentId))
                 .withSelfRel());
-        resultService.add(linkTo(methodOn(CommentBookController.class).add(resultService.getBook().getBookId(), null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).add(null, null))
                 .withRel("add"));
         resultService.add(linkTo(methodOn(CommentBookController.class).getByCommentId(commentId))
                 .withRel("getByCommentId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(resultService.getBook().getBookId(), null, null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(null, null, null))
                 .withRel("getPageOfCommentsByBookId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(resultService.getBook().getBookId(), null, null, null))
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(null, null, null, null))
                 .withRel("getPageOfSortedCommentsByBookId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).updateByCommentId(commentId, null))
                 .withRel("updateByCommentId"));
-        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(resultService.getBook().getBookId()))
+        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null))
                 .withRel("deleteAllCommentsByBookId"));
 
         response = ResponseEntity.ok(resultService);

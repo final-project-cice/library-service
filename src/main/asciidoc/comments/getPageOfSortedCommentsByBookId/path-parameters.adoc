@@ -1,0 +1,17 @@
+.+http://localhost:8082/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}+
+|===
+|Parameter|Description
+
+|`+bookId+`
+|The bookId used to search for a comments.
+
+|`+startPage+`
+|zero-based page index, must not be negative
+
+|`+pageSize+`
+|the size of the page to be returned, must be greater than 0
+
+|`+sortOrder+`
+|The value by which the sorted comments will be.
+
+|===

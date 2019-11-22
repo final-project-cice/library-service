@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import static java.lang.String.format;
@@ -183,6 +184,7 @@ public class CommentBookServiceImpl implements CommentBookService {
      * @throws BookNotExistException in case if book with this {@literal bookId} not exist.
      * @throws DataNotFoundException    in case if {@literal Page<CommentBookDTO>} not exist with this {@code bookId}.
      */
+    @Transactional
     @Override
     public Page<CommentBookDTO> getPageOfSortedCommentsByBookId(Long bookId, Integer startPage, Integer pageSize, String sortOrder) {
         Page<CommentBookDTO> pageOfCommentBookResult = null;
@@ -193,7 +195,7 @@ public class CommentBookServiceImpl implements CommentBookService {
         }
 
         LOG.debug("************ getPageOfSortedCommentsByBookId() ---> bookId = " + bookId + " ---> startPage = " + startPage
-                + " ---> pageSize = " + pageSize + " ---> sortOrder" + sortOrder);
+                + " ---> pageSize = " + pageSize + " ---> sortOrder = " + sortOrder);
 
         checkExistsBookById(bookId);
 

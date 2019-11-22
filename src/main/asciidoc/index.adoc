@@ -229,4 +229,200 @@ include::books/deleteById/response-body.adoc[]
 
 include::books/deleteById/response-fields.adoc[]
 
-= Author of the Book.
+= Comments of the Book.
+
+=== Get Comment By Comment Id.
+
+Get Comment By Comment Id.
+
+====== CURL Request
+
+include::comments/getByCommentId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::comments/getByCommentId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::comments/getByCommentId/http-request.adoc[]
+
+====== HTTPie Request
+
+include::comments/getByCommentId/httpie-request.adoc[]
+
+====== Request Body
+
+include::comments/getByCommentId/request-body.adoc[]
+
+====== Links
+
+include::comments/getByCommentId/links.adoc[]
+
+====== HTTP Response
+
+include::comments/getByCommentId/http-response.adoc[]
+
+====== Response Body
+
+include::comments/getByCommentId/response-body.adoc[]
+
+====== Response Fields
+
+include::comments/getByCommentId/response-fields.adoc[]
+
+=== Get Page Of Comments By Book Id.
+
+Get Page Of Comments By Book Id.
+
+====== CURL Request
+
+include::comments/getPageOfCommentsByBookId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::comments/getPageOfCommentsByBookId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::comments/getPageOfCommentsByBookId/http-request.adoc[]
+
+====== HTTPie Request
+
+include::comments/getPageOfCommentsByBookId/httpie-request.adoc[]
+
+====== Request Body
+
+include::comments/getPageOfCommentsByBookId/request-body.adoc[]
+
+====== Links
+
+include::comments/getPageOfCommentsByBookId/links.adoc[]
+
+====== HTTP Response
+
+include::comments/getPageOfCommentsByBookId/http-response.adoc[]
+
+====== Response Body
+
+include::comments/getPageOfCommentsByBookId/response-body.adoc[]
+
+====== Response Fields
+
+include::comments/getPageOfCommentsByBookId/response-fields.adoc[]
+
+=== Get Page Of Sorted Comments By Book Id.
+
+Get Page Of Sorted Comments By Book Id.
+
+====== CURL Request
+
+include::comments/getPageOfSortedCommentsByBookId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::comments/getPageOfSortedCommentsByBookId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::comments/getPageOfSortedCommentsByBookId/http-request.adoc[]
+
+====== HTTPie Request
+
+include::comments/getPageOfSortedCommentsByBookId/httpie-request.adoc[]
+
+====== Request Body
+
+include::comments/getPageOfSortedCommentsByBookId/request-body.adoc[]
+
+====== Links
+
+include::comments/getPageOfSortedCommentsByBookId/links.adoc[]
+
+====== HTTP Response
+
+include::comments/getPageOfSortedCommentsByBookId/http-response.adoc[]
+
+====== Response Body
+
+include::comments/getPageOfSortedCommentsByBookId/response-body.adoc[]
+
+====== Response Fields
+
+include::comments/getPageOfSortedCommentsByBookId/response-fields.adoc[]
+
+=== Delete Comment By Comment Id.
+
+Delete Comment By Comment Id.
+
+====== CURL Request
+
+include::comments/deleteByCommentId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::comments/deleteByCommentId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::comments/deleteByCommentId/http-request.adoc[]
+
+====== HTTPie Request
+
+include::comments/deleteByCommentId/httpie-request.adoc[]
+
+====== Request Body
+
+include::comments/deleteByCommentId/request-body.adoc[]
+
+====== Links
+
+include::comments/deleteByCommentId/links.adoc[]
+
+====== HTTP Response
+
+include::comments/deleteByCommentId/http-response.adoc[]
+
+====== Response Body
+
+include::comments/deleteByCommentId/response-body.adoc[]
+
+====== Response Fields
+
+include::comments/deleteByCommentId/response-fields.adoc[]
+
+=== Delete All Comments By Book Id.
+
+Delete All Comments By Book Id.
+
+====== CURL Request
+
+include::comments/deleteAllCommentsByBookId/curl-request.adoc[]
+
+====== Path Parameters
+
+include::comments/deleteAllCommentsByBookId/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::comments/deleteAllCommentsByBookId/http-request.adoc[]
+
+====== HTTPie Request
+
+include::comments/deleteAllCommentsByBookId/httpie-request.adoc[]
+
+====== Request Body
+
+include::comments/deleteAllCommentsByBookId/request-body.adoc[]
+
+====== HTTP Response
+
+include::comments/deleteAllCommentsByBookId/http-response.adoc[]
+
+====== Response Body
+
+include::comments/deleteAllCommentsByBookId/response-body.adoc[]
+
+====== Response Fields
+
+include::comments/deleteAllCommentsByBookId/response-fields.adoc[]

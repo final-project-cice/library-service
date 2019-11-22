@@ -1,0 +1,8 @@
+.+http://localhost:8082/books/comments/{commentId}+
+|===
+|Parameter|Description
+
+|`+commentId+`
+|The commentId used to search for a comment.
+
+|===

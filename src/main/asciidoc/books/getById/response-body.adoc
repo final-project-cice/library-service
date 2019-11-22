@@ -45,7 +45,7 @@
   "publicationDate" : "30.10.2019",
   "pathFile" : "path/path/book",
   "comments" : [ {
-    "id" : 1,
+    "commentId" : 1,
     "userId" : 1,
     "text" : "Text Comment",
     "date" : "02.11.2019",

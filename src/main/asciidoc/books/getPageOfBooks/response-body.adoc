@@ -46,7 +46,7 @@
     "publicationDate" : "30.10.2019",
     "pathFile" : "path/path/book",
     "comments" : [ {
-      "id" : 1,
+      "commentId" : 1,
       "userId" : 1,
       "text" : "Text Comment",
       "date" : "02.11.2019",
@@ -55,7 +55,8 @@
         "userId" : 1,
         "text" : "test sub comment",
         "date" : "02.11.2019"
-      } ]
+      } ],
+      "links" : [ ]
     } ],
     "authors" : [ {
       "id" : 1,
@@ -176,9 +177,9 @@
     "unsorted" : true,
     "empty" : true
   },
-  "size" : 1,
   "number" : 0,
   "numberOfElements" : 1,
+  "size" : 1,
   "empty" : false
 }
 ----
