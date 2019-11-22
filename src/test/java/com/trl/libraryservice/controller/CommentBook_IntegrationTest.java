@@ -1,5 +1,6 @@
 package com.trl.libraryservice.controller;
 
+import okhttp3.mockwebserver.MockWebServer;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,6 +41,7 @@ public class CommentBook_IntegrationTest {
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
+    private final MockWebServer mockWebServer = new MockWebServer();
     private static final String BASE_URL = "http://localhost:8082";
 
     @Before
@@ -76,7 +78,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 0)
-                        .content("{\"id\":null,\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -92,7 +94,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", -1)
-                        .content("{\"id\":null,\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -113,7 +115,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
-                        .content("{\"id\":null,\"userId\":null,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":null,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -129,7 +131,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
-                        .content("{\"id\":null,\"userId\":0,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":0,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -145,7 +147,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
-                        .content("{\"id\":null,\"userId\":-1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":-1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -161,7 +163,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
-                        .content("{\"id\":null,\"userId\":1,\"text\":null,\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":1,\"text\":null,\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -177,7 +179,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
-                        .content("{\"id\":null,\"userId\":1,\"text\":\"\",\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":1,\"text\":\"\",\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -193,7 +195,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
-                        .content("{\"id\":null,\"userId\":1,\"text\":\"Comment Message added.\",\"date\":null,\"subComments\":[]}")
+                        .content("{\"userId\":1,\"text\":\"Comment Message added.\",\"date\":null,\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -211,7 +213,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
-                        .content("{\"id\":null,\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
+                        .content("{\"userId\":1,\"text\":\"new comment added\",\"date\":\"12.06.2019\",\"subComments\":[]}")
                         .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -230,7 +232,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getById() throws Exception {
 
-        final String responseBodyContent = "{\"id\":1,\"userId\":1,\"text\":\"Text Comment One\",\"date\":\"01.11.2019\",\"subComments\":[{\"id\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}]}";
+        final String responseBodyContent = "{\"commentId\":1,\"userId\":1,\"text\":\"Text Comment One\",\"date\":\"01.11.2019\",\"subComments\":[{\"id\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}]}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", 1))

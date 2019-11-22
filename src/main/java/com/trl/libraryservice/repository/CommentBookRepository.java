@@ -1,5 +1,6 @@
 package com.trl.libraryservice.repository;
 
+import com.trl.libraryservice.repository.entity.BookEntity;
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
 
 import org.springframework.data.domain.Page;
@@ -20,17 +21,23 @@ import java.util.List;
  */
 public interface CommentBookRepository extends JpaRepository<CommentBookEntity, Long> {
 
+    @Transactional
     @Modifying
-    @Query(value = "INSERT INTO CommentBookEntity (userId, text, date, bookId) VALUES (:userId, :text, :date, :bookId)", nativeQuery = true)
+    @Query(value = "INSERT INTO comment_book (user_id, text, date, book_id) VALUES (:userId, :text, :date, :bookId)", nativeQuery = true)
     void add(@Param("userId") Long userId, @Param("text") String text,
              @Param("date") LocalDate date, @Param("bookId") Long bookId);
+
+
+    @Query(value = "SELECT e FROM CommentBookEntity e WHERE e.userId=:userId  AND e.text=:text AND e.date=:date AND e.book=:book")
+    CommentBookEntity findComment(@Param("userId") Long userId, @Param("text") String text,
+                                  @Param("date") LocalDate date, @Param("book") BookEntity book);
 
 
     @Query(value = "SELECT cb FROM CommentBookEntity cb WHERE cb.book.id=:bookId")
     List<CommentBookEntity> findByBookId(@Param("bookId") Long bookId);
 
     @Query(value = "SELECT cb FROM CommentBookEntity cb WHERE cb.book.id=:bookId")
-    Page<CommentBookEntity> findByBookId_RetrievePage(@Param("bookId") Long bookId, Pageable pageable);
+    Page<CommentBookEntity> getPageByBookId(@Param("bookId") Long bookId, Pageable pageable);
 
 
     @Transactional

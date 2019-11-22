@@ -43,7 +43,7 @@ public final class CommentBookConverter {
                 + " ---> commentBookEntity.getClass().getSimpleName() = " + entity.getClass().getSimpleName());
 
         result = new CommentBookDTO();
-        result.setId(entity.getId());
+        result.setCommentId(entity.getId());
         result.setUserId(entity.getUserId());
         result.setText(entity.getText());
         result.setDate(entity.getDate());
@@ -124,7 +124,7 @@ public final class CommentBookConverter {
                 + " ---> commentBookDTO.getClass().getSimpleName() = " + dto.getClass().getSimpleName());
 
         result = new CommentBookEntity();
-        result.setId(dto.getId());
+        result.setId(dto.getCommentId());
         result.setUserId(dto.getUserId());
         result.setText(dto.getText());
         result.setDate(dto.getDate());

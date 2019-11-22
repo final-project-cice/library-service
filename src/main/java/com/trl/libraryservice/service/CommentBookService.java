@@ -4,6 +4,8 @@ import com.trl.libraryservice.controller.dto.CommentBookDTO;
 
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 /**
  * This interface is designed to support service for {@literal CommentBookDTO}.
  *
@@ -11,18 +13,20 @@ import org.springframework.data.domain.Page;
  */
 public interface CommentBookService {
 
-    void add(Long bookId, CommentBookDTO commentBook);
+    CommentBookDTO add(Long bookId, CommentBookDTO commentBook);
 
 
-    CommentBookDTO getById(Long commentId);
+    CommentBookDTO getByCommentId(Long commentId);
 
-    Page<CommentBookDTO> getAllByBookId(Long bookId, Integer startPage, Integer pageSize);
+    Page<CommentBookDTO> getPageOfCommentsByBookId(Long bookId, Integer startPage, Integer pageSize);
+
+    Page<CommentBookDTO> getPageOfSortedCommentsByBookId(Long bookId, Integer startPage, Integer pageSize, String sortOrder);
 
 
-    CommentBookDTO updateById(Long commentId, CommentBookDTO commentBook);
+    CommentBookDTO updateByCommentId(Long commentId, CommentBookDTO commentBook);
 
 
-    void deleteById(Long commentId);
+    CommentBookDTO deleteByCommentId(Long commentId);
 
-    void deleteAllByBookId(Long bookId);
+    List<CommentBookDTO> deleteAllCommentsByBookId(Long bookId);
 }
