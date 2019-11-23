@@ -17,7 +17,7 @@ public class SubCommentCommentEntity {
 
     private Long userId;
 
-    @Column(name = "test", nullable = false)
+    @Column(name = "text", nullable = false)
     private String text;
 
     @Column(name = "date", nullable = false)

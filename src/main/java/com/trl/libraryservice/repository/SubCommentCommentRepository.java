@@ -1,5 +1,6 @@
 package com.trl.libraryservice.repository;
 
+import com.trl.libraryservice.repository.entity.CommentBookEntity;
 import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 
 import org.springframework.data.domain.Page;
@@ -20,14 +21,17 @@ import java.util.List;
  */
 public interface SubCommentCommentRepository extends JpaRepository<SubCommentCommentEntity, Long> {
 
+    @Transactional
     @Modifying
-    @Query(value = "INSERT INTO SubCommentCommenEntity (userId, text, date, commentId) VALUES (:userId, :text, :date, :commentId)", nativeQuery = true)
-    void add(@Param("userId") Long userId, @Param("text") String text,
-             @Param("date") LocalDate date, @Param("commentId") Long commentId);
+    @Query(value = "INSERT INTO sub_comment_comment (id, date, text, user_id, comment_id) VALUES (:id, :date, :text, :userId, :commentId)", nativeQuery = true)
+    void add(@Param("id") Long id, @Param("date") LocalDate date, @Param("text") String text, @Param("userId") Long userId, @Param("commentId") Long commentId);
 
 
     @Query(value = "SELECT e FROM SubCommentCommentEntity e WHERE e.comment.id=:commentId")
     List<SubCommentCommentEntity> findByCommentId(@Param("commentId") Long commentId);
+
+    @Query(value = "SELECT e FROM SubCommentCommentEntity e WHERE e.userId=:userId AND e.text=:text AND e.date=:date AND e.comment=:comment")
+    SubCommentCommentEntity findSubComment(@Param("userId") Long userId, @Param("text") String text, @Param("date") LocalDate date, @Param("comment") CommentBookEntity comment);
 
     @Query(value = "SELECT e FROM SubCommentCommentEntity e WHERE e.comment.id=:commentId")
     Page<SubCommentCommentEntity> findByCommentId_RetrievePage(@Param("commentId") Long commentId, Pageable pageable);

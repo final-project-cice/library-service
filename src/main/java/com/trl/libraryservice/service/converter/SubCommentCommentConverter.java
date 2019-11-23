@@ -43,7 +43,7 @@ public final class SubCommentCommentConverter {
                 + " ---> subCommentCommentEntity.getClass().getSimpleName() = " + entity.getClass().getSimpleName());
 
         result = new SubCommentCommentDTO();
-        result.setId(entity.getId());
+        result.setSubCommentId(entity.getId());
         result.setUserId(entity.getUserId());
         result.setText(entity.getText());
         result.setDate(entity.getDate());
@@ -123,7 +123,7 @@ public final class SubCommentCommentConverter {
                 + " ---> subCommentCommentDTO.getClass().getSimpleName() = " + dto.getClass().getSimpleName());
 
         result = new SubCommentCommentEntity();
-        result.setId(dto.getId());
+        result.setId(dto.getSubCommentId());
         result.setUserId(dto.getUserId());
         result.setText(dto.getText());
         result.setDate(dto.getDate());

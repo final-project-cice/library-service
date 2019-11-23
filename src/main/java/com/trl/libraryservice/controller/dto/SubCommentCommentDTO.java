@@ -2,13 +2,14 @@ package com.trl.libraryservice.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class SubCommentCommentDTO {
+public class SubCommentCommentDTO extends ResourceSupport {
 
-    private Long id;
+    private Long subCommentId;
     private Long userId;
     private String text;
 
@@ -20,12 +21,12 @@ public class SubCommentCommentDTO {
 
     public SubCommentCommentDTO() { }
 
-    public Long getId() {
-        return id;
+    public Long getSubCommentId() {
+        return subCommentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSubCommentId(Long subCommentId) {
+        this.subCommentId = subCommentId;
     }
 
     public Long getUserId() {
@@ -65,7 +66,7 @@ public class SubCommentCommentDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubCommentCommentDTO that = (SubCommentCommentDTO) o;
-        return Objects.equals(id, that.id) &&
+        return Objects.equals(subCommentId, that.subCommentId) &&
                 Objects.equals(userId, that.userId) &&
                 Objects.equals(text, that.text) &&
                 Objects.equals(date, that.date);
@@ -73,13 +74,13 @@ public class SubCommentCommentDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, text, date);
+        return Objects.hash(subCommentId, userId, text, date);
     }
 
     @Override
     public String toString() {
         return "SubCommentCommentDTO{" +
-                "id=" + id +
+                "id=" + subCommentId +
                 ", user=" + userId +
                 ", text='" + text + '\'' +
                 ", date=" + date +
