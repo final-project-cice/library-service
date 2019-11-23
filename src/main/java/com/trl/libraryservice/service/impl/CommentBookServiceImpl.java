@@ -59,6 +59,7 @@ public class CommentBookServiceImpl implements CommentBookService {
      *
      * @param bookId      must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
      * @param commentBook must not be equal to {@literal null}.
+     * @return {@literal CommentBookDTO} this comment to be saved.
      * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null}
      *                                  or if {@code bookId} is equal or less zero.
      *                                  And if {@code commentBook} is equals to {@literal null}.
@@ -84,7 +85,8 @@ public class CommentBookServiceImpl implements CommentBookService {
         LOG.debug("************ add() ---> userId = " + commentBook.getUserId());
         UserUtils.checkExistsUserById(commentBook.getUserId(), webClientBuilder);
 
-        commentBookRepository.add(commentBook.getUserId(), commentBook.getText(), commentBook.getDate(), bookId);
+        Long generatedId = commentBookRepository.count() + 1;
+        commentBookRepository.add(generatedId, commentBook.getDate(), commentBook.getText(), commentBook.getUserId(), bookId);
 
         BookEntity bookEntity = new BookEntity();
         bookEntity.setId(bookId);
@@ -178,7 +180,7 @@ public class CommentBookServiceImpl implements CommentBookService {
      * @param bookId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
      * @param startPage zero-based page index, must not be negative.
      * @param pageSize the size of the page to be returned, must be greater than 0.
-     * @param sortOrder the value by which the sorted books will be. Must not be {@literal null}.
+     * @param sortOrder the value by which the sorted CommentBookDTOs will be. Must not be {@literal null}.
      * @return the {@literal Page<CommentBookDTO>} with the given {@code bookId}.
      * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null} or if {@code bookId} is equal or less zero.
      * @throws BookNotExistException in case if book with this {@literal bookId} not exist.
@@ -218,7 +220,7 @@ public class CommentBookServiceImpl implements CommentBookService {
      *
      * @param commentId   must not be {@literal null}, and {@code id} must be greater than zero.
      * @param commentBook must not be {@literal null}.
-     * @return the {@literal CommentBookDTO}.
+     * @return the {@literal CommentBookDTO} this comment to be updated.
      * @throws IllegalArgumentException in case the given {@code book} is {@literal null}.
      * @throws DataNotFoundException    in case if {@literal BookDTO} not exist by {@code id}.
      * @throws TheSameValueException    in case if {@code name} equals to name book.
@@ -327,7 +329,7 @@ public class CommentBookServiceImpl implements CommentBookService {
     }
 
     private void checkExistsBookById(Long bookId) {
-        if (bookRepository.findById(bookId).isEmpty()) {
+        if (!bookRepository.existsById(bookId)) {
             LOG.debug("************ checkExistsBookById() ---> " + "Book with this id = " + bookId + " not exist.");
             throw new BookNotExistException("Book with this id = " + bookId + " not exist.");
         }

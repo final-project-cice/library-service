@@ -23,14 +23,12 @@ public interface CommentBookRepository extends JpaRepository<CommentBookEntity, 
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO comment_book (user_id, text, date, book_id) VALUES (:userId, :text, :date, :bookId)", nativeQuery = true)
-    void add(@Param("userId") Long userId, @Param("text") String text,
-             @Param("date") LocalDate date, @Param("bookId") Long bookId);
+    @Query(value = "INSERT INTO comment_book (id, date, text, user_id, book_id) VALUES (:id, :date, :text, :userId, :bookId)", nativeQuery = true)
+    void add(@Param("id") Long id, @Param("date") LocalDate date, @Param("text") String text, @Param("userId") Long userId, @Param("bookId") Long bookId);
 
 
     @Query(value = "SELECT e FROM CommentBookEntity e WHERE e.userId=:userId  AND e.text=:text AND e.date=:date AND e.book=:book")
-    CommentBookEntity findComment(@Param("userId") Long userId, @Param("text") String text,
-                                  @Param("date") LocalDate date, @Param("book") BookEntity book);
+    CommentBookEntity findComment(@Param("userId") Long userId, @Param("text") String text, @Param("date") LocalDate date, @Param("book") BookEntity book);
 
 
     @Query(value = "SELECT cb FROM CommentBookEntity cb WHERE cb.book.id=:bookId")

@@ -23,8 +23,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -46,9 +45,6 @@ public class CommentBook_IntegrationTest {
     @Autowired
     private WebApplicationContext context;
 
-//    @Autowired
-//    private MockWebServer mockWebServer;
-
     private MockMvc mockMvc;
     private static final String BASE_URL = "http://localhost:8082";
 
@@ -62,15 +58,67 @@ public class CommentBook_IntegrationTest {
                 .build();
     }
 
-    //    @MockBean
-//    WebClientFactory webClientFactory;
-
-    @Sql(value = {"/CommentBook_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void add() throws Exception {
-        // TODO: how to use MockMvc to mock webclient.
-        // TODO: Finish this test.
+        // TODO: How mock webclient, which uses this method.
+
+        final String responseBodyContent = "{\"commentId\":4,\"userId\":1,\"text\":\"new comment added\",\"date\":\"01.01.2000\",\"subComments\":[],\"_links\":{\"self\":{\"href\":\"http://localhost:8080/books/1/comments\"},\"getByCommentId\":{\"href\":\"http://localhost:8080/books/comments/4\"},\"getPageOfCommentsByBookId\":{\"href\":\"http://localhost:8080/books/1/comments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedCommentsByBookId\":{\"href\":\"http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"updateByCommentId\":{\"href\":\"http://localhost:8080/books/comments/4\"},\"deleteByCommentId\":{\"href\":\"http://localhost:8080/books/comments/4\"},\"deleteAllCommentsByBookId\":{\"href\":\"http://localhost:8080/books/1/comments\"}}}";
+        this.mockMvc.perform(
+                post(BASE_URL + "/books/{bookId}/comments", 1)
+                        .content("{\"userId\":1,\"text\":\"new comment added\",\"date\":\"01.01.2000\",\"subComments\":[]}")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8_VALUE))
+                .andExpect(content().string(containsString(responseBodyContent)))
+                .andDo(print())
+                .andDo(document("comments/add",
+                        pathParameters(
+                                parameterWithName("bookId").description("The book id to which comments will be added. .")
+                        ),
+                        requestFields(
+                                fieldWithPath("userId").description("The user id of the user who created this comment."),
+                                fieldWithPath("text").description("Text of the comment."),
+                                fieldWithPath("date").description("Date of the comment."),
+                                fieldWithPath("subComments.[]").description("The array of sub comments by the comment.")
+                        ),
+                        responseFields(
+                                fieldWithPath("commentId").description("The id of Comment"),
+                                fieldWithPath("userId").description("The user id of the user who created this comment."),
+                                fieldWithPath("text").description("Text of the comment."),
+                                fieldWithPath("date").description("Date of the comment."),
+                                fieldWithPath("subComments.[]").description("The array of sub comments by the comment."),
+                                fieldWithPath("_links.self.href").description("Link to self(add) the comment resource."),
+                                fieldWithPath("_links.getByCommentId.href").description("Link to get the comment resource by comment id."),
+                                fieldWithPath("_links.getPageOfCommentsByBookId.href").description("Link to get the page of comments resource by book id."),
+                                fieldWithPath("_links.getPageOfCommentsByBookId.templated").ignored(),
+                                fieldWithPath("_links.getPageOfSortedCommentsByBookId.href").description("Link to get the page of sorted comments resource by book id."),
+                                fieldWithPath("_links.getPageOfSortedCommentsByBookId.templated").ignored(),
+                                fieldWithPath("_links.updateByCommentId.href").description("Link to upgrade comment resource by comment id."),
+                                fieldWithPath("_links.deleteByCommentId.href").description("Link to delete comment resource by comment id."),
+                                fieldWithPath("_links.deleteAllCommentsByBookId.href").description("Link to delete comments resource by book id.")
+                        ),
+                        links(
+                                linkWithRel("self").description("Link to self(add) the comment resource."),
+                                linkWithRel("getByCommentId").description("Link to get the comment resource by comment id."),
+                                linkWithRel("getPageOfCommentsByBookId").description("Link to get the page of comments resource by book id."),
+                                linkWithRel("getPageOfSortedCommentsByBookId").description("Link to get the page of sorted comments resource by book id."),
+                                linkWithRel("updateByCommentId").description("Link to upgrade comment resource by comment id."),
+                                linkWithRel("deleteByCommentId").description("Link to delete comment resource by comment id."),
+                                linkWithRel("deleteAllCommentsByBookId").description("Link to delete comments resource by book id.")
+                        )
+                ));
+
+        // Check if comment is add correctly.
+        final String responseBodyContent_2 = "{\"bookId\":1,\"name\":\"My first Book\",\"genres\":[{\"id\":1,\"name\":\"Genre Book Uno\"},{\"id\":2,\"name\":\"Genre Book Dos\"}],\"publishingHouse\":{\"id\":1,\"name\":\"Publication House\",\"address\":{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":1111},\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"0111111111111111\",\"countryCode\":\"11111\",\"type\":\"Office\"},{\"id\":2,\"phoneNumber\":\"02222222222222\",\"countryCode\":\"222222\",\"type\":\"Fax\"}],\"emails\":[{\"id\":1,\"email\":\"email_1_publicationHouse9@email.com\",\"emailType\":\"Office\"},{\"id\":2,\"email\":\"email_2_publicationHouse9@email.com\",\"emailType\":\"Office 2\"}]},\"publicationDate\":\"30.10.2019\",\"pathFile\":\"path/path/book\",\"comments\":[{\"commentId\":1,\"userId\":1,\"text\":\"Text Comment One\",\"date\":\"01.11.2019\",\"subComments\":[{\"subCommentId\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}]},{\"commentId\":2,\"userId\":1,\"text\":\"Text Comment Two\",\"date\":\"02.11.2019\",\"subComments\":[]},{\"commentId\":3,\"userId\":1,\"text\":\"Text Comment Three\",\"date\":\"03.11.2019\",\"subComments\":[]},{\"commentId\":4,\"userId\":1,\"text\":\"new comment added\",\"date\":\"01.01.2000\",\"subComments\":[]}],\"authors\":[{\"id\":1,\"firstName\":\"Author_1 FirstName\",\"lastName\":\"Author_1 LastName\",\"emails\":[{\"id\":1,\"email\":\"email_1.author_19@email.com\",\"emailType\":\"Personal\"},{\"id\":2,\"email\":\"email_2.author_19@email.com\",\"emailType\":\"Personal\"}],\"phoneNumbers\":[{\"id\":1,\"phoneNumber\":\"01111111111111\",\"countryCode\":\"111\",\"type\":\"Personal\"},{\"id\":2,\"phoneNumber\":\"0222222222222222\",\"countryCode\":\"222\",\"type\":\"Work\"}],\"addresses\":[{\"id\":1,\"country\":\"Spain\",\"city\":\"Madrid\",\"street\":\"Calle Uno\",\"houseNumber\":\"1A\",\"postcode\":111111},{\"id\":2,\"country\":\"Spain\",\"city\":\"Barcelona\",\"street\":\"Calle Dos\",\"houseNumber\":\"2A\",\"postcode\":222222}],\"birthday\":\"30.10.2019\",\"genres\":[{\"id\":1,\"name\":\"Genre Uno\"},{\"id\":2,\"name\":\"Genre Dos\"}]}],\"_links\":{\"self\":{\"href\":\"http://localhost:8080/books/{id}\",\"templated\":true},\"add\":{\"href\":\"http://localhost:8080/books\"},\"getPageOfBooks\":{\"href\":\"http://localhost:8080/books/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedBooks\":{\"href\":\"http://localhost:8080/books/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"update\":{\"href\":\"http://localhost:8080/books/1\"},\"deleteById\":{\"href\":\"http://localhost:8080/books/1\"}}}";
+        this.mockMvc.perform(
+                get(BASE_URL + "/books/{bookId}", 1))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8_VALUE))
+                .andExpect(content().string(containsString(responseBodyContent_2)))
+                .andDo(print());
+
     }
 
     @Test
@@ -229,10 +277,22 @@ public class CommentBook_IntegrationTest {
                 .andDo(print());
     }
 
+    @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void add_User_ByUserId_NotExist() throws Exception {
-        // TODO: how to use MockMvc to mock webclient.
-        // TODO: Finish this test.
+        // TODO: How mock webclient, which uses this method.
+
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
+        final String responseBodyContent = "{\"errorMessage\":\"User by this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        this.mockMvc.perform(
+                post(BASE_URL + "/books/{bookId}/comments", 1)
+                        .content("{\"userId\":100,\"text\":\"new comment added\",\"date\":\"01.01.2000\",\"subComments\":[]}")
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().string(containsString(responseBodyContent)))
+                .andDo(print());
     }
 
     @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -240,7 +300,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getByCommentId() throws Exception {
 
-        final String responseBodyContent = "{\"commentId\":1,\"userId\":1,\"text\":\"Text Comment One\",\"date\":\"01.11.2019\",\"subComments\":[{\"id\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}],\"_links\":{\"self\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"add\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true},\"getPageOfCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"updateByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"deleteByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"deleteAllCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true}}}";
+        final String responseBodyContent = "{\"commentId\":1,\"userId\":1,\"text\":\"Text Comment One\",\"date\":\"01.11.2019\",\"subComments\":[{\"subCommentId\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}],\"_links\":{\"self\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"add\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true},\"getPageOfCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"updateByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"deleteByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"deleteAllCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true}}}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", 1))
@@ -258,7 +318,7 @@ public class CommentBook_IntegrationTest {
                                 fieldWithPath("text").description("Text of the comment."),
                                 fieldWithPath("date").description("Date of the comment."),
                                 fieldWithPath("subComments.[]").description("The array of sub comments by the comment."),
-                                fieldWithPath("subComments.[].id").description("The id of sub comment."),
+                                fieldWithPath("subComments.[].subCommentId").description("The id of sub comment."),
                                 fieldWithPath("subComments.[].userId").description("The user id of the user who created this sub comment."),
                                 fieldWithPath("subComments.[].text").description("Text of the sub comment."),
                                 fieldWithPath("subComments.[].date").description("Date of the sub comment."),
@@ -362,10 +422,11 @@ public class CommentBook_IntegrationTest {
                                 fieldWithPath("content.[].text").description("Text of the comment."),
                                 fieldWithPath("content.[].date").description("Date of the comment."),
                                 fieldWithPath("content.[].subComments.[]").description("The array of sub comments by the comment."),
-                                fieldWithPath("content.[].subComments.[].id").description("The id of sub comment."),
+                                fieldWithPath("content.[].subComments.[].subCommentId").description("The id of sub comment."),
                                 fieldWithPath("content.[].subComments.[].userId").description("The user id of the user who created this sub comment."),
                                 fieldWithPath("content.[].subComments.[].text").description("Text of the sub comment."),
                                 fieldWithPath("content.[].subComments.[].date").description("Date of the sub comment."),
+                                fieldWithPath("content.[].subComments.[].links.[]").ignored(),
                                 fieldWithPath("content.[].links[].href").ignored(),
                                 fieldWithPath("content.[].links[].rel").ignored(),
                                 fieldWithPath("content.[].links[].hreflang").ignored(),
@@ -492,10 +553,11 @@ public class CommentBook_IntegrationTest {
                                 fieldWithPath("content.[].text").description("Text of the comment."),
                                 fieldWithPath("content.[].date").description("Date of the comment."),
                                 fieldWithPath("content.[].subComments.[]").description("The array of sub comments by the comment."),
-                                fieldWithPath("content.[].subComments.[].id").description("The id of sub comment."),
+                                fieldWithPath("content.[].subComments.[].subCommentId").description("The id of sub comment."),
                                 fieldWithPath("content.[].subComments.[].userId").description("The user id of the user who created this sub comment."),
                                 fieldWithPath("content.[].subComments.[].text").description("Text of the sub comment."),
                                 fieldWithPath("content.[].subComments.[].date").description("Date of the sub comment."),
+                                fieldWithPath("content.[].subComments.[].links.[]").ignored(),
                                 fieldWithPath("content.[].links[].href").ignored(),
                                 fieldWithPath("content.[].links[].rel").ignored(),
                                 fieldWithPath("content.[].links[].hreflang").ignored(),

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +61,7 @@ public class CommentBookController {
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(bookId))
                 .withRel("deleteAllCommentsByBookId"));
 
-        response = ResponseEntity.ok().build();
+        response = ResponseEntity.status(HttpStatus.CREATED).body(resultService);
 
         return response;
     }
