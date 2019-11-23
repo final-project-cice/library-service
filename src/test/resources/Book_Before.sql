@@ -20,7 +20,7 @@ values (1, 'BBBBBBBBB', 'path/path/book', '2019-10-30', 1);
 insert into comment_book (id, date, text, user_id, book_id)
 values (1, '2019-11-02', 'Text Comment', 1, 1);
 
-insert into sub_comment_comment (id, date, test, user_id, comment_id)
+insert into sub_comment_comment (id, date, text, user_id, comment_id)
 values (1, '2019-11-02', 'test sub comment', 1, 1);
 
 insert into genre_book (id, name, book_id)
@@ -78,7 +78,7 @@ values (2, 'AAAAAAAAAA', 'path/path/book', '2019-10-30', 2);
 insert into comment_book (id, date, text, user_id, book_id)
 values (2, '2019-11-02', 'Text Comment', 1, 2);
 
-insert into sub_comment_comment (id, date, test, user_id, comment_id)
+insert into sub_comment_comment (id, date, text, user_id, comment_id)
 values (2, '2019-11-02', 'test sub comment', 1, 2);
 
 insert into genre_book (id, name, book_id)

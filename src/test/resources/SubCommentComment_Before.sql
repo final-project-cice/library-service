@@ -24,11 +24,11 @@ VALUES (2, '2019-11-02', 'Text Comment Two', 1, 1);
 INSERT INTO comment_book (id, date, text, user_id, book_id)
 VALUES (3, '2019-11-03', 'Text Comment Three', 1, 1);
 
-INSERT INTO sub_comment_comment (id, date, test, user_id, comment_id)
+INSERT INTO sub_comment_comment (id, date, text, user_id, comment_id)
 VALUES (1, '2019-11-01', 'test sub comment First', 1, 1);
-INSERT INTO sub_comment_comment (id, date, test, user_id, comment_id)
+INSERT INTO sub_comment_comment (id, date, text, user_id, comment_id)
 VALUES (2, '2019-11-02', 'test sub comment Second', 1, 1);
-INSERT INTO sub_comment_comment (id, date, test, user_id, comment_id)
+INSERT INTO sub_comment_comment (id, date, text, user_id, comment_id)
 VALUES (3, '2019-11-03', 'test sub comment Three', 1, 1);
 
 INSERT INTO genre_book (id, name, book_id)

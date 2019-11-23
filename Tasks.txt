@@ -13,8 +13,10 @@ Pensar...
 De momento dejo que microservice "libraryservice" guarda y busca "Users" en su base de datos.
 
 ========================================================================================================================
-                         Esta problema esta en clase User y provaca en otros calsses que esta relacionados.
-User tiene campo email de tipo String. Pensar para hacer campo email de un tipo de objeto Email.
+                                     BookDTO.path
+Classe BookDTO tiene campo path. tengo que eliminar este campo de la clase BookDTO. Y hacer un methodo que va guardar archivo de libro
+en ordenador. O mejor opcion installar una base de datos de tipo archivo como mongoDB y guardar archvo de libro en esta base de datos.
+Pensar donde va estar este methoso que va guardar archvo.
 
 ========================================================================================================================
                                       Todos methodos find... en "layout service".
@@ -25,6 +27,7 @@ Link: https://www.baeldung.com/spring-data-jpa-pagination-sorting
                                Dudas con exceptiones en cada methodo de "layout service".
 No estoy seguro si el uso de excepiones en cada methodo de "layout service" es correcto.
 Buscar la informacion sobre esto.
+Como se dice construir la logica de aplicacion en excepciones. Es incorrecto.
 
 ========================================================================================================================
 Explicar porque estoy usando mi exceptio InvalidArgumentException
@@ -58,9 +61,33 @@ Poner nombre SubComment... y no SubCommentComment...
 ========================================================================================================================
                                         terminar metodo Book.update()
 Terminar este metodo.
+Y hacer los IntegrationTest
 
 ========================================================================================================================
                                        terminar metodo update() en todos classes
 Terminar este metodo.
+Y hacer los IntegrationTest
+
+========================================================================================================================
+                                       CommentBook.add()
+De momento no encontrado la manera como puede mokear el WebClient. Terminar este test.
+*****************************
+No me agustado com le echo la implementacion de guardar en la base y sacar la entity. Buscar la forma mas optimal de hacer esta operacion.
+*****************************
+No se por que rason el methodo SubCommentSubcommentRepository.add() no genera id automaticamente correcto. Y por esta rason echo de esta manera.
+*****************************
+Buscar la forma como se puede hacer mock al WebClient cual usa este metodo. Para que el test de este methodo estara independiente de user-servie.
+
+========================================================================================================================
+                                       SubCommentComment.add()
+De momento no encontrado la manera como puede mokear el WebClient. Terminar este test
+*****************************
+No me agustado com le echo la implementacion de guardar en la base y sacar la entity. Buscar la forma mas optimal de hacer esta operacion.
+*****************************
+No se por que rason el methodo SubCommentSubcommentRepository.add() no genera id automaticamente correcto. Y por esta rason echo de esta manera.
+*****************************
+Buscar la forma como se puede hacer mock al WebClient cual usa este metodo. Para que el test de este methodo estara independiente de user-servie.
+
+========================================================================================================================
 
 ========================================================================================================================
