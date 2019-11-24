@@ -21,7 +21,7 @@
 |`+Array+`
 |The array of sub comments by the comment.
 
-|`+content.[].subComments.[].id+`
+|`+content.[].subComments.[].subCommentId+`
 |`+Number+`
 |The id of sub comment.
 

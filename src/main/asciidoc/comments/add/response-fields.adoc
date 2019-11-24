@@ -1,0 +1,52 @@
+|===
+|Path|Type|Description
+
+|`+commentId+`
+|`+Number+`
+|The id of Comment
+
+|`+userId+`
+|`+Number+`
+|The user id of the user who created this comment.
+
+|`+text+`
+|`+String+`
+|Text of the comment.
+
+|`+date+`
+|`+String+`
+|Date of the comment.
+
+|`+subComments.[]+`
+|`+Array+`
+|The array of sub comments by the comment.
+
+|`+_links.self.href+`
+|`+String+`
+|Link to self(add) the comment resource.
+
+|`+_links.getByCommentId.href+`
+|`+String+`
+|Link to get the comment resource by comment id.
+
+|`+_links.getPageOfCommentsByBookId.href+`
+|`+String+`
+|Link to get the page of comments resource by book id.
+
+|`+_links.getPageOfSortedCommentsByBookId.href+`
+|`+String+`
+|Link to get the page of sorted comments resource by book id.
+
+|`+_links.updateByCommentId.href+`
+|`+String+`
+|Link to upgrade comment resource by comment id.
+
+|`+_links.deleteByCommentId.href+`
+|`+String+`
+|Link to delete comment resource by comment id.
+
+|`+_links.deleteAllCommentsByBookId.href+`
+|`+String+`
+|Link to delete comments resource by book id.
+
+|===

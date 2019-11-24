@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ echo '{"userId":1,"text":"new comment added","date":"01.01.2000","subComments":[]}' | http POST 'http://localhost:8080/books/1/comments' \
+    'Content-Type:application/json;charset=UTF-8'
+----

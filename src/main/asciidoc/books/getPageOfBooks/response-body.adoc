@@ -51,10 +51,11 @@
       "text" : "Text Comment",
       "date" : "02.11.2019",
       "subComments" : [ {
-        "id" : 1,
+        "subCommentId" : 1,
         "userId" : 1,
         "text" : "test sub comment",
-        "date" : "02.11.2019"
+        "date" : "02.11.2019",
+        "links" : [ ]
       } ],
       "links" : [ ]
     } ],
@@ -177,9 +178,9 @@
     "unsorted" : true,
     "empty" : true
   },
+  "size" : 1,
   "number" : 0,
   "numberOfElements" : 1,
-  "size" : 1,
   "empty" : false
 }
 ----

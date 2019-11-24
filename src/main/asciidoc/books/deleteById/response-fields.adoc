@@ -129,7 +129,7 @@
 |`+Array+`
 |The array of subComment of the Comment.
 
-|`+comments.[].subComments.[].id+`
+|`+comments.[].subComments.[].subCommentId+`
 |`+Number+`
 |The id of the subComment of the Comment.
 

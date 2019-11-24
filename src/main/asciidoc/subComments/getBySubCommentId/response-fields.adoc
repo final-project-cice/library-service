@@ -1,0 +1,48 @@
+|===
+|Path|Type|Description
+
+|`+subCommentId+`
+|`+Number+`
+|The id of Comment
+
+|`+userId+`
+|`+Number+`
+|The user id of the user who created this comment.
+
+|`+text+`
+|`+String+`
+|Text of the comment.
+
+|`+date+`
+|`+String+`
+|Date of the comment.
+
+|`+_links.self.href+`
+|`+String+`
+|Link to self(getBySubCommentId) the sub comment resource.
+
+|`+_links.add.href+`
+|`+String+`
+|Link to add the sub comment resource by comment id.
+
+|`+_links.getPageOfSubCommentsByCommentId.href+`
+|`+String+`
+|Link to get the page of sub comments resource by comment id.
+
+|`+_links.getPageOfSortedSubCommentsByCommentId.href+`
+|`+String+`
+|Link to get the page of sorted sub comments resource by comment id.
+
+|`+_links.updateBySubCommentId.href+`
+|`+String+`
+|Link to upgrade sub comment resource by sub comment id.
+
+|`+_links.deleteBySubCommentId.href+`
+|`+String+`
+|Link to delete sub comment resource by sub comment id.
+
+|`+_links.deleteAllSubCommentsByCommentId.href+`
+|`+String+`
+|Link to delete sub comments resource by comment id.
+
+|===

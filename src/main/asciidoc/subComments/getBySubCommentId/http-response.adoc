@@ -1,0 +1,41 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 1110
+
+{
+  "subCommentId" : 1,
+  "userId" : 1,
+  "text" : "test sub comment First",
+  "date" : "01.11.2019",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/comments/subComments/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books/comments/{commentId}/subComments",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/{commentId}/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/1"
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/{commentId}/subComments",
+      "templated" : true
+    }
+  }
+}
+----

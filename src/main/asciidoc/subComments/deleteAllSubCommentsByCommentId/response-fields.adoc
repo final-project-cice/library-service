@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+[].subCommentId+`
+|`+Number+`
+|The id of sub comment
+
+|`+[].userId+`
+|`+Number+`
+|The user id of the user who created this sub comment.
+
+|`+[].text+`
+|`+String+`
+|Text of the sub comment.
+
+|`+[].date+`
+|`+String+`
+|Date of the sub comment.
+
+|===

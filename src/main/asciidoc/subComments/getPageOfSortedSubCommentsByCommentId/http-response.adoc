@@ -1,0 +1,97 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/hal+json;charset=UTF-8
+Content-Length: 2275
+
+{
+  "content" : [ {
+    "subCommentId" : 1,
+    "userId" : 1,
+    "text" : "test sub comment First",
+    "date" : "01.11.2019",
+    "links" : [ {
+      "rel" : "self",
+      "href" : "http://localhost:8080/books/comments/1/subComments/0/1/date",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "add",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/0/1",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    } ]
+  } ],
+  "pageable" : {
+    "sort" : {
+      "sorted" : true,
+      "unsorted" : false,
+      "empty" : false
+    },
+    "pageSize" : 1,
+    "pageNumber" : 0,
+    "offset" : 0,
+    "paged" : true,
+    "unpaged" : false
+  },
+  "totalPages" : 3,
+  "totalElements" : 3,
+  "last" : false,
+  "first" : true,
+  "sort" : {
+    "sorted" : true,
+    "unsorted" : false,
+    "empty" : false
+  },
+  "size" : 1,
+  "number" : 0,
+  "numberOfElements" : 1,
+  "empty" : false
+}
+----

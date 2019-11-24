@@ -53,8 +53,8 @@ public class SubCommentCommentController {
                 .withRel("updateBySubCommentId"));
         resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
                 .withRel("deleteBySubCommentId"));
-        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllByCommentId(commentId))
-                .withRel("deleteAllByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(commentId))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.status(HttpStatus.CREATED).body(resultService);
 
@@ -87,8 +87,8 @@ public class SubCommentCommentController {
                 .withRel("updateBySubCommentId"));
         resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
                 .withRel("deleteBySubCommentId"));
-        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllByCommentId(null))
-                .withRel("deleteAllByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(null))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -125,8 +125,8 @@ public class SubCommentCommentController {
                     .withRel("updateBySubCommentId"));
             subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
                     .withRel("deleteBySubCommentId"));
-            subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllByCommentId(commentId))
-                    .withRel("deleteAllByCommentId"));
+            subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(commentId))
+                    .withRel("deleteAllSubCommentsByCommentId"));
         }
 
         response = ResponseEntity.ok(resultPageService);
@@ -164,8 +164,8 @@ public class SubCommentCommentController {
                     .withRel("updateBySubCommentId"));
             subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
                     .withRel("deleteBySubCommentId"));
-            subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllByCommentId(commentId))
-                    .withRel("deleteAllByCommentId"));
+            subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(commentId))
+                    .withRel("deleteAllSubCommentsByCommentId"));
         }
 
         response = ResponseEntity.ok(resultPageService);
@@ -200,8 +200,8 @@ public class SubCommentCommentController {
                 .withRel("getPageOfSortedSubCommentsByCommentId"));
         resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
                 .withRel("deleteBySubCommentId"));
-        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllByCommentId(null))
-                .withRel("deleteAllByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(null))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -234,8 +234,8 @@ public class SubCommentCommentController {
                 .withRel("getPageOfSortedSubCommentsByCommentId"));
         resultService.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(subCommentId, null))
                 .withRel("updateBySubCommentId"));
-        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllByCommentId(null))
-                .withRel("deleteAllByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(null))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -251,13 +251,13 @@ public class SubCommentCommentController {
     @DeleteMapping(
             path = "/comments/{commentId}/subComments",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
-    public ResponseEntity<List<SubCommentCommentDTO>> deleteAllByCommentId(@PathVariable Long commentId) {
+    public ResponseEntity<List<SubCommentCommentDTO>> deleteAllSubCommentsByCommentId(@PathVariable Long commentId) {
         ResponseEntity<List<SubCommentCommentDTO>> response = null;
 
         List<SubCommentCommentDTO> resultService = subCommentService.deleteAllByCommentId(commentId);
 
         for (SubCommentCommentDTO subComment : resultService) {
-            subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllByCommentId(commentId))
+            subComment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(commentId))
                     .withSelfRel());
             subComment.add(linkTo(methodOn(SubCommentCommentController.class).add(commentId, null))
                     .withRel("add"));

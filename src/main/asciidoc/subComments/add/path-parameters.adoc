@@ -1,0 +1,8 @@
+.+http://localhost:8082/books/comments/{commentId}/subComments+
+|===
+|Parameter|Description
+
+|`+commentId+`
+|The comment id to which subComments will be added. .
+
+|===

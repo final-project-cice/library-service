@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 8156
+Content-Length: 8222
 
 {
   "content" : [ {
@@ -55,10 +55,11 @@ Content-Length: 8156
       "text" : "Text Comment",
       "date" : "02.11.2019",
       "subComments" : [ {
-        "id" : 2,
+        "subCommentId" : 2,
         "userId" : 1,
         "text" : "test sub comment",
-        "date" : "02.11.2019"
+        "date" : "02.11.2019",
+        "links" : [ ]
       } ],
       "links" : [ ]
     } ],
@@ -209,10 +210,11 @@ Content-Length: 8156
       "text" : "Text Comment",
       "date" : "02.11.2019",
       "subComments" : [ {
-        "id" : 1,
+        "subCommentId" : 1,
         "userId" : 1,
         "text" : "test sub comment",
-        "date" : "02.11.2019"
+        "date" : "02.11.2019",
+        "links" : [ ]
       } ],
       "links" : [ ]
     } ],
@@ -335,9 +337,9 @@ Content-Length: 8156
     "unsorted" : false,
     "empty" : false
   },
+  "size" : 2,
   "number" : 0,
   "numberOfElements" : 2,
-  "size" : 2,
   "empty" : false
 }
 ----

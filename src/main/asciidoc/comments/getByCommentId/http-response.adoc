@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 1062
+Content-Length: 1072
 
 {
   "commentId" : 1,
@@ -10,7 +10,7 @@ Content-Length: 1062
   "text" : "Text Comment One",
   "date" : "01.11.2019",
   "subComments" : [ {
-    "id" : 1,
+    "subCommentId" : 1,
     "userId" : 1,
     "text" : "test sub comment",
     "date" : "02.11.2019"

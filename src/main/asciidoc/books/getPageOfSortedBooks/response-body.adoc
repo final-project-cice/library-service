@@ -51,10 +51,11 @@
       "text" : "Text Comment",
       "date" : "02.11.2019",
       "subComments" : [ {
-        "id" : 2,
+        "subCommentId" : 2,
         "userId" : 1,
         "text" : "test sub comment",
-        "date" : "02.11.2019"
+        "date" : "02.11.2019",
+        "links" : [ ]
       } ],
       "links" : [ ]
     } ],
@@ -205,10 +206,11 @@
       "text" : "Text Comment",
       "date" : "02.11.2019",
       "subComments" : [ {
-        "id" : 1,
+        "subCommentId" : 1,
         "userId" : 1,
         "text" : "test sub comment",
-        "date" : "02.11.2019"
+        "date" : "02.11.2019",
+        "links" : [ ]
       } ],
       "links" : [ ]
     } ],
@@ -331,9 +333,9 @@
     "unsorted" : false,
     "empty" : false
   },
+  "size" : 2,
   "number" : 0,
   "numberOfElements" : 2,
-  "size" : 2,
   "empty" : false
 }
 ----

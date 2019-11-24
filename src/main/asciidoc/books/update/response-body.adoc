@@ -50,7 +50,7 @@
     "text" : "Text Comment",
     "date" : "02.11.2019",
     "subComments" : [ {
-      "id" : 1,
+      "subCommentId" : 1,
       "userId" : 1,
       "text" : "test sub comment",
       "date" : "02.11.2019"
