@@ -62,6 +62,62 @@
     "title" : null,
     "type" : null,
     "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/1/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
   } ]
 }, {
   "commentId" : 2,
@@ -125,6 +181,62 @@
     "title" : null,
     "type" : null,
     "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/2/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
   } ]
 }, {
   "commentId" : 3,
@@ -183,6 +295,62 @@
   }, {
     "rel" : "deleteByCommentId",
     "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/3/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments",
     "hreflang" : null,
     "media" : null,
     "title" : null,

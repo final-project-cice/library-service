@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 8222
+Content-Length: 10184
 
 {
   "content" : [ {
@@ -154,6 +154,38 @@ Content-Length: 8222
     }, {
       "rel" : "deleteById",
       "href" : "http://localhost:8080/books/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
       "hreflang" : null,
       "media" : null,
       "title" : null,
@@ -314,6 +346,38 @@ Content-Length: 8222
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -337,9 +401,9 @@ Content-Length: 8222
     "unsorted" : false,
     "empty" : false
   },
-  "size" : 2,
   "number" : 0,
   "numberOfElements" : 2,
+  "size" : 2,
   "empty" : false
 }
 ----

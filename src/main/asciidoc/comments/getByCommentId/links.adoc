@@ -22,4 +22,25 @@
 |`+deleteAllCommentsByBookId+`
 |Link to delete comments resource by book id.
 
+|`+addSubComment+`
+|Link to add sub comments to the comment resource.
+
+|`+getBySubCommentId+`
+|Link to get sub comments from the comment resource.
+
+|`+getPageOfSubCommentsByCommentId+`
+|Link to get page of sub comments from the comment resource.
+
+|`+getPageOfSortedSubCommentsByCommentId+`
+|Link to get page of sorted sub comments from the comment resource.
+
+|`+updateBySubCommentId+`
+|Link to update sub comments from the comment resource.
+
+|`+deleteBySubCommentId+`
+|Link to delete sub comments from the comment resource.
+
+|`+deleteAllSubCommentsByCommentId+`
+|Link to delete all sub comments from the comment resource.
+
 |===

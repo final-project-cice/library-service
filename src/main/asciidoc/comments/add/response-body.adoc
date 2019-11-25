@@ -29,6 +29,32 @@
     },
     "deleteAllCommentsByBookId" : {
       "href" : "http://localhost:8080/books/1/comments"
+    },
+    "addSubComment" : {
+      "href" : "http://localhost:8080/books/comments/4/subComments"
+    },
+    "getBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/4/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/4/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/4/subComments"
     }
   }
 }

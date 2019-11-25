@@ -124,6 +124,20 @@
     },
     "deleteById" : {
       "href" : "http://localhost:8080/books/1"
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/1/comments"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments"
     }
   }
 }

@@ -113,7 +113,8 @@
       "href" : "http://localhost:8080/books"
     },
     "getById" : {
-      "href" : "http://localhost:8080/books/1"
+      "href" : "http://localhost:8080/books/{id}",
+      "templated" : true
     },
     "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
@@ -125,6 +126,22 @@
     },
     "update" : {
       "href" : "http://localhost:8080/books/{id}",
+      "templated" : true
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
     }
   }

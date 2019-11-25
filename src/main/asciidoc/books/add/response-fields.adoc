@@ -265,4 +265,20 @@
 |`+String+`
 |Link to delete the book resource by id.
 
+|`+_links.addComment.href+`
+|`+String+`
+|Link to add comment to the book resource.
+
+|`+_links.getPageOfCommentsByBookId.href+`
+|`+String+`
+|Link to get page of comments of the book resource.
+
+|`+_links.getPageOfSortedCommentsByBookId.href+`
+|`+String+`
+|Link to get page of sorted comments of the book resource.
+
+|`+_links.deleteAllCommentsByBookId.href+`
+|`+String+`
+|Link to delete all comments of the book resource.
+
 |===

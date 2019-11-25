@@ -60,6 +60,20 @@ public class CommentBookController {
                 .withRel("deleteByCommentId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(bookId))
                 .withRel("deleteAllCommentsByBookId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).add(resultService.getCommentId(), null))
+                .withRel("addSubComment"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getBySubCommentId(null))
+                .withRel("getBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSubCommentsByCommentId(resultService.getCommentId(), null, null))
+                .withRel("getPageOfSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSortedSubCommentsByCommentId(resultService.getCommentId(), null, null, null))
+                .withRel("getPageOfSortedSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(null, null))
+                .withRel("updateBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
+                .withRel("deleteBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(resultService.getCommentId()))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.status(HttpStatus.CREATED).body(resultService);
 
@@ -97,6 +111,20 @@ public class CommentBookController {
                 .withRel("deleteByCommentId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null))
                 .withRel("deleteAllCommentsByBookId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).add(resultService.getCommentId(), null))
+                .withRel("addSubComment"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getBySubCommentId(null))
+                .withRel("getBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSubCommentsByCommentId(resultService.getCommentId(), null, null))
+                .withRel("getPageOfSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSortedSubCommentsByCommentId(resultService.getCommentId(), null, null, null))
+                .withRel("getPageOfSortedSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(null, null))
+                .withRel("updateBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
+                .withRel("deleteBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(resultService.getCommentId()))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -136,6 +164,20 @@ public class CommentBookController {
                     .withRel("deleteByCommentId"));
             comment.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(bookId))
                     .withRel("deleteAllCommentsByBookId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).add(comment.getCommentId(), null))
+                    .withRel("addSubComment"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getBySubCommentId(null))
+                    .withRel("getBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSubCommentsByCommentId(comment.getCommentId(), null, null))
+                    .withRel("getPageOfSubCommentsByCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSortedSubCommentsByCommentId(comment.getCommentId(), null, null, null))
+                    .withRel("getPageOfSortedSubCommentsByCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(null, null))
+                    .withRel("updateBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
+                    .withRel("deleteBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(comment.getCommentId()))
+                    .withRel("deleteAllSubCommentsByCommentId"));
         }
 
         response = ResponseEntity.ok(resultService);
@@ -177,6 +219,20 @@ public class CommentBookController {
                     .withRel("deleteByCommentId"));
             comment.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(bookId))
                     .withRel("deleteAllCommentsByBookId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).add(comment.getCommentId(), null))
+                    .withRel("addSubComment"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getBySubCommentId(null))
+                    .withRel("getBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSubCommentsByCommentId(comment.getCommentId(), null, null))
+                    .withRel("getPageOfSubCommentsByCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSortedSubCommentsByCommentId(comment.getCommentId(), null, null, null))
+                    .withRel("getPageOfSortedSubCommentsByCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(null, null))
+                    .withRel("updateBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
+                    .withRel("deleteBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(comment.getCommentId()))
+                    .withRel("deleteAllSubCommentsByCommentId"));
         }
 
         response = ResponseEntity.ok(resultService);
@@ -213,6 +269,20 @@ public class CommentBookController {
                 .withRel("deleteByCommentId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null))
                 .withRel("deleteAllCommentsByBookId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).add(resultService.getCommentId(), null))
+                .withRel("addSubComment"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getBySubCommentId(null))
+                .withRel("getBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSubCommentsByCommentId(resultService.getCommentId(), null, null))
+                .withRel("getPageOfSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSortedSubCommentsByCommentId(resultService.getCommentId(), null, null, null))
+                .withRel("getPageOfSortedSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(null, null))
+                .withRel("updateBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
+                .withRel("deleteBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(resultService.getCommentId()))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -247,6 +317,20 @@ public class CommentBookController {
                 .withRel("updateByCommentId"));
         resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null))
                 .withRel("deleteAllCommentsByBookId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).add(resultService.getCommentId(), null))
+                .withRel("addSubComment"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getBySubCommentId(null))
+                .withRel("getBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSubCommentsByCommentId(resultService.getCommentId(), null, null))
+                .withRel("getPageOfSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSortedSubCommentsByCommentId(resultService.getCommentId(), null, null, null))
+                .withRel("getPageOfSortedSubCommentsByCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(null, null))
+                .withRel("updateBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
+                .withRel("deleteBySubCommentId"));
+        resultService.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(resultService.getCommentId()))
+                .withRel("deleteAllSubCommentsByCommentId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -282,6 +366,20 @@ public class CommentBookController {
                     .withRel("updateByCommentId"));
             comment.add(linkTo(methodOn(CommentBookController.class).deleteByCommentId(comment.getCommentId()))
                     .withRel("deleteByCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).add(comment.getCommentId(), null))
+                    .withRel("addSubComment"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getBySubCommentId(null))
+                    .withRel("getBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSubCommentsByCommentId(comment.getCommentId(), null, null))
+                    .withRel("getPageOfSubCommentsByCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).getPageOfSortedSubCommentsByCommentId(comment.getCommentId(), null, null, null))
+                    .withRel("getPageOfSortedSubCommentsByCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).updateBySubCommentId(null, null))
+                    .withRel("updateBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).deleteBySubCommentId(null))
+                    .withRel("deleteBySubCommentId"));
+            comment.add(linkTo(methodOn(SubCommentCommentController.class).deleteAllSubCommentsByCommentId(comment.getCommentId()))
+                    .withRel("deleteAllSubCommentsByCommentId"));
         }
 
         response = ResponseEntity.ok(resultService);

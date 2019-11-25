@@ -19,4 +19,16 @@
 |`+deleteById+`
 |Link to delete the book resource by id.
 
+|`+addComment+`
+|Link to add comment to the book resource.
+
+|`+getPageOfCommentsByBookId+`
+|Link to get page of comments of the book resource.
+
+|`+getPageOfSortedCommentsByBookId+`
+|Link to get page of sorted comments of the book resource.
+
+|`+deleteAllCommentsByBookId+`
+|Link to delete all comments of the book resource.
+
 |===

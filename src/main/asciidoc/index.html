@@ -2519,6 +2519,29 @@ Host: localhost:8080</code></pre>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
                         by id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>addComment</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add comment to the book
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of comments of
+                        the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSortedCommentsByBookId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted
+                        comments of the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>deleteAllCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all comments of
+                        the book resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -2528,7 +2551,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2951
+Content-Length: 3448
 
 {
   "bookId" : 1,
@@ -2655,6 +2678,20 @@ Content-Length: 2951
     },
     "deleteById" : {
       "href" : "http://localhost:8080/books/1"
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/1/comments"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments"
     }
   }
 }</code></pre>
@@ -2790,6 +2827,20 @@ Content-Length: 2951
     },
     "deleteById" : {
       "href" : "http://localhost:8080/books/1"
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/1/comments"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments"
     }
   }
 }</code></pre>
@@ -3264,6 +3315,34 @@ Content-Length: 2951
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
                         by id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.addComment.href</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add comment to the book
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of comments of
+                        the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted
+                        comments of the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteAllCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all comments of
+                        the book resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -3355,7 +3434,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 4350
+Content-Length: 5331
 
 {
   "content" : [ {
@@ -3512,6 +3591,38 @@ Content-Length: 4350
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -3526,8 +3637,8 @@ Content-Length: 4350
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 2,
   "last" : false,
+  "totalPages" : 2,
   "totalElements" : 2,
   "first" : true,
   "sort" : {
@@ -3702,6 +3813,38 @@ Content-Length: 4350
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -3716,8 +3859,8 @@ Content-Length: 4350
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 2,
   "last" : false,
+  "totalPages" : 2,
   "totalElements" : 2,
   "first" : true,
   "sort" : {
@@ -4273,7 +4416,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 8222
+Content-Length: 10184
 
 {
   "content" : [ {
@@ -4425,6 +4568,38 @@ Content-Length: 8222
     }, {
       "rel" : "deleteById",
       "href" : "http://localhost:8080/books/2",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
       "hreflang" : null,
       "media" : null,
       "title" : null,
@@ -4585,6 +4760,38 @@ Content-Length: 8222
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -4599,8 +4806,8 @@ Content-Length: 8222
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 1,
   "last" : true,
+  "totalPages" : 1,
   "totalElements" : 2,
   "first" : true,
   "sort" : {
@@ -4775,6 +4982,38 @@ Content-Length: 8222
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   }, {
     "bookId" : 1,
@@ -4930,6 +5169,38 @@ Content-Length: 8222
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -4944,8 +5215,8 @@ Content-Length: 8222
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 1,
   "last" : true,
+  "totalPages" : 1,
   "totalElements" : 2,
   "first" : true,
   "sort" : {
@@ -5843,6 +6114,29 @@ Content-Length: 1678
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
                         by id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>addComment</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add comment to the book
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of comments of
+                        the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSortedCommentsByBookId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted
+                        comments of the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>deleteAllCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all comments of
+                        the book resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -5852,7 +6146,7 @@ Content-Length: 1678
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2938
+Content-Length: 3435
 
 {
   "bookId" : 1,
@@ -5978,6 +6272,20 @@ Content-Length: 2938
     },
     "deleteById" : {
       "href" : "http://localhost:8080/books/1"
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/1/comments"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments"
     }
   }
 }</code></pre>
@@ -6112,6 +6420,20 @@ Content-Length: 2938
     },
     "deleteById" : {
       "href" : "http://localhost:8080/books/1"
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/1/comments"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/1/comments"
     }
   }
 }</code></pre>
@@ -6586,6 +6908,34 @@ Content-Length: 2938
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete the book resource
                         by id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.addComment.href</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add comment to the book
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of comments of
+                        the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted
+                        comments of the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteAllCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all comments of
+                        the book resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -6697,6 +7047,29 @@ Host: localhost:8080</code></pre>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to update the book
                         resource.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>addComment</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add comment to the book
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>getPageOfCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of comments of
+                        the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSortedCommentsByBookId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted
+                        comments of the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>deleteAllCommentsByBookId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all comments of
+                        the book resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -6706,7 +7079,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 2977
+Content-Length: 3583
 
 {
   "bookId" : 1,
@@ -6821,7 +7194,8 @@ Content-Length: 2977
       "href" : "http://localhost:8080/books"
     },
     "getById" : {
-      "href" : "http://localhost:8080/books/1"
+      "href" : "http://localhost:8080/books/{id}",
+      "templated" : true
     },
     "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
@@ -6833,6 +7207,22 @@ Content-Length: 2977
     },
     "update" : {
       "href" : "http://localhost:8080/books/{id}",
+      "templated" : true
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
     }
   }
@@ -6957,7 +7347,8 @@ Content-Length: 2977
       "href" : "http://localhost:8080/books"
     },
     "getById" : {
-      "href" : "http://localhost:8080/books/1"
+      "href" : "http://localhost:8080/books/{id}",
+      "templated" : true
     },
     "getPageOfBooks" : {
       "href" : "http://localhost:8080/books/{startPage}/{pageSize}",
@@ -6969,6 +7360,22 @@ Content-Length: 2977
     },
     "update" : {
       "href" : "http://localhost:8080/books/{id}",
+      "templated" : true
+    },
+    "addComment" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
     }
   }
@@ -7444,6 +7851,34 @@ Content-Length: 2977
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to update the book
                         resource.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.addComment.href</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add comment to the book
+                        resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of comments of
+                        the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted
+                        comments of the book resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteAllCommentsByBookId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all comments of
+                        the book resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -7566,6 +8001,48 @@ Host: localhost:8080</code></pre>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
                         by book id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>addSubComment</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add sub comments to the
+                        comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBySubCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSubCommentsByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sub comments
+                        from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSortedSubCommentsByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted sub
+                        comments from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>updateBySubCommentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to update sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>deleteBySubCommentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteAllSubCommentsByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all sub comments
+                        from the comment resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -7575,7 +8052,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 1072
+Content-Length: 2070
 
 {
   "commentId" : 1,
@@ -7613,6 +8090,32 @@ Content-Length: 1072
     "deleteAllCommentsByBookId" : {
       "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
+    },
+    "addSubComment" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
+    },
+    "getBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
     }
   }
 }</code></pre>
@@ -7659,6 +8162,32 @@ Content-Length: 1072
     "deleteAllCommentsByBookId" : {
       "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
+    },
+    "addSubComment" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
+    },
+    "getBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
     }
   }
 }</code></pre>
@@ -7785,6 +8314,55 @@ Content-Length: 1072
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
                         by book id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.addSubComment.href</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add sub comments to the
+                        comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getBySubCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSubCommentsByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sub comments
+                        from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedSubCommentsByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted sub
+                        comments from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.updateBySubCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to update sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteBySubCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteAllSubCommentsByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all sub comments
+                        from the comment resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -7883,7 +8461,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 4058
+Content-Length: 7572
 
 {
   "content" : [ {
@@ -7954,6 +8532,62 @@ Content-Length: 4058
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   }, {
     "commentId" : 2,
@@ -8017,6 +8651,62 @@ Content-Length: 4058
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -8031,8 +8721,8 @@ Content-Length: 4058
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 2,
   "last" : false,
+  "totalPages" : 2,
   "totalElements" : 3,
   "first" : true,
   "sort" : {
@@ -8121,6 +8811,62 @@ Content-Length: 4058
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   }, {
     "commentId" : 2,
@@ -8184,6 +8930,62 @@ Content-Length: 4058
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -8198,8 +9000,8 @@ Content-Length: 4058
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 2,
   "last" : false,
+  "totalPages" : 2,
   "totalElements" : 3,
   "first" : true,
   "sort" : {
@@ -8395,7 +9197,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 4048
+Content-Length: 7562
 
 {
   "content" : [ {
@@ -8466,6 +9268,62 @@ Content-Length: 4048
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   }, {
     "commentId" : 2,
@@ -8529,6 +9387,62 @@ Content-Length: 4048
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -8543,8 +9457,8 @@ Content-Length: 4048
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 2,
   "last" : false,
+  "totalPages" : 2,
   "totalElements" : 3,
   "first" : true,
   "sort" : {
@@ -8633,6 +9547,62 @@ Content-Length: 4048
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/1/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   }, {
     "commentId" : 2,
@@ -8696,6 +9666,62 @@ Content-Length: 4048
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addSubComment",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "updateBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteBySubCommentId",
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllSubCommentsByCommentId",
+      "href" : "http://localhost:8080/books/comments/2/subComments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -8710,8 +9736,8 @@ Content-Length: 4048
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 2,
   "last" : false,
+  "totalPages" : 2,
   "totalElements" : 3,
   "first" : true,
   "sort" : {
@@ -8922,6 +9948,48 @@ Host: localhost:8080</code></pre>
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
                         by book id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>addSubComment</code></p>
+                    </td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add sub comments to the
+                        comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getBySubCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSubCommentsByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sub comments
+                        from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>getPageOfSortedSubCommentsByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted sub
+                        comments from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>updateBySubCommentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to update sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>deleteBySubCommentId</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>deleteAllSubCommentsByCommentId</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all sub comments
+                        from the comment resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -8931,7 +9999,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 962
+Content-Length: 1960
 
 {
   "commentId" : 1,
@@ -8964,6 +10032,32 @@ Content-Length: 962
     "deleteAllCommentsByBookId" : {
       "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
+    },
+    "addSubComment" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
+    },
+    "getBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
     }
   }
 }</code></pre>
@@ -9005,6 +10099,32 @@ Content-Length: 962
     "deleteAllCommentsByBookId" : {
       "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
+    },
+    "addSubComment" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
+    },
+    "getBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
     }
   }
 }</code></pre>
@@ -9104,6 +10224,55 @@ Content-Length: 962
                     <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete comments resource
                         by book id.</p></td>
                 </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">
+                        <code>_links.addSubComment.href</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to add sub comments to the
+                        comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getBySubCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSubCommentsByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sub comments
+                        from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.getPageOfSortedSubCommentsByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to get page of sorted sub
+                        comments from the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.updateBySubCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to update sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteBySubCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete sub comments from
+                        the comment resource.</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>_links.deleteAllSubCommentsByCommentId.href</code>
+                    </p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+                    <td class="tableblock halign-left valign-top"><p class="tableblock">Link to delete all sub comments
+                        from the comment resource.</p></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -9176,7 +10345,7 @@ Host: localhost:8080</code></pre>
                 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 4798
+Content-Length: 9733
 
 [ {
   "commentId" : 1,
@@ -9235,6 +10404,62 @@ Content-Length: 4798
   }, {
     "rel" : "deleteByCommentId",
     "href" : "http://localhost:8080/books/comments/1",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/1/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments",
     "hreflang" : null,
     "media" : null,
     "title" : null,
@@ -9303,6 +10528,62 @@ Content-Length: 4798
     "title" : null,
     "type" : null,
     "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/2/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
   } ]
 }, {
   "commentId" : 3,
@@ -9361,6 +10642,62 @@ Content-Length: 4798
   }, {
     "rel" : "deleteByCommentId",
     "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/3/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments",
     "hreflang" : null,
     "media" : null,
     "title" : null,
@@ -9437,6 +10774,62 @@ Content-Length: 4798
     "title" : null,
     "type" : null,
     "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/1/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/1/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
   } ]
 }, {
   "commentId" : 2,
@@ -9500,6 +10893,62 @@ Content-Length: 4798
     "title" : null,
     "type" : null,
     "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/2/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/2/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
   } ]
 }, {
   "commentId" : 3,
@@ -9558,6 +11007,62 @@ Content-Length: 4798
   }, {
     "rel" : "deleteByCommentId",
     "href" : "http://localhost:8080/books/comments/3",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "addSubComment",
+    "href" : "http://localhost:8080/books/comments/3/subComments",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments/{startPage}/{pageSize}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "getPageOfSortedSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments/{startPage}/{pageSize}/{sortOrder}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "updateBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteBySubCommentId",
+    "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+    "hreflang" : null,
+    "media" : null,
+    "title" : null,
+    "type" : null,
+    "deprecation" : null
+  }, {
+    "rel" : "deleteAllSubCommentsByCommentId",
+    "href" : "http://localhost:8080/books/comments/3/subComments",
     "hreflang" : null,
     "media" : null,
     "title" : null,
@@ -10091,8 +11596,8 @@ Content-Length: 2286
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 3,
   "last" : false,
+  "totalPages" : 3,
   "totalElements" : 3,
   "first" : true,
   "sort" : {
@@ -10188,8 +11693,8 @@ Content-Length: 2286
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 3,
   "last" : false,
+  "totalPages" : 3,
   "totalElements" : 3,
   "first" : true,
   "sort" : {
@@ -10431,8 +11936,8 @@ Content-Length: 2275
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 3,
   "last" : false,
+  "totalPages" : 3,
   "totalElements" : 3,
   "first" : true,
   "sort" : {
@@ -10528,8 +12033,8 @@ Content-Length: 2275
     "paged" : true,
     "unpaged" : false
   },
-  "totalPages" : 3,
   "last" : false,
+  "totalPages" : 3,
   "totalElements" : 3,
   "first" : true,
   "sort" : {

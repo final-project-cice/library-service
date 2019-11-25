@@ -2,7 +2,7 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 1072
+Content-Length: 2070
 
 {
   "commentId" : 1,
@@ -40,6 +40,32 @@ Content-Length: 1072
     "deleteAllCommentsByBookId" : {
       "href" : "http://localhost:8080/books/{bookId}/comments",
       "templated" : true
+    },
+    "addSubComment" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
+    },
+    "getBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
     }
   }
 }

@@ -49,6 +49,10 @@ public class BookController {
         resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
         resultService.add(linkTo(methodOn(BookController.class).update(resultService.getBookId(), null)).withRel("update"));
         resultService.add(linkTo(methodOn(BookController.class).deleteById(resultService.getBookId())).withRel("deleteById"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).add(resultService.getBookId(), null)).withRel("addComment"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(resultService.getBookId(), null, null)).withRel("getPageOfCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(resultService.getBookId(), null, null, null)).withRel("getPageOfSortedCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(resultService.getBookId())).withRel("deleteAllCommentsByBookId"));
 
         response = ResponseEntity.status(HttpStatus.CREATED).body(resultService);
 
@@ -75,6 +79,10 @@ public class BookController {
         resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
         resultService.add(linkTo(methodOn(BookController.class).update(resultService.getBookId(), null)).withRel("update"));
         resultService.add(linkTo(methodOn(BookController.class).deleteById(resultService.getBookId())).withRel("deleteById"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).add(resultService.getBookId(), null)).withRel("addComment"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(resultService.getBookId(), null, null)).withRel("getPageOfCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(resultService.getBookId(), null, null, null)).withRel("getPageOfSortedCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(resultService.getBookId())).withRel("deleteAllCommentsByBookId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -103,6 +111,10 @@ public class BookController {
             book.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
             book.add(linkTo(methodOn(BookController.class).update(book.getBookId(), null)).withRel("update"));
             book.add(linkTo(methodOn(BookController.class).deleteById(book.getBookId())).withRel("deleteById"));
+            book.add(linkTo(methodOn(CommentBookController.class).add(null, null)).withRel("addComment"));
+            book.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(null, null, null)).withRel("getPageOfCommentsByBookId"));
+            book.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(null, null, null, null)).withRel("getPageOfSortedCommentsByBookId"));
+            book.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null)).withRel("deleteAllCommentsByBookId"));
         }
 
         response = ResponseEntity.ok(resultService);
@@ -133,6 +145,10 @@ public class BookController {
             book.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
             book.add(linkTo(methodOn(BookController.class).update(book.getBookId(), null)).withRel("update"));
             book.add(linkTo(methodOn(BookController.class).deleteById(book.getBookId())).withRel("deleteById"));
+            book.add(linkTo(methodOn(CommentBookController.class).add(null, null)).withRel("addComment"));
+            book.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(null, null, null)).withRel("getPageOfCommentsByBookId"));
+            book.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(null, null, null, null)).withRel("getPageOfSortedCommentsByBookId"));
+            book.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null)).withRel("deleteAllCommentsByBookId"));
         }
 
         response = ResponseEntity.ok(resultService);
@@ -161,6 +177,10 @@ public class BookController {
         resultService.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
         resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
         resultService.add(linkTo(methodOn(BookController.class).deleteById(id)).withRel("deleteById"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).add(resultService.getBookId(), null)).withRel("addComment"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(resultService.getBookId(), null, null)).withRel("getPageOfCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(resultService.getBookId(), null, null, null)).withRel("getPageOfSortedCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(resultService.getBookId())).withRel("deleteAllCommentsByBookId"));
 
         response = ResponseEntity.ok(resultService);
 
@@ -183,10 +203,14 @@ public class BookController {
 
         resultService.add(linkTo(methodOn(BookController.class).deleteById(null)).withSelfRel());
         resultService.add(linkTo(methodOn(BookController.class).add(null)).withRel("add"));
-        resultService.add(linkTo(methodOn(BookController.class).getById(id)).withRel("getById"));
+        resultService.add(linkTo(methodOn(BookController.class).getById(null)).withRel("getById"));
         resultService.add(linkTo(methodOn(BookController.class).getPageOfBooks(null, null)).withRel("getPageOfBooks"));
         resultService.add(linkTo(methodOn(BookController.class).getPageOfSortedBooks(null, null, null)).withRel("getPageOfSortedBooks"));
         resultService.add(linkTo(methodOn(BookController.class).update(null, null)).withRel("update"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).add(null, null)).withRel("addComment"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfCommentsByBookId(null, null, null)).withRel("getPageOfCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).getPageOfSortedCommentsByBookId(null, null, null, null)).withRel("getPageOfSortedCommentsByBookId"));
+        resultService.add(linkTo(methodOn(CommentBookController.class).deleteAllCommentsByBookId(null)).withRel("deleteAllCommentsByBookId"));
 
         response = ResponseEntity.ok(resultService);
 

@@ -155,6 +155,38 @@
       "title" : null,
       "type" : null,
       "deprecation" : null
+    }, {
+      "rel" : "addComment",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "getPageOfSortedCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
+    }, {
+      "rel" : "deleteAllCommentsByBookId",
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "hreflang" : null,
+      "media" : null,
+      "title" : null,
+      "type" : null,
+      "deprecation" : null
     } ]
   } ],
   "pageable" : {
@@ -178,9 +210,9 @@
     "unsorted" : true,
     "empty" : true
   },
-  "size" : 1,
   "number" : 0,
   "numberOfElements" : 1,
+  "size" : 1,
   "empty" : false
 }
 ----
