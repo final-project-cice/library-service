@@ -385,7 +385,7 @@ public class SubCommentComment_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/subComments/{subCommentId}", 33))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -509,7 +509,7 @@ public class SubCommentComment_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 1, 0, 1))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -634,7 +634,7 @@ public class SubCommentComment_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}", 1, 0, 1, "date"))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -696,7 +696,7 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent_2 = "{\"errorMessage\":\"SubComment with this subCommentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/1\"}";
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/subComments/{subCommentId}", 1))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent_2)))
                 .andDo(print());
@@ -787,7 +787,7 @@ public class SubCommentComment_IntegrationTest {
         final String responseBodyContent_2 = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments/0/10\"}";
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 1, 0, 10))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent_2)))
                 .andDo(print());

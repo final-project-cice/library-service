@@ -493,7 +493,7 @@ public class Book_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/1"))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -626,7 +626,7 @@ public class Book_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{startPage}/{pageSize}", 0, 1))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -760,7 +760,7 @@ public class Book_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{startPage}/{pageSize}/{sortOrder}", 0, 1, "name"))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -1137,7 +1137,7 @@ public class Book_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}", 1))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent_2)))
                 .andDo(print());

@@ -98,7 +98,6 @@ public class CommentBook_IntegrationTest {
                                 fieldWithPath("_links.updateByCommentId.href").description("Link to upgrade comment resource by comment id."),
                                 fieldWithPath("_links.deleteByCommentId.href").description("Link to delete comment resource by comment id."),
                                 fieldWithPath("_links.deleteAllCommentsByBookId.href").description("Link to delete comments resource by book id."),
-
                                 fieldWithPath("_links.addSubComment.href").description("Link to add sub comments to the comment resource."),
                                 fieldWithPath("_links.getBySubCommentId.href").description("Link to get sub comments from the comment resource."),
                                 fieldWithPath("_links.getBySubCommentId.templated").ignored(),
@@ -120,7 +119,6 @@ public class CommentBook_IntegrationTest {
                                 linkWithRel("updateByCommentId").description("Link to upgrade comment resource by comment id."),
                                 linkWithRel("deleteByCommentId").description("Link to delete comment resource by comment id."),
                                 linkWithRel("deleteAllCommentsByBookId").description("Link to delete comments resource by book id."),
-
                                 linkWithRel("addSubComment").description("Link to add sub comments to the comment resource."),
                                 linkWithRel("getBySubCommentId").description("Link to get sub comments from the comment resource."),
                                 linkWithRel("getPageOfSubCommentsByCommentId").description("Link to get page of sub comments from the comment resource."),
@@ -139,7 +137,6 @@ public class CommentBook_IntegrationTest {
                 .andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent_2)))
                 .andDo(print());
-
     }
 
     @Test
@@ -429,7 +426,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", 33))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -559,7 +556,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}", 1, 0, 1))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -690,7 +687,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}", 1, 0, 1, "date"))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
@@ -766,7 +763,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", 1))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent_2)))
                 .andDo(print());
@@ -859,7 +856,7 @@ public class CommentBook_IntegrationTest {
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}", 1, 0, 10))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent_2)))
                 .andDo(print());

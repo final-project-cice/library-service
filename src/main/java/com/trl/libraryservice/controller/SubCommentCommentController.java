@@ -140,6 +140,7 @@ public class SubCommentCommentController {
      * @param commentId must not be equals to {@literal null}, and {@code commentId} must be greater than zero.
      * @param startPage zero-based page index, must not be negative.
      * @param pageSize  the size of the page to be returned, must be greater than 0.
+     * @param sortOrder the value by which the sorted subComments will be. Must not be {@literal null}.
      * @return the {@literal ResponseEntity.ok(List<SubCommentCommentDTO>)} with the given {@code commentId}.
      */
     @GetMapping(

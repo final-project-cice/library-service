@@ -3,6 +3,7 @@ package com.trl.libraryservice.utils;
 import com.trl.libraryservice.controller.dto.UserDTO;
 import com.trl.libraryservice.exception.UserNotExistException;
 
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,8 +15,8 @@ public class UserUtils {
         return webClientBuilder
                 .build()
                 .get()
-                .uri("http://user-service/user/" + userId)
-                .accept(MediaType.APPLICATION_JSON)
+                .uri("http://user-service/users/" + userId)
+                .accept(MediaType.valueOf(MediaTypes.HAL_JSON_UTF8_VALUE))
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError, clientResponse ->
                         Mono.error(new UserNotExistException("User by this id = " + userId + " not exist.")))

@@ -4,7 +4,6 @@ import com.trl.libraryservice.controller.dto.SubCommentCommentDTO;
 import com.trl.libraryservice.exception.*;
 import com.trl.libraryservice.repository.CommentBookRepository;
 import com.trl.libraryservice.repository.SubCommentCommentRepository;
-import com.trl.libraryservice.repository.entity.CommentBookEntity;
 import com.trl.libraryservice.repository.entity.SubCommentCommentEntity;
 import com.trl.libraryservice.service.SubCommentCommentService;
 import com.trl.libraryservice.utils.UserUtils;
@@ -81,12 +80,14 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
         LOG.debug("************ add() ---> userId = " + subComment.getUserId());
         UserUtils.checkExistsUserById(subComment.getUserId(), webClientBuilder);
 
+        // TODO: Find information. How can these two lines of code be done better.
         Long generatedId = subCommentRepository.count() + 1;
         subCommentRepository.add(generatedId, subComment.getDate(), subComment.getText(), subComment.getUserId(), commentId);
 
-        CommentBookEntity commentBookEntity = new CommentBookEntity();
-        commentBookEntity.setId(commentId);
-        SubCommentCommentEntity savedSubCommentFromRepository = subCommentRepository.findSubComment(subComment.getUserId(), subComment.getText(), subComment.getDate(), commentBookEntity);
+//        CommentBookEntity commentBookEntity = new CommentBookEntity();
+//        commentBookEntity.setId(commentId);
+//        SubCommentCommentEntity savedSubCommentFromRepository = subCommentRepository.findSubComment(subComment.getUserId(), subComment.getText(), subComment.getDate(), commentBookEntity);
+        SubCommentCommentEntity savedSubCommentFromRepository = subCommentRepository.findById(generatedId).get();
 
         subCommentResult = mapEntityToDTO(savedSubCommentFromRepository);
 

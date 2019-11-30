@@ -157,7 +157,7 @@ public final class BookConverter {
             throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
 
-        LOG.debug("************ mapSetDTOToSetEntity() ---> userDTOSet = " + dtos);
+        LOG.debug("************ mapSetDTOToSetEntity() ---> bookDTOSet = " + dtos);
 
         resultSet = dtos.parallelStream()
                 .map(BookConverter::mapDTOToEntity)

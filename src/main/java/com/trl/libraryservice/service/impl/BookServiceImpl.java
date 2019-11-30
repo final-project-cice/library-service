@@ -270,7 +270,7 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    public void updateFields(Long id, BookDTO actualBook, BookDTO sourceBook) {
+    private void updateFields(Long id, BookDTO actualBook, BookDTO sourceBook) {
 
         if ((sourceBook.getName() != null) && (!deleteWhitespace(sourceBook.getName()).isEmpty())) {
             updateName(id, actualBook.getName(), sourceBook.getName());
@@ -286,7 +286,7 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-    public void updateName(Long id, String actualName, String sourceName) {
+    private void updateName(Long id, String actualName, String sourceName) {
 
         if (sourceName.equals(actualName)) {
             LOG.debug("************ updateName() ---> " + EXCEPTION_MESSAGE_THE_SAME_VALUE);
@@ -297,7 +297,7 @@ public class BookServiceImpl implements BookService {
         LOG.debug("************ updateName() ---> Book name updated.");
     }
 
-    public void updateGenres(Long id, List<GenreBookDTO> actualGenres, List<GenreBookDTO> sourceGenres) {
+    private void updateGenres(Long id, List<GenreBookDTO> actualGenres, List<GenreBookDTO> sourceGenres) {
 
         if (sourceGenres.equals(actualGenres)) {
             LOG.debug("************ updateGenres() ---> " + EXCEPTION_MESSAGE_THE_SAME_VALUE);
@@ -308,7 +308,7 @@ public class BookServiceImpl implements BookService {
         throw new FunctionalityNotImplementedException("This functionality not terminated");
     }
 
-    public void updatePublishingDate(Long id, LocalDate actualPublishingDate, LocalDate sourcePublishingDate) {
+    private void updatePublishingDate(Long id, LocalDate actualPublishingDate, LocalDate sourcePublishingDate) {
 
         if (sourcePublishingDate.equals(actualPublishingDate)) {
             LOG.debug("************ updatePublishingDate() ---> " + EXCEPTION_MESSAGE_THE_SAME_VALUE);

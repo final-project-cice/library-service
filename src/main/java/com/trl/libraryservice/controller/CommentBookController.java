@@ -3,8 +3,6 @@ package com.trl.libraryservice.controller;
 import com.trl.libraryservice.controller.dto.CommentBookDTO;
 import com.trl.libraryservice.service.CommentBookService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;
@@ -20,8 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/books")
 public class CommentBookController {
-
-    private static final Logger LOG = LoggerFactory.getLogger(CommentBookController.class);
 
     private final CommentBookService commentBookService;
 
@@ -92,10 +88,7 @@ public class CommentBookController {
     public ResponseEntity<CommentBookDTO> getByCommentId(@PathVariable Long commentId) {
         ResponseEntity<CommentBookDTO> response = null;
 
-        LOG.debug("*****************************************************************     1");
-
         CommentBookDTO resultService = commentBookService.getByCommentId(commentId);
-        LOG.debug("*****************************************************************     2 = " + resultService);
 
         resultService.add(linkTo(methodOn(CommentBookController.class).getByCommentId(commentId))
                 .withSelfRel());
@@ -191,6 +184,7 @@ public class CommentBookController {
      * @param bookId    must not be equals to {@literal null}, and {@code bookId} must be greater than zero.
      * @param startPage zero-based page index, must not be negative.
      * @param pageSize  the size of the page to be returned, must be greater than 0.
+     * @param sortOrder the value by which the sorted comments will be. Must not be {@literal null}.
      * @return the {@literal ResponseEntity.ok(Page<CommentBookDTO>)} with the given {@code bookId}.
      */
     @GetMapping(
@@ -241,7 +235,7 @@ public class CommentBookController {
     }
 
     /**
-     * Update the {@literal CommentBookDTO} by this {@code id}.
+     * Update the {@literal CommentBookDTO} by this {@code commentId}.
      *
      * @param commentId   must not be equals to {@literal null}, and {@code commentId} must be greater than zero.
      * @param commentBook must not be equals to {@literal null}.
@@ -249,7 +243,7 @@ public class CommentBookController {
      */
     @PostMapping(path = "/comments/{commentId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<CommentBookDTO> updateByCommentId(@PathVariable Long commentId, @RequestBody CommentBookDTO commentBook) {
         ResponseEntity<CommentBookDTO> response = null;
 
@@ -292,7 +286,7 @@ public class CommentBookController {
     /**
      * Deletes the {@literal CommentBookDTO} with the given {@code commentId}.
      *
-     * @param commentId must not be equals to {@literal null}, and {@code id} must be greater than zero.
+     * @param commentId must not be equals to {@literal null}, and {@code commentId} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(CommentBookDTO)} if {@literal CommentBookDTO} is deleted correctly.
      */
     @DeleteMapping(
@@ -340,7 +334,7 @@ public class CommentBookController {
     /**
      * Deletes all {@literal CommentBookDTO} with the given {@code bookId}.
      *
-     * @param bookId must not be equals to {@literal null}, and {@code id} must be greater than zero.
+     * @param bookId must not be equals to {@literal null}, and {@code bookId} must be greater than zero.
      * @return the {@literal ResponseEntity.ok(List<CommentBookDTO>)} if {@literal List<CommentBookDTO>} is deleted correctly.
      */
     @DeleteMapping(

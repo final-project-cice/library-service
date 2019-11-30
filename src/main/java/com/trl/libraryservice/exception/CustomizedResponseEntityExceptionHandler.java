@@ -107,6 +107,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         errorDetails.setErrorCode(HttpStatus.NOT_FOUND.value());
         errorDetails.setTimestamp(LocalDateTime.now());
         errorDetails.setDescription(request.getDescription(false));
-        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

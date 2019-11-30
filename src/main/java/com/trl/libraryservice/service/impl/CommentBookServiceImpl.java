@@ -5,7 +5,6 @@ import com.trl.libraryservice.exception.*;
 import com.trl.libraryservice.repository.BookRepository;
 import com.trl.libraryservice.repository.CommentBookRepository;
 import com.trl.libraryservice.repository.SubCommentCommentRepository;
-import com.trl.libraryservice.repository.entity.BookEntity;
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
 import com.trl.libraryservice.service.CommentBookService;
 import com.trl.libraryservice.utils.UserUtils;
@@ -65,7 +64,7 @@ public class CommentBookServiceImpl implements CommentBookService {
      *                                  And if {@code commentBook} is equals to {@literal null}.
      * @throws IllegalValueException    in case if one of the fields of {@code commentBook} is equals {@literal null}, or less zero.
      * @throws UserNotExistException    in case if user not exist by {@code commentBook.userId}.
-     * @throws BookNotExistException    in case if book not exist by {@code commentBook.bookId}.
+     * @throws BookNotExistException    in case if book not exist by {@code bookId}.
      */
     @Override
     public CommentBookDTO add(Long bookId, CommentBookDTO commentBook) {
@@ -85,12 +84,14 @@ public class CommentBookServiceImpl implements CommentBookService {
         LOG.debug("************ add() ---> userId = " + commentBook.getUserId());
         UserUtils.checkExistsUserById(commentBook.getUserId(), webClientBuilder);
 
+        // TODO: Find information. How can these two lines of code be done better.
         Long generatedId = commentBookRepository.count() + 1;
         commentBookRepository.add(generatedId, commentBook.getDate(), commentBook.getText(), commentBook.getUserId(), bookId);
 
-        BookEntity bookEntity = new BookEntity();
-        bookEntity.setId(bookId);
-        CommentBookEntity savedCommentFromRepository = commentBookRepository.findComment(commentBook.getUserId(), commentBook.getText(), commentBook.getDate(), bookEntity);
+//        BookEntity bookEntity = new BookEntity();
+//        bookEntity.setId(bookId);
+//        CommentBookEntity savedCommentFromRepository = commentBookRepository.findComment(commentBook.getUserId(), commentBook.getText(), commentBook.getDate(), bookEntity);
+        CommentBookEntity savedCommentFromRepository = commentBookRepository.findById(generatedId).get();
 
         commentBookResult = mapEntityToDTO(savedCommentFromRepository);
 
@@ -102,7 +103,7 @@ public class CommentBookServiceImpl implements CommentBookService {
     /**
      * Retrieves the {@literal CommentBookDTO} by this {@code commentId}.
      *
-     * @param commentId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
+     * @param commentId must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
      * @return the {@literal CommentBookDTO} with the given {@code commentId}.
      * @throws IllegalArgumentException In case the given {@code commentId} is {@literal null} or if {@code commentId} is equal or less zero.
      * @throws DataNotFoundException    In case if {@literal CommentBookDTO} not exist with this {@code commentId}.

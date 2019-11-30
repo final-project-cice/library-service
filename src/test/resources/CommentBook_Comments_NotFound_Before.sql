@@ -1,3 +1,51 @@
+-- ======================================================================================================== Clear Tables
+DELETE
+FROM author_book;
+DELETE
+FROM book_author;
+
+
+
+DELETE
+FROM phone_number_author;
+DELETE
+FROM genre_author;
+DELETE
+FROM email_author;
+DELETE
+FROM address_author;
+DELETE
+FROM author;
+
+
+
+DELETE
+FROM genre_book;
+
+DELETE
+FROM sub_comment_comment;
+
+DELETE
+FROM comment_book;
+
+DELETE
+FROM book;
+
+
+
+DELETE
+FROM phone_number_publishing_house;
+
+DELETE
+FROM email_publishing_house;
+
+DELETE
+FROM publishing_house;
+
+DELETE
+FROM address_publishing_house;
+
+-- =====================================================================================================================
 INSERT INTO address_publishing_house (id, city, country, house_number, postcode, street)
 VALUES (1, 'Madrid', 'Spain', '1A', 1111, 'Calle Uno');
 INSERT INTO publishing_house (id, name, address_id)
@@ -16,7 +64,9 @@ VALUES (2, '222222', '02222222222222', 'Fax', 1);
 INSERT INTO book (id, name, path_file, publication_date, publishing_house_id)
 VALUES (1, 'My first Book', 'path/path/book', '2019-10-30', 1);
 
--- Comment not found...
+-- =====================================================================================================================
+-- ============================================== Comment not found... =================================================
+-- =====================================================================================================================
 
 INSERT INTO genre_book (id, name, book_id)
 VALUES (1, 'Genre Book Uno', 1);

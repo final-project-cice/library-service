@@ -77,6 +77,8 @@ No me agustado com le echo la implementacion de guardar en la base y sacar la en
 No se por que rason el methodo SubCommentSubcommentRepository.add() no genera id automaticamente correcto. Y por esta rason echo de esta manera.
 *****************************
 Buscar la forma como se puede hacer mock al WebClient cual usa este metodo. Para que el test de este methodo estara independiente de user-servie.
+*****************************
+Test de este method no funcciona sin service user-service
 
 ========================================================================================================================
                                        SubCommentComment.add()
@@ -87,6 +89,8 @@ No me agustado com le echo la implementacion de guardar en la base y sacar la en
 No se por que rason el methodo SubCommentSubcommentRepository.add() no genera id automaticamente correcto. Y por esta rason echo de esta manera.
 *****************************
 Buscar la forma como se puede hacer mock al WebClient cual usa este metodo. Para que el test de este methodo estara independiente de user-servie.
+*****************************
+Test de este method no funcciona sin service user-service
 
 ========================================================================================================================
 
