@@ -241,7 +241,7 @@ public class CommentBookController {
      * @param commentBook must not be equals to {@literal null}.
      * @return the {@literal ResponseEntity.ok(CommentBookDTO)} with the given {@code commentId}.
      */
-    @PostMapping(path = "/comments/{commentId}",
+    @PatchMapping(path = "/comments/{commentId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<CommentBookDTO> updateByCommentId(@PathVariable Long commentId, @RequestBody CommentBookDTO commentBook) {

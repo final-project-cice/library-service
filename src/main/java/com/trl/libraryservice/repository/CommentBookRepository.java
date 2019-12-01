@@ -1,6 +1,5 @@
 package com.trl.libraryservice.repository;
 
-import com.trl.libraryservice.repository.entity.BookEntity;
 import com.trl.libraryservice.repository.entity.CommentBookEntity;
 
 import org.springframework.data.domain.Page;
@@ -27,15 +26,11 @@ public interface CommentBookRepository extends JpaRepository<CommentBookEntity, 
     void add(@Param("id") Long id, @Param("date") LocalDate date, @Param("text") String text, @Param("userId") Long userId, @Param("bookId") Long bookId);
 
 
-    @Query(value = "SELECT e FROM CommentBookEntity e WHERE e.userId=:userId  AND e.text=:text AND e.date=:date AND e.book=:book")
-    CommentBookEntity findComment(@Param("userId") Long userId, @Param("text") String text, @Param("date") LocalDate date, @Param("book") BookEntity book);
-
-
     @Query(value = "SELECT cb FROM CommentBookEntity cb WHERE cb.book.id=:bookId")
     List<CommentBookEntity> findByBookId(@Param("bookId") Long bookId);
 
     @Query(value = "SELECT cb FROM CommentBookEntity cb WHERE cb.book.id=:bookId")
-    Page<CommentBookEntity> getPageByBookId(@Param("bookId") Long bookId, Pageable pageable);
+    Page<CommentBookEntity> getPageOfCommentsByBookId(@Param("bookId") Long bookId, Pageable pageable);
 
 
     @Transactional

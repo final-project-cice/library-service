@@ -181,7 +181,7 @@ public class SubCommentCommentController {
      * @param subComment   must not be equals to {@literal null}.
      * @return the {@literal ResponseEntity.ok(SubCommentCommentDTO)} with the given {@code subCommentId}.
      */
-    @PostMapping(path = "/comments/subComments/{subCommentId}",
+    @PatchMapping(path = "/comments/subComments/{subCommentId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<SubCommentCommentDTO> updateBySubCommentId(@PathVariable Long subCommentId, @RequestBody SubCommentCommentDTO subComment) {

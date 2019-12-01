@@ -88,9 +88,6 @@ public class CommentBookServiceImpl implements CommentBookService {
         Long generatedId = commentBookRepository.count() + 1;
         commentBookRepository.add(generatedId, commentBook.getDate(), commentBook.getText(), commentBook.getUserId(), bookId);
 
-//        BookEntity bookEntity = new BookEntity();
-//        bookEntity.setId(bookId);
-//        CommentBookEntity savedCommentFromRepository = commentBookRepository.findComment(commentBook.getUserId(), commentBook.getText(), commentBook.getDate(), bookEntity);
         CommentBookEntity savedCommentFromRepository = commentBookRepository.findById(generatedId).get();
 
         commentBookResult = mapEntityToDTO(savedCommentFromRepository);
@@ -161,7 +158,7 @@ public class CommentBookServiceImpl implements CommentBookService {
 
         checkExistsBookById(bookId);
 
-        Page<CommentBookEntity> pageOfCommentsByBookId = commentBookRepository.getPageByBookId(bookId, PageRequest.of(startPage, pageSize));
+        Page<CommentBookEntity> pageOfCommentsByBookId = commentBookRepository.getPageOfCommentsByBookId(bookId, PageRequest.of(startPage, pageSize));
         LOG.debug("************ getPageOfCommentsByBookId() ---> pageOfCommentsFromRepositoryByBookId = " + pageOfCommentsByBookId);
 
         if (pageOfCommentsByBookId.isEmpty()) {
@@ -202,7 +199,7 @@ public class CommentBookServiceImpl implements CommentBookService {
 
         checkExistsBookById(bookId);
 
-        Page<CommentBookEntity> pageOfCommentsByBookId = commentBookRepository.getPageByBookId(bookId, PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
+        Page<CommentBookEntity> pageOfCommentsByBookId = commentBookRepository.getPageOfCommentsByBookId(bookId, PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
         LOG.debug("************ getPageOfSortedCommentsByBookId() ---> pageOfCommentsFromRepositoryByBookId = " + pageOfCommentsByBookId);
 
         if (pageOfCommentsByBookId.isEmpty()) {
@@ -222,16 +219,29 @@ public class CommentBookServiceImpl implements CommentBookService {
      * @param commentId   must not be {@literal null}, and {@code id} must be greater than zero.
      * @param commentBook must not be {@literal null}.
      * @return the {@literal CommentBookDTO} this comment to be updated.
-     * @throws IllegalArgumentException in case the given {@code book} is {@literal null}.
-     * @throws DataNotFoundException    in case if {@literal BookDTO} not exist by {@code id}.
-     * @throws TheSameValueException    in case if {@code name} equals to name book.
+     * @throws IllegalArgumentException in case the given {@code commentId} is {@literal null}
+     *                                  or if {@code commentId} is equal or less zero.
+     *                                  And if {@code commentBook} is equals to {@literal null}.
+     * @throws DataNotFoundException    in case if {@literal CommentBookDTO} not exist by {@code commentId}.
+     * @throws TheSameValueException    in case if source value field is equals to current value field.
      */
     @Override
     public CommentBookDTO updateByCommentId(Long commentId, CommentBookDTO commentBook) {
         CommentBookDTO commentResult = null;
-        // TODO: Terminar este methodo
 
-        if (true) throw new FunctionalityNotImplementedException("This functionality not implemented");
+        if ((commentId == null) || (commentId <= 0) || (commentBook == null)) {
+            LOG.debug("************ updateByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        }
+
+        LOG.debug("************ updateByCommentId() ---> commentId = " + commentId + " ---> commentBook = " + commentBook);
+
+        CommentBookEntity commentToBeUpdated = checkExistsCommentByCommentId(commentId);
+
+        // TODO: Finish this method.
+        commentResult = mapEntityToDTO(commentToBeUpdated);
+
+        LOG.debug("************ updateByCommentId() ---> " + "Deleted commentResult = " + commentResult);
 
         return commentResult;
     }

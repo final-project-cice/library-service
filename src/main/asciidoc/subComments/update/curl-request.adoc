@@ -1,0 +1,6 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/books/comments/subComments/1' -i -X PATCH \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{"userId":1,"text":"updated text comment","date":"01.01.2000"}'
+----

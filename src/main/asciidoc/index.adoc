@@ -182,15 +182,63 @@ include::books/add/request-fields.adoc[]
 include::books/add/links.adoc[]
 
 ====== HTTP Response
+
 include::books/add/http-response.adoc[]
 
 ====== Response Body
+
 include::books/add/response-body.adoc[]
 
 ====== Response Fields
+
 include::books/add/response-fields.adoc[]
 
+=== Update Book.
+
+Update Book by book id and this body request.
+
+====== CURL Request
+
+include::books/update/curl-request.adoc[]
+
+====== Path Parameter
+
+include::books/update/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::books/update/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::books/update/httpie-request.adoc[]
+
+====== Request Body
+
+include::books/update/request-body.adoc[]
+
+====== Request Fields
+
+include::books/update/request-fields.adoc[]
+
+====== Links
+
+include::books/update/links.adoc[]
+
+====== HTTP Response
+
+include::books/update/http-response.adoc[]
+
+====== Response Body
+
+include::books/update/response-body.adoc[]
+
+====== Response Fields
+
+include::books/update/response-fields.adoc[]
+
 === Delete Book.
+
 Delete Book by ID.
 
 ====== CURL Request
@@ -350,6 +398,94 @@ include::comments/getPageOfSortedCommentsByBookId/response-body.adoc[]
 ====== Response Fields
 
 include::comments/getPageOfSortedCommentsByBookId/response-fields.adoc[]
+
+=== Create Comment.
+
+Create Comment by this body request.
+
+====== CURL Request
+
+include::comments/add/curl-request.adoc[]
+
+====== Path Parameter
+
+include::comments/add/path-parameters.adoc
+
+====== HTTP Request
+
+include::comments/add/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::comments/add/httpie-request.adoc[]
+
+====== Request Body
+
+include::comments/add/request-body.adoc[]
+
+====== Request Fields
+
+include::comments/add/request-fields.adoc[]
+
+====== Links
+
+include::comments/add/links.adoc[]
+
+====== HTTP Response
+
+include::comments/add/http-response.adoc[]
+
+====== Response Body
+
+include::comments/add/response-body.adoc[]
+
+====== Response Fields
+
+include::comments/add/response-fields.adoc[]
+
+=== Update Comment.
+
+Update Comment by comment id and this body request.
+
+====== CURL Request
+
+include::comments/update/curl-request.adoc[]
+
+====== Path Parameter
+
+include::comments/update/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::comments/update/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::comments/update/httpie-request.adoc[]
+
+====== Request Body
+
+include::comments/update/request-body.adoc[]
+
+====== Request Fields
+
+include::comments/update/request-fields.adoc[]
+
+====== Links
+
+include::comments/update/links.adoc[]
+
+====== HTTP Response
+
+include::comments/update/http-response.adoc[]
+
+====== Response Body
+
+include::comments/update/response-body.adoc[]
+
+====== Response Fields
+
+include::comments/update/response-fields.adoc[]
 
 === Delete Comment By Comment Id.
 
@@ -548,6 +684,94 @@ include::subComments/getPageOfSortedSubCommentsByCommentId/response-body.adoc[]
 ====== Response Fields
 
 include::subComments/getPageOfSortedSubCommentsByCommentId/response-fields.adoc[]
+
+=== Create SubComment.
+
+Create SubComment by this body request.
+
+====== CURL Request
+
+include::subComments/add/curl-request.adoc[]
+
+====== Path Parameter
+
+include::subComments/add/path-parameters.adoc
+
+====== HTTP Request
+
+include::subComments/add/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::subComments/add/httpie-request.adoc[]
+
+====== Request Body
+
+include::subComments/add/request-body.adoc[]
+
+====== Request Fields
+
+include::subComments/add/request-fields.adoc[]
+
+====== Links
+
+include::subComments/add/links.adoc[]
+
+====== HTTP Response
+
+include::subComments/add/http-response.adoc[]
+
+====== Response Body
+
+include::subComments/add/response-body.adoc[]
+
+====== Response Fields
+
+include::subComments/add/response-fields.adoc[]
+
+=== Update SubComment.
+
+Update SubComment by subComment id and this body request.
+
+====== CURL Request
+
+include::subComments/update/curl-request.adoc[]
+
+====== Path Parameter
+
+include::subComments/update/path-parameters.adoc[]
+
+====== HTTP Request
+
+include::subComments/update/http-request.adoc[]
+
+====== HTTPie Requests
+
+include::subComments/update/httpie-request.adoc[]
+
+====== Request Body
+
+include::subComments/update/request-body.adoc[]
+
+====== Request Fields
+
+include::subComments/update/request-fields.adoc[]
+
+====== Links
+
+include::subComments/update/links.adoc[]
+
+====== HTTP Response
+
+include::subComments/update/http-response.adoc[]
+
+====== Response Body
+
+include::subComments/update/response-body.adoc[]
+
+====== Response Fields
+
+include::subComments/update/response-fields.adoc[]
 
 === Delete Sub Comment By Sub Comment Id.
 

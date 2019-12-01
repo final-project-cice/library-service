@@ -78,15 +78,15 @@ public class SubCommentComment_IntegrationTest {
                                 parameterWithName("commentId").description("The comment id to which subComments will be added. .")
                         ),
                         requestFields(
-                                fieldWithPath("userId").description("The user id of the user who created this comment."),
-                                fieldWithPath("text").description("Text of the comment."),
-                                fieldWithPath("date").description("Date of the comment.")
+                                fieldWithPath("userId").description("The user id of the user who created this sub comment."),
+                                fieldWithPath("text").description("Text of the sub comment."),
+                                fieldWithPath("date").description("Date of the sub comment.")
                         ),
                         responseFields(
-                                fieldWithPath("subCommentId").description("The id of Comment"),
-                                fieldWithPath("userId").description("The user id of the user who created this comment."),
-                                fieldWithPath("text").description("Text of the comment."),
-                                fieldWithPath("date").description("Date of the comment."),
+                                fieldWithPath("subCommentId").description("The id of sub comment"),
+                                fieldWithPath("userId").description("The user id of the user who created this sub comment."),
+                                fieldWithPath("text").description("Text of the sub comment."),
+                                fieldWithPath("date").description("Date of the sub comment."),
                                 fieldWithPath("_links.self.href").description("Link to self(add) the sub comment resource."),
                                 fieldWithPath("_links.getBySubCommentId.href").description("Link to get the sub comment resource by sub comment id."),
                                 fieldWithPath("_links.getBySubCommentId.templated").ignored(),
@@ -313,10 +313,10 @@ public class SubCommentComment_IntegrationTest {
                                 parameterWithName("subCommentId").description("The subCommentId used to search for a subComment.")
                         ),
                         responseFields(
-                                fieldWithPath("subCommentId").description("The id of Comment"),
-                                fieldWithPath("userId").description("The user id of the user who created this comment."),
-                                fieldWithPath("text").description("Text of the comment."),
-                                fieldWithPath("date").description("Date of the comment."),
+                                fieldWithPath("subCommentId").description("The id of sub comment"),
+                                fieldWithPath("userId").description("The user id of the user who created this sub comment."),
+                                fieldWithPath("text").description("Text of the sub comment."),
+                                fieldWithPath("date").description("Date of the sub comment."),
                                 fieldWithPath("_links.self.href").description("Link to self(getBySubCommentId) the sub comment resource."),
                                 fieldWithPath("_links.add.href").description("Link to add the sub comment resource by comment id."),
                                 fieldWithPath("_links.add.templated").ignored(),
@@ -638,6 +638,62 @@ public class SubCommentComment_IntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().string(containsString(responseBodyContent)))
                 .andDo(print());
+    }
+
+    @Sql(value = {"/SubCommentComment_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
+    public void update_docs() throws Exception {
+
+        final Integer SUB_COMMENT_ID = 1;
+
+        final String responseBodyContent = "{\"subCommentId\":1,\"userId\":1,\"text\":\"test sub comment First\",\"date\":\"01.11.2019\",\"_links\":{\"self\":{\"href\":\"http://localhost:8080/books/comments/subComments/1\"},\"add\":{\"href\":\"http://localhost:8080/books/comments/{commentId}/subComments\",\"templated\":true},\"getBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/1\"},\"getPageOfSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/{commentId}/subComments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"deleteBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/{subCommentId}\",\"templated\":true},\"deleteAllSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/{commentId}/subComments\",\"templated\":true}}}";
+
+        this.mockMvc.perform(
+                patch(BASE_URL + "/books/comments/subComments/{subCommentId}", SUB_COMMENT_ID)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                        .content("{\"userId\":1,\"text\":\"updated text comment\",\"date\":\"01.01.2000\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8_VALUE))
+                .andExpect(content().string(containsString(responseBodyContent)))
+                .andDo(print())
+                .andDo(document("subComments/update",
+                        pathParameters(
+                                parameterWithName("subCommentId").description("SubComment with this subCommentId to be updated.")
+                        ),
+                        requestFields(
+                                fieldWithPath("userId").description("The user id of the user who created this sub comment."),
+                                fieldWithPath("text").description("Text of the sub comment."),
+                                fieldWithPath("date").description("Date of the sub comment.")
+                        ),
+                        responseFields(
+                                fieldWithPath("subCommentId").description("The id of sub comment"),
+                                fieldWithPath("userId").description("The user id of the user who created this sub comment."),
+                                fieldWithPath("text").description("Text of the sub comment."),
+                                fieldWithPath("date").description("Date of the sub comment."),
+                                fieldWithPath("_links.self.href").description("Link to self(updateBySubCommentId) the sub comment resource."),
+                                fieldWithPath("_links.add.href").description("Link to add sub comment resource by comment id."),
+                                fieldWithPath("_links.add.templated").ignored(),
+                                fieldWithPath("_links.getBySubCommentId.href").description("Link to get the sub comment resource by sub comment id."),
+                                fieldWithPath("_links.getPageOfSubCommentsByCommentId.href").description("Link to get the page of sub comments resource by comment id."),
+                                fieldWithPath("_links.getPageOfSubCommentsByCommentId.templated").ignored(),
+                                fieldWithPath("_links.getPageOfSortedSubCommentsByCommentId.href").description("Link to get the page of sorted sub comments resource by comment id."),
+                                fieldWithPath("_links.getPageOfSortedSubCommentsByCommentId.templated").ignored(),
+                                fieldWithPath("_links.deleteBySubCommentId.href").description("Link to delete sub comment resource by sub comment id."),
+                                fieldWithPath("_links.deleteBySubCommentId.templated").ignored(),
+                                fieldWithPath("_links.deleteAllSubCommentsByCommentId.href").description("Link to delete sub comments resource by comment id."),
+                                fieldWithPath("_links.deleteAllSubCommentsByCommentId.templated").ignored()
+                        ),
+                        links(
+                                linkWithRel("self").description("Link to self(updateBySubCommentId) the sub comment resource."),
+                                linkWithRel("add").description("Link to add sub comment resource by comment id."),
+                                linkWithRel("getBySubCommentId").description("Link to get the sub comment resource by sub comment id."),
+                                linkWithRel("getPageOfSubCommentsByCommentId").description("Link to get the page of sub comments resource by comment id."),
+                                linkWithRel("getPageOfSortedSubCommentsByCommentId").description("Link to get the page of sorted sub comments resource by comment id."),
+                                linkWithRel("deleteBySubCommentId").description("Link to delete sub comment resource by sub comment id."),
+                                linkWithRel("deleteAllSubCommentsByCommentId").description("Link to delete sub comments resource by comment id.")
+                        )
+                ));
     }
 
     @Sql(value = {"/SubCommentComment_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)

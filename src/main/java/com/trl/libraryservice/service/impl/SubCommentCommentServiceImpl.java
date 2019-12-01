@@ -84,9 +84,6 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
         Long generatedId = subCommentRepository.count() + 1;
         subCommentRepository.add(generatedId, subComment.getDate(), subComment.getText(), subComment.getUserId(), commentId);
 
-//        CommentBookEntity commentBookEntity = new CommentBookEntity();
-//        commentBookEntity.setId(commentId);
-//        SubCommentCommentEntity savedSubCommentFromRepository = subCommentRepository.findSubComment(subComment.getUserId(), subComment.getText(), subComment.getDate(), commentBookEntity);
         SubCommentCommentEntity savedSubCommentFromRepository = subCommentRepository.findById(generatedId).get();
 
         subCommentResult = mapEntityToDTO(savedSubCommentFromRepository);
@@ -158,7 +155,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         checkExistsCommentById(commentId);
 
-        Page<SubCommentCommentEntity> subCommentsByCommentId = subCommentRepository.findByCommentId_RetrievePage(commentId, PageRequest.of(startPage, pageSize));
+        Page<SubCommentCommentEntity> subCommentsByCommentId = subCommentRepository.getPageOfSubCommentsByCommentId(commentId, PageRequest.of(startPage, pageSize));
         LOG.debug("************ getPageOfSubCommentsByCommentId() ---> subCommentsFromRepositoryByCommentId = " + subCommentsByCommentId);
 
         if (subCommentsByCommentId.isEmpty()) {
@@ -198,7 +195,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
         checkExistsCommentById(commentId);
 
-        Page<SubCommentCommentEntity> subCommentsByCommentId = subCommentRepository.findByCommentId_RetrievePage(commentId, PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
+        Page<SubCommentCommentEntity> subCommentsByCommentId = subCommentRepository.getPageOfSubCommentsByCommentId(commentId, PageRequest.of(startPage, pageSize, Sort.by(sortOrder)));
         LOG.debug("************ getPageOfSortedSubCommentsByCommentId() ---> subCommentsFromRepositoryByCommentId = " + subCommentsByCommentId);
 
         if (subCommentsByCommentId.isEmpty()) {
@@ -216,17 +213,33 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      * Update the {@literal SubCommentCommentDTO} by this {@code subCommentId}.
      *
      * @param subCommentId must not be equal to {@literal null}, and {@code subCommentId} must be greater than zero.
-     * @param subComment must not be equal to {@literal null}.
+     * @param subComment   must not be equal to {@literal null}.
      * @return the updated {@literal SubCommentCommentDTO} with the given {@code subCommentId}.
-     * @throws IllegalArgumentException in case the given {@code subCommentId} is {@literal null} or if {@code subCommentId} is equal or less zero.
-     *                                  And if {@code subComment} is equls to {@literal null}.
-     * @throws SubCommentNotExistException in case if subComment with this {@literal subCommentId} not exist.
+     * @throws IllegalArgumentException in case the given {@code subCommentId} is {@literal null}
+     *                                  or if {@code subCommentId} is equal or less zero.
+     *                                  And if {@code subComment} is equals to {@literal null}.
+     * @throws DataNotFoundException    in case if {@literal SubCommentCommentDTO} not exist by {@code commentId}.
+     * @throws TheSameValueException    in case if source value field is equals to current value field.
      */
     @Override
     public SubCommentCommentDTO updateBySubCommentId(Long subCommentId, SubCommentCommentDTO subComment) {
-        // TODO: Finish this.
-        if (true) throw new FunctionalityNotImplementedException("This functionality not implemented.");
-        return null;
+        SubCommentCommentDTO subCommentResult = null;
+
+        if ((subCommentId == null) || (subCommentId <= 0) || (subComment == null)) {
+            LOG.debug("************ updateBySubCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
+        }
+
+        LOG.debug("************ updateBySubCommentId() ---> subCommentId = " + subCommentId + " ---> subComment = " + subComment);
+
+        SubCommentCommentEntity subCommentToBeUpdated = checkExistsSubCommentBySubCommentId(subCommentId);
+
+        // TODO: Finish this method.
+        subCommentResult = mapEntityToDTO(subCommentToBeUpdated);
+
+        LOG.debug("************ updateBySubCommentId() ---> " + "Deleted subCommentResult = " + subCommentResult);
+
+        return subCommentResult;
     }
 
     /**

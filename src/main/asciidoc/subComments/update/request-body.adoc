@@ -1,0 +1,4 @@
+[source,options="nowrap"]
+----
+{"userId":1,"text":"updated text comment","date":"01.01.2000"}
+----

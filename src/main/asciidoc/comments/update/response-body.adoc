@@ -1,0 +1,68 @@
+[source,options="nowrap"]
+----
+{
+  "commentId" : 1,
+  "userId" : 1,
+  "text" : "Text Comment One",
+  "date" : "01.11.2019",
+  "subComments" : [ {
+    "subCommentId" : 1,
+    "userId" : 1,
+    "text" : "test sub comment",
+    "date" : "02.11.2019"
+  } ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "add" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "getByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "getPageOfCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "deleteByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1"
+    },
+    "deleteAllCommentsByBookId" : {
+      "href" : "http://localhost:8080/books/{bookId}/comments",
+      "templated" : true
+    },
+    "addSubComment" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
+    },
+    "getBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "getPageOfSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}",
+      "templated" : true
+    },
+    "getPageOfSortedSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}",
+      "templated" : true
+    },
+    "updateBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteBySubCommentId" : {
+      "href" : "http://localhost:8080/books/comments/subComments/{subCommentId}",
+      "templated" : true
+    },
+    "deleteAllSubCommentsByCommentId" : {
+      "href" : "http://localhost:8080/books/comments/1/subComments"
+    }
+  }
+}
+----

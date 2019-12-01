@@ -1,0 +1,25 @@
+|===
+|Relation|Description
+
+|`+self+`
+|Link to self(updateBySubCommentId) the sub comment resource.
+
+|`+add+`
+|Link to add sub comment resource by comment id.
+
+|`+getBySubCommentId+`
+|Link to get the sub comment resource by sub comment id.
+
+|`+getPageOfSubCommentsByCommentId+`
+|Link to get the page of sub comments resource by comment id.
+
+|`+getPageOfSortedSubCommentsByCommentId+`
+|Link to get the page of sorted sub comments resource by comment id.
+
+|`+deleteBySubCommentId+`
+|Link to delete sub comment resource by sub comment id.
+
+|`+deleteAllSubCommentsByCommentId+`
+|Link to delete sub comments resource by comment id.
+
+|===

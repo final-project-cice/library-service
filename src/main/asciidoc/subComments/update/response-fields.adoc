@@ -19,11 +19,15 @@
 
 |`+_links.self.href+`
 |`+String+`
-|Link to self(getBySubCommentId) the sub comment resource.
+|Link to self(updateBySubCommentId) the sub comment resource.
 
 |`+_links.add.href+`
 |`+String+`
-|Link to add the sub comment resource by comment id.
+|Link to add sub comment resource by comment id.
+
+|`+_links.getBySubCommentId.href+`
+|`+String+`
+|Link to get the sub comment resource by sub comment id.
 
 |`+_links.getPageOfSubCommentsByCommentId.href+`
 |`+String+`
@@ -32,10 +36,6 @@
 |`+_links.getPageOfSortedSubCommentsByCommentId.href+`
 |`+String+`
 |Link to get the page of sorted sub comments resource by comment id.
-
-|`+_links.updateBySubCommentId.href+`
-|`+String+`
-|Link to upgrade sub comment resource by sub comment id.
 
 |`+_links.deleteBySubCommentId.href+`
 |`+String+`

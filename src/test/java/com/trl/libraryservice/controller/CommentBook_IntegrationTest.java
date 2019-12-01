@@ -696,6 +696,86 @@ public class CommentBook_IntegrationTest {
     @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
+    public void update_docs() throws Exception {
+
+        final Integer COMMENT_ID = 1;
+
+        final String responseBodyContent = "{\"commentId\":1,\"userId\":1,\"text\":\"Text Comment One\",\"date\":\"01.11.2019\",\"subComments\":[{\"subCommentId\":1,\"userId\":1,\"text\":\"test sub comment\",\"date\":\"02.11.2019\"}],\"_links\":{\"self\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"add\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true},\"getByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"getPageOfCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"deleteByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"deleteAllCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true},\"addSubComment\":{\"href\":\"http://localhost:8080/books/comments/1/subComments\"},\"getBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/{subCommentId}\",\"templated\":true},\"getPageOfSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"updateBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/{subCommentId}\",\"templated\":true},\"deleteBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/{subCommentId}\",\"templated\":true},\"deleteAllSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1/subComments\"}}}";
+
+        this.mockMvc.perform(
+                patch(BASE_URL + "/books/comments/{commentId}", COMMENT_ID)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                        .content("{\"userId\":1,\"text\":\"new comment added\",\"date\":\"01.01.2000\",\"subComments\":[]}"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaTypes.HAL_JSON_UTF8_VALUE))
+                .andExpect(content().string(containsString(responseBodyContent)))
+                .andDo(print())
+                .andDo(document("comments/update",
+                        pathParameters(
+                                parameterWithName("commentId").description("Comment with this commentId to be updated.")
+                        ),
+                        requestFields(
+                                fieldWithPath("userId").description("The user id of the user who created this comment."),
+                                fieldWithPath("text").description("Text of the comment."),
+                                fieldWithPath("date").description("Date of the comment."),
+                                fieldWithPath("subComments.[]").description("The array of sub comments by the comment.")
+                        ),
+                        responseFields(
+                                fieldWithPath("commentId").description("The id of Comment"),
+                                fieldWithPath("userId").description("The user id of the user who created this comment."),
+                                fieldWithPath("text").description("Text of the comment."),
+                                fieldWithPath("date").description("Date of the comment."),
+                                fieldWithPath("subComments.[]").description("The array of sub comments by the comment."),
+                                fieldWithPath("subComments.[].subCommentId").description("The id of sub comment."),
+                                fieldWithPath("subComments.[].userId").description("The user id of the user who created this sub comment."),
+                                fieldWithPath("subComments.[].text").description("Text of the sub comment."),
+                                fieldWithPath("subComments.[].date").description("Date of the sub comment."),
+                                fieldWithPath("_links.self.href").description("Link to self(updateByCommentId) the comment resource."),
+                                fieldWithPath("_links.add.href").description("Link to add comment resource by book id."),
+                                fieldWithPath("_links.add.templated").ignored(),
+                                fieldWithPath("_links.getByCommentId.href").description("Link to get the comment resource by comment id."),
+                                fieldWithPath("_links.getPageOfCommentsByBookId.href").description("Link to get the page of comments resource by book id."),
+                                fieldWithPath("_links.getPageOfCommentsByBookId.templated").ignored(),
+                                fieldWithPath("_links.getPageOfSortedCommentsByBookId.href").description("Link to get the page of sorted comments resource by book id."),
+                                fieldWithPath("_links.getPageOfSortedCommentsByBookId.templated").ignored(),
+                                fieldWithPath("_links.deleteByCommentId.href").description("Link to delete comment resource by comment id."),
+                                fieldWithPath("_links.deleteAllCommentsByBookId.href").description("Link to delete comments resource by book id."),
+                                fieldWithPath("_links.deleteAllCommentsByBookId.templated").ignored(),
+                                fieldWithPath("_links.addSubComment.href").description("Link to add sub comments to the comment resource."),
+                                fieldWithPath("_links.getBySubCommentId.href").description("Link to get sub comments from the comment resource."),
+                                fieldWithPath("_links.getBySubCommentId.templated").ignored(),
+                                fieldWithPath("_links.getPageOfSubCommentsByCommentId.href").description("Link to get page of sub comments from the comment resource."),
+                                fieldWithPath("_links.getPageOfSubCommentsByCommentId.templated").ignored(),
+                                fieldWithPath("_links.getPageOfSortedSubCommentsByCommentId.href").description("Link to get page of sorted sub comments from the comment resource."),
+                                fieldWithPath("_links.getPageOfSortedSubCommentsByCommentId.templated").ignored(),
+                                fieldWithPath("_links.updateBySubCommentId.href").description("Link to update sub comments from the comment resource."),
+                                fieldWithPath("_links.updateBySubCommentId.templated").ignored(),
+                                fieldWithPath("_links.deleteBySubCommentId.href").description("Link to delete sub comments from the comment resource."),
+                                fieldWithPath("_links.deleteBySubCommentId.templated").ignored(),
+                                fieldWithPath("_links.deleteAllSubCommentsByCommentId.href").description("Link to delete all sub comments from the comment resource.")
+                        ),
+                        links(
+                                linkWithRel("self").description("Link to self(updateByCommentId) the comment resource."),
+                                linkWithRel("add").description("Link to add comment resource by book id."),
+                                linkWithRel("getByCommentId").description("Link to get the comment resource by comment id."),
+                                linkWithRel("getPageOfCommentsByBookId").description("Link to get the page of comments resource by book id."),
+                                linkWithRel("getPageOfSortedCommentsByBookId").description("Link to get the page of sorted comments resource by book id."),
+                                linkWithRel("deleteByCommentId").description("Link to delete comment resource by comment id."),
+                                linkWithRel("deleteAllCommentsByBookId").description("Link to delete comments resource by book id."),
+                                linkWithRel("addSubComment").description("Link to add sub comments to the comment resource."),
+                                linkWithRel("getBySubCommentId").description("Link to get sub comments from the comment resource."),
+                                linkWithRel("getPageOfSubCommentsByCommentId").description("Link to get page of sub comments from the comment resource."),
+                                linkWithRel("getPageOfSortedSubCommentsByCommentId").description("Link to get page of sorted sub comments from the comment resource."),
+                                linkWithRel("updateBySubCommentId").description("Link to update sub comments from the comment resource."),
+                                linkWithRel("deleteBySubCommentId").description("Link to delete sub comments from the comment resource."),
+                                linkWithRel("deleteAllSubCommentsByCommentId").description("Link to delete all sub comments from the comment resource.")
+                        )
+                ));
+    }
+
+    @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Test
     public void deleteByCommentId() throws Exception {
 
         final String responseBodyContent = "{\"commentId\":1,\"userId\":1,\"text\":\"Text Comment One\",\"date\":\"01.11.2019\",\"subComments\":[],\"_links\":{\"self\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"add\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true},\"getByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"getPageOfCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"updateByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1\"},\"deleteAllCommentsByBookId\":{\"href\":\"http://localhost:8080/books/{bookId}/comments\",\"templated\":true},\"addSubComment\":{\"href\":\"http://localhost:8080/books/comments/1/subComments\"},\"getBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/{subCommentId}\",\"templated\":true},\"getPageOfSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}\",\"templated\":true},\"getPageOfSortedSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1/subComments/{startPage}/{pageSize}/{sortOrder}\",\"templated\":true},\"updateBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/{subCommentId}\",\"templated\":true},\"deleteBySubCommentId\":{\"href\":\"http://localhost:8080/books/comments/subComments/{subCommentId}\",\"templated\":true},\"deleteAllSubCommentsByCommentId\":{\"href\":\"http://localhost:8080/books/comments/1/subComments\"}}}";

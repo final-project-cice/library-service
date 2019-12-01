@@ -3,19 +3,19 @@
 
 |`+subCommentId+`
 |`+Number+`
-|The id of Comment
+|The id of sub comment
 
 |`+userId+`
 |`+Number+`
-|The user id of the user who created this comment.
+|The user id of the user who created this sub comment.
 
 |`+text+`
 |`+String+`
-|Text of the comment.
+|Text of the sub comment.
 
 |`+date+`
 |`+String+`
-|Date of the comment.
+|Date of the sub comment.
 
 |`+_links.self.href+`
 |`+String+`

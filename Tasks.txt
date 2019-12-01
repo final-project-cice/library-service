@@ -93,5 +93,8 @@ Buscar la forma como se puede hacer mock al WebClient cual usa este metodo. Para
 Test de este method no funcciona sin service user-service
 
 ========================================================================================================================
+Cuando se va presentar proyecto desir de configuracion de loging carpeta.
+Cuando se va presentar proyecto desir de los tests CommentBook_IntegrationTest.add() - este test necesita service user-service
+Cuando se va presentar proyecto desir de los tests SubCommentComment_IntegrationTest.add() - este test necesita service user-service
 
 ========================================================================================================================
