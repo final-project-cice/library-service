@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This class is designed to support service layout for {@literal SubCommentCommentDTO}.
+ * This class is designed to implement methods of service {@literal SubCommentCommentService}.
  *
  * @author Tsyupryk Roman
  */
@@ -143,7 +143,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      */
     @Override
     public Page<SubCommentCommentDTO> getPageOfSubCommentsByCommentId(Long commentId, Integer startPage, Integer pageSize) {
-        Page<SubCommentCommentDTO> subCommentListResult = null;
+        Page<SubCommentCommentDTO> subCommentPageResult = null;
 
         if ((commentId == null) || (commentId <= 0)) {
             LOG.debug("************ getPageOfSubCommentsByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
@@ -163,10 +163,10 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
             throw new DataNotFoundException(format(EXCEPTION_MESSAGE_SUB_COMMENTS_BY_COMMENT_ID_NOT_EXIST, commentId));
         }
 
-        subCommentListResult = mapPageEntityToPageDTO(subCommentsByCommentId);
-        LOG.debug("************ getPageOfSubCommentsByCommentId() ---> subCommentsListResult = " + subCommentListResult);
+        subCommentPageResult = mapPageEntityToPageDTO(subCommentsByCommentId);
+        LOG.debug("************ getPageOfSubCommentsByCommentId() ---> subCommentsPageResult = " + subCommentPageResult);
 
-        return subCommentListResult;
+        return subCommentPageResult;
     }
 
     /**
@@ -183,7 +183,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      */
     @Override
     public Page<SubCommentCommentDTO> getPageOfSortedSubCommentsByCommentId(Long commentId, Integer startPage, Integer pageSize, String sortOrder) {
-        Page<SubCommentCommentDTO> subCommentListResult = null;
+        Page<SubCommentCommentDTO> subCommentPageResult = null;
 
         if ((commentId == null) || (commentId <= 0)) {
             LOG.debug("************ getPageOfSortedSubCommentsByCommentId() ---> " + EXCEPTION_MESSAGE_ILLEGAL_ARGUMENTS);
@@ -203,10 +203,10 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
             throw new DataNotFoundException(format(EXCEPTION_MESSAGE_SUB_COMMENTS_BY_COMMENT_ID_NOT_EXIST, commentId));
         }
 
-        subCommentListResult = mapPageEntityToPageDTO(subCommentsByCommentId);
-        LOG.debug("************ getPageOfSortedSubCommentsByCommentId() ---> subCommentsListResult = " + subCommentListResult);
+        subCommentPageResult = mapPageEntityToPageDTO(subCommentsByCommentId);
+        LOG.debug("************ getPageOfSortedSubCommentsByCommentId() ---> subCommentsPageResult = " + subCommentPageResult);
 
-        return subCommentListResult;
+        return subCommentPageResult;
     }
 
     /**
@@ -237,7 +237,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
         // TODO: Finish this method.
         subCommentResult = mapEntityToDTO(subCommentToBeUpdated);
 
-        LOG.debug("************ updateBySubCommentId() ---> " + "Deleted subCommentResult = " + subCommentResult);
+        LOG.debug("************ updateBySubCommentId() ---> " + "Updated subCommentResult = " + subCommentResult);
 
         return subCommentResult;
     }

@@ -4,6 +4,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * This class is designed to represent Entity object of book.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "BookEntity")
 @Table(name = "book")
 public class BookEntity {

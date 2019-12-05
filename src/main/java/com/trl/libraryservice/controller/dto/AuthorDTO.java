@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * This class is designed to represent DTO object of author.
+ *
+ * @author Tsyupryk Roman
+ */
 public class AuthorDTO {
 
     private Long id;

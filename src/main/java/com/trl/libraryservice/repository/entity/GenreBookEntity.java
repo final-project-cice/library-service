@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of genre of book.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "GenreBookEntity")
 @Table(name = "genre_book")
 public class GenreBookEntity {

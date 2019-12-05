@@ -15,8 +15,13 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
 
+/**
+ * This class is designed to support controller layout for {@literal SubCommentCommentDTO}.
+ *
+ * @author Tsyupryk Roman
+ */
 @RestController
-@RequestMapping(path = "/books")
+@RequestMapping(path = "/books/comments")
 public class SubCommentCommentController {
 
     private final SubCommentCommentService subCommentService;
@@ -33,7 +38,7 @@ public class SubCommentCommentController {
      * @return the {@literal ResponseEntity.ok(SubCommentCommentDTO)}.
      */
     @PostMapping(
-            path = "/comments/{commentId}/subComments",
+            path = "/{commentId}/subComments",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<SubCommentCommentDTO> add(@PathVariable Long commentId, @RequestBody SubCommentCommentDTO subComment) {
@@ -68,7 +73,7 @@ public class SubCommentCommentController {
      * @return the {@literal ResponseEntity.ok(SubCommentCommentDTO)} with the given {@code subCommentId}.
      */
     @GetMapping(
-            path = "/comments/subComments/{subCommentId}",
+            path = "/subComments/{subCommentId}",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<SubCommentCommentDTO> getBySubCommentId(@PathVariable Long subCommentId) {
         ResponseEntity<SubCommentCommentDTO> response = null;
@@ -104,7 +109,7 @@ public class SubCommentCommentController {
      * @return the {@literal ResponseEntity.ok(List<SubCommentCommentDTO>)} with the given {@code commentId}.
      */
     @GetMapping(
-            path = "/comments/{commentId}/subComments/{startPage}/{pageSize}",
+            path = "/{commentId}/subComments/{startPage}/{pageSize}",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<Page<SubCommentCommentDTO>> getPageOfSubCommentsByCommentId(
             @PathVariable Long commentId, @PathVariable Integer startPage, @PathVariable Integer pageSize) {
@@ -144,7 +149,7 @@ public class SubCommentCommentController {
      * @return the {@literal ResponseEntity.ok(List<SubCommentCommentDTO>)} with the given {@code commentId}.
      */
     @GetMapping(
-            path = "/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}",
+            path = "/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<Page<SubCommentCommentDTO>> getPageOfSortedSubCommentsByCommentId(
             @PathVariable Long commentId, @PathVariable Integer startPage, @PathVariable Integer pageSize, @PathVariable String sortOrder) {
@@ -181,7 +186,7 @@ public class SubCommentCommentController {
      * @param subComment   must not be equals to {@literal null}.
      * @return the {@literal ResponseEntity.ok(SubCommentCommentDTO)} with the given {@code subCommentId}.
      */
-    @PatchMapping(path = "/comments/subComments/{subCommentId}",
+    @PatchMapping(path = "/subComments/{subCommentId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<SubCommentCommentDTO> updateBySubCommentId(@PathVariable Long subCommentId, @RequestBody SubCommentCommentDTO subComment) {
@@ -216,7 +221,7 @@ public class SubCommentCommentController {
      * @return the {@literal ResponseEntity.ok(SubCommentCommentDTO)} if {@literal SubCommentCommentDTO} is deleted correctly.
      */
     @DeleteMapping(
-            path = "/comments/subComments/{subCommentId}",
+            path = "/subComments/{subCommentId}",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<SubCommentCommentDTO> deleteBySubCommentId(@PathVariable Long subCommentId) {
         ResponseEntity<SubCommentCommentDTO> response = null;
@@ -250,7 +255,7 @@ public class SubCommentCommentController {
      * @return the {@literal ResponseEntity.ok()} if {@literal SubCommentCommentDTO} is deleted correctly.
      */
     @DeleteMapping(
-            path = "/comments/{commentId}/subComments",
+            path = "/{commentId}/subComments",
             produces = MediaTypes.HAL_JSON_UTF8_VALUE)
     public ResponseEntity<List<SubCommentCommentDTO>> deleteAllSubCommentsByCommentId(@PathVariable Long commentId) {
         ResponseEntity<List<SubCommentCommentDTO>> response = null;

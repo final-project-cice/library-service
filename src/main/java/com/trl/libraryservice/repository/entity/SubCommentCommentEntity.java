@@ -6,6 +6,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of sub comment of comment book.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "SubCommentCommentEntity")
 @Table(name = "sub_comment_comment")
 public class SubCommentCommentEntity {

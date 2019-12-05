@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of publishing hose.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "PublishingHouseEntity")
 @Table(name = "publishing_house")
 public class PublishingHouseEntity {

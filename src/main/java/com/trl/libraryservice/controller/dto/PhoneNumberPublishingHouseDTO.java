@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of phone number of publishing house.
+ *
+ * @author Tsyupryk Roman
+ */
 public class PhoneNumberPublishingHouseDTO {
 
     private Long id;

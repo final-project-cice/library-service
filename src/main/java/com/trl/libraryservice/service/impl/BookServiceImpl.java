@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This class is designed to support service layout for {@literal BookDTO}.
+ * This class is designed to implement methods of service {@literal BookService}.
  *
  * @author Tsyupryk Roman
  */

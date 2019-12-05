@@ -3,6 +3,11 @@ package com.trl.libraryservice.repository.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of address of publishing house.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "AddressPublishingHouseEntity")
 @Table(name = "address_publishing_house")
 public class AddressPublishingHouseEntity {

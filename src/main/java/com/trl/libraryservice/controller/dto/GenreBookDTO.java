@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of genre of book.
+ *
+ * @author Tsyupryk Roman
+ */
 public class GenreBookDTO {
 
     private Long id;

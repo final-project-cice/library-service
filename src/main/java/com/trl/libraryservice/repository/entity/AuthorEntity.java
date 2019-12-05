@@ -6,6 +6,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * This class is designed to represent Entity object of author.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "AuthorEntity")
 @Table(name = "author")
 public class AuthorEntity {

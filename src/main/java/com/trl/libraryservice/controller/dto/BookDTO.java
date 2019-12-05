@@ -6,6 +6,11 @@ import org.springframework.hateoas.ResourceSupport;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * This class is designed to represent DTO object of address of author.
+ *
+ * @author Tsyupryk Roman
+ */
 public class BookDTO extends ResourceSupport {
 
     private Long bookId;

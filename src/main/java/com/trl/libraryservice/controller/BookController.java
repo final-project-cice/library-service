@@ -14,7 +14,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
- * This class is designed to support resource layout for {@literal BookDTO}.
+ * This class is designed to support controller layout for {@literal BookDTO}.
  *
  * @author Tsyupryk Roman
  */

@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of publishing house.
+ *
+ * @author Tsyupryk Roman
+ */
 public class PublishingHouseDTO {
 
     private Long id;

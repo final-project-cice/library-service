@@ -2,6 +2,11 @@ package com.trl.libraryservice.controller.dto;
 
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of address of publishing house.
+ *
+ * @author Tsyupryk Roman
+ */
 public class AddressPublishingHouseDTO {
 
     private Long id;

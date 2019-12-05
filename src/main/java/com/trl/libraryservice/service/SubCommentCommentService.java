@@ -6,6 +6,11 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
+/**
+ * This interface is designed to support service for {@literal SubCommentCommentDTO}.
+ *
+ * @author Tsyupryk Roman
+ */
 public interface SubCommentCommentService {
 
     SubCommentCommentDTO add(Long commentId, SubCommentCommentDTO subComment);

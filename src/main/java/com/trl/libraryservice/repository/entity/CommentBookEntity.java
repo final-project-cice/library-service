@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of comment of book.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "CommentBookEntity")
 @Table(name = "comment_book")
 public class CommentBookEntity {

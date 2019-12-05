@@ -15,6 +15,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
 
+/**
+ * This class is designed to support controller layout for {@literal CommentBookDTO}.
+ *
+ * @author Tsyupryk Roman
+ */
 @RestController
 @RequestMapping(path = "/books")
 public class CommentBookController {

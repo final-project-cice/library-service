@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of email of publishing hose.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "EmailPublishingHouseEntity")
 @Table(name = "email_publishing_house")
 public class EmailPublishingHouseEntity {

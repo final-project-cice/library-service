@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent Entity object of phone number of publishing hose.
+ *
+ * @author Tsyupryk Roman
+ */
 @Entity(name = "PhoneNumberPublishingHouseEntity")
 @Table(name = "phone_number_publishing_house")
 public class PhoneNumberPublishingHouseEntity {

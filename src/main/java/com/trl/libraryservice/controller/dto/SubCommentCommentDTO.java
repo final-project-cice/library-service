@@ -7,6 +7,11 @@ import org.springframework.hateoas.ResourceSupport;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of sub comment of comment book.
+ *
+ * @author Tsyupryk Roman
+ */
 public class SubCommentCommentDTO extends ResourceSupport {
 
     private Long subCommentId;

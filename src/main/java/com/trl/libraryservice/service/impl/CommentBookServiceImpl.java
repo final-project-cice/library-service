@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This class is designed to implementation methods of {@code CommentBookService}.
+ * This class is designed to implement methods of service {@literal CommentBookService}.
  *
  * @author Tsyupryk Roman
  */
@@ -241,7 +241,7 @@ public class CommentBookServiceImpl implements CommentBookService {
         // TODO: Finish this method.
         commentResult = mapEntityToDTO(commentToBeUpdated);
 
-        LOG.debug("************ updateByCommentId() ---> " + "Deleted commentResult = " + commentResult);
+        LOG.debug("************ updateByCommentId() ---> " + "Updated commentResult = " + commentResult);
 
         return commentResult;
     }

@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * This class is designed to represent DTO object of user.
+ *
+ * @author Tsyupryk Roman
+ */
 public class UserDTO {
 
     private Long id;

@@ -38,7 +38,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(UserNotExistException.class)
     public final ResponseEntity<ErrorDetailsDTO> handleUserNotExistException(UserNotExistException ex, WebRequest request) {
-        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
@@ -49,7 +48,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(BookNotExistException.class)
     public final ResponseEntity<ErrorDetailsDTO> handleBookNotExistException(BookNotExistException ex, WebRequest request) {
-        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
@@ -60,7 +58,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(CommentNotExistException.class)
     public final ResponseEntity<ErrorDetailsDTO> handleCommentNotExistException(CommentNotExistException ex, WebRequest request) {
-        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
@@ -71,7 +68,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(SubCommentNotExistException.class)
     public final ResponseEntity<ErrorDetailsDTO> handleSubCommentNotExistException(SubCommentNotExistException ex, WebRequest request) {
-        // TODO: Think of how best to do it. Use HttpStatus.BAD_REQUEST or HttpStatus.NOT_FOUND.
         ErrorDetailsDTO errorDetails = new ErrorDetailsDTO();
         errorDetails.setErrorMessage(ex.getMessage());
         errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.value());
