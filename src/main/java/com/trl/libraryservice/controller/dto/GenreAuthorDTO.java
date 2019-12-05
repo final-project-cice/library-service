@@ -17,7 +17,8 @@ public class GenreAuthorDTO {
     @JsonIgnore
     private AuthorDTO author;
 
-    public GenreAuthorDTO() { }
+    public GenreAuthorDTO() {
+    }
 
     public Long getId() {
         return id;

@@ -27,7 +27,8 @@ public class GenreBookEntity {
     @JoinColumn(name = "book_id")
     private BookEntity book;
 
-    public GenreBookEntity() { }
+    public GenreBookEntity() {
+    }
 
     public Long getId() {
         return id;

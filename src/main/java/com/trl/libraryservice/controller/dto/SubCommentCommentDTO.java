@@ -24,7 +24,8 @@ public class SubCommentCommentDTO extends ResourceSupport {
     @JsonIgnore
     private CommentBookDTO comment;
 
-    public SubCommentCommentDTO() { }
+    public SubCommentCommentDTO() {
+    }
 
     public Long getSubCommentId() {
         return subCommentId;

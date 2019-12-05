@@ -26,7 +26,8 @@ public class BookDTO extends ResourceSupport {
 
     private Set<AuthorDTO> authors = new HashSet<>();
 
-    public BookDTO() { }
+    public BookDTO() {
+    }
 
     public Long getBookId() {
         return bookId;

@@ -21,7 +21,8 @@ public class AddressAuthorDTO {
     @JsonIgnore
     private AuthorDTO author;
 
-    public AddressAuthorDTO() { }
+    public AddressAuthorDTO() {
+    }
 
     public Long getId() {
         return id;

@@ -30,7 +30,8 @@ public class EmailPublishingHouseEntity {
     @JoinColumn(name = "publishing_house_id")
     private PublishingHouseEntity publishingHouse;
 
-    public EmailPublishingHouseEntity() { }
+    public EmailPublishingHouseEntity() {
+    }
 
     public Long getId() {
         return id;

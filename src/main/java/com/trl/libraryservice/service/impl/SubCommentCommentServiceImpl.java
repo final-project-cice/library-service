@@ -135,7 +135,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      *
      * @param commentId must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
      * @param startPage zero-based page index, must not be negative.
-     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
      * @return the {@literal Page<SubCommentCommentDTO>} with the given {@code commentId}.
      * @throws IllegalArgumentException in case the given {@code commentId} is {@literal null} or if {@code commentId} is equal or less zero.
      * @throws CommentNotExistException in case if comment with this {@literal commentId} not exist.
@@ -247,7 +247,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      *
      * @param subCommentId must not be equal to {@literal null}, and {@code subCommentId} must be greater than zero.
      * @return {@literal SubCommentCommentDTO} this subComment will be deleted.
-     * @throws IllegalArgumentException In case if the given {@code subCommentId} is {@literal null}, and if {@code subCommentId} is equal or less zero.
+     * @throws IllegalArgumentException    In case if the given {@code subCommentId} is {@literal null}, and if {@code subCommentId} is equal or less zero.
      * @throws SubCommentNotExistException If subComment not exist with the {@code subCommentId}.
      */
     @Override
@@ -277,7 +277,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
      *
      * @param commentId must not be equal to {@literal null}, and {@code commentId} must be greater than zero.
      * @return {@literal List<SubCommentCommentDTO>} this subComments will be deleted.
-     * @throws IllegalArgumentException In case if the given {@code commentId} is {@literal null}, and if {@code commentId} is equal or less zero.
+     * @throws IllegalArgumentException    In case if the given {@code commentId} is {@literal null}, and if {@code commentId} is equal or less zero.
      * @throws CommentNotExistException    If comment not exist with the {@code commentId}.
      * @throws SubCommentNotExistException If subComments not exist with the {@code commentId}.
      */

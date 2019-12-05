@@ -18,7 +18,8 @@ public class EmailPublishingHouseDTO {
     @JsonIgnore
     private PublishingHouseDTO publishingHouse;
 
-    public EmailPublishingHouseDTO() { }
+    public EmailPublishingHouseDTO() {
+    }
 
     public Long getId() {
         return id;

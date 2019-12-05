@@ -33,7 +33,8 @@ public class PhoneNumberPublishingHouseEntity {
     @JoinColumn(name = "publishing_house_id")
     private PublishingHouseEntity publishingHouse;
 
-    public PhoneNumberPublishingHouseEntity() { }
+    public PhoneNumberPublishingHouseEntity() {
+    }
 
     public Long getId() {
         return id;

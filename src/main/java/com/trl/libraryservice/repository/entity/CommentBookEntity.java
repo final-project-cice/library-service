@@ -38,7 +38,8 @@ public class CommentBookEntity {
     @JoinColumn(name = "book_id")
     private BookEntity book;
 
-    public CommentBookEntity() { }
+    public CommentBookEntity() {
+    }
 
     public Long getId() {
         return id;

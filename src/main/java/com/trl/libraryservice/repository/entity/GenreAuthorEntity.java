@@ -27,7 +27,8 @@ public class GenreAuthorEntity {
     @JoinColumn(name = "author_id")
     private AuthorEntity author;
 
-    public GenreAuthorEntity() { }
+    public GenreAuthorEntity() {
+    }
 
     public Long getId() {
         return id;

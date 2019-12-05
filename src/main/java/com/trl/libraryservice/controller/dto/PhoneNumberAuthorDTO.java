@@ -19,7 +19,8 @@ public class PhoneNumberAuthorDTO {
     @JsonIgnore
     private AuthorDTO author;
 
-    public PhoneNumberAuthorDTO() { }
+    public PhoneNumberAuthorDTO() {
+    }
 
     public Long getId() {
         return id;

@@ -32,7 +32,8 @@ public class AddressPublishingHouseEntity {
     @Column(name = "postcode", nullable = false)
     private Integer postcode;
 
-    public AddressPublishingHouseEntity() { }
+    public AddressPublishingHouseEntity() {
+    }
 
     public Long getId() {
         return id;

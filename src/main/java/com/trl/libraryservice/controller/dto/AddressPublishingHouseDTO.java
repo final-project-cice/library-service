@@ -16,7 +16,8 @@ public class AddressPublishingHouseDTO {
     private String houseNumber;
     private Integer postcode;
 
-    public AddressPublishingHouseDTO() { }
+    public AddressPublishingHouseDTO() {
+    }
 
     public Long getId() {
         return id;

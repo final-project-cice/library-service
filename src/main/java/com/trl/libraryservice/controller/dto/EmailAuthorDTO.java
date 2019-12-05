@@ -18,7 +18,8 @@ public class EmailAuthorDTO {
     @JsonIgnore
     private AuthorDTO author;
 
-    public EmailAuthorDTO() { }
+    public EmailAuthorDTO() {
+    }
 
     public Long getId() {
         return id;

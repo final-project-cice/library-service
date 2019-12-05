@@ -28,7 +28,8 @@ public class AuthorDTO {
     @JsonIgnore
     private Set<BookDTO> books = new HashSet<>();
 
-    public AuthorDTO() { }
+    public AuthorDTO() {
+    }
 
     public Long getId() {
         return id;

@@ -28,7 +28,8 @@ public class CommentBookDTO extends ResourceSupport {
     @JsonIgnore
     private BookDTO book;
 
-    public CommentBookDTO() { }
+    public CommentBookDTO() {
+    }
 
     public Long getCommentId() {
         return commentId;

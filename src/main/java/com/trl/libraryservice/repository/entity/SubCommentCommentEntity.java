@@ -33,7 +33,8 @@ public class SubCommentCommentEntity {
     @JoinColumn(name = "comment_id")
     private CommentBookEntity comment;
 
-    public SubCommentCommentEntity() { }
+    public SubCommentCommentEntity() {
+    }
 
     public Long getId() {
         return id;

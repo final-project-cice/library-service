@@ -137,12 +137,12 @@ public class CommentBookServiceImpl implements CommentBookService {
     /**
      * Retrieve page of {@literal CommentBookDTOs} by this {@code bookId}.
      *
-     * @param bookId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
+     * @param bookId    must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
      * @param startPage zero-based page index, must not be negative.
-     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
      * @return the {@literal Page<CommentBookDTO>} with the given {@code bookId}.
      * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null} or if {@code bookId} is equal or less zero.
-     * @throws BookNotExistException in case if book with this {@literal bookId} not exist.
+     * @throws BookNotExistException    in case if book with this {@literal bookId} not exist.
      * @throws DataNotFoundException    in case if {@literal Page<CommentBookDTO>} not exist with this {@code bookId}.
      */
     @Override
@@ -175,13 +175,13 @@ public class CommentBookServiceImpl implements CommentBookService {
     /**
      * Retrieve page of sorted {@literal CommentBookDTOs} by this {@code bookId}.
      *
-     * @param bookId must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
+     * @param bookId    must not be equal to {@literal null}, and {@code bookId} must be greater than zero.
      * @param startPage zero-based page index, must not be negative.
-     * @param pageSize the size of the page to be returned, must be greater than 0.
+     * @param pageSize  the size of the page to be returned, must be greater than 0.
      * @param sortOrder the value by which the sorted CommentBookDTOs will be. Must not be {@literal null}.
      * @return the {@literal Page<CommentBookDTO>} with the given {@code bookId}.
      * @throws IllegalArgumentException in case the given {@code bookId} is {@literal null} or if {@code bookId} is equal or less zero.
-     * @throws BookNotExistException in case if book with this {@literal bookId} not exist.
+     * @throws BookNotExistException    in case if book with this {@literal bookId} not exist.
      * @throws DataNotFoundException    in case if {@literal Page<CommentBookDTO>} not exist with this {@code bookId}.
      */
     @Transactional

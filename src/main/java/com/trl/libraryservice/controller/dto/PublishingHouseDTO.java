@@ -17,7 +17,8 @@ public class PublishingHouseDTO {
     private List<PhoneNumberPublishingHouseDTO> phoneNumbers = new ArrayList<>();
     private List<EmailPublishingHouseDTO> emails = new ArrayList<>();
 
-    public PublishingHouseDTO() { }
+    public PublishingHouseDTO() {
+    }
 
     public Long getId() {
         return id;

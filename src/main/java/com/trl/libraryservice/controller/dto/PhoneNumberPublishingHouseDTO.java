@@ -19,7 +19,8 @@ public class PhoneNumberPublishingHouseDTO {
     @JsonIgnore
     private PublishingHouseDTO publishingHouse;
 
-    public PhoneNumberPublishingHouseDTO() { }
+    public PhoneNumberPublishingHouseDTO() {
+    }
 
     public Long getId() {
         return id;
