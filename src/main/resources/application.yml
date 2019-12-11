@@ -26,8 +26,8 @@ spring:
   #============================== Configuration PostgreSQL
   datasource:
     username: developer
-    password: 1,5Lht.nt!o0#
-    url: jdbc:postgresql://localhost/library
+    password: Nqa2GrwJ5dqu
+    url: jdbc:postgresql://ec2-15-188-76-238.eu-west-3.compute.amazonaws.com/library_service
     driver-class-name: org.postgresql.Driver
 
   #============================== Configuration JPA
