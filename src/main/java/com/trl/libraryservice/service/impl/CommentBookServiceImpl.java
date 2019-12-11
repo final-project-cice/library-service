@@ -120,7 +120,7 @@ public class CommentBookServiceImpl implements CommentBookService {
         LOG.debug("************ getByCommentId(() ---> " +
                 "commentBookFromRepositoryByCommentId = " + commentByCommentId);
 
-        if (commentByCommentId.isEmpty()) {
+        if (!commentByCommentId.isPresent()) {
             LOG.debug("************ getByCommentId(() ---> " +
                     format(EXCEPTION_MESSAGE_COMMENT_BY_COMMENT_ID_NOT_EXIST, commentId));
             throw new DataNotFoundException(
@@ -350,7 +350,7 @@ public class CommentBookServiceImpl implements CommentBookService {
 
         Optional<CommentBookEntity> commentFromRepository = commentBookRepository.findById(commentId);
 
-        if (commentFromRepository.isEmpty()) {
+        if (!commentFromRepository.isPresent()) {
             LOG.debug("************ checkExistsCommentByCommentId() ---> " + "Comment with this commentId = " + commentId + " not exist.");
             throw new CommentNotExistException("Comment with this commentId = " + commentId + " not exist.");
         }

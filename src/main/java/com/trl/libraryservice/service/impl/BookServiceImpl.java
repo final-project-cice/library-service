@@ -98,7 +98,7 @@ public class BookServiceImpl implements BookService {
         Optional<BookEntity> bookById = bookRepository.findById(id);
         LOG.debug("************ getById() ---> bookFromRepositoryById = " + bookById);
 
-        if (bookById.isEmpty()) {
+        if (!bookById.isPresent()) {
             LOG.debug("************ getById() ---> " + format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
             throw new DataNotFoundException(format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
         }
@@ -183,7 +183,7 @@ public class BookServiceImpl implements BookService {
 
         Optional<BookEntity> bookFromRepositoryById = bookRepository.findById(id);
 
-        if (bookFromRepositoryById.isEmpty()) {
+        if (!bookFromRepositoryById.isPresent()) {
             LOG.debug("************ update() ---> " + EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
             throw new DataNotFoundException(EXCEPTION_MESSAGE_BOOKS_NOT_EXIST);
         }
@@ -218,7 +218,7 @@ public class BookServiceImpl implements BookService {
         Optional<BookEntity> bookById = bookRepository.findById(id);
         LOG.debug("************ deleteById() ---> bookFromRepositoryById = " + bookById);
 
-        if (bookById.isEmpty()) {
+        if (!bookById.isPresent()) {
             LOG.debug("************ deleteById() ---> " + format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
             throw new BookNotExistException(format(EXCEPTION_MESSAGE_BOOK_NOT_EXIST, id));
         }

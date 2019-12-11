@@ -116,7 +116,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
         LOG.debug("************ getBySubCommentId() ---> " +
                 "subCommentFromRepositoryBySubCommentId = " + subCommentBySubCommentId);
 
-        if (subCommentBySubCommentId.isEmpty()) {
+        if (!subCommentBySubCommentId.isPresent()) {
             LOG.debug("************ getBySubCommentId() ---> " +
                     format(EXCEPTION_MESSAGE_SUB_COMMENT_BY_SUB_COMMENT_ID_NOT_EXIST, subCommentId));
             throw new DataNotFoundException(
@@ -338,7 +338,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
     private SubCommentCommentEntity checkExistsSubCommentBySubCommentId(Long subCommentId) {
         Optional<SubCommentCommentEntity> subCommentFromRepository = subCommentRepository.findById(subCommentId);
-        if (subCommentFromRepository.isEmpty()) {
+        if (!subCommentFromRepository.isPresent()) {
             LOG.debug("************ checkExistsSubCommentBySubCommentId() ---> " + "SubComment with this subCommentId = " + subCommentId + " not exist.");
             throw new CommentNotExistException("SubComment with this subCommentId = " + subCommentId + " not exist.");
         }
