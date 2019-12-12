@@ -267,9 +267,9 @@
     "unsorted" : false,
     "empty" : false
   },
-  "number" : 0,
   "numberOfElements" : 2,
   "size" : 2,
+  "number" : 0,
   "empty" : false
 }
 ----

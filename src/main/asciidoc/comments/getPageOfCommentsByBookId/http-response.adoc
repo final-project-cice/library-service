@@ -271,9 +271,9 @@ Content-Length: 7572
     "unsorted" : true,
     "empty" : true
   },
-  "number" : 0,
   "numberOfElements" : 2,
   "size" : 2,
+  "number" : 0,
   "empty" : false
 }
 ----
