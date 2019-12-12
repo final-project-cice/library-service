@@ -6,8 +6,8 @@ logging:
   file: /tmp/log/library-service.log
   level:
     root: INFO
-    org.springframework: DEBUG
-    org.springframework.data: DEBUG
+    org.springframework: INFO
+    org.springframework.data: INFO
     guru.springframework.controllers: INFO
     org.hibernate: INFO
     com.trl.libraryservice: DEBUG
@@ -34,7 +34,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
   #    database-platform: org.hibernate.dialect.H2Dialect
 
 #  #============================== Configuration H2
