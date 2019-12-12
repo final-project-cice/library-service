@@ -1,6 +1,6 @@
 #============================== Configuration Apache TomCat
 server:
-  port: 8082
+  port: 5000
 #============================== Configuration Logging
 logging:
   file: /tmp/log/library-service.log
@@ -17,12 +17,6 @@ spring:
   application:
     name: library-service
 
-  #============================== Configuration Eureka Client
-  eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:8761/eureka/
-
   #============================== Configuration PostgreSQL
   datasource:
     username: developer
@@ -35,18 +29,3 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-  #    database-platform: org.hibernate.dialect.H2Dialect
-
-#  #============================== Configuration H2
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2-console
-#      settings:
-#        web-allow-others: true
-#
-#  datasource:
-#    username: sa
-#    password:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:library

@@ -1,12 +1,13 @@
 #============================== Configuration Apache TomCat
 server:
-  port: 8082
+  port: 5000
 #============================== Configuration Logging
 logging:
   file: /tmp/log/library-service_test.log
   level:
     root: INFO
     org.springframework: INFO
+    org.springframework.data: INFO
     guru.springframework.controllers: INFO
     org.hibernate: INFO
     com.trl.libraryservice: DEBUG
@@ -15,12 +16,6 @@ spring:
   profiles.active: test
   application:
     name: library-service
-
-  #============================== Configuration Eureka Client
-  eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:8761/eureka/
 
   #============================== Configuration PostgreSQL
   datasource:
