@@ -30,9 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -147,8 +144,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_IllegalBookId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/0/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 0)
@@ -163,8 +159,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_IllegalBookId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/-1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/-1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", -1)
@@ -184,8 +179,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_ParrameterCommntBook_IllegallFild_UserId_ValueNull() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' not be equals to null', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' not be equals to null', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
@@ -200,8 +194,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_ParrameterCommntBook_IllegallFild_UserId_ValueZero() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
@@ -216,8 +209,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_ParrameterCommntBook_IllegallFild_UserId_ValueZero_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
@@ -232,8 +224,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_ParrameterCommntBook_IllegallFild_TextVaule_Null() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' not be equals to null', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' not be equals to null', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
@@ -246,10 +237,9 @@ public class CommentBook_IntegrationTest {
     }
 
     @Test
-    public void add_ParrameterCommntBook_IllegallFild_TextValue_Empty() throws Exception {
+    public void add_ParameterCommentBook_IllegalField_TextValue_Empty() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' is empty', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' is empty', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
@@ -264,8 +254,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_ParrameterCommntBook_IllegallFild_Date() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''date' not be equals to null', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''date' not be equals to null', check the field that it has the 'commentBook' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
@@ -282,8 +271,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void add_BookByBookId_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
@@ -301,8 +289,7 @@ public class CommentBook_IntegrationTest {
     public void add_User_ByUserId_NotExist() throws Exception {
         // TODO: How mock webclient, which uses this method.
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User by this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User by this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
         this.mockMvc.perform(
                 post(BASE_URL + "/books/{bookId}/comments", 1)
                         .content("{\"userId\":100,\"text\":\"new comment added\",\"date\":\"01.01.2000\",\"subComments\":[]}")
@@ -391,8 +378,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getByCommentId_IllegalCommentId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/0\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", 0))
@@ -405,8 +391,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getByCommentId_IllegalCommentId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/-1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", -1))
@@ -421,8 +406,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getByCommentId_Comment_NotFound() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comment with this commentId = 33 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/33\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comment with this commentId = 33 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/comments/33\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", 33))
@@ -505,8 +489,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfCommentsByBookId_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0/comments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/0/comments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}", 0, 0, 1))
@@ -519,8 +502,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfCommentsByBookId_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/-1/comments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/-1/comments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}", -1, 0, 1))
@@ -535,8 +517,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfCommentsByBookId_BookById_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/33/comments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/33/comments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}", 33, 0, 1))
@@ -551,8 +532,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfCommentsByBookId_NotFoundComments_ByBookId() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/1/comments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}", 1, 0, 1))
@@ -636,8 +616,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfSortedCommentsByBookId_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0/comments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/0/comments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}", 0, 0, 1, "date"))
@@ -650,8 +629,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfSortedCommentsByBookId_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/-1/comments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/-1/comments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}", -1, 0, 1, "date"))
@@ -666,8 +644,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfSortedCommentsByBookId_BookById_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/33/comments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/33/comments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}", 33, 0, 1, "date"))
@@ -682,8 +659,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void getPageOfSortedCommentsByBookId_NotFoundComments_ByBookId() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/1/comments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}/{sortOrder}", 1, 0, 1, "date"))
@@ -838,8 +814,7 @@ public class CommentBook_IntegrationTest {
                         )
                 ));
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"Comment with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"Comment with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/comments/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}", 1))
@@ -857,8 +832,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void deleteByCommentId_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/0\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/{commentId}", 0))
@@ -871,8 +845,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void deleteByCommentId_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/-1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/{commentId}", -1))
@@ -887,8 +860,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void deleteByCommentId_Comment_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comment with this commentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comment with this commentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/{commentId}", 1))
@@ -931,8 +903,7 @@ public class CommentBook_IntegrationTest {
                         )
                 ));
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments/0/10\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/1/comments/0/10\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}/comments/{startPage}/{pageSize}", 1, 0, 10))
@@ -950,8 +921,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void deleteAllCommentsByBookId_IllegalBookId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/0/comments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/{bookId}/comments", 0))
@@ -964,8 +934,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void deleteAllCommentsByBookId_IllegalBookId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/-1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/-1/comments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/{bookId}/comments", -1))
@@ -978,8 +947,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void deleteAllCommentsByBookId_BookById_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/33/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/33/comments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/{bookId}/comments", 33))
@@ -994,8 +962,7 @@ public class CommentBook_IntegrationTest {
     @Test
     public void deleteAllCommentsByBookId_NotFoundComments_ByBookId() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1/comments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comments with this bookId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1/comments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/{bookId}/comments", 1))

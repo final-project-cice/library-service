@@ -30,9 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -129,8 +126,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_IllegalCommentId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/0/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 0)
@@ -145,8 +141,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_IllegalBookId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/-1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", -1)
@@ -166,8 +161,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_ParrameterSubCommnt_IllegallFild_UserId_ValueNull() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
@@ -182,8 +176,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_ParrameterSubCommnt_IllegallFild_UserId_ValueZero() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
@@ -198,8 +191,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_ParrameterSubCommnt_IllegallFild_UserId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''userId' must be greater that zero', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
@@ -214,8 +206,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_ParrameterSubCommnt_IllegallFild_Text_ValueNull() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
@@ -230,8 +221,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_ParrameterSubCommnt_IllegallFild_Text_ValueEmpty() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' is empty', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''text' is empty', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
@@ -246,8 +236,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_ParrameterSubCommnt_IllegallFild_Date() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field ''date' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field ''date' not be equals to null', check the field that it has the 'subComment' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
@@ -264,8 +253,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void add_Comment_ByCommentId_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
@@ -283,8 +271,7 @@ public class SubCommentComment_IntegrationTest {
     public void add_User_ByUserId_NotExist() throws Exception {
         // TODO: How mock webclient, which uses this method.
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"User by this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"User by this id = 100 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
         this.mockMvc.perform(
                 post(BASE_URL + "/books/comments/{commentId}/subComments", 1)
                         .content("{\"userId\":100,\"text\":\"new comment added\",\"date\":\"01.01.2000\"}")
@@ -350,8 +337,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getBySubCommentId_IllegalCommentId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/subComments/0\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/subComments/{subCommentId}", 0))
@@ -364,8 +350,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getBySubCommentId_IllegalCommentId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/subComments/-1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/subComments/{subCommentId}", -1))
@@ -380,8 +365,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getBySubCommentId_Comment_NotFound() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"SubComment with this subCommentId = 33 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/33\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"SubComment with this subCommentId = 33 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/comments/subComments/33\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/subComments/{subCommentId}", 33))
@@ -458,8 +442,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSubCommentsByCommentId_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/0/subComments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 0, 0, 1))
@@ -472,8 +455,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSubCommentsByCommentId_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/-1/subComments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", -1, 0, 1))
@@ -488,8 +470,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSubCommentsByCommentId_CommentById_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/33/subComments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/33/subComments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 33, 0, 1))
@@ -504,8 +485,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSubCommentsByCommentId_NotFoundSubComments_ByCommentId() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 1, 0, 1))
@@ -583,8 +563,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSortedSubCommentsByCommentId_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/0/subComments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}", 0, 0, 1, "date"))
@@ -597,8 +576,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSortedSubCommentsByCommentId_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/-1/subComments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}", -1, 0, 1, "date"))
@@ -613,8 +591,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSortedSubCommentsByCommentId_CommentById_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/33/subComments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/33/subComments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}", 33, 0, 1, "date"))
@@ -629,8 +606,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void getPageOfSortedSubCommentsByCommentId_NotFoundSubComments_ByCommentId() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments/0/1/date\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments/0/1/date\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}/{sortOrder}", 1, 0, 1, "date"))
@@ -748,8 +724,7 @@ public class SubCommentComment_IntegrationTest {
                 ));
 
         // Check if subComment is deleted corectly.
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"SubComment with this subCommentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/1\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"SubComment with this subCommentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/comments/subComments/1\"}";
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/subComments/{subCommentId}", 1))
                 .andExpect(status().isBadRequest())
@@ -766,8 +741,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void deleteBySubCommentId_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/subComments/0\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/subComments/{subCommentId}", 0))
@@ -780,8 +754,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void deleteBySubCommentId_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/subComments/-1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/subComments/{subCommentId}", -1))
@@ -796,8 +769,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void deleteBySubCommentId_SubComment_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"SubComment with this subCommentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/subComments/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"SubComment with this subCommentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/subComments/1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/subComments/{subCommentId}", 1))
@@ -839,8 +811,7 @@ public class SubCommentComment_IntegrationTest {
                 ));
 
         // Check if subComments is deleted correctly.
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments/0/10\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments/0/10\"}";
         this.mockMvc.perform(
                 get(BASE_URL + "/books/comments/{commentId}/subComments/{startPage}/{pageSize}", 1, 0, 10))
                 .andExpect(status().isBadRequest())
@@ -857,8 +828,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void deleteAllSubCommentsByCommentId_IllegalBookId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/0/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/0/subComments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/{commentId}/subComments", 0))
@@ -871,8 +841,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void deleteAllSubCommentsByCommentId_IllegalBookId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/-1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"One of parameters is illegal. Parameters must be not equals to null, and parameters must be greater that zero. Check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/-1/subComments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/{commentId}/subComments", -1))
@@ -885,8 +854,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void deleteAllSubCommentsByCommentId_SubCommentById_NotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/33/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Comment with this id = 33 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/33/subComments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/{commentId}/subComments", 33))
@@ -901,8 +869,7 @@ public class SubCommentComment_IntegrationTest {
     @Test
     public void deleteAllSubCommentsByCommentId_NotFoundSubComments_ByCommentId() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/comments/1/subComments\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"SubComments with this commentId = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/comments/1/subComments\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/comments/{commentId}/subComments", 1))

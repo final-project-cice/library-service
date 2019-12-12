@@ -30,9 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -228,7 +225,6 @@ public class Book_IntegrationTest {
     @Test
     public void add_Parameter_Null() throws Exception {
         // TODO: Buscar la forma com se puede pasa parametro null.
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
         final String responseBodyContent = "      ";
 
         this.mockMvc.perform(
@@ -244,8 +240,7 @@ public class Book_IntegrationTest {
     @Test
     public void add_BookName_Null() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getName() == null' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getName() == null' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books")
@@ -260,8 +255,7 @@ public class Book_IntegrationTest {
     @Test
     public void add_BookName_Empty() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getName() == is empty' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getName() == is empty' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books")
@@ -281,8 +275,7 @@ public class Book_IntegrationTest {
     @Test
     public void add_GenreList_Empty() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getGenres() is empty' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getGenres() is empty' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books")
@@ -297,8 +290,7 @@ public class Book_IntegrationTest {
     @Test
     public void add_PublishingHouse_Null() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getPublishingHouse() == null' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getPublishingHouse() == null' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books")
@@ -313,8 +305,7 @@ public class Book_IntegrationTest {
     @Test
     public void add_PublicationDate_Null() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getPublicationDate() == null' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getPublicationDate() == null' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books")
@@ -334,8 +325,7 @@ public class Book_IntegrationTest {
     @Test
     public void add_AuthorSet_Empty() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getAuthors() is empty' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Field 'book.getAuthors() is empty' is illegal, check the field that it has the 'book' parameter.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books\"}";
 
         this.mockMvc.perform(
                 post(BASE_URL + "/books")
@@ -459,8 +449,7 @@ public class Book_IntegrationTest {
     @Test
     public void getById_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Parameter '0' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Parameter '0' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/0\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/0"))
@@ -473,8 +462,7 @@ public class Book_IntegrationTest {
     @Test
     public void getById_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Parameter '-1' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Parameter '-1' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/-1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/-1"))
@@ -488,8 +476,7 @@ public class Book_IntegrationTest {
     @Test
     public void getById_NotFoundBookById() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/1"))
@@ -621,8 +608,7 @@ public class Book_IntegrationTest {
     @Test
     public void getPageOfBooks_NotFoundBook() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Books not found.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Books not found.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/0/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{startPage}/{pageSize}", 0, 1))
@@ -755,8 +741,7 @@ public class Book_IntegrationTest {
     @Test
     public void getPageOfSortedBooks_NotFoundBook() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Books not found.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0/1/name\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Books not found.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/0/1/name\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{startPage}/{pageSize}/{sortOrder}", 0, 1, "name"))
@@ -1132,8 +1117,7 @@ public class Book_IntegrationTest {
                         )
                 ));
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent_2 = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1\"}";
+        final String responseBodyContent_2 = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":404,\"documentation\":null,\"description\":\"uri=/books/1\"}";
 
         this.mockMvc.perform(
                 get(BASE_URL + "/books/{bookId}", 1))
@@ -1146,8 +1130,7 @@ public class Book_IntegrationTest {
     @Test
     public void deleteById_IllegalId_ZeroValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Parameter '0' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/0\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Parameter '0' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/0\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/{bookId}", 0))
@@ -1160,8 +1143,7 @@ public class Book_IntegrationTest {
     @Test
     public void deleteById_IllegalId_NegativeValue() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Parameter '-1' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/-1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Parameter '-1' is illegal, check the parameter that are passed to the method.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/-1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/{bookId}", -1))
@@ -1176,8 +1158,7 @@ public class Book_IntegrationTest {
     @Test
     public void deleteById_BookByIdNotExist() throws Exception {
 
-        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm"));
-        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"timestamp\":\"" + timestamp + "\",\"description\":\"uri=/books/1\"}";
+        final String responseBodyContent = "{\"errorMessage\":\"Book with this id = 1 not exist.\",\"errorCode\":400,\"documentation\":null,\"description\":\"uri=/books/1\"}";
 
         this.mockMvc.perform(
                 delete(BASE_URL + "/books/{bookId}", 1))
