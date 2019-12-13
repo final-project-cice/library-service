@@ -40,12 +40,12 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
 
     private final SubCommentCommentRepository subCommentRepository;
     private final CommentBookRepository commentBookRepository;
-    private final WebClient.Builder webClientBuilder;
+    private final WebClient webClient;
 
-    public SubCommentCommentServiceImpl(SubCommentCommentRepository subCommentRepository, CommentBookRepository commentBookRepository, WebClient.Builder webClientBuilder) {
+    public SubCommentCommentServiceImpl(SubCommentCommentRepository subCommentRepository, CommentBookRepository commentBookRepository, WebClient webClient) {
         this.subCommentRepository = subCommentRepository;
         this.commentBookRepository = commentBookRepository;
-        this.webClientBuilder = webClientBuilder;
+        this.webClient = webClient;
     }
 
     /**
@@ -78,7 +78,7 @@ public class SubCommentCommentServiceImpl implements SubCommentCommentService {
         checkExistsCommentById(commentId);
 
         LOG.debug("************ add() ---> userId = " + subComment.getUserId());
-        UserUtils.checkExistsUserById(subComment.getUserId(), webClientBuilder);
+        UserUtils.checkExistsUserById(subComment.getUserId(), webClient);
 
         // TODO: Find information. How can these two lines of code be done better.
         Long generatedId = subCommentRepository.count() + 1;

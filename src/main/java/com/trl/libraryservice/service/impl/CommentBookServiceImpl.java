@@ -43,13 +43,13 @@ public class CommentBookServiceImpl implements CommentBookService {
     private final CommentBookRepository commentBookRepository;
     private final BookRepository bookRepository;
     private final SubCommentCommentRepository subCommentRepository;
-    private final WebClient.Builder webClientBuilder;
+    private final WebClient webClient;
 
-    public CommentBookServiceImpl(CommentBookRepository commentBookRepository, BookRepository bookRepository, SubCommentCommentRepository subCommentRepository, WebClient.Builder webClientBuilder) {
+    public CommentBookServiceImpl(CommentBookRepository commentBookRepository, BookRepository bookRepository, SubCommentCommentRepository subCommentRepository, WebClient webClient) {
         this.commentBookRepository = commentBookRepository;
         this.bookRepository = bookRepository;
         this.subCommentRepository = subCommentRepository;
-        this.webClientBuilder = webClientBuilder;
+        this.webClient = webClient;
     }
 
     /**
@@ -82,7 +82,7 @@ public class CommentBookServiceImpl implements CommentBookService {
         checkExistsBookById(bookId);
 
         LOG.debug("************ add() ---> userId = " + commentBook.getUserId());
-        UserUtils.checkExistsUserById(commentBook.getUserId(), webClientBuilder);
+        UserUtils.checkExistsUserById(commentBook.getUserId(), webClient);
 
         // TODO: Find information. How can these two lines of code be done better.
         Long generatedId = commentBookRepository.count() + 1;
