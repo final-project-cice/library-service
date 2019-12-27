@@ -63,14 +63,14 @@ values (2, '222222', '02222222222222', 'Fax', 1);
 
 
 insert into book (id, name, path_file, publication_date, publishing_house_id)
-values (1, 'My first Book', 'path/path/book', '2019-10-30', 1);
+values (1, 'My first Book', 'path/path/book', TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 1);
 
-insert into comment_book (id, date, text, user_id, book_id)
-values (1, '2019-11-01', 'Text Comment One', 1, 1);
-insert into comment_book (id, date, text, user_id, book_id)
-values (2, '2019-11-02', 'Text Comment Two', 1, 1);
-insert into comment_book (id, date, text, user_id, book_id)
-values (3, '2019-11-03', 'Text Comment Three', 1, 1);
+insert into comment_book (id, date_of_creation, text, user_id, book_id)
+values (1, TO_DATE('01-NOV-2019', 'DD-MON-YYYY'), 'Text Comment One', 1, 1);
+insert into comment_book (id, date_of_creation, text, user_id, book_id)
+values (2, TO_DATE('02-NOV-2019', 'DD-MON-YYYY'), 'Text Comment Two', 1, 1);
+insert into comment_book (id, date_of_creation, text, user_id, book_id)
+values (3, TO_DATE('03-NOV-2019', 'DD-MON-YYYY'), 'Text Comment Three', 1, 1);
 
 -- =====================================================================================================================
 -- ================================================ SubComments not found... ===========================================
@@ -84,7 +84,7 @@ values (2, 'Genre Book Dos', 1);
 
 
 insert into author (id, birthday, first_name, last_name)
-values (1, '2019-10-30', 'Author_1 FirstName', 'Author_1 LastName');
+values (1, TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 'Author_1 FirstName', 'Author_1 LastName');
 insert into address_author (id, city, country, house_number, postcode, street, author_id)
 values (1, 'Madrid', 'Spain', '1A', 111111, 'Calle Uno', 1);
 insert into address_author (id, city, country, house_number, postcode, street, author_id)

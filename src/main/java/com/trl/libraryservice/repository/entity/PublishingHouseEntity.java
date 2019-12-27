@@ -1,5 +1,8 @@
 package com.trl.libraryservice.repository.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +18,22 @@ import java.util.Objects;
 public class PublishingHouseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private AddressPublishingHouseEntity address;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "publishingHouse", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PhoneNumberPublishingHouseEntity> phoneNumbers = new ArrayList<>();
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "publishingHouse", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EmailPublishingHouseEntity> emails = new ArrayList<>();
 

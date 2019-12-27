@@ -16,7 +16,7 @@ import java.util.Objects;
 public class SubCommentCommentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
@@ -25,7 +25,7 @@ public class SubCommentCommentEntity {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date_of_creation", nullable = false)
     private LocalDate date;
 
     @JsonIgnore

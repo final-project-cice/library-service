@@ -2,14 +2,19 @@
 ----
 HTTP/1.1 200 OK
 Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 1960
+Content-Length: 2067
 
 {
   "commentId" : 1,
   "userId" : 1,
   "text" : "Text Comment One",
   "date" : "01.11.2019",
-  "subComments" : [ ],
+  "subComments" : [ {
+    "subCommentId" : 1,
+    "userId" : 1,
+    "text" : "test sub comment",
+    "date" : "02.11.2019"
+  } ],
   "_links" : {
     "self" : {
       "href" : "http://localhost:8080/books/comments/1"

@@ -22,7 +22,7 @@ public interface SubCommentCommentRepository extends JpaRepository<SubCommentCom
 
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO sub_comment_comment (id, date, text, user_id, comment_id) VALUES (:id, :date, :text, :userId, :commentId)", nativeQuery = true)
+    @Query(value = "INSERT INTO sub_comment_comment (id, date_of_creation, text, user_id, comment_id) VALUES (:id, :date, :text, :userId, :commentId)", nativeQuery = true)
     void add(@Param("id") Long id, @Param("date") LocalDate date, @Param("text") String text, @Param("userId") Long userId, @Param("commentId") Long commentId);
 
 

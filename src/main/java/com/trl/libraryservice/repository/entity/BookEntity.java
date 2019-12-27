@@ -1,5 +1,8 @@
 package com.trl.libraryservice.repository.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -14,16 +17,18 @@ import java.util.*;
 public class BookEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GenreBookEntity> genres = new ArrayList<>();
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private PublishingHouseEntity publishingHouse;
 
@@ -33,9 +38,11 @@ public class BookEntity {
     @Column(name = "path_file", nullable = false)
     private String pathFile;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentBookEntity> comments = new ArrayList<>();
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {

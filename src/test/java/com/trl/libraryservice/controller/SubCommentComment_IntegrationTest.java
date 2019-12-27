@@ -248,8 +248,8 @@ public class SubCommentComment_IntegrationTest {
                 .andDo(print());
     }
 
-    @Sql(value = {"/CommentBook_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_Empty_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void add_Comment_ByCommentId_NotExist() throws Exception {
 
@@ -465,8 +465,8 @@ public class SubCommentComment_IntegrationTest {
                 .andDo(print());
     }
 
-    @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getPageOfSubCommentsByCommentId_CommentById_NotExist() throws Exception {
 
@@ -481,7 +481,7 @@ public class SubCommentComment_IntegrationTest {
     }
 
     @Sql(value = {"/SubComment_SubComments_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getPageOfSubCommentsByCommentId_NotFoundSubComments_ByCommentId() throws Exception {
 
@@ -586,8 +586,8 @@ public class SubCommentComment_IntegrationTest {
                 .andDo(print());
     }
 
-    @Sql(value = {"/CommentBook_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getPageOfSortedSubCommentsByCommentId_CommentById_NotExist() throws Exception {
 
@@ -602,7 +602,7 @@ public class SubCommentComment_IntegrationTest {
     }
 
     @Sql(value = {"/SubComment_SubComments_NotFound_Before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-    @Sql(value = {"/CommentBook_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    @Sql(value = {"/SubCommentComment_After.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     @Test
     public void getPageOfSortedSubCommentsByCommentId_NotFoundSubComments_ByCommentId() throws Exception {
 

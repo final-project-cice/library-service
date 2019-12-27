@@ -1,6 +1,8 @@
 package com.trl.libraryservice.repository.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,22 +20,25 @@ import java.util.Objects;
 public class CommentBookEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
+    @Column(name = "userId", nullable = false)
     private Long userId;
 
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date_of_creation", nullable = false)
     private LocalDate date;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubCommentCommentEntity> subComments = new ArrayList<>();
 
     @JsonIgnore
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
     private BookEntity book;

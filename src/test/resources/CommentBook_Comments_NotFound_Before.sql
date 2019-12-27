@@ -63,7 +63,7 @@ values (2, '222222', '02222222222222', 'Fax', 1);
 
 
 insert into book (id, name, path_file, publication_date, publishing_house_id)
-values (1, 'My first Book', 'path/path/book', '2019-10-30', 1);
+values (1, 'My first Book', 'path/path/book', TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 1);
 
 -- =====================================================================================================================
 -- ============================================== Comment not found... =================================================
@@ -77,7 +77,7 @@ values (2, 'Genre Book Dos', 1);
 
 
 insert into author (id, birthday, first_name, last_name)
-values (1, '2019-10-30', 'Author_1 FirstName', 'Author_1 LastName');
+values (1, TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 'Author_1 FirstName', 'Author_1 LastName');
 insert into address_author (id, city, country, house_number, postcode, street, author_id)
 values (1, 'Madrid', 'Spain', '1A', 111111, 'Calle Uno', 1);
 insert into address_author (id, city, country, house_number, postcode, street, author_id)

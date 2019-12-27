@@ -64,13 +64,13 @@ values (2, '222222', '02222222222222', 'Fax', 1);
 
 
 insert into book (id, name, path_file, publication_date, publishing_house_id)
-values (1, 'BBBBBBBBB', 'path/path/book', '2019-10-30', 1);
+values (1, 'BBBBBBBBB', 'path/path/book', TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 1);
 
-insert into comment_book (id, date, text, user_id, book_id)
-values (1, '2019-11-02', 'Text Comment', 1, 1);
+insert into comment_book (id, date_of_creation, text, user_id, book_id)
+values (1, TO_DATE('02-NOV-2019', 'DD-MON-YYYY'), 'Text Comment', 1, 1);
 
-insert into sub_comment_comment (id, date, text, user_id, comment_id)
-values (1, '2019-11-02', 'test sub comment', 1, 1);
+insert into sub_comment_comment (id, date_of_creation, text, user_id, comment_id)
+values (1, TO_DATE('02-NOV-2019', 'DD-MON-YYYY'), 'test sub comment', 1, 1);
 
 insert into genre_book (id, name, book_id)
 values (1, 'Genre Book Uno', 1);
@@ -80,7 +80,7 @@ values (2, 'Genre Book Dos', 1);
 
 
 insert into author (id, birthday, first_name, last_name)
-values (1, '2019-10-30', 'Author_1 FirstName', 'Author_1 LastName');
+values (1, TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 'Author_1 FirstName', 'Author_1 LastName');
 insert into address_author (id, city, country, house_number, postcode, street, author_id)
 values (1, 'Madrid', 'Spain', '1A', 111111, 'Calle Uno', 1);
 insert into address_author (id, city, country, house_number, postcode, street, author_id)
@@ -122,13 +122,13 @@ values (4, '222222', '02222222222222', 'Fax', 2);
 
 
 insert into book (id, name, path_file, publication_date, publishing_house_id)
-values (2, 'AAAAAAAAAA', 'path/path/book', '2019-10-30', 2);
+values (2, 'AAAAAAAAAA', 'path/path/book', TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 2);
 
-insert into comment_book (id, date, text, user_id, book_id)
-values (2, '2019-11-02', 'Text Comment', 1, 2);
+insert into comment_book (id, date_of_creation, text, user_id, book_id)
+values (2, TO_DATE('02-NOV-2019', 'DD-MON-YYYY'), 'Text Comment', 1, 2);
 
-insert into sub_comment_comment (id, date, text, user_id, comment_id)
-values (2, '2019-11-02', 'test sub comment', 1, 2);
+insert into sub_comment_comment (id, date_of_creation, text, user_id, comment_id)
+values (2, TO_DATE('02-NOV-2019', 'DD-MON-YYYY'), 'test sub comment', 1, 2);
 
 insert into genre_book (id, name, book_id)
 values (3, 'Genre Book Uno', 2);
@@ -137,7 +137,7 @@ values (4, 'Genre Book Dos', 2);
 
 
 insert into author (id, birthday, first_name, last_name)
-values (2, '2019-10-30', 'Author_1 FirstName', 'Author_1 LastName');
+values (2, TO_DATE('30-OCT-2019', 'DD-MON-YYYY'), 'Author_1 FirstName', 'Author_1 LastName');
 insert into address_author (id, city, country, house_number, postcode, street, author_id)
 values (3, 'Madrid', 'Spain', '1A', 111111, 'Calle Uno', 2);
 insert into address_author (id, city, country, house_number, postcode, street, author_id)

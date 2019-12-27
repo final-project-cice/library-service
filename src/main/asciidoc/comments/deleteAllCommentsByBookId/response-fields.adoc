@@ -21,4 +21,20 @@
 |`+Array+`
 |The array of sub comments by the comment.
 
+|`+[].subComments.[].subCommentId+`
+|`+Number+`
+|The id of subComment.
+
+|`+[].subComments.[].userId+`
+|`+Number+`
+|The id of user whu created this subComment.
+
+|`+[].subComments.[].text+`
+|`+String+`
+|The text of the subComment.
+
+|`+[].subComments.[].date+`
+|`+String+`
+|The date of the subComment.
+
 |===
